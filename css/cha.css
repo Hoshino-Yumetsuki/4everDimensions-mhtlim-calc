@@ -1,0 +1,176 @@
+
+.now{
+    width: auto !important;
+}
+/* .mdui-textfield{
+    width: auto !important;
+}
+.mdui-textfield-label{
+    width: auto !important;
+}
+.mdui-textfield-input{
+    width: auto !important;
+}
+.mdui-textfield-helper{
+    width: auto !important;
+}
+.mdui-textfield-focused{
+    width: auto !important;
+}
+.mdui-textfield-has-bottom {
+    width: auto !important;
+}
+.mdui-textfield-has-bottom-line{
+    width: auto !important;
+} */
+.aaa-panel{
+    background: #333; /* 深灰色背景 */
+    padding: 36px;
+    text-align: center;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    border: 22px;
+    
+}
+.fullcenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.aTe{
+    /* width: auto !important; */
+    resize: none;
+    padding: 15px;
+    margin: 10px 0;
+    border: none;
+    min-width: 90%;
+    border-radius: 12px;
+    background: #1d1d1d88; /* 深灰色背景 */
+    color: #ccc;
+    outline: none; /* 去除边框 */
+
+    &::placeholder {
+        color: #999; /* 输入占位文字颜色 */
+    }
+}
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0; /* 去掉外边距 */
+    /* padding: 20px; 内边距 */
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; 使内容水平居中 */
+    background-color: #1a1a1a; /* 网页背景颜色（稍微亮一点点） */
+    color: white; /* 默认字体颜色为白色 */
+}
+
+.container {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* 卡片最小宽度150px，自动填充列 */
+gap: 5px; /* 卡片间距 */
+width: 100%; 
+}
+
+.card {
+min-width: 0;
+border-radius: 5px;
+padding: 10px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+position: relative; /* 必须是 relative，以便子元素可以使用 absolute */
+text-align: left;
+aspect-ratio: 2 / 1; /* 宽高比始终为2:1 */
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
+
+
+.title {
+color: #D3D3D3;
+margin-bottom: 5px;
+white-space: nowrap;
+}
+
+.info {
+/* position: absolute; */
+/* bottom: 40%; 绝对位置，基于卡片高度的25%处 */
+width: 80%; /* 保证宽度撑满 */
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-size: 12px;
+color: #D3D3D3
+}
+.accuracy {
+color: #D3D3D3;
+}
+
+.score {
+/* position: absolute; */
+/* left: 50%;  */
+/* top: 00%;   */
+/* transform: translate(-50%, 190%);  */
+font-weight: bold;
+text-align: center;
+/* font-size: 18px; */
+color: #DDA0DD;
+width: 100%; /* 保证宽度撑满卡片的宽度 */
+}
+.index {
+position: absolute;
+top: 5px;
+right: 5px;
+color: #D3D3D3;
+}
+
+body{
+    background-image: url("../static/bg_night.avif");
+    background-attachment: fixed;
+}
+.aaa-panel{
+    background-color: #1a1a1a88;
+}
+.mdui-card{
+    background-color: #ffffff10 !important;
+    border-radius: 24px !important;
+}
+.mdui-panel{
+    background-color: #ffffff06 !important;
+    border-radius: 24px !important;
+}
+mdui-panel-header{
+    border-radius: 24px !important;
+    background-color: #ffffff06 !important;
+}
+.mdui-panel-item{
+    background-color: #ffffff06 !important;
+    border-radius: 24px !important;
+}
+/* .mdui-panel-item-body{
+    background-color: #ffffff11 !important;
+} */
+.mdui-btn{
+    border-radius: 32px !important;
+}
+.mdui-dialog{
+    border-radius: 24px !important;
+}
+
+/* 默认样式，适用于移动端 */
+.jjjjj {
+  width: 100%; /* 在移动端占满屏幕宽度 */
+  max-width: 100%; /* 防止超出屏幕宽度 */
+}
+
+/* 桌面端样式 */
+@media (min-width: 768px) { /* 假设768px是桌面端的最小宽度 */
+  .jjjjj {
+    min-width: 500px;
+    width: 36%;
+    max-width: 1200px;
+    margin: 0 auto; /* 水平居中 */
+  }
+}
