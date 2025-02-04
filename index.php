@@ -326,7 +326,7 @@ Copyleft 2024~2025. Reality Calculator Project.
                         <textarea id="TakanashiHoshinoILoveYou" class="mdui-textarea aTe" rows="10" disabled style="width:80%">假设命题存在于一个足够强大的形式系统（如算术系统）中喵～根据哥德尔第一不完备定理喵～，若系统一致喵～（无矛盾喵～），则存在一个命题G喵～，声称“G在本系统中不可证”喵～。  
    - 若G可证喵～，则系统不一致喵～（因为G声称自身不可证喵～）。  
    - 若G不可证喵～，则G为真喵～（因其确实无法被证明喵～）。  
-   因此，在一致的系统内，G为真但不可证喵喵～。</textarea>
+因此，在一致的系统内，G为真但不可证喵喵～。</textarea>
                         <!--<div class="audio-links"></div>-->
                         <!--    <audio controls>-->
                         <!--        <source src="./Camellia-δ_for_the_DELTA.ogg" type="audio/ogg">-->
@@ -359,9 +359,7 @@ Copyleft 2024~2025. Reality Calculator Project.
                         <i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
                     </div>
                     <div class="mdui-panel-item-body">
-                        <textarea id="ILoveYouTakanashiHoshino" class="mdui-textarea aTe" rows="10" disabled style="width:80%">
-                        哪来的广告？
-                        </textarea>
+                        <textarea id="ILoveYouTakanashiHoshino" class="mdui-textarea aTe" rows="10" disabled style="width:80%">哪来的广告和赞助？</textarea>
                         </div>
 
                         
