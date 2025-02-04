@@ -20,11 +20,11 @@ execute($dbc,"INSERT INTO `cha_stat` (`ip`,`ms`) VALUES ('$ip','$ms_time')");
 
 
 <!DOCTYPE html>
-        <html lang="en">
-        <head>
+<html lang="en">
+    <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Reality计算器</title>
+            <title>Milthm 查分器（原Reality计算器）</title>
             <link rel="icon" type="image/x-icon" href="./favicon.ico">
             <link rel="stylesheet" href="css/cha.css">
             <script src="js/mdui.min.js"></script>
@@ -39,7 +39,7 @@ execute($dbc,"INSERT INTO `cha_stat` (`ip`,`ms`) VALUES ('$ip','$ms_time')");
                 <div class="mdui-toolbar mdui-color-theme">
             <a onclick="javascript:openContributionDialog();" class="mdui-hoverable mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-purple">
                 <i class="mdui-icon material-icons">info_outline</i></a>
-            <a href="javascript:;" class="mdui-typo-headline">Reality计算器v3.1</a>
+            <a href="javascript:;" class="mdui-typo-headline">Reality计算器v3.2</a>
                 <div class="mdui-toolbar-spacer"></div>
                 <a href="javascript:;" class="mdui-btn mdui-btn-icon">
                     <a href="https://qm.qq.com/q/Utb6sNDvki" target="_blank">交流群：375882310</a>
@@ -340,10 +340,39 @@ Copyleft 2024~2025. Reality Calculator Project.
                         <!--    </audio>-->
                         <!--    <p>かめりあ - FM Synthesis Experiment</p>-->
                             
+                        <!-- 你搁这瞅啥呢，没见过HTML吗？ -->
                         </div>
-                    </div>
+
+                        
+
                 </div>
             </div>
+
+
+
+
+
+            <div class="mdui-panel mdui-panel-gapless" mdui-panel>
+                <div class="mdui-panel-item mdui-panel-item-open">
+                    <div class="mdui-panel-item-header">
+                        <div class="mdui-panel-item-title">赞助&广告</div>
+                        <i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+                    </div>
+                    <div class="mdui-panel-item-body">
+                        <textarea id="ILoveYouTakanashiHoshino" class="mdui-textarea aTe" rows="10" disabled style="width:80%">
+                        哪来的广告？
+                        </textarea>
+                        </div>
+
+                        
+
+                </div>
+            </div>
+
+
+
+            
+        </div>
             
         </div>
     </div>
