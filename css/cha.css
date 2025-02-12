@@ -159,18 +159,24 @@ mdui-panel-header{
     border-radius: 24px !important;
 }
 
-/* 默认样式，适用于移动端 */
+/* 移动端样式（默认情况下生效） */
 .jjjjj {
-  width: 100%; /* 在移动端占满屏幕宽度 */
-  max-width: 100%; /* 防止超出屏幕宽度 */
-}
-
-/* 桌面端样式 */
-@media (min-width: 768px) { /* 假设768px是桌面端的最小宽度 */
-  .jjjjj {
-    min-width: 500px;
-    width: 36%;
-    max-width: 1200px;
-    margin: 0 auto; /* 水平居中 */
+    width: 100%;  /* 让它在小屏幕下始终占满 */
+    max-width: 100%;  /* 防止超出屏幕 */
+    padding: 10px;  /* 给内容留一些间距 */
+    overflow-x: auto;  /* 允许超出时滚动，而不是压缩 */
   }
-}
+  
+  /* 适用于桌面端的自适应拓展 */
+  @media (min-width: 768px) { /* 768px 以上视为桌面端 */
+    .jjjjj {
+      min-width: 500px;  /* 不能比 500px 更窄 */
+      width: auto;  /* 让宽度随内容增长 */
+      max-width: 90vw;  /* 防止太宽（最多 90% 屏幕宽度） */
+      margin: 0 auto;  /* 居中 */
+      padding: 20px;  /* 让内容更美观 */
+      display: block;  /* 确保不会受 flex 或 grid 影响 */
+      overflow-x: auto;  /* 超出时允许横向滚动 */
+    }
+  }
+  
