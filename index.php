@@ -18,7 +18,6 @@ execute($dbc,"INSERT INTO `cha_stat` (`ip`,`ms`) VALUES ('$ip','$ms_time')");
 
 
 
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -257,14 +256,13 @@ leavel:0=R,1=AP,2=FC,3=S,4=A ……
 贡献名单
 
 作者：
- - 归梦
+ - mkzi_nya(归梦)
  - Chara
  - Amorimagus
  - Autumn
- - 名字
 
 UI&脚本:
- - 归梦
+ - mkzi_nya(归梦)
  - Amorimagus
 
 QQBot API:
@@ -275,10 +273,9 @@ QQBot API:
  - Chara
 
 特别感谢：
- - 归梦
+ - mkzi_nya(归梦)
  - Amorimagus
  - Chara
- - 名字
  - Autumn
 
 感谢所有参与贡献的人！
