@@ -1,4 +1,5 @@
-console.log("Updated at 2025.02.04 11:30+-")
+console.log("Updated at 2025.02.15")
+console.log("已更新data.db文件解析")
 console.log(" ███  ███                               \n\
  ███  ███                               \n\
  ███▒▒███                               \n\
@@ -22,165 +23,187 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-                const constants = {
-"5aaafcea-684f-4310-936d-67ae35956c48": { constant: -1, category: "Ø", name: "驟雨の狭間" },
-"1104f25d-2493-4bc7-9172-b262d36488ac": { constant: -1, category: "SP", name: "Oiiaioooooiai" },
-"e543f4a5-5f55-45e5-9c41-ebe1c155c12e": { constant: -1, category: "SP", name: "Dogbite" },
-"6252f7c4-8eae-4b59-a22f-9f142f904029": { constant: 12.3, category: "CL", name: "Contrasty Angeles" },
-"d742e989-92c4-4474-87ef-57b218d0fc41": { constant: 12.2, category: "CL", name: "命日" },
-"9acd5289-bc81-49fb-afc8-7b0631e60e60": { constant: 12.1, category: "CL", name: "Regnaissance" },
-"a19a54b6-363e-49ae-9cd2-633a2db8ae4f": { constant: 11.9, category: "CL", name: "Broken Conviction" },
-"eab07c23-395d-47f3-be33-15c7c566f694": { constant: 11.7, category: "CL", name: "Moonflutter" },
-"ead657f6-f0f2-4a21-acfd-4322892a0562": { constant: 11.7, category: "CL", name: "Fly To Meteor feat.兔柒" },
-"217898b1-4806-401f-adf5-740e9d72b66e": { constant: 10.5, category: "CL", name: "雨女" },
-"cc75ce1c-dbed-4bc7-94eb-728bf36bb1ec": { constant: 12.1, category: "CB", name: "Innocent white" },
-"97ef94ce-df45-4a92-9645-2456f606e0fa": { constant: 11.9, category: "CB", name: "Meltovt Necrosys" },
-"ed40cd1b-2741-415a-be81-6fcc63db4044": { constant: 11.7, category: "CB", name: "HYPER MEMORIES" },
-"ef55520f-c913-449f-bf26-ab947384127e": { constant: 11.5, category: "CB", name: "Broken Conviction" },
-"269efa5f-8b69-4a71-be24-7abe57372b3f": { constant: 11.5, category: "CB", name: "Contrasty Angeles" },
-"e0162d0e-0727-49c2-80fa-f611621650ea": { constant: 11.4, category: "CB", name: "slic.hertz #GdbG"},
-"61f5e310-d45b-40dc-a934-e3a849382729": { constant: 11.4, category: "CB", name: "Moonflutter" },
-"14080c32-a16c-464c-b24a-880f1a7e657d": { constant: 11.4, category: "CB", name: "Algebra" },
-"6b478cca-035d-4297-b34a-ae75658d81bd": { constant: 11.3, category: "CB", name: "Fragment of Memories" },
-"f425914c-db82-413c-aca9-96ff151b8605": { constant: 11.2, category: "CB", name: "IN" },
-"da07cabf-7c7b-4083-a41a-879be13c8c94": { constant: 11.2, category: "CB", name: "イコラト" },
-"01929c36-e7ba-40d5-8123-ca3d4c2da4fb": { constant: 11.2, category: "CB", name: "参宿四~Betelgeuse~" },
-"04d821ff-493a-421d-83a5-a61a59b2d3d3": { constant: 11.1, category: "CB", name: "命日" },
-"80df6e22-69c3-4983-a712-adeebb47fb2b": { constant: 11.1, category: "CB", name: "Regnaissance" },
-"22bd5632-25cc-412f-9299-bcf2cdd64aed": { constant: 10.9, category: "CB", name: "樱落繁花" },
-"f7b864bc-72a3-4c9d-ab7c-b57946fb77ec": { constant: 10.8, category: "CB", name: "Elsorhg" },
-"aafec4af-3479-445b-9b30-b6822b9f5e19": { constant: 10.8, category: "CB", name: "Moving on" },
-"a6ef2d0a-057b-4ada-be88-23dcde06ada5": { constant: 10.7, category: "CB", name: "Hikari" },
-"6db4cb9b-adec-4ce5-bb0a-71d4761e88f8": { constant: 10.6, category: "CB", name: "WATER" },
-"13fda58e-3091-4b3d-8eb9-4ac8346ce61a": { constant: 10.6, category: "CB", name: "Threat - Sky Islands" },
-"35ab3fba-928d-4b08-be7f-2fc67a77a838": { constant: 10.5, category: "CB", name: "Fly To Meteor (Milthm Edit)" },
-"7131ad7b-1602-4acd-bfc1-1ff712d054f0": { constant: 10.5, category: "CB", name: "Future Unbound (Game Edit)" },
-"7c0cdf77-fcfa-4f96-9897-24ca10582c32": { constant: 10.3, category: "CB", name: "Threat - Superstructure" },
-"7cdb8a2c-e133-4a91-a29f-4e21ba4e442a": { constant: 10.3, category: "CB", name: "Dogbite" },
-"3a908e2d-8a39-4220-a6b8-4817bd1cea4a": { constant: 10.2, category: "CB", name: "cybernetic blazar" },
-"b60f0788-f9af-4a41-8c73-2b72151d309f": { constant: 10.2, category: "CB", name: "Agnostic" },
-"887157ea-fe1a-480b-b7e9-e6a4f9e27ae4": { constant: 10.1, category: "CB", name: "夜風" },
-"130d1d7d-ba20-467c-b5f5-eafc51882809": { constant: 10.1, category: "CB", name: "Blueface" },
-"c902851b-fa01-44f4-97a8-ab6d317fccd4": { constant: 10.0, category: "CB", name: "仮想明日" },
-"03b883cf-f28b-4e33-8f67-d3bcb1a74719": { constant: 10.0, category: "CB", name: "Psyched Fevereiro" },
-"fc40c7fc-e62a-4fa8-891e-430444191e26": { constant: 10.0, category: "CB", name: "OverRain" },
-"8d787646-a290-4f14-a831-d7d43bc9f534": { constant: 9.8, category: "CB", name: "Rainbow Flavor!" },
-"f728706a-e40a-421d-aaba-dde4bc35e8e3": { constant: 9.8, category: "CB", name: "Oniichan" },
-"fa97e341-3a72-47bc-927e-b9cf87980b37": { constant: 9.7, category: "CB", name: "ネオン色のまち feat.Mai" },
-"9e083951-188f-4998-951a-58d08b4b4f45": { constant: 9.7, category: "CB", name: "Jump out" },
-"00e3e0b6-fbdd-4a7d-bcab-ba6540f4225d": { constant: 9.6, category: "CB", name: "白虎蓮華" },
-"df4ff6fe-a8da-4b63-b0bd-b69ac8d80ace": { constant: 9.6, category: "CB", name: "Bio-Engineering" },
-"9a55b865-0860-41b9-9f78-bc5209bc9f44": { constant: 9.5, category: "CB", name: "雨女" },
-"ca4c79a7-709a-40c5-b0e0-c04b6deff431": { constant: 9.4, category: "CB", name: "烁雨" },
-"c3769378-d595-4119-b93c-e0db2b3ea8e2": { constant: 9.3, category: "CB", name: "Aconsma" },
-"cdacaee4-2866-4109-93a8-5bbbf0dc6207": { constant: 9.3, category: "CB", name: "花月" },
-"d70bc3b4-752a-45b9-bd31-c6ab8b9a7c9e": { constant: 9.2, category: "CB", name: "INFP.mp3" },
-"725abac1-5de5-463f-870d-a99a41cae61e": { constant: 9.1, category: "CB", name: "暮予星光"},
-"bb5b7628-87b1-4e1c-8e07-8bacadf6f2b1": { constant: 8.6, category: "CB", name: "サイクルの欠片"},
-"b2594118-dcf5-4750-9e57-e4eeef6142fe": { constant: 8.5, category: "CB", name: "时落之雨" },
-"6df0b462-dded-46db-8505-3ff86fc46c26": { constant: 8.3, category: "CB", name: "粗线条的雨" },
-"35b424f8-d0de-41ab-9512-f365a154c328": { constant: 8.3, category: "CB", name: "Words" },
-"858f698c-4bd9-40f0-aa8b-793021e0c550": { constant: 7.5, category: "CB", name: "雨之城" },
-"c18f27b6-2d4e-4631-82b1-4ede237874df": { constant: 9.0, category: "SK", name: "Contrasty Angeles" },
-"0785d07e-50e1-4e3f-b1aa-01fa43d0c2f6": { constant: 8.9, category: "SK", name: "HYPER MEMORIES" },
-"c9a9bc45-8695-4fb9-babe-d2027a6d9ed7": { constant: 8.8, category: "SK", name: "樱落繁花" },
-"2cfa74ee-7e6d-4ebf-8f0a-e7cfb3a7e94c": { constant: 8.7, category: "SK", name: "イコラト" },
-"63b8512d-ac16-4026-bfee-1317d860ab82": { constant: 8.7, category: "SK", name: "命日" },
-"de2327c7-0d63-496f-9974-dbb70bfcbed8": { constant: 8.6, category: "SK", name: "Broken Conviction" },
-"a5a9a7e4-3030-4bb3-9eef-04e58a0fbdb4": { constant: 8.5, category: "SK", name: "Regnaissance" },
-"2022fd8f-3210-4151-8636-8ec888236214": { constant: 8.4, category: "SK", name: "Hikari" },
-"de74f367-3a91-4421-a657-f0e8268083a3": { constant: 8.4, category: "SK", name: "Fragment of Memories" },
-"9953c1b3-f92a-406c-8ea6-78dbee1b8f71": { constant: 8.3, category: "SK", name: "Bio-Engineering" },
-"d6514d67-18d3-4d8e-8492-890061efb6f7": { constant: 8.2, category: "SK", name: "花月" },
-"14700dda-b3c7-429d-a5ce-8a65f2fe4846": { constant: 8.2, category: "SK", name: "Innocent white" },
-"962ec79e-489c-43ea-bd72-6dc3448e3983": { constant: 8.1, category: "SK", name: "Algebra" },
-"d89765a7-05a1-44a1-8ed3-f23f5f15741a": { constant: 8.0, category: "SK", name: "Blueface" },
-"4001a2b3-374d-438e-8e2b-2bd6d3651805": { constant: 8.0, category: "SK", name: "ネオン色のまち feat.Mai" },
-"44405d3d-4162-4fb8-9e86-fc7c965d4d2d": { constant: 8.0, category: "SK", name: "Oniichan" },
-"e663eb53-66d4-4a76-b533-445ef08ee18e": { constant: 7.9, category: "SK", name: "IN" },
-"38b25a54-afa9-4369-b286-90ba2e29df0b": { constant: 7.9, category: "SK", name: "Jump out" },
-"dae03da2-2ff0-4ed1-9624-945c2b9d3118": { constant: 7.9, category: "SK", name: "Moonflutter" },
-"e7ec6340-be44-44ab-8545-d5b7cf326fd4": { constant: 7.8, category: "SK", name: "Meltovt Necrosys" },
-"e75e2d80-86a0-464f-8d29-8dd0bb68328b": { constant: 7.8, category: "SK", name: "サイクルの欠片"},
-"b1361177-1426-47cc-b036-afd09cad775b": { constant: 7.8, category: "SK", name: "cybernetic blazar" },
-"fccd5960-dbdc-4127-8b0b-58c1fb521354": { constant: 7.6, category: "SK", name: "OverRain" },
-"26a76638-ec89-4809-bd40-5d6afe403c40": { constant: 7.6, category: "SK", name: "slic.hertz #GdbG"},
-"640cea92-0024-4ba5-aa16-8a38f77743ac": { constant: 7.5, category: "SK", name: "Elsorhg" },
-"ac9308f8-b896-43af-879a-b65bcfcaa874": { constant: 7.5, category: "SK", name: "Rainbow Flavor!" },
-"bdf2975e-8b19-4af8-9b1c-dc6f62587e7c": { constant: 7.5, category: "SK", name: "暮予星光"},
-"3442183b-cf7d-4842-9ddf-04243914916a": { constant: 7.5, category: "SK", name: "Future Unbound (Game Edit)" },
-"9a75cbb5-f9ad-4557-b3ed-5553a16023d7": { constant: 7.4, category: "SK", name: "Agnostic" },
-"fe111534-c651-4896-9538-2dd100131a7d": { constant: 7.3, category: "SK", name: "夜風" },
-"b87796c3-a64e-4cfd-a57f-a35484a951e2": { constant: 7.3, category: "SK", name: "WATER" },
-"9a8d5198-664a-418a-868b-b28d992c9b9e": { constant: 7.3, category: "SK", name: "Psyched Fevereiro" },
-"9476c969-d02d-40ca-b64f-eb3efae43ee7": { constant: 7.0, category: "SK", name: "烁雨" },
-"eb7a9055-b56f-46ba-9c30-0f9380d2f5b5": { constant: 6.9, category: "SK", name: "Threat - Sky Islands" },
-"1ec80826-e11e-43af-acd3-c154212443b9": { constant: 6.6, category: "SK", name: "仮想明日" },
-"9953eae4-4f60-4cfe-a8c3-9ada13a4b1ca": { constant: 6.5, category: "SK", name: "雨女" },
-"508fff6a-32dc-4f6b-88c7-bbd86e639085": { constant: 6.5, category: "SK", name: "Fly To Meteor (Milthm Edit)" },
-"296e3be3-1bdc-4568-a9d2-33ce9e0da9d4": { constant: 6.5, category: "SK", name: "Words" },
-"5aac139b-ab96-486d-a081-6bfebe382932": { constant: 6.5, category: "SK", name: "Dogbite" },
-"f28a654d-a2c4-4ff2-88f0-592ba52cd4fd": { constant: 6.5, category: "SK", name: "白虎蓮華" },
-"81daeec2-c1ae-4218-97fa-f9796504dba9": { constant: 6.4, category: "SK", name: "参宿四~Betelgeuse~" },
-"7d5df9f6-080f-4da0-974a-d2b8cb86e7e6": { constant: 6.3, category: "SK", name: "Moving on" },
-"8f75c6ff-a5ac-4738-b5e9-2549fa838084": { constant: 6.0, category: "SK", name: "Aconsma" },
-"8e72dab7-e72f-4842-a499-559659279e2c": { constant: 5.5, category: "SK", name: "Threat - Superstructure" },
-"37a9f1a0-32d4-4f78-acae-1be9ca7ea42f": { constant: 5.5, category: "SK", name: "INFP.mp3" },
-"54ea2f8f-ae05-4aba-a117-8d187bf08074": { constant: 4.5, category: "SK", name: "时落之雨" },
-"7c30226f-0ea5-4b71-aab7-7fefca1070dd": { constant: 4.5, category: "SK", name: "Broken Conviction" },
-"62c1cdc7-57c2-4a5f-809b-bcfb6c6a0469": { constant: 4.0, category: "SK", name: "粗线条的雨" },
-"acdab435-5aa3-45de-a815-9dbb7cd13130": { constant: 4.0, category: "SK", name: "雨之城" },
-"4144b702-77bd-4ff4-9ba0-aa7c70b2bab5": { constant: 4.5, category: "DZ", name: "Regnaissance" },
-"ac138fef-ad0b-4d0d-883c-453e6fe11d37": { constant: 4.0, category: "DZ", name: "Contrasty Angeles" },
-"cea79b8c-23fd-4fbd-b2a9-6f080ef15b44": { constant: 4.0, category: "DZ", name: "cybernetic blazar" },
-"2d6e3256-818b-434e-9980-ee6fcf14a8c7": { constant: 4.0, category: "DZ", name: "Blueface" },
-"5d23aa36-a3df-406f-980f-b6cd0cec5385": { constant: 3.5, category: "DZ", name: "仮想明日" },
-"2484331f-4345-4f97-98ac-edda4be3f723": { constant: 3.5, category: "DZ", name: "Psyched Fevereiro" },
-"5ab2ddde-5f3e-42ec-b626-1296680093d1": { constant: 3.5, category: "DZ", name: "ネオン色のまち feat.Mai" },
-"375f0d93-82e2-4350-9b46-98c3dd836305": { constant: 3.0, category: "DZ", name: "雨女" },
-"a8f6451b-eeb3-4cb4-898b-4a8c4233567f": { constant: 3.0, category: "DZ", name: "Oniichan" },
-"794c0460-7a5e-4ffb-bfcc-2800f1d5bfb2": { constant: 3.0, category: "DZ", name: "Moonflutter" },
-"520361a1-805b-4332-b53e-1da11a94de1b": { constant: 3.0, category: "DZ", name: "イコラト" },
-"dd163ba4-a1fa-4fc7-ba45-91561c824cc8": { constant: 3.0, category: "DZ", name: "命日" },
-"74bf4e17-c246-4871-9b2b-0dd0d0e6ee28": { constant: 3.0, category: "DZ", name: "Agnostic" },
-"d83fd3e1-a609-4b73-b1f1-348ee1dca71d": { constant: 3.0, category: "DZ", name: "夜風" },
-"8442e9aa-ea0a-4d9e-8592-cfd9228eb14c": { constant: 3.0, category: "DZ", name: "樱落繁花" },
-"1ab3b5cf-b6af-48ec-99e8-2d3a4e9edc72": { constant: 3.0, category: "DZ", name: "Hikari" },
-"c6629820-510f-4575-969e-dc6a9d3fe479": { constant: 3.0, category: "DZ", name: "WATER" },
-"adcc6c11-2986-4f3c-ae7e-4b52fe75dc83": { constant: 3.0, category: "DZ", name: "Fly To Meteor (Milthm Edit)" },
-"75fbb0ef-08fa-47cb-8c6f-acf361f7a081": { constant: 3.0, category: "DZ", name: "Future Unbound (Game Edit)" },
-"d8074d7e-dc36-4190-9377-0c62c3775dac": { constant: 3.0, category: "DZ", name: "Dogbite" },
-"cfa1c1fd-432e-4313-ae23-fbd6f731ae46": { constant: 3.0, category: "DZ", name: "白虎蓮華" },
-"6eac0020-b9a1-480e-9539-633c0e502f9c": { constant: 3.0, category: "DZ", name: "slic.hertz #GdbG"},
-"e27a66da-19c5-4d3a-85f4-5defdf5b7b88": { constant: 2.0, category: "CB", name: "Elsorhg" },
-"c55ac81b-f00d-4031-8f54-a7735ce84cd3": { constant: 2.0, category: "DZ", name: "Meltovt Necrosys" },
-"5b104c2e-94ad-4156-ab25-d1b11be487f3": { constant: 2.0, category: "DZ", name: "Rainbow Flavor!" },
-"0af38afb-fe05-403c-90b6-2876bb18616e": { constant: 2.0, category: "DZ", name: "Threat - Sky Islands" },
-"6d4c9a21-2ed4-4892-9b38-fd53840de04f": { constant: 2.0, category: "DZ", name: "Moving on" },
-"e09a8896-ad87-4cee-8f2a-40b8d4439f26": { constant: 2.0, category: "DZ", name: "Algebra" },
-"a5000e56-b917-40ce-9ebb-12cc2c4a2e70": { constant: 2.0, category: "DZ", name: "Fragment of Memories" },
-"98913dff-7257-44aa-a0f2-abcd58d11fcd": { constant: 2.0, category: "DZ", name: "Threat - Superstructure" },
-"c5032ab4-c03c-42c3-b132-445b94165e8d": { constant: 2.0, category: "DZ", name: "OverRain" },
-"b75e195e-7991-4e4a-8afc-7372b4ae95fd": { constant: 2.0, category: "DZ", name: "暮予星光"},
-"a4ac4167-5934-4157-90e7-675c994b4451": { constant: 2.0, category: "DZ", name: "参宿四~Betelgeuse~" },
-"eceaaf9e-3754-4054-9c17-2d87644de96e": { constant: 2.0, category: "DZ", name: "烁雨" },
-"8c794275-de29-4beb-87a1-af024fe94e1e": { constant: 2.0, category: "DZ", name: "花月" },
-"3ebe1bbe-5d13-4175-ad91-dcf85c7bfd19": { constant: 2.0, category: "DZ", name: "INFP.mp3" },
-"7072a099-a482-484d-84a5-945ac94807e1": { constant: 2.0, category: "DZ", name: "Innocent white" },
-"9884d239-3007-4e78-a655-297f000bcf50": { constant: 2.0, category: "DZ", name: "Words" },
-"213a40e1-d945-464c-aa6e-9ae82db8fc50": { constant: 2.0, category: "DZ", name: "Jump out" },
-"a5ba0b3b-1eb5-4b43-8d12-9e82b6d0afaa": { constant: 2.0, category: "DZ", name: "Bio-Engineering" },
-"e7cd8b7f-a19c-488d-b9b6-127524586ed3": { constant: 1.0, category: "DZ", name: "IN" },
-"8b329704-9ce5-4361-abd5-b89c68b61286": { constant: 1.0, category: "DZ", name: "Aconsma" },
-"68fbf0eb-f43a-4497-afb1-8282176aed97": { constant: 1.0, category: "DZ", name: "HYPER MEMORIES" },
-"64cc8f3b-7bed-48a3-80ca-f281c57c0916": { constant: 1.0, category: "DZ", name: "时落之雨" },
-"7687d948-dbe1-48c4-a786-fbe669ec7b0c": { constant: 1.0, category: "DZ", name: "粗线条的雨" },
-"e69b4e77-ccb2-4694-ba88-7209ed097783": { constant: 1.0, category: "DZ", name: "雨之城" },
-"606be389-ad01-41e3-a1ba-e7b355d16948": { constant: 1.0, category: "DZ", name: "Sundown" },
-"364be32e-f685-4efb-80b5-64281c93939d": { constant: 1.0, category: "DZ", name: "Welcome to Milthm" },
-"4fa17ebf-6a8e-47c1-8d8b-bd1344ccd559": { constant: 1.0, category: "DZ", name: "サイクルの欠片"}
-            };
-            
+const constants = {
+  "5aaafcea-684f-4310-936d-67ae35956c48": { constant: -1, category: "Ø", name: "驟雨の狭間" },
+  "1104f25d-2493-4bc7-9172-b262d36488ac": { constant: -1, category: "SP", name: "Oiiaioooooiai" },
+  "e543f4a5-5f55-45e5-9c41-ebe1c155c12e": { constant: -1, category: "SP", name: "Dogbite" },
+  "6252f7c4-8eae-4b59-a22f-9f142f904029": { constant: 12.3, category: "CL", name: "Contrasty Angeles" },
+  "d742e989-92c4-4474-87ef-57b218d0fc41": { constant: 12.2, category: "CL", name: "命日" },
+  "9acd5289-bc81-49fb-afc8-7b0631e60e60": { constant: 12.1, category: "CL", name: "Regnaissance" },
+  "a19a54b6-363e-49ae-9cd2-633a2db8ae4f": { constant: 11.9, category: "CL", name: "Broken Conviction" },
+  "eab07c23-395d-47f3-be33-15c7c566f694": { constant: 11.7, category: "CL", name: "Moonflutter" },
+  "ead657f6-f0f2-4a21-acfd-4322892a0562": { constant: 11.7, category: "CL", name: "Fly To Meteor feat.兔柒" },
+  "217898b1-4806-401f-adf5-740e9d72b66e": { constant: 10.5, category: "CL", name: "雨女" },
+  "cc75ce1c-dbed-4bc7-94eb-728bf36bb1ec": { constant: 12.1, category: "CB", name: "Innocent white" },
+  "97ef94ce-df45-4a92-9645-2456f606e0fa": { constant: 11.9, category: "CB", name: "Meltovt Necrosys" },
+  "ed40cd1b-2741-415a-be81-6fcc63db4044": { constant: 11.7, category: "CB", name: "HYPER MEMORIES" },
+  "ef55520f-c913-449f-bf26-ab947384127e": { constant: 11.5, category: "CB", name: "Broken Conviction" },
+  "269efa5f-8b69-4a71-be24-7abe57372b3f": { constant: 11.5, category: "CB", name: "Contrasty Angeles" },
+  "e0162d0e-0727-49c2-80fa-f611621650ea": { constant: 11.4, category: "CB", name: "slic.hertz #GdbG"},
+  "61f5e310-d45b-40dc-a934-e3a849382729": { constant: 11.4, category: "CB", name: "Moonflutter" },
+  "14080c32-a16c-464c-b24a-880f1a7e657d": { constant: 11.4, category: "CB", name: "Algebra" },
+  "6b478cca-035d-4297-b34a-ae75658d81bd": { constant: 11.3, category: "CB", name: "Fragment of Memories" },
+  "f425914c-db82-413c-aca9-96ff151b8605": { constant: 11.2, category: "CB", name: "IN" },
+  "da07cabf-7c7b-4083-a41a-879be13c8c94": { constant: 11.2, category: "CB", name: "イコラト" },
+  "01929c36-e7ba-40d5-8123-ca3d4c2da4fb": { constant: 11.2, category: "CB", name: "参宿四~Betelgeuse~" },
+  "04d821ff-493a-421d-83a5-a61a59b2d3d3": { constant: 11.1, category: "CB", name: "命日" },
+  "80df6e22-69c3-4983-a712-adeebb47fb2b": { constant: 11.1, category: "CB", name: "Regnaissance" },
+  "22bd5632-25cc-412f-9299-bcf2cdd64aed": { constant: 10.9, category: "CB", name: "樱落繁花" },
+  "f7b864bc-72a3-4c9d-ab7c-b57946fb77ec": { constant: 10.8, category: "CB", name: "Elsorhg" },
+  "aafec4af-3479-445b-9b30-b6822b9f5e19": { constant: 10.8, category: "CB", name: "Moving on" },
+  "a6ef2d0a-057b-4ada-be88-23dcde06ada5": { constant: 10.7, category: "CB", name: "Hikari" },
+  "6db4cb9b-adec-4ce5-bb0a-71d4761e88f8": { constant: 10.6, category: "CB", name: "WATER" },
+  "13fda58e-3091-4b3d-8eb9-4ac8346ce61a": { constant: 10.6, category: "CB", name: "Threat - Sky Islands" },
+  "35ab3fba-928d-4b08-be7f-2fc67a77a838": { constant: 10.5, category: "CB", name: "Fly To Meteor (Milthm Edit)" },
+  "7131ad7b-1602-4acd-bfc1-1ff712d054f0": { constant: 10.5, category: "CB", name: "Future Unbound (Game Edit)" },
+  "7c0cdf77-fcfa-4f96-9897-24ca10582c32": { constant: 10.3, category: "CB", name: "Threat - Superstructure" },
+  "7cdb8a2c-e133-4a91-a29f-4e21ba4e442a": { constant: 10.3, category: "CB", name: "Dogbite" },
+  "3a908e2d-8a39-4220-a6b8-4817bd1cea4a": { constant: 10.2, category: "CB", name: "cybernetic blazar" },
+  "b60f0788-f9af-4a41-8c73-2b72151d309f": { constant: 10.2, category: "CB", name: "Agnostic" },
+  "887157ea-fe1a-480b-b7e9-e6a4f9e27ae4": { constant: 10.1, category: "CB", name: "夜風" },
+  "130d1d7d-ba20-467c-b5f5-eafc51882809": { constant: 10.1, category: "CB", name: "Blueface" },
+  "c902851b-fa01-44f4-97a8-ab6d317fccd4": { constant: 10.0, category: "CB", name: "仮想明日" },
+  "03b883cf-f28b-4e33-8f67-d3bcb1a74719": { constant: 10.0, category: "CB", name: "Psyched Fevereiro" },
+  "fc40c7fc-e62a-4fa8-891e-430444191e26": { constant: 10.0, category: "CB", name: "OverRain" },
+  "8d787646-a290-4f14-a831-d7d43bc9f534": { constant: 9.8, category: "CB", name: "Rainbow Flavor!" },
+  "f728706a-e40a-421d-aaba-dde4bc35e8e3": { constant: 9.8, category: "CB", name: "Oniichan" },
+  "fa97e341-3a72-47bc-927e-b9cf87980b37": { constant: 9.7, category: "CB", name: "ネオン色のまち feat.Mai" },
+  "9e083951-188f-4998-951a-58d08b4b4f45": { constant: 9.7, category: "CB", name: "Jump out" },
+  "00e3e0b6-fbdd-4a7d-bcab-ba6540f4225d": { constant: 9.6, category: "CB", name: "白虎蓮華" },
+  "df4ff6fe-a8da-4b63-b0bd-b69ac8d80ace": { constant: 9.6, category: "CB", name: "Bio-Engineering" },
+  "9a55b865-0860-41b9-9f78-bc5209bc9f44": { constant: 9.5, category: "CB", name: "雨女" },
+  "ca4c79a7-709a-40c5-b0e0-c04b6deff431": { constant: 9.4, category: "CB", name: "烁雨" },
+  "c3769378-d595-4119-b93c-e0db2b3ea8e2": { constant: 9.3, category: "CB", name: "Aconsma" },
+  "cdacaee4-2866-4109-93a8-5bbbf0dc6207": { constant: 9.3, category: "CB", name: "花月" },
+  "d70bc3b4-752a-45b9-bd31-c6ab8b9a7c9e": { constant: 9.2, category: "CB", name: "INFP.mp3" },
+  "725abac1-5de5-463f-870d-a99a41cae61e": { constant: 9.1, category: "CB", name: "暮予星光"},
+  "bb5b7628-87b1-4e1c-8e07-8bacadf6f2b1": { constant: 8.6, category: "CB", name: "サイクルの欠片"},
+  "b2594118-dcf5-4750-9e57-e4eeef6142fe": { constant: 8.5, category: "CB", name: "时落之雨" },
+  "6df0b462-dded-46db-8505-3ff86fc46c26": { constant: 8.3, category: "CB", name: "粗线条的雨" },
+  "35b424f8-d0de-41ab-9512-f365a154c328": { constant: 8.3, category: "CB", name: "Words" },
+  "858f698c-4bd9-40f0-aa8b-793021e0c550": { constant: 7.5, category: "CB", name: "雨之城" },
+  "c18f27b6-2d4e-4631-82b1-4ede237874df": { constant: 9.0, category: "SK", name: "Contrasty Angeles" },
+  "0785d07e-50e1-4e3f-b1aa-01fa43d0c2f6": { constant: 8.9, category: "SK", name: "HYPER MEMORIES" },
+  "c9a9bc45-8695-4fb9-babe-d2027a6d9ed7": { constant: 8.8, category: "SK", name: "樱落繁花" },
+  "2cfa74ee-7e6d-4ebf-8f0a-e7cfb3a7e94c": { constant: 8.7, category: "SK", name: "イコラト" },
+  "63b8512d-ac16-4026-bfee-1317d860ab82": { constant: 8.7, category: "SK", name: "命日" },
+  "de2327c7-0d63-496f-9974-dbb70bfcbed8": { constant: 8.6, category: "SK", name: "Broken Conviction" },
+  "a5a9a7e4-3030-4bb3-9eef-04e58a0fbdb4": { constant: 8.5, category: "SK", name: "Regnaissance" },
+  "2022fd8f-3210-4151-8636-8ec888236214": { constant: 8.4, category: "SK", name: "Hikari" },
+  "de74f367-3a91-4421-a657-f0e8268083a3": { constant: 8.4, category: "SK", name: "Fragment of Memories" },
+  "9953c1b3-f92a-406c-8ea6-78dbee1b8f71": { constant: 8.3, category: "SK", name: "Bio-Engineering" },
+  "d6514d67-18d3-4d8e-8492-890061efb6f7": { constant: 8.2, category: "SK", name: "花月" },
+  "14700dda-b3c7-429d-a5ce-8a65f2fe4846": { constant: 8.2, category: "SK", name: "Innocent white" },
+  "962ec79e-489c-43ea-bd72-6dc3448e3983": { constant: 8.1, category: "SK", name: "Algebra" },
+  "d89765a7-05a1-44a1-8ed3-f23f5f15741a": { constant: 8.0, category: "SK", name: "Blueface" },
+  "4001a2b3-374d-438e-8e2b-2bd6d3651805": { constant: 8.0, category: "SK", name: "ネオン色のまち feat.Mai" },
+  "44405d3d-4162-4fb8-9e86-fc7c965d4d2d": { constant: 8.0, category: "SK", name: "Oniichan" },
+  "e663eb53-66d4-4a76-b533-445ef08ee18e": { constant: 7.9, category: "SK", name: "IN" },
+  "38b25a54-afa9-4369-b286-90ba2e29df0b": { constant: 7.9, category: "SK", name: "Jump out" },
+  "dae03da2-2ff0-4ed1-9624-945c2b9d3118": { constant: 7.9, category: "SK", name: "Moonflutter" },
+  "e7ec6340-be44-44ab-8545-d5b7cf326fd4": { constant: 7.8, category: "SK", name: "Meltovt Necrosys" },
+  "e75e2d80-86a0-464f-8d29-8dd0bb68328b": { constant: 7.8, category: "SK", name: "サイクルの欠片"},
+  "b1361177-1426-47cc-b036-afd09cad775b": { constant: 7.8, category: "SK", name: "cybernetic blazar" },
+  "fccd5960-dbdc-4127-8b0b-58c1fb521354": { constant: 7.6, category: "SK", name: "OverRain" },
+  "26a76638-ec89-4809-bd40-5d6afe403c40": { constant: 7.6, category: "SK", name: "slic.hertz #GdbG"},
+  "640cea92-0024-4ba5-aa16-8a38f77743ac": { constant: 7.5, category: "SK", name: "Elsorhg" },
+  "ac9308f8-b896-43af-879a-b65bcfcaa874": { constant: 7.5, category: "SK", name: "Rainbow Flavor!" },
+  "bdf2975e-8b19-4af8-9b1c-dc6f62587e7c": { constant: 7.5, category: "SK", name: "暮予星光"},
+  "3442183b-cf7d-4842-9ddf-04243914916a": { constant: 7.5, category: "SK", name: "Future Unbound (Game Edit)" },
+  "9a75cbb5-f9ad-4557-b3ed-5553a16023d7": { constant: 7.4, category: "SK", name: "Agnostic" },
+  "fe111534-c651-4896-9538-2dd100131a7d": { constant: 7.3, category: "SK", name: "夜風" },
+  "b87796c3-a64e-4cfd-a57f-a35484a951e2": { constant: 7.3, category: "SK", name: "WATER" },
+  "9a8d5198-664a-418a-868b-b28d992c9b9e": { constant: 7.3, category: "SK", name: "Psyched Fevereiro" },
+  "9476c969-d02d-40ca-b64f-eb3efae43ee7": { constant: 7.0, category: "SK", name: "烁雨" },
+  "eb7a9055-b56f-46ba-9c30-0f9380d2f5b5": { constant: 6.9, category: "SK", name: "Threat - Sky Islands" },
+  "1ec80826-e11e-43af-acd3-c154212443b9": { constant: 6.6, category: "SK", name: "仮想明日" },
+  "9953eae4-4f60-4cfe-a8c3-9ada13a4b1ca": { constant: 6.5, category: "SK", name: "雨女" },
+  "508fff6a-32dc-4f6b-88c7-bbd86e639085": { constant: 6.5, category: "SK", name: "Fly To Meteor (Milthm Edit)" },
+  "296e3be3-1bdc-4568-a9d2-33ce9e0da9d4": { constant: 6.5, category: "SK", name: "Words" },
+  "5aac139b-ab96-486d-a081-6bfebe382932": { constant: 6.5, category: "SK", name: "Dogbite" },
+  "f28a654d-a2c4-4ff2-88f0-592ba52cd4fd": { constant: 6.5, category: "SK", name: "白虎蓮華" },
+  "81daeec2-c1ae-4218-97fa-f9796504dba9": { constant: 6.4, category: "SK", name: "参宿四~Betelgeuse~" },
+  "7d5df9f6-080f-4da0-974a-d2b8cb86e7e6": { constant: 6.3, category: "SK", name: "Moving on" },
+  "8f75c6ff-a5ac-4738-b5e9-2549fa838084": { constant: 6.0, category: "SK", name: "Aconsma" },
+  "8e72dab7-e72f-4842-a499-559659279e2c": { constant: 5.5, category: "SK", name: "Threat - Superstructure" },
+  "37a9f1a0-32d4-4f78-acae-1be9ca7ea42f": { constant: 5.5, category: "SK", name: "INFP.mp3" },
+  "54ea2f8f-ae05-4aba-a117-8d187bf08074": { constant: 4.5, category: "SK", name: "时落之雨" },
+  "7c30226f-0ea5-4b71-aab7-7fefca1070dd": { constant: 4.5, category: "SK", name: "Broken Conviction" },
+  "62c1cdc7-57c2-4a5f-809b-bcfb6c6a0469": { constant: 4.0, category: "SK", name: "粗线条的雨" },
+  "acdab435-5aa3-45de-a815-9dbb7cd13130": { constant: 4.0, category: "SK", name: "雨之城" },
+  "4144b702-77bd-4ff4-9ba0-aa7c70b2bab5": { constant: 4.5, category: "DZ", name: "Regnaissance" },
+  "ac138fef-ad0b-4d0d-883c-453e6fe11d37": { constant: 4.0, category: "DZ", name: "Contrasty Angeles" },
+  "cea79b8c-23fd-4fbd-b2a9-6f080ef15b44": { constant: 4.0, category: "DZ", name: "cybernetic blazar" },
+  "2d6e3256-818b-434e-9980-ee6fcf14a8c7": { constant: 4.0, category: "DZ", name: "Blueface" },
+  "5d23aa36-a3df-406f-980f-b6cd0cec5385": { constant: 3.5, category: "DZ", name: "仮想明日" },
+  "2484331f-4345-4f97-98ac-edda4be3f723": { constant: 3.5, category: "DZ", name: "Psyched Fevereiro" },
+  "5ab2ddde-5f3e-42ec-b626-1296680093d1": { constant: 3.5, category: "DZ", name: "ネオン色のまち feat.Mai" },
+  "375f0d93-82e2-4350-9b46-98c3dd836305": { constant: 3.0, category: "DZ", name: "雨女" },
+  "a8f6451b-eeb3-4cb4-898b-4a8c4233567f": { constant: 3.0, category: "DZ", name: "Oniichan" },
+  "794c0460-7a5e-4ffb-bfcc-2800f1d5bfb2": { constant: 3.0, category: "DZ", name: "Moonflutter" },
+  "520361a1-805b-4332-b53e-1da11a94de1b": { constant: 3.0, category: "DZ", name: "イコラト" },
+  "dd163ba4-a1fa-4fc7-ba45-91561c824cc8": { constant: 3.0, category: "DZ", name: "命日" },
+  "74bf4e17-c246-4871-9b2b-0dd0d0e6ee28": { constant: 3.0, category: "DZ", name: "Agnostic" },
+  "d83fd3e1-a609-4b73-b1f1-348ee1dca71d": { constant: 3.0, category: "DZ", name: "夜風" },
+  "8442e9aa-ea0a-4d9e-8592-cfd9228eb14c": { constant: 3.0, category: "DZ", name: "樱落繁花" },
+  "1ab3b5cf-b6af-48ec-99e8-2d3a4e9edc72": { constant: 3.0, category: "DZ", name: "Hikari" },
+  "c6629820-510f-4575-969e-dc6a9d3fe479": { constant: 3.0, category: "DZ", name: "WATER" },
+  "adcc6c11-2986-4f3c-ae7e-4b52fe75dc83": { constant: 3.0, category: "DZ", name: "Fly To Meteor (Milthm Edit)" },
+  "75fbb0ef-08fa-47cb-8c6f-acf361f7a081": { constant: 3.0, category: "DZ", name: "Future Unbound (Game Edit)" },
+  "d8074d7e-dc36-4190-9377-0c62c3775dac": { constant: 3.0, category: "DZ", name: "Dogbite" },
+  "cfa1c1fd-432e-4313-ae23-fbd6f731ae46": { constant: 3.0, category: "DZ", name: "白虎蓮華" },
+  "6eac0020-b9a1-480e-9539-633c0e502f9c": { constant: 3.0, category: "DZ", name: "slic.hertz #GdbG"},
+  "e27a66da-19c5-4d3a-85f4-5defdf5b7b88": { constant: 2.0, category: "CB", name: "Elsorhg" },
+  "c55ac81b-f00d-4031-8f54-a7735ce84cd3": { constant: 2.0, category: "DZ", name: "Meltovt Necrosys" },
+  "5b104c2e-94ad-4156-ab25-d1b11be487f3": { constant: 2.0, category: "DZ", name: "Rainbow Flavor!" },
+  "0af38afb-fe05-403c-90b6-2876bb18616e": { constant: 2.0, category: "DZ", name: "Threat - Sky Islands" },
+  "6d4c9a21-2ed4-4892-9b38-fd53840de04f": { constant: 2.0, category: "DZ", name: "Moving on" },
+  "e09a8896-ad87-4cee-8f2a-40b8d4439f26": { constant: 2.0, category: "DZ", name: "Algebra" },
+  "a5000e56-b917-40ce-9ebb-12cc2c4a2e70": { constant: 2.0, category: "DZ", name: "Fragment of Memories" },
+  "98913dff-7257-44aa-a0f2-abcd58d11fcd": { constant: 2.0, category: "DZ", name: "Threat - Superstructure" },
+  "c5032ab4-c03c-42c3-b132-445b94165e8d": { constant: 2.0, category: "DZ", name: "OverRain" },
+  "b75e195e-7991-4e4a-8afc-7372b4ae95fd": { constant: 2.0, category: "DZ", name: "暮予星光"},
+  "a4ac4167-5934-4157-90e7-675c994b4451": { constant: 2.0, category: "DZ", name: "参宿四~Betelgeuse~" },
+  "eceaaf9e-3754-4054-9c17-2d87644de96e": { constant: 2.0, category: "DZ", name: "烁雨" },
+  "8c794275-de29-4beb-87a1-af024fe94e1e": { constant: 2.0, category: "DZ", name: "花月" },
+  "3ebe1bbe-5d13-4175-ad91-dcf85c7bfd19": { constant: 2.0, category: "DZ", name: "INFP.mp3" },
+  "7072a099-a482-484d-84a5-945ac94807e1": { constant: 2.0, category: "DZ", name: "Innocent white" },
+  "9884d239-3007-4e78-a655-297f000bcf50": { constant: 2.0, category: "DZ", name: "Words" },
+  "213a40e1-d945-464c-aa6e-9ae82db8fc50": { constant: 2.0, category: "DZ", name: "Jump out" },
+  "a5ba0b3b-1eb5-4b43-8d12-9e82b6d0afaa": { constant: 2.0, category: "DZ", name: "Bio-Engineering" },
+  "e7cd8b7f-a19c-488d-b9b6-127524586ed3": { constant: 1.0, category: "DZ", name: "IN" },
+  "8b329704-9ce5-4361-abd5-b89c68b61286": { constant: 1.0, category: "DZ", name: "Aconsma" },
+  "68fbf0eb-f43a-4497-afb1-8282176aed97": { constant: 1.0, category: "DZ", name: "HYPER MEMORIES" },
+  "64cc8f3b-7bed-48a3-80ca-f281c57c0916": { constant: 1.0, category: "DZ", name: "时落之雨" },
+  "7687d948-dbe1-48c4-a786-fbe669ec7b0c": { constant: 1.0, category: "DZ", name: "粗线条的雨" },
+  "e69b4e77-ccb2-4694-ba88-7209ed097783": { constant: 1.0, category: "DZ", name: "雨之城" },
+  "606be389-ad01-41e3-a1ba-e7b355d16948": { constant: 1.0, category: "DZ", name: "Sundown" },
+  "364be32e-f685-4efb-80b5-64281c93939d": { constant: 1.0, category: "DZ", name: "Welcome to Milthm" },
+  "4fa17ebf-6a8e-47c1-8d8b-bd1344ccd559": { constant: 1.0, category: "DZ", name: "サイクルの欠片"},
+  "6a647130-01de-4cf2-ba7a-a6065f043465": { constant: 4.0, category: "SK", name: "White Lizard" },
+  "c1d143f6-ad6b-46cc-b3e0-f136e4accb01": { constant: 10.6, category: "CB", name: "Threat - Waterfront Complex" },
+  "9c28aeec-247e-4b9d-9edc-a92d0bd06303": { constant: 7.6, category: "SK", name: "Threat - Waterfront Complex" },
+  "2103d16c-9a07-4001-be01-155ef305118e": { constant: 2.0, category: "DZ", name: "Threat - Waterfront Complex" },
+  "1a3167ae-9105-4545-9aa7-3cab60874e9c": { constant: 10.4, category: "CB", name: "Kayava" },
+  "1ae6231b-d165-4f09-a138-9ec0d29431a7": { constant: 5.5, category: "SK", name: "Kayava" },
+  "85a6566f-d9df-408e-a812-0b13a80362cc": { constant: 3.0, category: "DZ", name: "Kayava" },
+  "abefe6c9-2b30-45ef-b5b0-8edb5fc18195": { constant: 11.5, category: "CB", name: "Threat - Metropolis" },
+  "975a9b31-3f04-4587-b77e-2282dec95188": { constant: 6.6, category: "SK", name: "Threat - Metropolis" },
+  "c292f47e-d8ff-483f-bfd7-aa43937f0e2e": { constant: 2.0, category: "DZ", name: "Threat - Metropolis" },
+  "6add3ab9-52c0-4c13-abc9-506dfa89faa6": { constant: 11.1, category: "CB", name: "Sheer Ice Torrent" },
+  "d3ddf678-adb0-4157-ae10-21c2667c7ba8": { constant: 7.8, category: "SK", name: "Sheer Ice Torrent" },
+  "e23637e8-fe15-4d9a-b3c9-9e059745ad3c": { constant: 2.0, category: "DZ", name: "Sheer Ice Torrent" },
+  "a8d6dfa7-b879-4eef-a10a-dbbd46519583": { constant: 12.2, category: "CB", name: "Moonfall / 大月墜落狂想" },
+  "9eb53fd3-a91c-45c6-8608-f3a76eecf9f7": { constant: 8.0, category: "SK", name: "Moonfall / 大月墜落狂想" },
+  "ca751a94-f71e-4556-9d54-76de325ca29c": { constant: 2.0, category: "DZ", name: "Moonfall / 大月墜落狂想" }
+  //特殊谱面
+  
+  //剧情谱面，显示定数为3
+  //"eb802d90-72c0-4b95-856a-b2951a57c0ec": { constant: -1, category: "CB*", name: "Sheer Ice Torrent" },
+  //"d3ddf678-adb0-4158-ae10-21c2667c7ba8": { constant: -1, category: "SK*", name: "Sheer Ice Torrent" },
+  //"e23637e8-fe16-4d9a-b3c9-9e059745ad3c": { constant: -1, category: "DZ*", name: "Sheer Ice Torrent" },
+              };
+       
 /* ========== 全局变量 ========== */
 let columns = 4;
 
@@ -216,7 +239,6 @@ function processData() {
 
   // 显示用户信息
     drawUserInfo(username, items);
-
   // 绘制所有卡片
   items.forEach(drawCard);
   
@@ -477,25 +499,395 @@ function upl() {
   document.getElementById('fileupLoad').click();
 }
 
-// 监听文件上传
 document.getElementById('fileupLoad').addEventListener("change", async function (e) {
   const file = e.target.files[0];
   if (!file) return;
-
-  if (file.name.toLowerCase().endsWith('.db')) {
+  
+  const fileName = file.name.toLowerCase();
+  
+  if (fileName.endsWith('.db')) {
       const reader = new FileReader();
       reader.onload = async () => {
           const SQL = await initSQL();  // 加载 SQL.js
-          processDBFile(reader.result, SQL);
+          const db = new SQL.Database(new Uint8Array(reader.result));
+          const tables = getAllTables(db); // 获取数据库中的所有表
+  
+          if (tables.includes("kv")) {
+              // 使用 saves.db 的解析方式
+              processDBFile(reader.result, SQL);
+          } else if (tables.includes("scores")) {
+              // 使用 data.db 的解析方式
+              const scores = extractScores(db);
+              processHistoryRecords(scores);
+          } else {
+              console.error("数据库不包含 'kv' 或 'scores' 表，无法解析");
+          }
       };
       reader.readAsArrayBuffer(file);
   } else {
+      // 如果不是 .db 文件，执行第3种操作
       const reader = new FileReader();
-      reader.onload = () => handleFile(reader.result, file.name.toLowerCase());
+      reader.onload = () => handleFile(reader.result, fileName);
       reader.onerror = () => alert("读取文件失败");
       reader.readAsText(file);
   }
+  
 });
+function getAllTables(db) {
+  try {
+      const stmt = db.prepare("SELECT name FROM sqlite_master WHERE type='table'");
+      let tables = [];
+      while (stmt.step()) {
+          tables.push(stmt.getAsObject().name);
+      }
+      stmt.free();
+      return tables;
+  } catch (error) {
+      console.error("无法获取数据库表:", error);
+      return [];
+  }
+}
+
+function extractScores(db) {
+  let scores = [];
+  try {
+      const stmt = db.prepare("SELECT * FROM scores");
+      while (stmt.step()) {
+          let row = stmt.getAsObject();
+          scores.push(row);
+      }
+      stmt.free();
+  } catch (error) {
+      console.error("提取 scores 失败:", error);
+  }
+  return scores;
+}
+function processHistoryRecords(scores) {
+  scores.forEach(scoreData => {
+      const chartid = scoreData.chart_id;
+      const score = scoreData.score;
+      const constantData = constants[chartid];
+
+      if (constantData) {
+          const { constant, category, name } = constantData;
+          const singleReality = reality(score) === null ? 0 : reality(score) + constant;
+          scoreData.constant = constant;
+          scoreData.category = category;
+          scoreData.name = name;
+          scoreData.singleReality = singleReality;
+      } else {
+          console.warn(`未找到对应的 chartid: ${chartid}`);
+      }
+  });
+
+  // 计算 r30 和 r10
+  const { r30, r10 } = calculateRecentScores(scores);
+  console.log("r30 (最近30条成绩):", r30.sort((a, b) => b.singleReality - a.singleReality));
+  const userrealityHistory= calculateUserReality(scores);
+  drawAndDownloadUserRealityChart(userrealityHistory,r10,scores);
+  const username = scores[0]?.username;
+  formatInput(username, items);
+  processData()
+}
+
+
+function calculateRecentScores(scores) {
+  scores = scores.filter(item => item.constant >= 0);
+  // 先按游玩时间升序排列，确保 r30 维护最近的成绩
+  scores.sort((a, b) => new Date(a.played_at) - new Date(b.played_at));
+
+  let r30 = [];
+  let seenCharts = new Set();
+
+  scores.forEach(scoreData => {
+      const { chart_id, score, singleReality, played_at } = scoreData;
+
+      // 是否是新曲面
+      const isNewChart = !seenCharts.has(chart_id);
+
+      // 条件写入规则
+      const shouldInsert = 
+          score >= 1000000 ||                  // 分数大于等于 1000000
+          isNewChart ||                        // 第一次游玩该谱面
+          score > getBestScore(chart_id, r30) || // 分数高于历史最佳
+          causesChartReduction(r30);  // 写入会导致不同谱面数小于 10
+
+      if (shouldInsert) {
+          // 直接写入（如果已满则踢掉最早的成绩）
+          if (r30.length >= 30) {
+              r30.shift();
+          }
+          r30.push(scoreData);
+          seenCharts.add(chart_id);
+      }
+  });
+  const r10 = [];
+  const usedCharts = new Set();
+
+  r30.sort((a, b) => b.singleReality - a.singleReality);
+
+  for (let i = 0; i < r30.length && r10.length < 10; i++) {
+      if (!usedCharts.has(r30[i].chart_id)) {
+          r10.push(r30[i]);
+          usedCharts.add(r30[i].chart_id);
+      }
+  }
+
+  return { r30, r10 };
+}
+// 获取某个 chart_id 在 r30 中的最高分
+function getBestScore(chart_id, r30) {
+  let bestScore = 0;
+  for (let record of r30) {
+      if (record.chart_id === chart_id) {
+          bestScore = Math.max(bestScore, record.score);
+      }
+  }
+  return bestScore;
+}
+
+// 判断写入是否会导致不同谱面数小于 10
+function causesChartReduction(r30) {
+  let uniqueCharts = new Set(r30.map(record => record.chart_id));
+  return uniqueCharts.size <= 10;
+}
+function calculateUserReality(scores) {
+  let b20_lg = new Map(); // 存储所有不同谱面的最高得分记录 (chart_id -> scoreData)
+  let userrealityHistory = []; // 记录 userreality 变化历史
+  let lastUserReality = null; // 记录上一次的 userreality
+
+  scores.forEach(scoreData => {
+      const { chart_id, score, singleReality, played_at } = scoreData;
+
+      // **修改点：b20_lg 存储所有曲目的最高分**
+      if (!b20_lg.has(chart_id) || b20_lg.get(chart_id).score < score) {
+          b20_lg.set(chart_id, scoreData);
+      }
+      let b20 = Array.from(b20_lg.values())
+          .sort((a, b) => b.singleReality - a.singleReality) // 按 singleReality 降序排序
+          .slice(0, 20); // 取最高的 20 条
+let filteredReality = b20.slice(0, 20).filter(data => data.singleReality > 0);
+let sumReality = filteredReality.reduce((sum, data) => sum + data.singleReality, 0);
+      let userreality = sumReality / 20;
+
+      // 检测 userreality 是否发生变化
+      if (lastUserReality === null || userreality !== lastUserReality) {
+          userrealityHistory.push({ userreality, played_at });
+          lastUserReality = userreality;
+      }
+  });
+  const gradeMap = { EX: 0, AP: 1, FC: 2, S: 3, A: 4, B: 5, C: 6, F: 7 };
+
+  window.items = Array.from(b20_lg.values()).map(({ score, singleReality, score_accuracy, grade, ...rest }) => ({
+      ...rest,
+      bestScore: score,
+      singleRealityRaw: singleReality,
+      singleReality: singleReality.toFixed(2),
+      bestAccuracy: score_accuracy,
+      bestLevel: gradeMap[grade] ?? 7 // 默认 F 等级
+  }));  
+  return userrealityHistory;
+}
+
+function drawAndDownloadUserRealityChart(userrealityHistory, r10, scores) {
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = 2000;
+  canvas.height = 1500;
+
+  // 设置背景为黑色
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // 折线图区域：右上 1/4，留 10px 间距，表格高度减少 30px
+  const chartX = 1050, chartY = 50, chartWidth = 900, chartHeight = 500;
+
+  // 解析用户现实历史数据
+  const times = userrealityHistory.map(data => new Date(data.played_at).getTime());
+  const realities = userrealityHistory.map(data => data.userreality);
+  const [minTime, maxTime] = [Math.min(...times), Math.max(...times)];
+  const [minReality, maxReality] = [Math.min(...realities), Math.max(...realities)];
+
+  // 设置时间坐标轴的刻度
+  const scaleX = (time) => chartX + ((time - minTime) / (maxTime - minTime)) * chartWidth;
+  const scaleY = (reality) => chartY + chartHeight - ((reality - minReality) / (maxReality - minReality)) * chartHeight;
+
+  // 绘制表格
+  ctx.strokeStyle = "#444";
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 5; i++) {
+      let y = chartY + (chartHeight / 5) * i;
+      ctx.beginPath();
+      ctx.moveTo(chartX, y);
+      ctx.lineTo(chartX + chartWidth, y);
+      ctx.stroke();
+  }
+
+  for (let i = 0; i <= 6; i++) {
+      let x = chartX + (chartWidth / 6) * i;
+      ctx.beginPath();
+      ctx.moveTo(x, chartY);
+      ctx.lineTo(x, chartY + chartHeight);
+      ctx.stroke();
+  }
+
+  // 绘制折线
+  ctx.strokeStyle = "blue";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  userrealityHistory.forEach((data, i) => {
+      let x = scaleX(times[i]), y = scaleY(realities[i]);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+
+  // 时间坐标：显示基于当前时间的时间差
+  const now = new Date();
+  const totalTime = now.getTime() - minTime;
+  const interval = totalTime / 5;
+  ctx.fillStyle = "white";
+  ctx.font = "20px Arial";
+  ctx.textAlign = "center";
+
+  for (let i = 0; i < 5; i++) {
+      let x = chartX + (i * chartWidth) / 5;
+      let time = minTime + i * interval;
+      let timeDiff = now.getTime() - time;
+      let timeLabel = formatTimeDiff(timeDiff);
+      ctx.fillText(timeLabel, x, chartY + chartHeight + 30);
+  }
+  
+  // 右下角显示“now”
+  ctx.fillText("now", chartX + chartWidth, chartY + chartHeight + 30);
+
+  // userreality 刻度
+  ctx.textAlign = "right";
+  for (let i = 0; i < 5; i++) {
+      let reality = minReality + (maxReality - minReality) * (i / 4);
+      let y = scaleY(reality);
+      ctx.fillText(reality.toFixed(2), chartX - 10, y);
+  }
+
+  // 添加标题
+  ctx.textAlign = "center";
+  ctx.fillText("User Reality 变化趋势", chartX + chartWidth / 2, chartY - 10);
+  ctx.font = "40px Arial";
+  ctx.fillText("最近游玩",350,110);
+  ctx.fillText("r10记录(测试,无实际用途)",350,760);
+  lg_drawCards(ctx, scores.slice(-10).reverse(), 50, 150).then(() => {
+    lg_drawCards(ctx, r10, 50, 800).then(() => {
+        // 生成下载链接
+        const link = document.createElement("a");
+        link.download = "user_reality_chart.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+    });
+});
+}
+
+function formatTimeDiff(timeDiff) {
+  const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+  
+  if (days > 0) {
+    return `-${days}d`;
+  } else if (hours > 0) {
+    return `-${hours}h`;
+  } else {
+    return `-${minutes}m`;
+  }
+}
+
+
+function lg_drawCards(ctx, items, xOffset, yOffset) {
+  const scale = 1;
+  const cardWidth = 300 * scale;
+  const cardHeight = 100 * scale;
+  const imgWidth = 110 * scale;
+  const imgHeight = 70;
+
+  const columnSpacing = 320 * scale;
+  const rowSpacing = 110 * scale;
+
+  const imagePromises = items.map((item, i) => {
+      const x = xOffset + (i % 2) * columnSpacing;
+      const y = yOffset + Math.floor(i / 2) * rowSpacing;
+
+      // 卡片背景
+      ctx.fillStyle = 'rgba(128, 128, 128, 0.4)';
+      ctx.fillRect(x, y, cardWidth, cardHeight);
+
+      // 编号
+      ctx.font = `${13 * scale}px Arial`;
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'top';
+      ctx.fillStyle = (i < 10) ? '#FAFAFA' : '#C9C9C9';
+      ctx.fillText(`#${i + 1}`, x + cardWidth - 10, y + 5);
+
+      // 分数：不足7位前补0
+      let strScore = item.score.toString().padStart(7, '0');
+
+      // 分数颜色
+      let scoreColor;
+      if (item.bestLevel < 2) {
+          const gradient = ctx.createLinearGradient(x, y + 40 * scale, x, y + 70 * scale);
+          gradient.addColorStop(0, '#99C5FB');
+          gradient.addColorStop(1, '#D8C3FA');
+          scoreColor = gradient;
+      } else if (item.bestLevel === 2) {
+          scoreColor = '#90CAEF';
+      } else {
+          scoreColor = '#FFFFFF';
+      }
+
+      ctx.font = `${30 * scale}px Arial`;
+      ctx.textAlign = 'left';
+      ctx.fillStyle = scoreColor;
+      ctx.fillText(strScore, x + 130, y + 40 * scale);
+
+      // 曲名，动态调整字体大小
+      const maxTextWidth = 200;
+      let currentFontSize = 19 * scale;
+      ctx.font = `${currentFontSize}px Arial`;
+      let textWidth = ctx.measureText(item.name).width;
+      while (textWidth > maxTextWidth && currentFontSize > 10) {
+          currentFontSize--;
+          ctx.font = `${currentFontSize}px Arial`;
+          textWidth = ctx.measureText(item.name).width;
+      }
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillText(item.name, x + 130, y + 18);
+
+      // Reality + Accuracy
+      ctx.font = `${15 * scale}px Arial`;
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillText(`${item.category} ${parseFloat(item.constant).toFixed(1)} > ${item.singleReality.toFixed(2)}   ${(item.score_accuracy * 100).toFixed(2)}%`, x + 130, y + 75 * scale);
+
+      // 曲绘图
+      const imgPath = `./jpgs/${encodeURIComponent(item.name)}.jpg`;
+      return loadImage(imgPath).then(img => {
+          ctx.drawImage(img, x + 10 * scale, y + 13 * scale, imgWidth, imgHeight);
+      }).catch(() => {
+          // Fallback image if specific image fails to load
+          return loadImage('./jpgs/NYA.jpg').then(img => {
+              ctx.drawImage(img, x + 10 * scale, y + 10 * scale, imgWidth, imgHeight);
+          });
+      });
+  });
+
+  // 等待所有图片加载完成
+  return Promise.all(imagePromises);
+}
+
+function loadImage(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
+}
 
 // **初始化 SQL.js**
 async function initSQL() {
@@ -690,7 +1082,6 @@ function openContributionDialog() {
   new mdui.Dialog('#contributionDialog').open();
 }
 
-/* ========== 下载图片 (含背景、卡片等) ========== */
 /* ========== 下载图片 (含背景、卡片等) ========== */
 function downloadImage() {
   const canvas = document.createElement('canvas');
