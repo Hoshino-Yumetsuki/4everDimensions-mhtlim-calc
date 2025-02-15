@@ -1,4 +1,5 @@
 console.log("Updated at 2025.02.15")
+console.log("已更新data.db文件解析")
 console.log(" ███  ███                               \n\
  ███  ███                               \n\
  ███▒▒███                               \n\
@@ -501,37 +502,36 @@ function upl() {
 document.getElementById('fileupLoad').addEventListener("change", async function (e) {
   const file = e.target.files[0];
   if (!file) return;
-
+  
   const fileName = file.name.toLowerCase();
-
-  if (fileName === 'saves.db') {
-      const reader = new FileReader();
-      reader.onload = async () => {
-          const SQL = await initSQL();  // 加载 SQL.js
-          processDBFile(reader.result, SQL);
-      };
-      reader.readAsArrayBuffer(file);
-  } else if (fileName === 'data.db') {
+  
+  if (fileName.endsWith('.db')) {
       const reader = new FileReader();
       reader.onload = async () => {
           const SQL = await initSQL();  // 加载 SQL.js
           const db = new SQL.Database(new Uint8Array(reader.result));
-          const tables = getAllTables(db);
-
-          if (!tables.includes("scores")) {
-              console.error("数据库中未找到 'scores' 表");
-              return;
+          const tables = getAllTables(db); // 获取数据库中的所有表
+  
+          if (tables.includes("kv")) {
+              // 使用 saves.db 的解析方式
+              processDBFile(reader.result, SQL);
+          } else if (tables.includes("scores")) {
+              // 使用 data.db 的解析方式
+              const scores = extractScores(db);
+              processHistoryRecords(scores);
+          } else {
+              console.error("数据库不包含 'kv' 或 'scores' 表，无法解析");
           }
-          const scores = extractScores(db);
-          processHistoryRecords(scores);
       };
       reader.readAsArrayBuffer(file);
   } else {
+      // 如果不是 .db 文件，执行第3种操作
       const reader = new FileReader();
       reader.onload = () => handleFile(reader.result, fileName);
       reader.onerror = () => alert("读取文件失败");
       reader.readAsText(file);
   }
+  
 });
 function getAllTables(db) {
   try {
