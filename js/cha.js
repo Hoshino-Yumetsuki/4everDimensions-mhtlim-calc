@@ -238,7 +238,6 @@ function processData() {
 
   // 显示用户信息
     drawUserInfo(username, items);
-  console.log("items:", items);
   // 绘制所有卡片
   items.forEach(drawCard);
   
@@ -517,20 +516,13 @@ document.getElementById('fileupLoad').addEventListener("change", async function 
       reader.onload = async () => {
           const SQL = await initSQL();  // 加载 SQL.js
           const db = new SQL.Database(new Uint8Array(reader.result));
-
-          // 获取数据库中的所有表
           const tables = getAllTables(db);
-          console.log("数据库中的表:", tables);
 
           if (!tables.includes("scores")) {
               console.error("数据库中未找到 'scores' 表");
               return;
           }
-
-          // 读取 scores 表的所有内容
           const scores = extractScores(db);
-
-          // 调用新函数解析历史记录
           processHistoryRecords(scores);
       };
       reader.readAsArrayBuffer(file);
@@ -541,10 +533,6 @@ document.getElementById('fileupLoad').addEventListener("change", async function 
       reader.readAsText(file);
   }
 });
-
-/**
-* 获取数据库中的所有表
-*/
 function getAllTables(db) {
   try {
       const stmt = db.prepare("SELECT name FROM sqlite_master WHERE type='table'");
@@ -560,13 +548,10 @@ function getAllTables(db) {
   }
 }
 
-/**
-* 提取 scores 表的所有内容
-*/
 function extractScores(db) {
   let scores = [];
   try {
-      const stmt = db.prepare("SELECT * FROM scores"); // 读取 scores 表的所有数据
+      const stmt = db.prepare("SELECT * FROM scores");
       while (stmt.step()) {
           let row = stmt.getAsObject();
           scores.push(row);
@@ -578,9 +563,6 @@ function extractScores(db) {
   return scores;
 }
 function processHistoryRecords(scores) {
-  console.log("scores 表的数据:", scores);
-
-  // 遍历 scores 数据，计算 singleReality
   scores.forEach(scoreData => {
       const chartid = scoreData.chart_id;
       const score = scoreData.score;
@@ -600,14 +582,9 @@ function processHistoryRecords(scores) {
 
   // 计算 r30 和 r10
   const { r30, r10 } = calculateRecentScores(scores);
-
-  // 按 singleReality 从大到小排序并打印
   console.log("r30 (最近30条成绩):", r30.sort((a, b) => b.singleReality - a.singleReality));
-  console.log("r10 (最高的10条成绩):", r10.sort((a, b) => b.singleReality - a.singleReality));
   const userrealityHistory= calculateUserReality(scores);
   drawAndDownloadUserRealityChart(userrealityHistory,r10,scores);
-
-  //打印出data.db中提取的存档成绩
   const username = scores[0]?.username;
   formatInput(username, items);
   processData()
@@ -633,7 +610,7 @@ function calculateRecentScores(scores) {
           score >= 1000000 ||                  // 分数大于等于 1000000
           isNewChart ||                        // 第一次游玩该谱面
           score > getBestScore(chart_id, r30) || // 分数高于历史最佳
-          causesChartReduction(chart_id, r30);  // 写入会导致不同谱面数小于 10
+          causesChartReduction(r30);  // 写入会导致不同谱面数小于 10
 
       if (shouldInsert) {
           // 直接写入（如果已满则踢掉最早的成绩）
@@ -644,8 +621,6 @@ function calculateRecentScores(scores) {
           seenCharts.add(chart_id);
       }
   });
-
-  // 计算 r10（r30 内 singleReality 最高的 10 条成绩，且 chart_id 唯一）
   const r10 = [];
   const usedCharts = new Set();
 
@@ -672,7 +647,7 @@ function getBestScore(chart_id, r30) {
 }
 
 // 判断写入是否会导致不同谱面数小于 10
-function causesChartReduction(chart_id, r30) {
+function causesChartReduction(r30) {
   let uniqueCharts = new Set(r30.map(record => record.chart_id));
   return uniqueCharts.size <= 10;
 }
@@ -681,7 +656,6 @@ function calculateUserReality(scores) {
   let userrealityHistory = []; // 记录 userreality 变化历史
   let lastUserReality = null; // 记录上一次的 userreality
 
-  // 按时间顺序遍历 scores（原始顺序，无需排序）
   scores.forEach(scoreData => {
       const { chart_id, score, singleReality, played_at } = scoreData;
 
@@ -689,15 +663,9 @@ function calculateUserReality(scores) {
       if (!b20_lg.has(chart_id) || b20_lg.get(chart_id).score < score) {
           b20_lg.set(chart_id, scoreData);
       }
-
-      // 计算当前 b20（取 b20_lg 中 singleReality 最高的 20 首）
       let b20 = Array.from(b20_lg.values())
           .sort((a, b) => b.singleReality - a.singleReality) // 按 singleReality 降序排序
           .slice(0, 20); // 取最高的 20 条
-          console.log("b20:", b20);
-          console.log("b20:", Array.from(b20.values()));
-      // 计算 userreality（b20 的 singleReality 平均数，若不足 20 仍除以 20）
-      // 先过滤出 singleReality 大于 0 的曲目，然后进行 reduce 求和
 let filteredReality = b20.slice(0, 20).filter(data => data.singleReality > 0);
 let sumReality = filteredReality.reduce((sum, data) => sum + data.singleReality, 0);
       let userreality = sumReality / 20;
@@ -708,12 +676,6 @@ let sumReality = filteredReality.reduce((sum, data) => sum + data.singleReality,
           lastUserReality = userreality;
       }
   });
-
-  // 解析完成后，打印最终 b20_lg（存储所有谱面的最高分）
-  console.log("所有谱面的最高分 (b20_lg):", Array.from(b20_lg.values()));
-
-  // 输出 userreality 变化记录
-  console.log("UserReality 变化记录:", userrealityHistory);
   const gradeMap = { EX: 0, AP: 1, FC: 2, S: 3, A: 4, B: 5, C: 6, F: 7 };
 
   window.items = Array.from(b20_lg.values()).map(({ score, singleReality, score_accuracy, grade, ...rest }) => ({
@@ -811,10 +773,8 @@ function drawAndDownloadUserRealityChart(userrealityHistory, r10, scores) {
   ctx.fillText("User Reality 变化趋势", chartX + chartWidth / 2, chartY - 10);
   ctx.font = "40px Arial";
   ctx.fillText("最近游玩",350,110);
-  ctx.fillText("r10记录(测试)",350,760);
-  // 绘制成绩卡片：scores 最后 10 项
-  lg_drawCards(ctx, scores.slice(-10), 50, 150).then(() => {
-    // 绘制成绩卡片：r10
+  ctx.fillText("r10记录(测试,无实际用途)",350,760);
+  lg_drawCards(ctx, scores.slice(-10).reverse(), 50, 150).then(() => {
     lg_drawCards(ctx, r10, 50, 800).then(() => {
         // 生成下载链接
         const link = document.createElement("a");
@@ -850,7 +810,6 @@ function lg_drawCards(ctx, items, xOffset, yOffset) {
   const columnSpacing = 320 * scale;
   const rowSpacing = 110 * scale;
 
-  // 创建一个 promises 数组，存储所有加载图片的 promises
   const imagePromises = items.map((item, i) => {
       const x = xOffset + (i % 2) * columnSpacing;
       const y = yOffset + Math.floor(i / 2) * rowSpacing;
