@@ -195,13 +195,13 @@ const constants = {
   "e23637e8-fe15-4d9a-b3c9-9e059745ad3c": { constant: 2.0, category: "DZ", name: "Sheer Ice Torrent" },
   "a8d6dfa7-b879-4eef-a10a-dbbd46519583": { constant: 12.2, category: "CB", name: "Moonfall / 大月墜落狂想" },
   "9eb53fd3-a91c-45c6-8608-f3a76eecf9f7": { constant: 8.0, category: "SK", name: "Moonfall / 大月墜落狂想" },
-  "ca751a94-f71e-4556-9d54-76de325ca29c": { constant: 2.0, category: "DZ", name: "Moonfall / 大月墜落狂想" }
+  "ca751a94-f71e-4556-9d54-76de325ca29c": { constant: 2.0, category: "DZ", name: "Moonfall / 大月墜落狂想" },
+
   //特殊谱面
-  
   //剧情谱面，显示定数为3
-  //"eb802d90-72c0-4b95-856a-b2951a57c0ec": { constant: -1, category: "CB*", name: "Sheer Ice Torrent" },
-  //"d3ddf678-adb0-4158-ae10-21c2667c7ba8": { constant: -1, category: "SK*", name: "Sheer Ice Torrent" },
-  //"e23637e8-fe16-4d9a-b3c9-9e059745ad3c": { constant: -1, category: "DZ*", name: "Sheer Ice Torrent" },
+  "eb802d90-72c0-4b95-856a-b2951a57c0ec": { constant: -1, category: "CB*", name: "Sheer Ice Torrent" },
+  "d3ddf678-adb0-4158-ae10-21c2667c7ba8": { constant: -1, category: "SK*", name: "Sheer Ice Torrent" },
+  "e23637e8-fe16-4d9a-b3c9-9e059745ad3c": { constant: -1, category: "DZ*", name: "Sheer Ice Torrent" }
               };
        
 /* ========== 全局变量 ========== */
@@ -214,12 +214,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ========== Reality 计算相关 ========== */
-function reality(score) {
-    if (score >= 1005000) return 1;
-    if (score >= 995000) return 1.4 / (Math.exp(-3.65 * (score / 10000 - 99.5)) + 1) - 0.4;
-  if (score >= 980000) return ((Math.exp(3.1 * (score - 980000) / 15000) - 1) / (Math.exp(3.1) - 1)) * 0.8 - 0.5;
-    if (score >= 700000) return score / 280000 - 4;
-    return null;
+function reality(score,c) {
+  if(c>-1){
+    if (score >= 1005000) return 1+c;
+    if (score >= 995000) return 1.4 / (Math.exp(-3.65 * (score / 10000 - 99.5)) + 1) - 0.4+c;
+    if (score >= 980000) return ((Math.exp(3.1 * (score - 980000) / 15000) - 1) / (Math.exp(3.1) - 1)) * 0.8 - 0.5+c;
+    if (score >= 700000) return score / 280000 - 4+c;
+  }
+    return 0;
 }
 
 /* ========== 核心流程 ========== */
@@ -293,8 +295,7 @@ function processSong(song) {
   const accuracyVal = parseFloat(accuracy);
   const levelVal = parseInt(level, 10);
   
-  const rlt = reality(scoreVal);
-  const singleRealityRaw = rlt ? rlt + constantVal : 0;
+  const singleRealityRaw = reality(scoreVal,constantVal);
   
     return {
     singleRealityRaw,
@@ -315,8 +316,7 @@ function processSongFromOldFormat(record) {
   if (!constantObj) return null;
   
   const { constant, category, name } = constantObj;
-    const rlt = reality(BestScore);
-  const singleRealityRaw = rlt ? rlt + constant : 0;
+  const singleRealityRaw = reality(BestScore,constant);
   
     return {
     singleRealityRaw,
@@ -563,22 +563,27 @@ function extractScores(db) {
   return scores;
 }
 function processHistoryRecords(scores) {
-  scores.forEach(scoreData => {
+  for (let i = 0; i < scores.length; i++) {
+      const scoreData = scores[i];
       const chartid = scoreData.chart_id;
       const score = scoreData.score;
       const constantData = constants[chartid];
 
       if (constantData) {
           const { constant, category, name } = constantData;
-          const singleReality = reality(score) === null ? 0 : reality(score) + constant;
+          const singleReality = reality(score,constant);
           scoreData.constant = constant;
           scoreData.category = category;
           scoreData.name = name;
           scoreData.singleReality = singleReality;
       } else {
           console.warn(`未找到对应的 chartid: ${chartid}`);
+          // 删除当前scoreData对象
+          scores.splice(i, 1);
+          i--;  // 调整索引以便继续遍历下一个元素
       }
-  });
+  }
+
 
   // 计算 r30 和 r10
   const { r30, r10 } = calculateRecentScores(scores);
