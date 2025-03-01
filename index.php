@@ -26,6 +26,7 @@ execute($dbc,"INSERT INTO `cha_stat` (`ip`,`ms`) VALUES ('$ip','$ms_time')");
     <link rel="stylesheet" href="new_UI.css">
     <link href="./layui/css/layui.css" rel="stylesheet">
 
+    <input type="file" id="fileupLoad" style="display:none;" />
     <script src="./js/cha_newui.js"></script>
     <!-- Chunk: sql_wasm -->
     <script src="./js/plistjs/dist/plist.js"></script>
@@ -85,7 +86,6 @@ execute($dbc,"INSERT INTO `cha_stat` (`ip`,`ms`) VALUES ('$ip','$ms_time')");
                 <div class="layui-card-body">
                     <textarea id="inputData" placeholder="粘贴数据在此处..." class="layui-textarea"></textarea>
                     <hr/>
-                    <input type="file" id="fileupLoad" style="display:none;" />
                     <!-- chunk: data processing operations -->
                     <button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:qqbot_ua();">QQ Bot选项</button>
                     <hr/>
