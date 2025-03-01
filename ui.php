@@ -78,7 +78,7 @@
                                     echo '服务器负载：'.implode(' ', sys_getloadavg()).'<br>';
                                     echo '服务器CPU核心数：'.shell_exec('nproc').'<br>';
                                     echo '服务器CPU型号：'.shell_exec('cat /proc/cpuinfo | grep "model name" | uniq | awk -F : \'{print $2}\' | sed \'s/^[ \t]*//\'').'<br>';
-                                    echo '服务器内存剩余：'.shell_exec('free -m | grep 内存 | awk \'{print $7}\'').'MB<br>';
+                                    // echo '服务器内存剩余：'.shell_exec('free -m | grep 内存 | awk \'{print $7}\'').'MB<br>';
                                 ?>
                             </div>
                         </div>
