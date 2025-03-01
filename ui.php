@@ -58,7 +58,8 @@
                 <div class="layui-card-body">
                     你好，欢迎来到MilthmCalc！(Reality计算器) (http://k9.lv/c)<br>
                     这是一个用于计算Milthm Reality分数的网站，你可以在这里导入存档并解析。<br><hr>
-                    使用说明：<span class="superlink" onclick="javascript:show_usage();">查看使用说明</span>
+                    使用说明：<span class="superlink" onclick="javascript:show_usage();">查看使用说明</span><hr>
+                    <b>QQ交流群：</b><a href="https://qm.qq.com/q/Utb6sNDvki" target="_blank"><span class="superlink">Milthm#-1洨巟羣</span></a>
                 </div>
             </div>
             <div class="layui-card rccc">
