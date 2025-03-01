@@ -59,10 +59,18 @@
                 <div class="layui-card-body">
                     <!-- 网站作者：<button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:show_author_info();">查看</button><br> -->
                     网站作者：<span onclick="javascript:show_author_info();" class="superlink">查看</span><br>
-                    本站访问数量：<br>
+                    本站访问数量：<span id="accessCount"><span><br>
                 </div>
             </div>
-            <div class="layui-card">
+            <script>
+                if (accessCount != null){
+                    document.getElementById("accessCount").innerHTML = accessCount;
+                }else{
+                    document.getElementById("accessCount").innerHTML = "DevMode";
+                }
+            </script>
+
+<div class="layui-card">
                 <div class="layui-card-header">数据处理</div>
                 <div class="layui-card-body">
                     <textarea id="inputData" placeholder="粘贴数据在此处..." class="layui-textarea"></textarea>
