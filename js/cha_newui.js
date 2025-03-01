@@ -271,7 +271,7 @@ function processOldFormat(data) {
   
   const parsed = tryParseJSON(str);
   if (!(parsed && parsed.SongRecords)) {
-        alert("存档数据无效或无法解析。");
+        alert_invalid();
         return { username: "", items: [] };
     }
 
