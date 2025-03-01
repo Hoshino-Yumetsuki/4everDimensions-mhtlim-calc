@@ -66,7 +66,24 @@
                 <div class="layui-card-body">
                     <!-- 网站作者：<button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:show_author_info();">查看</button><br> -->
                     网站作者：<span onclick="javascript:show_author_info();" class="superlink">查看</span><br>
-                    本站访问数量：<span id="accessCount"><span><br>
+                    本站访问数量：<span id="accessCount"></span><br>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <div class="layui-colla-title rccc">服务器信息</div>
+                            <div class="layui-colla-content">
+                                <?php
+                                    echo '运行在 '.shell_exec('uname -p')." 的 ".shell_exec('uname -s')." 上，";
+                                    echo 'PHP版本：'.phpversion().'<br>';
+                                    echo '距离上次页面更新：'.(time()-filemtime(__FILE__)).'秒<br>';
+                                    echo '服务器负载：'.implode(' ', sys_getloadavg()).'<br>';
+                                    echo '服务器CPU核心数：'.shell_exec('nproc').'<br>';
+                                    echo '服务器CPU型号：'.shell_exec('cat /proc/cpuinfo | grep "model name" | uniq | awk -F : \'{print $2}\' | sed \'s/^[ \t]*//\'').'<br>';
+                                    echo '服务器内存剩余：'.shell_exec('free -m | grep 内存 | awk \'{print $7}\'').'MB<br>';
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
             <script>
