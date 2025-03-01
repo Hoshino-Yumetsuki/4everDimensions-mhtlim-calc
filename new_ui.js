@@ -48,23 +48,24 @@ function alert_invalid(){
   });
 }
 function genPicDialog(){
-  layer.open({
+  // layer.open({
 
-    type: 1,
+  //   type: 1,
 
-    offset: 'b',
+  //   offset: 'b',
 
-    anim: 'slideUp',
+  //   anim: 'slideUp',
 
-    area: ['100%', '30%'],
+  //   area: ['100%', '30%'],
 
-    shade: 0.1,
+  //   shade: 0.1,
 
-    shadeClose: true,
+  //   shadeClose: true,
 
-    id: 'ID-demo-layer-direction-b',
+  //   id: 'ID-demo-layer-direction-b',
 
-    content: '<div style="padding: 16px;">正在生成图片，由于需要下载图片资源，可能需要一些时间。如果一直没有反应，可以多次尝试。</div>'
+  //   content: '<div style="padding: 16px;">正在生成图片，由于需要下载图片资源，可能需要一些时间。如果一直没有反应，可以多次尝试。</div>'
 
-  });
+  // });
+  document.getElementById('picgen').style.display='block';
 }

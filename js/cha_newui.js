@@ -1352,6 +1352,7 @@ function downloadImage() {
     const timestamp = now.toISOString().replace(/[:\-T]/g, '_').split('.')[0];
     link.download = `output_${timestamp}.png`;
     link.click();
+    document.getElementById('picgen').style.display='none';
 }
 
   function loadImage(src) {

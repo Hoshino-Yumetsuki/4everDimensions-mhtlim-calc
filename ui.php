@@ -105,6 +105,12 @@
                     <button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:processData();">解析</button>
                     <button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:upl();">上传文件</button>
                     <button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:downloadImage();">生成图像</button>
+                    <br>
+                    <div id="picgen" style="display: none";>
+                        <br>
+                        <span class="layui-badge layui-bg-black">正在生成图片，由于需要下载图片资源，可能需要一些时间。若一直没有反应，可以多次尝试。</span>
+                    </div>
+                    
                     <!-- end chunk: data processing operations -->
                 </div>
             </div>
