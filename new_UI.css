@@ -58,7 +58,7 @@
                 }
                 
 body{
-    background-image: url("../static/bg_night.avif");
+    background-image: url("./static/bg_night.avif");
     background-attachment: fixed;
     background-size: cover;
 }
