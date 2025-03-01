@@ -30,6 +30,23 @@ execute($dbc,"INSERT INTO `cha_stat` (`ip`,`ms`) VALUES ('$ip','$ms_time')");
             <link rel="stylesheet" href="css/mdui.min.css">
     <script src="./js/plistjs/dist/plist.js"></script>
     <script src="./js/sql-wasm.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./js/sw.js')
+                .then(reg => console.log("Service Worker 注册成功:", reg.scope))
+                .catch(err => console.log("Service Worker 注册失败:", err));
+        }
+    </script>
+    <script>
+        function checkForUpdate() {
+            if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+                navigator.serviceWorker.controller.postMessage("checkForUpdate");
+            }
+        }
+        
+        // 每次刷新时检查更新
+        window.addEventListener("load", checkForUpdate);
+    </script>        
     <!-- <script src="http://cdn.jsdelivr.net/npm/plist@3.0.1/dist/plist.min.js"></script> -->
         </head>
         <body class="mdui-theme-layout-dark">
@@ -38,7 +55,7 @@ execute($dbc,"INSERT INTO `cha_stat` (`ip`,`ms`) VALUES ('$ip','$ms_time')");
                 <div class="mdui-toolbar mdui-color-theme">
             <a onclick="javascript:openContributionDialog();" class="mdui-hoverable mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-purple">
                 <i class="mdui-icon material-icons">info_outline</i></a>
-            <a href="javascript:;" class="mdui-typo-headline">Reality计算器v3.2</a>
+            <a href="javascript:;" class="mdui-typo-headline">Reality计算器v3.3</a>
                 <div class="mdui-toolbar-spacer"></div>
                 <a href="javascript:;" class="mdui-btn mdui-btn-icon">
                     <a href="https://qm.qq.com/q/Utb6sNDvki" target="_blank">交流群：375882310</a>
@@ -277,6 +294,8 @@ QQBot API:
  - Amorimagus
  - Chara
  - Autumn
+ - Panyi
+ - Eric_Lian
 
 感谢所有参与贡献的人！
 Copyleft 2024~2025. Reality Calculator Project.

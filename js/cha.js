@@ -24,38 +24,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 const constants = {
-  "5aaafcea-684f-4310-936d-67ae35956c48": { constant: -1, category: "Ø", name: "驟雨の狭間" },
-  "1104f25d-2493-4bc7-9172-b262d36488ac": { constant: -1, category: "SP", name: "Oiiaioooooiai" },
-  "e543f4a5-5f55-45e5-9c41-ebe1c155c12e": { constant: -1, category: "SP", name: "Dogbite" },
-  "6252f7c4-8eae-4b59-a22f-9f142f904029": { constant: 12.3, category: "CL", name: "Contrasty Angeles" },
-  "d742e989-92c4-4474-87ef-57b218d0fc41": { constant: 12.2, category: "CL", name: "命日" },
-  "9acd5289-bc81-49fb-afc8-7b0631e60e60": { constant: 12.1, category: "CL", name: "Regnaissance" },
-  "a19a54b6-363e-49ae-9cd2-633a2db8ae4f": { constant: 11.9, category: "CL", name: "Broken Conviction" },
-  "eab07c23-395d-47f3-be33-15c7c566f694": { constant: 11.7, category: "CL", name: "Moonflutter" },
-  "ead657f6-f0f2-4a21-acfd-4322892a0562": { constant: 11.7, category: "CL", name: "Fly To Meteor feat.兔柒" },
-  "217898b1-4806-401f-adf5-740e9d72b66e": { constant: 10.5, category: "CL", name: "雨女" },
-  "cc75ce1c-dbed-4bc7-94eb-728bf36bb1ec": { constant: 12.1, category: "CB", name: "Innocent white" },
+  "5aaafcea-684f-4310-936d-67ae35956c48": { constant: -1, category: "Ø", name: "驟雨の狭間", ad:4.334},
+  "1104f25d-2493-4bc7-9172-b262d36488ac": { constant: -1, category: "SP", name: "Oiiaioooooiai", ae:3.5,af:4},
+  "e543f4a5-5f55-45e5-9c41-ebe1c155c12e": { constant: -1, category: "SP", name: "Dogbite", ae:3,af:3,ag:2.5},
+  "6252f7c4-8eae-4b59-a22f-9f142f904029": { constant: 12.3, category: "CL", name: "Contrasty Angeles", ad:2.438,ae:4.5,af:3.5},
+  "d742e989-92c4-4474-87ef-57b218d0fc41": { constant: 12.2, category: "CL", name: "命日", ad:4.66,ae:2.5,af:3.5},
+  "9acd5289-bc81-49fb-afc8-7b0631e60e60": { constant: 12.1, category: "CL", name: "Regnaissance", ad:4.169,ae:5,af:4.5},
+  "a19a54b6-363e-49ae-9cd2-633a2db8ae4f": { constant: 11.9, category: "CL", name: "Broken Conviction", ad:2.350,ag:4},
+  "eab07c23-395d-47f3-be33-15c7c566f694": { constant: 11.7, category: "CL", name: "Moonflutter", ad:2.232,ae:3,af:3,ag:3.5},
+  "ead657f6-f0f2-4a21-acfd-4322892a0562": { constant: 11.7, category: "CL", name: "Fly To Meteor feat.兔柒", ad:3.583,ae:3.5,af:3.5},
+  "217898b1-4806-401f-adf5-740e9d72b66e": { constant: 10.5, category: "CL", name: "雨女", ad:1.192,ae:2,af:1.5},
+  "cc75ce1c-dbed-4bc7-94eb-728bf36bb1ec": { constant: 12.1, category: "CB", name: "Innocent white", ad:3.121,ae:4.5,af:4},
   "97ef94ce-df45-4a92-9645-2456f606e0fa": { constant: 11.9, category: "CB", name: "Meltovt Necrosys" },
-  "ed40cd1b-2741-415a-be81-6fcc63db4044": { constant: 11.7, category: "CB", name: "HYPER MEMORIES" },
-  "ef55520f-c913-449f-bf26-ab947384127e": { constant: 11.5, category: "CB", name: "Broken Conviction" },
-  "269efa5f-8b69-4a71-be24-7abe57372b3f": { constant: 11.5, category: "CB", name: "Contrasty Angeles" },
-  "e0162d0e-0727-49c2-80fa-f611621650ea": { constant: 11.4, category: "CB", name: "slic.hertz #GdbG"},
-  "61f5e310-d45b-40dc-a934-e3a849382729": { constant: 11.4, category: "CB", name: "Moonflutter" },
-  "14080c32-a16c-464c-b24a-880f1a7e657d": { constant: 11.4, category: "CB", name: "Algebra" },
-  "6b478cca-035d-4297-b34a-ae75658d81bd": { constant: 11.3, category: "CB", name: "Fragment of Memories" },
-  "f425914c-db82-413c-aca9-96ff151b8605": { constant: 11.2, category: "CB", name: "IN" },
-  "da07cabf-7c7b-4083-a41a-879be13c8c94": { constant: 11.2, category: "CB", name: "イコラト" },
-  "01929c36-e7ba-40d5-8123-ca3d4c2da4fb": { constant: 11.2, category: "CB", name: "参宿四~Betelgeuse~" },
-  "04d821ff-493a-421d-83a5-a61a59b2d3d3": { constant: 11.1, category: "CB", name: "命日" },
-  "80df6e22-69c3-4983-a712-adeebb47fb2b": { constant: 11.1, category: "CB", name: "Regnaissance" },
-  "22bd5632-25cc-412f-9299-bcf2cdd64aed": { constant: 10.9, category: "CB", name: "樱落繁花" },
+  "ed40cd1b-2741-415a-be81-6fcc63db4044": { constant: 11.7, category: "CB", name: "HYPER MEMORIES", ad:4.137,ae:1.5,af:2},
+  "ef55520f-c913-449f-bf26-ab947384127e": { constant: 11.5, category: "CB", name: "Broken Conviction", ad:2.986,af:1},
+  "269efa5f-8b69-4a71-be24-7abe57372b3f": { constant: 11.5, category: "CB", name: "Contrasty Angeles", ad:3.568,ae:3,af:3.5},
+  "e0162d0e-0727-49c2-80fa-f611621650ea": { constant: 11.4, category: "CB", name: "slic.hertz #GdbG", ae:2.5,af:3.5},
+  "61f5e310-d45b-40dc-a934-e3a849382729": { constant: 11.4, category: "CB", name: "Moonflutter", ad:2.838,ae:3,af:2.5},
+  "14080c32-a16c-464c-b24a-880f1a7e657d": { constant: 11.4, category: "CB", name: "Algebra", ad:2.945,ae:4,af:3.5},
+  "6b478cca-035d-4297-b34a-ae75658d81bd": { constant: 11.3, category: "CB", name: "Fragment of Memories", ad:2.719,ae:3,af:3},
+  "f425914c-db82-413c-aca9-96ff151b8605": { constant: 11.2, category: "CB", name: "IN", ad:2.745},
+  "da07cabf-7c7b-4083-a41a-879be13c8c94": { constant: 11.2, category: "CB", name: "イコラト", ad:2.484,ae:3.5,af:2},
+  "01929c36-e7ba-40d5-8123-ca3d4c2da4fb": { constant: 11.2, category: "CB", name: "参宿四~Betelgeuse~", ad:2.013,ae:2,af:3},
+  "04d821ff-493a-421d-83a5-a61a59b2d3d3": { constant: 11.1, category: "CB", name: "命日", ad:3.118,ae:2.5,af:2},
+  "80df6e22-69c3-4983-a712-adeebb47fb2b": { constant: 11.1, category: "CB", name: "Regnaissance", ad:2.86,ae:3.5,af:4},
+  "22bd5632-25cc-412f-9299-bcf2cdd64aed": { constant: 10.9, category: "CB", name: "樱落繁花", ad:2.789,ae:4,af:3},
   "f7b864bc-72a3-4c9d-ab7c-b57946fb77ec": { constant: 10.8, category: "CB", name: "Elsorhg" },
-  "aafec4af-3479-445b-9b30-b6822b9f5e19": { constant: 10.8, category: "CB", name: "Moving on" },
-  "a6ef2d0a-057b-4ada-be88-23dcde06ada5": { constant: 10.7, category: "CB", name: "Hikari" },
-  "6db4cb9b-adec-4ce5-bb0a-71d4761e88f8": { constant: 10.6, category: "CB", name: "WATER" },
-  "13fda58e-3091-4b3d-8eb9-4ac8346ce61a": { constant: 10.6, category: "CB", name: "Threat - Sky Islands" },
-  "35ab3fba-928d-4b08-be7f-2fc67a77a838": { constant: 10.5, category: "CB", name: "Fly To Meteor (Milthm Edit)" },
-  "7131ad7b-1602-4acd-bfc1-1ff712d054f0": { constant: 10.5, category: "CB", name: "Future Unbound (Game Edit)" },
+  "aafec4af-3479-445b-9b30-b6822b9f5e19": { constant: 10.8, category: "CB", name: "Moving on", ae:1.5,af:1.5},
+  "a6ef2d0a-057b-4ada-be88-23dcde06ada5": { constant: 10.7, category: "CB", name: "Hikari", ad:2.44,ae:1,af:1.5},
+  "6db4cb9b-adec-4ce5-bb0a-71d4761e88f8": { constant: 10.6, category: "CB", name: "WATER", ad:1.624,ae:1.5,af:2.5},
+  "13fda58e-3091-4b3d-8eb9-4ac8346ce61a": { constant: 10.6, category: "CB", name: "Threat - Sky Islands", ae:5,af:4.5},
+  "35ab3fba-928d-4b08-be7f-2fc67a77a838": { constant: 10.5, category: "CB", name: "Fly To Meteor (Milthm Edit)", ad:3.183,ae:2.5,af:2},
+  "7131ad7b-1602-4acd-bfc1-1ff712d054f0": { constant: 10.5, category: "CB", name: "Future Unbound (Game Edit)", ad:1.556,ae:2,af:2.5},
   "7c0cdf77-fcfa-4f96-9897-24ca10582c32": { constant: 10.3, category: "CB", name: "Threat - Superstructure" },
   "7cdb8a2c-e133-4a91-a29f-4e21ba4e442a": { constant: 10.3, category: "CB", name: "Dogbite" },
   "3a908e2d-8a39-4220-a6b8-4817bd1cea4a": { constant: 10.2, category: "CB", name: "cybernetic blazar" },
@@ -76,7 +76,7 @@ const constants = {
   "c3769378-d595-4119-b93c-e0db2b3ea8e2": { constant: 9.3, category: "CB", name: "Aconsma" },
   "cdacaee4-2866-4109-93a8-5bbbf0dc6207": { constant: 9.3, category: "CB", name: "花月" },
   "d70bc3b4-752a-45b9-bd31-c6ab8b9a7c9e": { constant: 9.2, category: "CB", name: "INFP.mp3" },
-  "725abac1-5de5-463f-870d-a99a41cae61e": { constant: 9.1, category: "CB", name: "暮予星光"},
+  "725abac1-5de5-463f-870d-a99a41cae61e": { constant: 9.1, category: "CB", name: "暮予星光", ad:1.968},
   "bb5b7628-87b1-4e1c-8e07-8bacadf6f2b1": { constant: 8.6, category: "CB", name: "サイクルの欠片"},
   "b2594118-dcf5-4750-9e57-e4eeef6142fe": { constant: 8.5, category: "CB", name: "时落之雨" },
   "6df0b462-dded-46db-8505-3ff86fc46c26": { constant: 8.3, category: "CB", name: "粗线条的雨" },
@@ -195,14 +195,14 @@ const constants = {
   "e23637e8-fe15-4d9a-b3c9-9e059745ad3c": { constant: 2.0, category: "DZ", name: "Sheer Ice Torrent" },
   "a8d6dfa7-b879-4eef-a10a-dbbd46519583": { constant: 12.2, category: "CB", name: "Moonfall / 大月墜落狂想" },
   "9eb53fd3-a91c-45c6-8608-f3a76eecf9f7": { constant: 8.0, category: "SK", name: "Moonfall / 大月墜落狂想" },
-  "ca751a94-f71e-4556-9d54-76de325ca29c": { constant: 2.0, category: "DZ", name: "Moonfall / 大月墜落狂想" }
+  "ca751a94-f71e-4556-9d54-76de325ca29c": { constant: 2.0, category: "DZ", name: "Moonfall / 大月墜落狂想" },
+
   //特殊谱面
-  
   //剧情谱面，显示定数为3
-  //"eb802d90-72c0-4b95-856a-b2951a57c0ec": { constant: -1, category: "CB*", name: "Sheer Ice Torrent" },
-  //"d3ddf678-adb0-4158-ae10-21c2667c7ba8": { constant: -1, category: "SK*", name: "Sheer Ice Torrent" },
-  //"e23637e8-fe16-4d9a-b3c9-9e059745ad3c": { constant: -1, category: "DZ*", name: "Sheer Ice Torrent" },
-              };
+  "eb802d90-72c0-4b95-856a-b2951a57c0ec": { constant: -1, category: "CB*", name: "Sheer Ice Torrent" },
+  "d3ddf678-adb0-4158-ae10-21c2667c7ba8": { constant: -1, category: "SK*", name: "Sheer Ice Torrent" },
+  "e23637e8-fe16-4d9a-b3c9-9e059745ad3c": { constant: -1, category: "DZ*", name: "Sheer Ice Torrent" }
+};
        
 /* ========== 全局变量 ========== */
 let columns = 4;
@@ -214,12 +214,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ========== Reality 计算相关 ========== */
-function reality(score) {
-    if (score >= 1005000) return 1;
-    if (score >= 995000) return 1.4 / (Math.exp(-3.65 * (score / 10000 - 99.5)) + 1) - 0.4;
-  if (score >= 980000) return ((Math.exp(3.1 * (score - 980000) / 15000) - 1) / (Math.exp(3.1) - 1)) * 0.8 - 0.5;
-    if (score >= 700000) return score / 280000 - 4;
-    return null;
+function reality(score,c) {
+    if (score >= 1005000) return Math.max(1+c,0);
+    if (score >= 995000) return Math.max(1.4 / (Math.exp(-3.65 * (score / 10000 - 99.5)) + 1) - 0.4+c,0);
+    if (score >= 980000) return Math.max(((Math.exp(3.1 * (score - 980000) / 15000) - 1) / (Math.exp(3.1) - 1)) * 0.8 - 0.5+c,0);
+    if (score >= 700000) return Math.max(score / 280000 - 4+c,0);
+    return 0;
 }
 
 /* ========== 核心流程 ========== */
@@ -293,8 +293,7 @@ function processSong(song) {
   const accuracyVal = parseFloat(accuracy);
   const levelVal = parseInt(level, 10);
   
-  const rlt = reality(scoreVal);
-  const singleRealityRaw = rlt ? rlt + constantVal : 0;
+  const singleRealityRaw = reality(scoreVal,constantVal);
   
     return {
     singleRealityRaw,
@@ -315,13 +314,12 @@ function processSongFromOldFormat(record) {
   if (!constantObj) return null;
   
   const { constant, category, name } = constantObj;
-    const rlt = reality(BestScore);
-  const singleRealityRaw = rlt ? rlt + constant : 0;
+  const singleRealityRaw = reality(BestScore,constant);
   
     return {
     singleRealityRaw,
     singleReality: singleRealityRaw.toFixed(2),
-    constant: constant, // 移除 toFixed(1)
+    constant: constant,
     name,
     category,
     bestScore: BestScore,
@@ -342,8 +340,6 @@ function calculateAverageReality(results) {
   const filtered = results.filter(item => item.singleRealityRaw > 0);
   const top = filtered.slice(0, 20);
   const sum = top.reduce((acc, item) => acc + item.singleRealityRaw, 0);
-  
-  // 始终除以20，即使top.length < 20
   return top.length > 0 ? (sum / 20).toFixed(4) : '0.0000';
 }
 
@@ -352,11 +348,8 @@ function drawUserInfo(username, results) {
   const userInfoDiv = document.getElementById('userInfo');
   const usercontainer = document.getElementById('usercontainer');
   usercontainer.style.display = 'block';
-  
   const avg = calculateAverageReality(results);
   userInfoDiv.innerHTML = `${username} ${avg}`;
-  
-  // 保存到全局
   window.username = username;
   window.average = avg;
 }
@@ -563,30 +556,42 @@ function extractScores(db) {
   return scores;
 }
 function processHistoryRecords(scores) {
-  scores.forEach(scoreData => {
+  for (let i = 0; i < scores.length; i++) {
+      const scoreData = scores[i];
       const chartid = scoreData.chart_id;
       const score = scoreData.score;
       const constantData = constants[chartid];
+      const score_accuracy = scoreData.score_accuracy*100
 
       if (constantData) {
-          const { constant, category, name } = constantData;
-          const singleReality = reality(score) === null ? 0 : reality(score) + constant;
+          const { constant, category, name,ad,ae,af,ag } = constantData;
+          const singleReality = reality(score,constant);
           scoreData.constant = constant;
           scoreData.category = category;
           scoreData.name = name;
           scoreData.singleReality = singleReality;
+          //分析表相关内容
+          scoreData.h = (score_accuracy < 99 || score < 10000 * score_accuracy) ? 0 : (constant * 0.1 + 1) * Math.pow((score - 5000 * score_accuracy - 500000) / 10000, 2);//准度
+          if (ad) scoreData.d = score < 995000 ? 0 : (score < 1005000 ? Math.pow((score - 995000) / 10000, 2) * ad : ad);//底力
+          if (ae) scoreData.e = score < 995000 ? 0 : (score < 1005000 ? Math.pow((score - 995000) / 10000, 2) * ae : ae);//手法
+          if (af) scoreData.f = score < 995000 ? 0 : (score < 1005000 ? Math.pow((score - 995000) / 10000, 2) * af : af);//读谱
+          if (ag) scoreData.g = score < 995000 ? 0 : (score < 1005000 ? Math.pow((score - 995000) / 10000, 2) * ag : ag);//多指
       } else {
           console.warn(`未找到对应的 chartid: ${chartid}`);
+          // 删除当前scoreData对象
+          scores.splice(i, 1);
+          i--;  // 调整索引以便继续遍历下一个元素
       }
-  });
+  }
+
 
   // 计算 r30 和 r10
   const { r30, r10 } = calculateRecentScores(scores);
   console.log("r30 (最近30条成绩):", r30.sort((a, b) => b.singleReality - a.singleReality));
   const userrealityHistory= calculateUserReality(scores);
-  drawAndDownloadUserRealityChart(userrealityHistory,r10,scores);
   const username = scores[0]?.username;
   formatInput(username, items);
+  drawAndDownloadUserRealityChart(userrealityHistory,r10,scores);
   processData()
 }
 
@@ -600,7 +605,7 @@ function calculateRecentScores(scores) {
   let seenCharts = new Set();
 
   scores.forEach(scoreData => {
-      const { chart_id, score, singleReality, played_at } = scoreData;
+      const { chart_id, score} = scoreData;
 
       // 是否是新曲面
       const isNewChart = !seenCharts.has(chart_id);
@@ -657,7 +662,7 @@ function calculateUserReality(scores) {
   let lastUserReality = null; // 记录上一次的 userreality
 
   scores.forEach(scoreData => {
-      const { chart_id, score, singleReality, played_at } = scoreData;
+      const { chart_id, score,played_at } = scoreData;
 
       // **修改点：b20_lg 存储所有曲目的最高分**
       if (!b20_lg.has(chart_id) || b20_lg.get(chart_id).score < score) {
@@ -688,102 +693,223 @@ let sumReality = filteredReality.reduce((sum, data) => sum + data.singleReality,
   }));  
   return userrealityHistory;
 }
-
 function drawAndDownloadUserRealityChart(userrealityHistory, r10, scores) {
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
   canvas.width = 2000;
   canvas.height = 1500;
 
-  // 设置背景为黑色
-  ctx.fillStyle = "black";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  // 加载背景图片
+  const bgImage = new Image();
+  bgImage.src = "./jpgs/背景.jpg";
 
-  // 折线图区域：右上 1/4，留 10px 间距，表格高度减少 30px
-  const chartX = 1050, chartY = 50, chartWidth = 900, chartHeight = 500;
+  bgImage.onload = function () {
+      // 绘制背景图（不会覆盖其他元素）
+      ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
 
-  // 解析用户现实历史数据
-  const times = userrealityHistory.map(data => new Date(data.played_at).getTime());
-  const realities = userrealityHistory.map(data => data.userreality);
-  const [minTime, maxTime] = [Math.min(...times), Math.max(...times)];
-  const [minReality, maxReality] = [Math.min(...realities), Math.max(...realities)];
+      // 折线图区域：右上 1/4，留 10px 间距，表格高度减少 30px
+      const chartX = 1050, chartY = 50, chartWidth = 900, chartHeight = 500;
 
-  // 设置时间坐标轴的刻度
-  const scaleX = (time) => chartX + ((time - minTime) / (maxTime - minTime)) * chartWidth;
-  const scaleY = (reality) => chartY + chartHeight - ((reality - minReality) / (maxReality - minReality)) * chartHeight;
+      // 解析用户现实历史数据
+      const times = userrealityHistory.map(data => new Date(data.played_at).getTime());
+      const realities = userrealityHistory.map(data => data.userreality);
+      const [minTime, maxTime] = [Math.min(...times), Math.max(...times)];
+      const [minReality, maxReality] = [Math.min(...realities), Math.max(...realities)];
 
-  // 绘制表格
-  ctx.strokeStyle = "#444";
-  ctx.lineWidth = 1;
-  for (let i = 0; i <= 5; i++) {
-      let y = chartY + (chartHeight / 5) * i;
+      // 设置时间坐标轴的刻度
+      const scaleX = (time) => chartX + ((time - minTime) / (maxTime - minTime)) * chartWidth;
+      const scaleY = (reality) => chartY + chartHeight - ((reality - minReality) / (maxReality - minReality)) * chartHeight;
+
+      // 绘制表格
+      ctx.strokeStyle = "#444";
+      ctx.lineWidth = 1;
+      for (let i = 0; i <= 5; i++) {
+          let y = chartY + (chartHeight / 5) * i;
+          ctx.beginPath();
+          ctx.moveTo(chartX, y);
+          ctx.lineTo(chartX + chartWidth, y);
+          ctx.stroke();
+      }
+
+      for (let i = 0; i <= 6; i++) {
+          let x = chartX + (chartWidth / 6) * i;
+          ctx.beginPath();
+          ctx.moveTo(x, chartY);
+          ctx.lineTo(x, chartY + chartHeight);
+          ctx.stroke();
+      }
+
+      // 绘制折线趋势，并填充折线以下的区域
+ctx.fillStyle = "rgba(206, 238, 249, 0.5)"; // 半透明淡蓝色
+ctx.beginPath();
+
+// 起始点（第一个数据点）
+ctx.moveTo(scaleX(times[0]), scaleY(realities[0]));
+
+// 连接所有数据点
+userrealityHistory.forEach((data, i) => {
+    let x = scaleX(times[i]), y = scaleY(realities[i]);
+    ctx.lineTo(x, y);
+});
+
+// 连接到底部封闭区域
+ctx.lineTo(scaleX(times[times.length - 1]), chartY + chartHeight); // 右下角
+ctx.lineTo(scaleX(times[0]), chartY + chartHeight); // 左下角
+ctx.closePath();
+
+// 填充颜色
+ctx.fill();
+
+// 重新绘制折线，避免被填充色覆盖
+ctx.strokeStyle = "rgba(200, 237, 249, 0.9)";
+ctx.lineWidth = 3;
+ctx.beginPath();
+userrealityHistory.forEach((data, i) => {
+    let x = scaleX(times[i]), y = scaleY(realities[i]);
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+});
+ctx.stroke();
+
+
+      // 时间坐标：显示基于当前时间的时间差
+      const now = new Date();
+      const totalTime = now.getTime() - minTime;
+      const interval = totalTime / 5;
+      ctx.fillStyle = "white";
+      ctx.font = "20px Arial";
+      ctx.textAlign = "center";
+
+      for (let i = 0; i < 5; i++) {
+          let x = chartX + (i * chartWidth) / 5;
+          let time = minTime + i * interval;
+          let timeDiff = now.getTime() - time;
+          let timeLabel = formatTimeDiff(timeDiff);
+          ctx.fillText(timeLabel, x, chartY + chartHeight + 30);
+      }
+      
+      // 右下角显示“now”
+      ctx.fillText("now", chartX + chartWidth, chartY + chartHeight + 30);
+
+      // userreality 刻度
+      ctx.textAlign = "right";
+      for (let i = 0; i < 5; i++) {
+          let reality = minReality + (maxReality - minReality) * (i / 4);
+          let y = scaleY(reality);
+          ctx.fillText(reality.toFixed(2), chartX - 10, y);
+      }
+
+      console.log("数据1", items);
+      
+      // 分析图
+      const calculateMetric = (items, key, multiplier, divisor) => {
+          return multiplier * (
+              items.map(item => item[key])
+                  .filter(value => value !== undefined)
+                  .sort((a, b) => b - a)
+                  .slice(0, 7)
+                  .reduce((sum, value) => sum + value, 0) / 7 || 0
+          ) / divisor;
+      };
+
+      const d = calculateMetric(items, 'd', 70, 22.5);
+      const e = calculateMetric(items, 'e', 70, 30.5);
+      const f = calculateMetric(items, 'f', 2.5, 1);
+      const g = calculateMetric(items, 'g', 7, 1);
+      const h = calculateMetric(items, 'h', 80.5, 15.38);
+
+      console.log("数据", { d, e, f, g, h });
+
+      // 添加标题
+      ctx.textAlign = "center";
+      ctx.fillText("User Reality 变化趋势", chartX + chartWidth / 2, chartY - 10);
+      ctx.fillText("(由Panyi提供计算方式)", 1850, 1380);
+      ctx.font = "40px Arial";
+      ctx.fillText("最近游玩", 400, 110);
+      ctx.fillText("r10记录(测试,无实际用途)", 400, 760);
+
+      // 绘制雷达图
+      drawRadarChart(ctx, [d, e, f, g, h], 1150, 680, 700, 700);
+
+      // 绘制最近 10 次的分数卡片
+      lg_drawCards(ctx, scores.slice(-10).reverse(), 50, 150).then(() => {
+          // 绘制 r10 记录
+          lg_drawCards(ctx, r10, 50, 800).then(() => {
+              // 生成下载链接
+              const link = document.createElement("a");
+              link.download = "user_reality_chart.png";
+              link.href = canvas.toDataURL("image/png");
+              link.click();
+          });
+      });
+  };
+}
+
+
+function drawRadarChart(ctx, data, x, y, width, height) {
+  const labels = ['底力', '手法', '读谱', '多指', '准度']; // 按指定顺序绘制
+  const maxDataValue = Math.max(...data); // 计算数据中的最大值
+
+  // 计算 maxVal，使其比 maxDataValue 大，并且是 0.5 的倍数
+  const maxVal = Math.ceil(maxDataValue * 2) / 2;
+
+  const numScales = 8; // 8个刻度
+  const scaleStep = maxVal / (numScales - 1); // 计算刻度间距，确保是0.1的倍数
+
+  const centerX = x + width / 2;
+  const centerY = y + height / 2;
+  const radius = Math.min(width, height) / 2;
+
+  ctx.strokeStyle = "#ccc";
+  ctx.fillStyle = "rgba(219, 245, 255, 0.5)";
+
+  // 绘制刻度线
+  for (let i = 0; i < numScales; i++) {
+      const scaleRadius = (i / (numScales - 1)) * radius;
       ctx.beginPath();
-      ctx.moveTo(chartX, y);
-      ctx.lineTo(chartX + chartWidth, y);
+      for (let j = 0; j < labels.length; j++) {
+          const angle = (Math.PI * 2 / labels.length) * j - Math.PI / 2;
+          const px = centerX + scaleRadius * Math.cos(angle);
+          const py = centerY + scaleRadius * Math.sin(angle);
+          j === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+      }
+      ctx.closePath();
       ctx.stroke();
   }
 
-  for (let i = 0; i <= 6; i++) {
-      let x = chartX + (chartWidth / 6) * i;
-      ctx.beginPath();
-      ctx.moveTo(x, chartY);
-      ctx.lineTo(x, chartY + chartHeight);
-      ctx.stroke();
+  // 绘制刻度值
+  ctx.fillStyle = "white";
+  ctx.font = "12px Arial";
+  for (let i = 0; i < numScales; i++) {
+      const scaleValue = (i * scaleStep).toFixed(1);
+      const scaleRadius = (i / (numScales - 1)) * radius;
+      ctx.fillText(scaleValue, centerX, centerY - scaleRadius);
   }
 
-  // 绘制折线
-  ctx.strokeStyle = "blue";
-  ctx.lineWidth = 3;
+  // 画雷达数据区域
   ctx.beginPath();
-  userrealityHistory.forEach((data, i) => {
-      let x = scaleX(times[i]), y = scaleY(realities[i]);
-      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  ctx.fillStyle = "rgba(210, 244, 255, 0.5)";
+  data.forEach((value, index) => {
+      const angle = (Math.PI * 2 / data.length) * index - Math.PI / 2;
+      const scaledValue = (value / maxVal) * radius;
+      const px = centerX + scaledValue * Math.cos(angle);
+      const py = centerY + scaledValue * Math.sin(angle);
+      index === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
   });
+  ctx.closePath();
+  ctx.fill();
   ctx.stroke();
 
-  // 时间坐标：显示基于当前时间的时间差
-  const now = new Date();
-  const totalTime = now.getTime() - minTime;
-  const interval = totalTime / 5;
+  // 绘制标签（白色字体）
   ctx.fillStyle = "white";
-  ctx.font = "20px Arial";
-  ctx.textAlign = "center";
-
-  for (let i = 0; i < 5; i++) {
-      let x = chartX + (i * chartWidth) / 5;
-      let time = minTime + i * interval;
-      let timeDiff = now.getTime() - time;
-      let timeLabel = formatTimeDiff(timeDiff);
-      ctx.fillText(timeLabel, x, chartY + chartHeight + 30);
-  }
-  
-  // 右下角显示“now”
-  ctx.fillText("now", chartX + chartWidth, chartY + chartHeight + 30);
-
-  // userreality 刻度
-  ctx.textAlign = "right";
-  for (let i = 0; i < 5; i++) {
-      let reality = minReality + (maxReality - minReality) * (i / 4);
-      let y = scaleY(reality);
-      ctx.fillText(reality.toFixed(2), chartX - 10, y);
-  }
-
-  // 添加标题
-  ctx.textAlign = "center";
-  ctx.fillText("User Reality 变化趋势", chartX + chartWidth / 2, chartY - 10);
-  ctx.font = "40px Arial";
-  ctx.fillText("最近游玩",350,110);
-  ctx.fillText("r10记录(测试,无实际用途)",350,760);
-  lg_drawCards(ctx, scores.slice(-10).reverse(), 50, 150).then(() => {
-    lg_drawCards(ctx, r10, 50, 800).then(() => {
-        // 生成下载链接
-        const link = document.createElement("a");
-        link.download = "user_reality_chart.png";
-        link.href = canvas.toDataURL("image/png");
-        link.click();
-    });
-});
+  ctx.font = "16px Arial";
+  labels.forEach((label, index) => {
+      const angle = (Math.PI * 2 / labels.length) * index - Math.PI / 2;
+      const px = centerX + (radius + 20) * Math.cos(angle);
+      const py = centerY + (radius + 20) * Math.sin(angle);
+      ctx.fillText(`${label}: ${data[index].toFixed(2)}`, px, py);
+  });
 }
+
 
 function formatTimeDiff(timeDiff) {
   const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
@@ -802,12 +928,12 @@ function formatTimeDiff(timeDiff) {
 
 function lg_drawCards(ctx, items, xOffset, yOffset) {
   const scale = 1;
-  const cardWidth = 300 * scale;
+  const cardWidth = 340 * scale;
   const cardHeight = 100 * scale;
   const imgWidth = 110 * scale;
   const imgHeight = 70;
 
-  const columnSpacing = 320 * scale;
+  const columnSpacing = 360 * scale;
   const rowSpacing = 110 * scale;
 
   const imagePromises = items.map((item, i) => {
@@ -815,7 +941,7 @@ function lg_drawCards(ctx, items, xOffset, yOffset) {
       const y = yOffset + Math.floor(i / 2) * rowSpacing;
 
       // 卡片背景
-      ctx.fillStyle = 'rgba(128, 128, 128, 0.4)';
+      ctx.fillStyle = 'rgba(104, 118, 122, 0.4)';
       ctx.fillRect(x, y, cardWidth, cardHeight);
 
       // 编号
@@ -841,12 +967,16 @@ function lg_drawCards(ctx, items, xOffset, yOffset) {
           scoreColor = '#FFFFFF';
       }
 
-      ctx.font = `${30 * scale}px Arial`;
+      ctx.font = `${28 * scale}px Arial`;
       ctx.textAlign = 'left';
       ctx.fillStyle = scoreColor;
-      ctx.fillText(strScore, x + 130, y + 40 * scale);
+      ctx.fillText(strScore, x + 128, y + 42 * scale);
 
-      // 曲名，动态调整字体大小
+      ctx.font = `${15 * scale}px Arial`;
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillText(`P:${(item.score_perfect_count+item.score_exact_count).toString()}(+${item.score_exact_count.toString()})`, x + 240, y +48 * scale);
+      ctx.fillText(`G:${item.score_good_count.toString()}  L:${item.score_bad_count.toString()}/${item.score_miss_count.toString()}`, x + 240, y + 68 * scale);
       const maxTextWidth = 200;
       let currentFontSize = 19 * scale;
       ctx.font = `${currentFontSize}px Arial`;
@@ -862,7 +992,7 @@ function lg_drawCards(ctx, items, xOffset, yOffset) {
       // Reality + Accuracy
       ctx.font = `${15 * scale}px Arial`;
       ctx.fillStyle = '#FFFFFF';
-      ctx.fillText(`${item.category} ${parseFloat(item.constant).toFixed(1)} > ${item.singleReality.toFixed(2)}   ${(item.score_accuracy * 100).toFixed(2)}%`, x + 130, y + 75 * scale);
+      ctx.fillText(`${item.category} ${parseFloat(item.constant).toFixed(1)} > ${item.singleReality.toFixed(2)}`, x + 130, y + 75 * scale);
 
       // 曲绘图
       const imgPath = `./jpgs/${encodeURIComponent(item.name)}.jpg`;
@@ -1094,24 +1224,21 @@ function downloadImage() {
     .then(bgImage => {
       if (bgImage) {
         ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
-        } else {
+      } else {
         ctx.fillStyle = '#000000';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
+      }
 
-      // 半透明矩形
       ctx.fillStyle = 'rgba(128, 128, 128, 0.3)';
       ctx.fillRect(0, 50, canvas.width, 200);
 
-      // 线条
-        ctx.beginPath();
+      ctx.beginPath();
       ctx.strokeStyle = 'rgba(255,255,255,0.8)';
       ctx.lineWidth = 3;
       ctx.moveTo(550, 250);
       ctx.lineTo(650, 50);
       ctx.stroke();
 
-      // 文字信息
       ctx.font = '25px Arial';
       ctx.fillStyle = '#ffffff';
       ctx.fillText(`Player: ${window.username}`, 660, 100);
@@ -1121,11 +1248,10 @@ function downloadImage() {
       ctx.fillText(`Date: ${dateStr}`, 660, 200);
 
       ctx.font = '50px Arial';
-      ctx.fillText('Reality查分器v3.0', 100, 130);
+      ctx.fillText('Reality查分器v3.3', 100, 130);
       ctx.font = '30px Arial';
       ctx.fillText('http://k9.lv/c/', 100, 180);
 
-      // 预加载并绘制卡片
       preloadImages(ctx, canvas);
     });
 
@@ -1135,10 +1261,14 @@ function downloadImage() {
     const imagePromises = [];
 
     for (let i = 0; i < maxItems; i++) {
-      const encodedName = encodeURIComponent(items[i].name); // 对歌曲名称进行编码
+      const encodedName = encodeURIComponent(items[i].name);
       const imgPath = `./jpgs/${encodedName}.jpg`;
-      const promise = loadImage(imgPath).catch(() => loadImage('./jpgs/NYA.jpg'));
-      imagePromises.push(promise);
+      const rankImgPath = `./jpgs/${items[i].bestLevel}.png`;
+      
+      const songImgPromise = loadImage(imgPath).catch(() => loadImage('./jpgs/NYA.jpg'));
+      const rankImgPromise = loadImage(rankImgPath).catch(() => null);
+      
+      imagePromises.push(Promise.all([songImgPromise, rankImgPromise]));
     }
 
     Promise.all(imagePromises).then(images => drawCards(ctx, canvas, items, images));
@@ -1150,6 +1280,7 @@ function downloadImage() {
     const cardHeight = 100 * scale;
     const imgWidth = 142 * scale;
     const imgHeight = 80 * scale;
+    const rankIconSize = 70 * scale;
 
     const xOffset = 110;
     const yOffset = 350;
@@ -1160,32 +1291,24 @@ function downloadImage() {
       const x = xOffset + (i % 2) * columnSpacing;
       const y = yOffset + Math.floor(i / 2) * rowSpacing - ((i % 2 === 0) ? 50 : 0);
 
-      // 卡片背景
       ctx.fillStyle = 'rgba(128, 128, 128, 0.4)';
       ctx.fillRect(x, y, cardWidth, cardHeight);
 
-      // 编号
       ctx.font = `${13 * scale}px Arial`;
       ctx.textAlign = 'right';
       ctx.textBaseline = 'top';
       ctx.fillStyle = (i < 20) ? '#FAFAFA' : '#C9C9C9';
       ctx.fillText(`#${i + 1}`, x + cardWidth - 10, y + 5 * scale);
 
-      // 分数：不足7位前补0
-      let strScore = item.bestScore.toString();
-      while (strScore.length < 7) strScore = '0' + strScore;
+      let strScore = item.bestScore.toString().padStart(7, '0');
 
-      // 分数颜色
-      let scoreColor;
-      if (item.bestLevel < 2) {
-        const gradient = ctx.createLinearGradient(x, y + 40 * scale, x, y + 70 * scale);
-        gradient.addColorStop(0, '#99C5FB');
-        gradient.addColorStop(1, '#D8C3FA');
-        scoreColor = gradient;
-      } else if (item.bestLevel === 2) {
-        scoreColor = '#90CAEF';
-        } else {
-        scoreColor = '#FFFFFF';
+      let scoreColor = item.bestLevel < 2 ? 
+        ctx.createLinearGradient(x, y + 40 * scale, x, y + 70 * scale) :
+        (item.bestLevel === 2 ? '#90CAEF' : '#FFFFFF');
+      
+      if (typeof scoreColor !== 'string') {
+        scoreColor.addColorStop(0, '#99C5FB');
+        scoreColor.addColorStop(1, '#D8C3FA');
       }
 
       ctx.font = `${30 * scale}px Arial`;
@@ -1193,7 +1316,6 @@ function downloadImage() {
       ctx.fillStyle = scoreColor;
       ctx.fillText(strScore, x + 160 * scale, y + 40 * scale);
 
-      // 曲名，动态调整字体大小
       const maxTextWidth = 200;
       let currentFontSize = 19 * scale;
       ctx.font = `${currentFontSize}px Arial`;
@@ -1206,14 +1328,16 @@ function downloadImage() {
       ctx.fillStyle = '#FFFFFF';
       ctx.fillText(item.name, x + 163 * scale, y + 18 * scale);
 
-      // Reality + Accuracy
       ctx.font = `${15 * scale}px Arial`;
       ctx.fillStyle = '#FFFFFF';
       const accText = `${(item.bestAccuracy * 100).toFixed(2)}%`;
       ctx.fillText(`${item.category} ${parseFloat(item.constant).toFixed(1)} > ${item.singleReality}   ${accText}`, x + 160 * scale, y + 75 * scale);
 
-      // 曲绘图
-      ctx.drawImage(images[i], x + 10 * scale, y + 10 * scale, imgWidth, imgHeight);
+      ctx.drawImage(images[i][0], x + 10 * scale, y + 10 * scale, imgWidth, imgHeight);
+
+      if (images[i][1]) {
+        ctx.drawImage(images[i][1], x + 270 * scale, y + 20 * scale, rankIconSize, rankIconSize);
+      }
     });
 
     exportImage(canvas);
