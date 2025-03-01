@@ -45,7 +45,7 @@
     </div>
 
     <div style="padding: 30px; text-align:center;display:flex;">
-        <div class="" style="text-align: left;max-width:60%;margin:auto;">
+        <div class="" style="text-align: left;max-width:1200px;margin:auto;">
             <div class="layui-card">
                 <div class="layui-card-header">Welcome</div>
                 <div class="layui-card-body">
