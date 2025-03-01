@@ -1,5 +1,5 @@
 <?php
-$dev_mode = true;
+$dev_mode = false;
 if (!$dev_mode) {
     include "fc.php";
     // 统计信息
