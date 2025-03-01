@@ -1,3 +1,20 @@
+<?php
+include "fc.php";
+// 统计信息
+// $time_now = date("Y-m-d H:i:s");
+$dbc=dbc();
+$ms_time = microtime(true);
+// $gen_uuid=uuid(); //生成唯一id
+if(isset($_SERVER['HTTP_X_REAL_IP'])){
+    $ip="O:".$_SERVER['REMOTE_ADDR'].' X:'.$_SERVER['HTTP_X_REAL_IP'];
+}else{
+    $ip=$_SERVER['REMOTE_ADDR'];
+}
+execute($dbc,"INSERT INTO `cha_stat` (`ip`,`ms`) VALUES ('$ip','$ms_time')");
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
