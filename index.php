@@ -56,7 +56,11 @@
                 <div class="layui-card-body">
                     <!-- 网站作者：<button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:show_author_info();">查看</button><br> -->
                     网站作者：<span onclick="javascript:show_author_info();" class="superlink">查看</span><br>
-                    本站访问数量：<br>
+                    本站访问数量：<?php
+                                    $r=fetch($dbc, "select count(*) from cha_stat;");
+                                    print_r($r[0]['count(*)']);
+                                    echo "次";
+                                    ?><br>
                 </div>
             </div>
             <div class="layui-card">
