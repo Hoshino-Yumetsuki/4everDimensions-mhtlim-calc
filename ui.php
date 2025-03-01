@@ -14,7 +14,7 @@
     <input type="file" id="fileupLoad" style="display:none;" />
     <script src="./js/cha_newui.js"></script>
     <!-- Chunk: sql_wasm -->
-    <script src="./js/plistjs/dist_/plist.js"></script>
+    <script src="./js/plistjs/plist.js"></script>
     <script src="./js/sql-wasm.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
