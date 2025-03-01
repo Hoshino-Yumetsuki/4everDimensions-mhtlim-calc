@@ -1,7 +1,7 @@
 function show_author_info() {
     layer.open({
         type: 2, 
-        area: ['60%', '90%'],
+        area: ['90%', '90%'],
         title: '作者信息',
         shade: 0.6, // 遮罩透明度
         shadeClose: true, // 点击遮罩区域，关闭弹层
