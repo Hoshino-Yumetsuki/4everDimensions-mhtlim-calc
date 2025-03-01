@@ -46,15 +46,22 @@
 
     <div style="padding: 30px; text-align:center;display:flex;">
         <div class="" style="text-align: left;max-width:1200px;margin:auto;">
-            <div class="layui-card">
-                <div class="layui-card-header">Welcome</div>
+
+            <div class="layui-card layui-bg-black" style="background-color: rgba(84, 105, 0, 0.34) !important;border-radius: 10px;border: 1px solid rgba(122, 122, 122, 0.42);">
+                <div class="layui-card-header">测试版新UI说明</div>
+                <div class="layui-card-body">
+                    <h3>本网站的新UI仍然处于测试阶段！如有BUG请反馈！</h3>
+                </div>
+            </div>
+            <div class="layui-card rccc">
+                <div class="layui-card-header"><h2>Welcome</h2></div>
                 <div class="layui-card-body">
                     你好，欢迎来到MilthmCalc！(Reality计算器) (http://k9.lv/c)<br>
                     这是一个用于计算Milthm Reality分数的网站，你可以在这里导入存档并解析。<br><hr>
                     使用说明：<span class="superlink" onclick="javascript:show_usage();">查看使用说明</span>
                 </div>
             </div>
-            <div class="layui-card">
+            <div class="layui-card rccc">
                 <div class="layui-card-header">网站信息</div>
                 <div class="layui-card-body">
                     <!-- 网站作者：<button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:show_author_info();">查看</button><br> -->
@@ -70,7 +77,7 @@
                 }
             </script>
 
-<div class="layui-card">
+            <div class="layui-card rccc">
                 <div class="layui-card-header">数据处理</div>
                 <div class="layui-card-body">
                     <textarea id="inputData" placeholder="粘贴数据在此处..." class="layui-textarea"></textarea>
@@ -86,7 +93,7 @@
             </div>
 
             <!-- chunk result show -->
-            <div class="layui-card" id="usercontainer" style="display: none;">
+            <div class="layui-card rccc" id="usercontainer" style="display: none;">
                 <!-- usercontainer 默认隐藏，在数据处理完成后会有js调起显示 -->
                 <div class="layui-card-header">数据处理结果</div>
                 <div class="layui-card-body">

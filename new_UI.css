@@ -56,3 +56,21 @@
                 .accuracy {
                 color: #D3D3D3;
                 }
+                
+body{
+    background-image: url("../static/bg_night.avif");
+    background-attachment: fixed;
+    background-size: cover;
+}
+.rccc{
+    /* 设置半透明背景最高优先级,覆盖layui的设置 */
+    background-color: rgba(33, 33, 33, 0.8) !important;
+    border-radius: 10px !important; /* 圆角边框 */
+    border: 1px solid #aaaaaa2a !important;
+}
+.layui-btn{
+    border-radius: 12px !important;
+}
+.layui-layer{
+    border-radius: 12px !important;
+}

@@ -1,47 +1,19 @@
 function show_author_info() {
     layer.open({
-        type: 1, 
-        area: ['80%', '90%'],
-        title: 'About the author',
+        type: 2, 
+        area: ['60%', '90%'],
+        title: '作者信息',
         shade: 0.6, // 遮罩透明度
         shadeClose: true, // 点击遮罩区域，关闭弹层
         maxmin: false,
         anim: 0, // 0-6 的动画形式，-1 不开启
-        content: `<div style="width:100%;text-align:center;"><div style="min-width:50%;padding: 32px;white-space: pre;"><h2>贡献名单</h3>
-<h3>作者：</h3>
- - mkzi_nya(归梦)
- - Chara
- - Amorimagus
- - Autumn
-
-<h3>UI&脚本：</h3>
- - mkzi_nya(归梦)
- - Amorimagus
-
-<h3>QQBot API:</h3>
- - Autumn
-
-<h3>后端：</h3>
- - Amorimagus
- - Chara
-
-<h3>特别鸣谢：</h3>
- - mkzi_nya(归梦)
- - Amorimagus
- - Chara
- - Autumn
- - Panyi
- - Eric_Lian
-
-<h3>感谢所有参与贡献的人！</h3>
-Copyleft 2024~2025. Reality Calculator Project.
-        </div></div>`
+        content: `./authors.html`
       });
 }
 function show_usage() {
   layer.open({
       type: 2, 
-      area: ['80%', '90%'],
+      area: ['90%', '90%'],
       title: '使用说明',
       shade: 0.6, // 遮罩透明度
       shadeClose: true, // 点击遮罩区域，关闭弹层
@@ -71,7 +43,28 @@ function alert_invalid(){
     title: '提示',
     shadeClose: true,
     shade: 0.8,
-    area: ['40%', '20%'],
+    area: ['50%', '20%'],
     content: '<h3 style="padding:12px;">存档数据无效或无法解析。</h3>'
+  });
+}
+function genPicDialog(){
+  layer.open({
+
+    type: 1,
+
+    offset: 'b',
+
+    anim: 'slideUp',
+
+    area: ['100%', '30%'],
+
+    shade: 0.1,
+
+    shadeClose: true,
+
+    id: 'ID-demo-layer-direction-b',
+
+    content: '<div style="padding: 16px;">正在生成图片，由于需要下载图片资源，可能需要一些时间。如果一直没有反应，可以多次尝试。</div>'
+
   });
 }

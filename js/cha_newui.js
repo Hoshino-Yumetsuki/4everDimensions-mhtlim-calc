@@ -1213,6 +1213,9 @@ function openContributionDialog() {
 
 /* ========== 下载图片 (含背景、卡片等) ========== */
 function downloadImage() {
+
+  genPicDialog();
+  console.log("opening genPicDialog")
   const canvas = document.createElement('canvas');
   canvas.width = 1200;
   canvas.height = 2200;
