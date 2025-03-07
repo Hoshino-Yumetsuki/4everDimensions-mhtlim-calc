@@ -9,10 +9,11 @@
     <title>Milthm 查分器（原Reality计算器）</title>
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="new_UI.css">
+
     <link href="./layui/css/layui.css" rel="stylesheet">
 
     <input type="file" id="fileupLoad" style="display:none;" />
-    <script src="./js/cha_newui.js"></script>
+    
     <!-- Chunk: sql_wasm -->
     <script src="./js/plistjs/plist.js"></script>
     <script src="./js/sql-wasm.js"></script>
@@ -38,25 +39,25 @@
 <body>
     <script src="./layui/layui.js"></script>
     <script src="./new_ui.js"></script>
-    <div class="layui-header">
-        <div class="layui-logo layui-bg-black" style="padding: 16px;">
-            <h1>MilthmCalc</h1>
+    <div class="layui-header header-opa">
+        <div class="layui-logo header-opa-bg2" style="padding: 16px;">
+            <h1 style="color:turquoise;">MilthmCalc <span style="font-size: medium;color:gold;">Ultra</span></h1>
         </div>
     </div>
 
     <div style="padding: 30px; text-align:center;display:flex;">
         <div class="" style="text-align: left;max-width:1200px;margin:auto;">
 
-            <div class="layui-card layui-bg-black" style="background-color: rgba(84, 105, 0, 0.34) !important;border-radius: 10px;border: 1px solid rgba(122, 122, 122, 0.42);">
+            <!-- <div class="layui-card layui-bg-black" style="background-color: rgba(84, 105, 0, 0.34) !important;border-radius: 10px;border: 1px solid rgba(122, 122, 122, 0.42);">
                 <div class="layui-card-header">测试版新UI说明</div>
                 <div class="layui-card-body">
                     <h3>本网站的新UI仍然处于测试阶段！如有BUG请反馈！</h3>
                 </div>
-            </div>
+            </div> -->
             <div class="layui-card rccc">
                 <div class="layui-card-header"><h2>Welcome</h2></div>
                 <div class="layui-card-body">
-                    你好，欢迎来到MilthmCalc！(Reality计算器) (http://k9.lv/c)<br>
+                    欢迎来到MilthmCalc！(Reality计算器) (http://k9.lv/c)<br>
                     这是一个用于计算Milthm Reality分数的网站，你可以在这里导入存档并解析。<br><hr>
                     使用说明：<span class="superlink" onclick="javascript:show_usage();">查看使用说明</span><hr>
                     <b>QQ交流群：</b><a href="https://qm.qq.com/q/Utb6sNDvki" target="_blank"><span class="superlink">Milthm#-1洨巟羣</span></a>
@@ -66,6 +67,7 @@
                 <div class="layui-card-header">网站信息</div>
                 <div class="layui-card-body">
                     <!-- 网站作者：<button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:show_author_info();">查看</button><br> -->
+                    其他地址: <a href="https://mkzi-nya.github.io/milthm-calculator-web/index.html" target="_blank"><span class="superlink">Mkzi Nya's Fork</span></a><br>
                     网站作者：<span onclick="javascript:show_author_info();" class="superlink">查看</span><br>
                     本站访问数量：<span id="accessCount"></span><br>
                     <div class="layui-collapse">
@@ -101,11 +103,11 @@
                     <textarea id="inputData" placeholder="粘贴数据在此处..." class="layui-textarea"></textarea>
                     <hr/>
                     <!-- chunk: data processing operations -->
-                    <button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:qqbot_ua();">QQ Bot选项</button>
+                    <button class="layui-btn layui-btn-primary layui-btn-disabled layui-btn-sm" onclick="javascript:qqbot_ua();" disabled>QQ Bot选项 (不可用)</button>
                     <hr/>
-                    <button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:processData();">解析</button>
-                    <button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:upl();">上传文件</button>
-                    <button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:downloadImage();">生成图像</button>
+                    <button class="layui-btn layui-btn-primary" onclick="javascript:processData();">解析</button>
+                    <button class="layui-btn layui-btn-primary" onclick="javascript:upl();">上传文件</button>
+                    <button class="layui-btn layui-btn-primary" onclick="javascript:downloadImage();">生成图像</button>
                     <br>
                     <div id="picgen" style="display: none";>
                         <br>
@@ -139,5 +141,6 @@
             <!-- end chunk result show-->
         </div>
     </div>
+    <script src="./js/cha_newui.js"></script>
 </body>
 </html>
