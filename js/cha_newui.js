@@ -1133,6 +1133,7 @@ function openContributionDialog() {
 */
 /* ========== 下载图片 (含背景、卡片等) ========== */
 function downloadImage() {
+  document.getElementById('picgen').style.display = 'block';
   // 获取用户输入的卡片数量
   const cardCount = parseInt(document.getElementById('cardCount').value, 10);
   const maxItems = Math.max(0, cardCount);
