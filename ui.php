@@ -41,7 +41,7 @@
         background-color: #444;
         color: #fff;
         border: 1px solid #555;
-        border-radius: 10px;
+        border-radius: 12px;
         font-size: 16px;
     }
     #settingsModal input:focus, 
@@ -98,7 +98,7 @@
     <script src="./new_ui.js"></script>
     <div class="layui-header header-opa">
         <div class="layui-logo header-opa-bg2" style="padding: 16px;">
-            <h1 style="color:turquoise;">MilthmCalc <span style="font-size: medium;color:gold;">Ultra</span></h1>
+            <h1 style="color:turquoise;">MilthmCalc <span style="font-size: medium;color:gold;">Ultra</span><span style="font-size: small;color:lightgreen;">&nbsp;v<?php if (file_exists("version.txt")) {echo file_get_contents("version.txt");}else{echo "_unknown";} ?></span></h1>
         </div>
     </div>
 
@@ -127,22 +127,22 @@
                     其他地址: <a href="https://mkzi-nya.github.io/milthm-calculator-web/index.html" target="_blank"><span class="superlink">Mkzi Nya's Fork</span></a><br>
                     网站作者：<span onclick="javascript:show_author_info();" class="superlink">查看</span><br>
                     本站访问数量：<span id="accessCount"></span><br>
-                    <div class="layui-collapse">
+                    <!-- <div class="layui-collapse">
                         <div class="layui-colla-item">
                             <div class="layui-colla-title rccc">服务器信息</div>
                             <div class="layui-colla-content">
                                 <?php
-                                    echo '运行在 '.shell_exec('uname -p')." 的 ".shell_exec('uname -s')." 上，";
-                                    echo 'PHP版本：'.phpversion().'<br>';
-                                    echo '距离上次页面更新：'.(time()-filemtime(__FILE__)).'秒<br>';
-                                    echo '服务器负载：'.implode(' ', sys_getloadavg()).'<br>';
-                                    echo '服务器CPU核心数：'.shell_exec('nproc').'<br>';
-                                    echo '服务器CPU型号：'.shell_exec('cat /proc/cpuinfo | grep "model name" | uniq | awk -F : \'{print $2}\' | sed \'s/^[ \t]*//\'').'<br>';
+                                    // echo '运行在 '.shell_exec('uname -p')." 的 ".shell_exec('uname -s')." 上，";
+                                    // echo 'PHP版本：'.phpversion().'<br>';
+                                    // echo '距离上次页面更新：'.(time()-filemtime(__FILE__)).'秒<br>';
+                                    // echo '服务器负载：'.implode(' ', sys_getloadavg()).'<br>';
+                                    // echo '服务器CPU核心数：'.shell_exec('nproc').'<br>';
+                                    // echo '服务器CPU型号：'.shell_exec('cat /proc/cpuinfo | grep "model name" | uniq | awk -F : \'{print $2}\' | sed \'s/^[ \t]*//\'').'<br>';
                                     // echo '服务器内存剩余：'.shell_exec('free -m | grep 内存 | awk \'{print $7}\'').'MB<br>';
                                 ?>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     
                 </div>
             </div>
@@ -160,8 +160,9 @@
                     <textarea id="inputData" placeholder="粘贴数据在此处..." class="layui-textarea"></textarea>
                     <hr/>
                     <!-- chunk: data processing operations -->
-                    <button class="layui-btn layui-btn-primary layui-btn-disabled layui-btn-sm" onclick="javascript:qqbot_ua();" disabled>QQ Bot选项 (不可用)</button>
-                    <hr/>
+                     <!-- 暂时禁用 -->
+                    <!-- <button class="layui-btn layui-btn-primary layui-btn-disabled layui-btn-sm" onclick="javascript:qqbot_ua();" disabled>QQ Bot选项 (不可用)</button>
+                    <hr/> -->
                     <button class="layui-btn layui-btn-primary" onclick="javascript:processData();">解析</button>
                     <button class="layui-btn layui-btn-primary" onclick="javascript:upl();">上传文件</button>
                     <button class="layui-btn layui-btn-primary" onclick="javascript:downloadImage();">生成图像</button>
@@ -187,8 +188,8 @@
                     <!-- end chunk: userinfo -->
                     <hr/>
                     <h3>图表：</h3>
-                    <button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:changeColumns(1);">增加列</button>
-                    <button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:changeColumns(-1);">减少列</button>
+                    <button class="layui-btn layui-btn-primary" onclick="javascript:changeColumns(1);">增加列</button>
+                    <button class="layui-btn layui-btn-primary" onclick="javascript:changeColumns(-1);">减少列</button>
                     <br>
                     <hr>
                     <!-- chunk: res container -->
@@ -200,7 +201,7 @@
         </div>
     </div>
       <div id="overlay" onclick="closeSettings()"></div>
-  <div id="settingsModal">
+  <div id="settingsModal" style="border: 1px solid #eeeeee;">
     <h3 data-i18n="settingsTitle">查分图设置</h3>
     <label for="cardCount" data-i18n="cardCountLabel" style="font-size: 18px;">卡片数量:</label>
     <input type="number" id="cardCount" value="22" min="1" data-i18n-placeholder="cardCountPlaceholder"><br>
@@ -215,7 +216,7 @@
     <select id="yrjds" style="font-size: 16px;">
       <option value="true" >true</option>
       <option value="false">false</option>
-    </select><br>
+    </select><br><hr/>
     <button onclick="closeSettings()" class="cancel-btn" data-i18n="cancel">取消</button>
     <button onclick="applySettings()" class="apply-btn" data-i18n="apply">应用</button>
   </div>

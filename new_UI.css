@@ -99,7 +99,7 @@ body{
     color: #ffffff !important;
 }
 .header-opa-bg2{
-    background-color: #11223a80 !important;
+    /* background-color: #11223a80 !important; */
     padding: 10px;
     color: #ffffff;
     text-align: center;
