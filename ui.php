@@ -13,7 +13,64 @@
     <link href="./layui/css/layui.css" rel="stylesheet">
 
     <input type="file" id="fileupLoad" style="display:none;" />
-    
+    <style>
+    #settingsModal { 
+        display: none; 
+        position: fixed; 
+        top: 50%; 
+        left: 50%; 
+        transform: translate(-50%, -50%); 
+        background: #2a2a2a; 
+        color: #fff; 
+        padding: 30px; 
+        border-radius: 15px; 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.7); 
+        z-index: 10000;
+        width: 300px;
+    }
+    #settingsModal h3 { 
+        text-align: center;
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+    #settingsModal input, 
+    #settingsModal button { 
+        margin-bottom: 15px;
+        padding: 8px;
+        width: 100%;
+        background-color: #444;
+        color: #fff;
+        border: 1px solid #555;
+        border-radius: 10px;
+        font-size: 16px;
+    }
+    #settingsModal input:focus, 
+    #settingsModal button:focus { 
+        outline: none; 
+        border-color: #888;
+    }
+    #settingsModal button {
+        width: 48%;
+        display: inline-block;
+        cursor: pointer;
+    }
+    #settingsModal .cancel-btn {
+        background-color: #777;
+    }
+    #settingsModal .apply-btn {
+        background-color: #5cb85c;
+    }
+    #overlay { 
+        display: none; 
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        width: 100%; 
+        height: 100%; 
+        background-color: rgba(0,0,0,0.7); 
+        z-index: 9999; 
+    }
+  </style>
     <!-- Chunk: sql_wasm -->
     <script src="./js/plistjs/plist.js"></script>
     <script src="./js/sql-wasm.js"></script>
@@ -108,6 +165,7 @@
                     <button class="layui-btn layui-btn-primary" onclick="javascript:processData();">解析</button>
                     <button class="layui-btn layui-btn-primary" onclick="javascript:upl();">上传文件</button>
                     <button class="layui-btn layui-btn-primary" onclick="javascript:downloadImage();">生成图像</button>
+                    <button class="layui-btn layui-btn-primary" onclick="showSettings();" >查分图设置</button>
                     <br>
                     <div id="picgen" style="display: none";>
                         <br>
@@ -141,6 +199,44 @@
             <!-- end chunk result show-->
         </div>
     </div>
+      <div id="overlay" onclick="closeSettings()"></div>
+  <div id="settingsModal">
+    <h3 data-i18n="settingsTitle">查分图设置</h3>
+    <label for="cardCount" data-i18n="cardCountLabel" style="font-size: 18px;">卡片数量:</label>
+    <input type="number" id="cardCount" value="22" min="1" data-i18n-placeholder="cardCountPlaceholder"><br>
+    <label for="bgImage" data-i18n="bgImageLabel" style="font-size: 18px;">更换背景图:</label>
+    <input type="file" id="bgImage" accept="image/*"><br>
+    <label for="excludeReality" data-i18n="excludeRealityLabel" style="font-size: 18px;">绘制不记入Reality的曲目:</label>    
+    <select id="excludeReality" style="font-size: 16px;">
+      <option value="false">false</option>
+      <option value="true" >true</option>
+    </select><br>
+    <label for="yrjds" data-i18n="yrjds" style="font-size: 18px;">展示愚人节定数:</label>    
+    <select id="yrjds" style="font-size: 16px;">
+      <option value="true" >true</option>
+      <option value="false">false</option>
+    </select><br>
+    <button onclick="closeSettings()" class="cancel-btn" data-i18n="cancel">取消</button>
+    <button onclick="applySettings()" class="apply-btn" data-i18n="apply">应用</button>
+  </div>
+  <script>
+    function showSettings() {
+      document.getElementById('overlay').style.display = 'block';
+      document.getElementById('settingsModal').style.display = 'block';
+    }
+
+    function closeSettings() {
+      document.getElementById('overlay').style.display = 'none';
+      document.getElementById('settingsModal').style.display = 'none';
+    }
+
+    function applySettings() {
+      const cardCount = document.getElementById('cardCount').value;
+      const bgImage = document.getElementById('bgImage').files[0];
+
+      closeSettings();
+    }
+    </script>
     <script src="./js/cha_newui.js"></script>
 </body>
 </html>
