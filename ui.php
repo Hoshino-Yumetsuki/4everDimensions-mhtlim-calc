@@ -1,12 +1,10 @@
-
-
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Milthm 查分器（原Reality计算器）</title>
+    <title data-i18n="title">Milthm 查分器（原Reality计算器）</title>
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="new_UI.css">
 
@@ -14,6 +12,7 @@
 
     <input type="file" id="fileupLoad" style="display:none;" />
     <style>
+    #languageMenu{position:absolute;right:0;top:40px;display:none;background-color:#333;color:#eee;border:1px solid #444;border-radius:4px;padding:5px;min-width:100px;z-index:9999}#languageMenu div{margin:5px;cursor:pointer;padding:3px 5px}#languageMenu div:hover{background-color:#444}
     #settingsModal { 
         display: none; 
         position: fixed; 
@@ -72,7 +71,6 @@
     }
   </style>
     <!-- Chunk: sql_wasm -->
-    <script src="./js/plistjs/plist.js"></script>
     <script src="./js/sql-wasm.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
@@ -102,6 +100,20 @@
         </div>
     </div>
 
+    <div style="position:absolute;right:20px;top:20px;z-index:9999;">
+    <button id="languageButton" style="background:transparent;border:none;cursor:pointer;font-size:20px;">🌐</button>
+    <div id="languageMenu">
+      <div id="langZh">简体中文</div>
+      <div id="langZhTw">繁體中文</div>
+      <div id="langEn">English</div>
+      <div id="langJa">日本語</div>
+      <div id="langKo">한국어</div>
+      <div id="langRu">Русский</div>
+      <div id="langEs">Español</div>
+      <div id="langVi">Tiếng Việt</div>
+    </div>
+    </div>
+
     <div style="padding: 30px; text-align:center;display:flex;">
         <div class="" style="text-align: left;max-width:1200px;margin:auto;">
 
@@ -112,21 +124,21 @@
                 </div>
             </div> -->
             <div class="layui-card rccc">
-                <div class="layui-card-header"><h2>Welcome</h2></div>
+                <div class="layui-card-header"><h2 data-i18n="welcome">Welcome</h2></div>
                 <div class="layui-card-body">
-                    欢迎来到MilthmCalc！(Reality计算器) (http://k9.lv/c)<br>
-                    这是一个用于计算Milthm Reality分数的网站，你可以在这里导入存档并解析。<br><hr>
-                    使用说明：<span class="superlink" onclick="javascript:show_usage();">查看使用说明</span><hr>
-                    <b>QQ交流群：</b><a href="https://qm.qq.com/q/Utb6sNDvki" target="_blank"><span class="superlink">Milthm#-1洨巟羣</span></a>
+                    <p data-i18n="greeting">欢迎来到MilthmCalc！(Reality计算器) (http://k9.lv/c)</p>
+                    <p data-i18n="description">这是一个用于计算Milthm Reality分数的网站，你可以在这里导入存档并解析。</p><hr>
+                    <span data-i18n="usage">使用说明：</span><a href="./usage/usage.html" target="_blank"><span class="superlink" data-i18n="viewUsage">查看帮助信息</span></a><hr>
+                    <span data-i18n="qqGroup">QQ交流群：</span><a href="https://qm.qq.com/q/Utb6sNDvki" target="_blank"><span class="superlink" data-i18n="viewQQGroup">Milthm#√-1洨巟羣</span></a>
                 </div>
             </div>
             <div class="layui-card rccc">
-                <div class="layui-card-header">网站信息</div>
+                <div class="layui-card-header" data-i18n="siteInfo">网站信息</div>
                 <div class="layui-card-body">
                     <!-- 网站作者：<button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:show_author_info();">查看</button><br> -->
-                    其他地址: <a href="https://mkzi-nya.github.io/milthm-calculator-web/index.html" target="_blank"><span class="superlink">Mkzi Nya's Fork</span></a><br>
-                    网站作者：<span onclick="javascript:show_author_info();" class="superlink">查看</span><br>
-                    本站访问数量：<span id="accessCount"></span><br>
+                    <span data-i18n="OtherAddress">其他地址: </span><a href="https://mkzi-nya.github.io/milthm-calculator-web/index.html" target="_blank"><span class="superlink">Mkzi Nya's Fork</span></a><br>
+                    <span data-i18n="siteAuthor">网站作者：</span><a href="javascript:void(0);" onclick="show_author_info();" style="color:lightblue;text-decoration:none;" data-i18n="viewAuthor">查看</a><br>
+                    <span data-i18n="visit">本站访问数量：</span><span id="accessCount"></span><br>
                     <!-- <div class="layui-collapse">
                         <div class="layui-colla-item">
                             <div class="layui-colla-title rccc">服务器信息</div>
@@ -155,22 +167,22 @@
             </script>
 
             <div class="layui-card rccc">
-                <div class="layui-card-header">数据处理</div>
+                <div class="layui-card-header" data-i18n="dataProcessing">数据处理</div>
                 <div class="layui-card-body">
-                    <textarea id="inputData" placeholder="粘贴数据在此处..." class="layui-textarea"></textarea>
+                    <textarea id="inputData" class="layui-textarea" data-i18n="inputDataPlaceholder">粘贴数据在此处...</textarea>
                     <hr/>
                     <!-- chunk: data processing operations -->
                      <!-- 暂时禁用 -->
                     <!-- <button class="layui-btn layui-btn-primary layui-btn-disabled layui-btn-sm" onclick="javascript:qqbot_ua();" disabled>QQ Bot选项 (不可用)</button>
                     <hr/> -->
-                    <button class="layui-btn layui-btn-primary" onclick="javascript:processData();">解析</button>
-                    <button class="layui-btn layui-btn-primary" onclick="javascript:upl();">上传文件</button>
-                    <button class="layui-btn layui-btn-primary" onclick="javascript:downloadImage();">生成图像</button>
-                    <button class="layui-btn layui-btn-primary" onclick="showSettings();" >查分图设置</button>
+                    <button class="layui-btn layui-btn-primary" onclick="javascript:processData();" data-i18n="parse">解析</button>
+                    <button class="layui-btn layui-btn-primary" onclick="javascript:upl();" data-i18n="uploadFile">上传文件</button>
+                    <button class="layui-btn layui-btn-primary" onclick="javascript:downloadImage();" data-i18n="generateImage">生成图像</button>
+                    <button class="layui-btn layui-btn-primary" onclick="showSettings();" data-i18n="settings">查分图设置</button>
                     <br>
                     <div id="picgen" style="display: none";>
                         <br>
-                        <span class="layui-badge layui-bg-black">正在生成图片，由于需要下载图片资源，可能需要一些时间。若一直没有反应，可以多次尝试。</span>
+                        <span class="layui-badge layui-bg-black" data-i18n="generatingImage">正在生成图片，由于需要下载图片资源，可能需要一些时间。若一直没有反应，可以多次尝试。资源不会超过4MB</span>
                     </div>
                     
                     <!-- end chunk: data processing operations -->
@@ -180,16 +192,16 @@
             <!-- chunk result show -->
             <div class="layui-card rccc" id="usercontainer" style="display: none;">
                 <!-- usercontainer 默认隐藏，在数据处理完成后会有js调起显示 -->
-                <div class="layui-card-header">数据处理结果</div>
+                <div class="layui-card-header" data-i18n="dataResult">数据处理结果</div>
                 <div class="layui-card-body">
-                    <h3>用户信息：</h3>
+                    <h3 data-i18n="userInfo">用户信息：</h3>
                     <!-- chunk: userinfo -->
-                     <h4 id="userInfo"></h3>
+                     <h4 id="userInfo"></h4>
                     <!-- end chunk: userinfo -->
                     <hr/>
-                    <h3>图表：</h3>
-                    <button class="layui-btn layui-btn-primary" onclick="javascript:changeColumns(1);">增加列</button>
-                    <button class="layui-btn layui-btn-primary" onclick="javascript:changeColumns(-1);">减少列</button>
+                    <h3 data-i18n="charts">图表：</h3>
+                    <button class="layui-btn layui-btn-primary" onclick="javascript:changeColumns(1);" data-i18n="increaseColumn">增加列</button>
+                    <button class="layui-btn layui-btn-primary" onclick="javascript:changeColumns(-1);" data-i18n="decreaseColumn">减少列</button>
                     <br>
                     <hr>
                     <!-- chunk: res container -->
@@ -237,6 +249,41 @@
 
       closeSettings();
     }
+    
+    let translations = {}, currentLang = 'zh', menuVisible = false;
+    function loadTranslations() {
+      fetch('lang.json').then(response => response.json()).then(data => {
+        translations = data;
+        let detected = (navigator.language || navigator.userLanguage).toLowerCase();
+        if (detected.startsWith('zh')) {detected = detected.includes('tw') || detected.includes('hk') || detected.includes('mo') ? 'zh-tw' : 'zh';}
+        currentLang = translations[detected] ? detected : 'en'; setLanguage(currentLang);
+      }).catch(error => {console.error('加载翻译文件失败:', error); setLanguage('en');});
+    }
+    function setLanguage(lang) {
+      currentLang = lang; document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {el.innerHTML = translations[lang][key];}
+      });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (translations[lang] && translations[lang][key]) {el.placeholder = translations[lang][key];}
+      });
+      menuVisible = false; document.getElementById('languageMenu').style.display = 'none';
+    }
+    function toggleLangMenu() {menuVisible = !menuVisible; document.getElementById('languageMenu').style.display = menuVisible ? 'block' : 'none';}
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('languageButton').addEventListener('click', toggleLangMenu);
+      document.getElementById('langZh').addEventListener('click', () => setLanguage('zh'));
+      document.getElementById('langZhTw').addEventListener('click', () => setLanguage('zh-tw'));
+      document.getElementById('langEn').addEventListener('click', () => setLanguage('en'));
+      document.getElementById('langJa').addEventListener('click', () => setLanguage('ja'));
+      document.getElementById('langKo').addEventListener('click', () => setLanguage('ko'));
+      document.getElementById('langRu').addEventListener('click', () => setLanguage('ru'));
+      document.getElementById('langEs').addEventListener('click', () => setLanguage('es'));
+      document.getElementById('langVi').addEventListener('click', () => setLanguage('vi'));
+      loadTranslations();
+    });
     </script>
     <script src="./js/cha_newui.js"></script>
 </body>
