@@ -66,14 +66,14 @@
     "yrjds":"愚人節定數"
   },
   "en": {
-    "title": "Milthm Score Calculator (Original Reality Calculator)",
+    "title": "Milthm Score Calculator (known as Reality Calculator)",
     "welcome": "Welcome",
     "greeting": "Welcome to MilthmCalc! (Reality Calculator) (http://k9.lv/c)",
-    "description": "This is a website for calculating Milthm Reality scores. You can import and parse your archives here.",
-    "usage": "Usage instructions:",
+    "description": "This is a website to calculate Milthm Reality scores. You can import and parse your archives here.",
+    "usage": "Usage:",
     "viewUsage": "View help information",
     "qqGroup": "QQ Group: ",
-    "OtherAddress": "Other address: ",
+    "OtherAddress": "Other websites: ",
     "siteInfo": "Site Information",
     "siteAuthor": "Site Author: ",
     "viewAuthor": "View",
