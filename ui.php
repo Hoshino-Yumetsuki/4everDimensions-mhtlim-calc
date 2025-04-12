@@ -169,7 +169,8 @@
             <div class="layui-card rccc">
                 <div class="layui-card-header" data-i18n="dataProcessing">数据处理</div>
                 <div class="layui-card-body">
-                    <textarea id="inputData" class="layui-textarea" data-i18n="inputDataPlaceholder">粘贴数据在此处...</textarea>
+                    <textarea id="inputData" class="layui-textarea" placeholder="粘贴数据在此处... / Paste Data Here..."></textarea>
+                    <!-- 这个 placeholder 的 翻译不好做。-->
                     <hr/>
                     <!-- chunk: data processing operations -->
                      <!-- 暂时禁用 -->
