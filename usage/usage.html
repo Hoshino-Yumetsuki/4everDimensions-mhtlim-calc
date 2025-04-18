@@ -115,11 +115,11 @@
         .then(md => {
           // 在这里进行链接的自动转义处理
 md = md.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, p1, p2) {
-// 只处理包含 'javascript:' 的链接
-if (p2.startsWith('javascript:')) {
+// 只处理包含 'info:' 的链接
+if (p2.startsWith('info:')) {
     const [protocol, rest] = p2.split(':', 2);  // 分离协议和剩余部分
     const encodedRest = encodeURIComponent(rest);  // 对剩余部分进行编码
-    return `[${p1}](${protocol}:${encodedRest})`;  // 保持 'javascript:' 协议不变
+    return `[${p1}](${protocol}:${encodedRest})`;  // 保持 'info:' 协议不变
 }
   const encodedUrl = p2;
   return `[${p1}](${encodedUrl})`;
@@ -139,7 +139,7 @@ if (p2.startsWith('javascript:')) {
     }
     
     function runJavascriptLinks() {
-      const links = document.querySelectorAll('a[href^="javascript:info"], a[href^="javascript:chart"]');
+      const links = document.querySelectorAll('a[href^="info:info"], a[href^="info:info"]');
       links.forEach(link => {
         link.addEventListener('click', function(event) {
           event.preventDefault(); // 阻止默认的链接跳转
@@ -177,22 +177,42 @@ function checkMouseOnLink(event) {
   if (target.tagName === 'A') {
     const url = decodeURIComponent(target.href); // 解码链接URL
 
-    // 使用正则表达式查找 info() 或 chart() 中的值
-    const regex = /(info|chart)\(([^)]*)\)/;
+    const regex = /(info)\(([^)]*)\)/;
     const match = url.match(regex);
 
     if (match) {
       const funcName = match[1];
       const params = match[2].split(',').map(param => param.trim().replace(/['"]/g, ''));  // 获取函数参数并去除引号
 
-      // 检查是否有两个参数
+      // 获取链接的位置信息
+      const linkRect = target.getBoundingClientRect();
+
+      // 鼠标停留在链接时处理显示
       if (params.length === 2) {
         // 如果有两个参数，将aaa设置为显示状态，并显示为 "a,b"
         const [param1, param2] = params;
         const aaaElement = document.querySelector(`div[aaa="${param1},${param2}"]`);
         if (aaaElement) {
           aaaElement.classList.add('visible');
-          console.log(`Found and displayed aaa="${param1},${param2}" for link: ${target.href}`);
+          
+          // 计算div的位置，放置在链接的正下方，并确保div的中心与链接的中心对齐
+          const topPosition = linkRect.bottom + window.scrollY; // 计算顶部位置
+          let leftPosition = linkRect.left + linkRect.width / 2 + window.scrollX - aaaElement.offsetWidth / 2; // 计算左边位置，居中显示
+
+          // 确保div不超出屏幕左边或右边
+          const screenWidth = window.innerWidth;
+          const elementWidth = aaaElement.offsetWidth;
+          if (leftPosition + elementWidth > screenWidth) {
+            leftPosition = screenWidth - elementWidth; // 超出右边界时调整
+          } else if (leftPosition < 0) {
+            leftPosition = 0; // 超出左边界时调整
+          }
+
+          // 设置div的位置
+          aaaElement.style.position = 'absolute';
+          aaaElement.style.top = `${topPosition}px`;
+          aaaElement.style.left = `${leftPosition}px`;
+
         }
       } 
       // 检查是否只有一个参数
@@ -202,7 +222,25 @@ function checkMouseOnLink(event) {
         const aaaElement = document.querySelector(`div[aaa="${param}"]`);
         if (aaaElement) {
           aaaElement.classList.add('visible');
-          console.log(`Found and displayed aaa="${param}" for link: ${target.href}`);
+          
+          // 计算div的位置，放置在链接的正下方，并确保div的中心与链接的中心对齐
+          const topPosition = linkRect.bottom + window.scrollY; // 计算顶部位置
+          let leftPosition = linkRect.left + linkRect.width / 2 + window.scrollX - aaaElement.offsetWidth / 2; // 计算左边位置，居中显示
+
+          // 确保div不超出屏幕左边或右边
+          const screenWidth = window.innerWidth;
+          const elementWidth = aaaElement.offsetWidth;
+          if (leftPosition + elementWidth > screenWidth) {
+            leftPosition = screenWidth - elementWidth; // 超出右边界时调整
+          } else if (leftPosition < 0) {
+            leftPosition = 0; // 超出左边界时调整
+          }
+
+          // 设置div的位置
+          aaaElement.style.position = 'absolute';
+          aaaElement.style.top = `${topPosition}px`;
+          aaaElement.style.left = `${leftPosition}px`;
+
         }
       }
 
@@ -212,19 +250,18 @@ function checkMouseOnLink(event) {
           const aaaElement = document.querySelector(`div[aaa="${params.join(',')}"]`);
           if (aaaElement) {
             aaaElement.classList.remove('visible');
-            console.log(`Hidden aaa="${params.join(',')}" after mouse leave.`);
           }
         } else if (params.length === 1 && params[0]) {
           const aaaElement = document.querySelector(`div[aaa="${params[0]}"]`);
           if (aaaElement) {
             aaaElement.classList.remove('visible');
-            console.log(`Hidden aaa="${params[0]}" after mouse leave.`);
           }
         }
       });
     }
   }
 }
+
 
 // 在文档上监听鼠标移动事件
 document.addEventListener('mousemove', checkMouseOnLink);
