@@ -29,7 +29,7 @@
 ---
 
 _by [mkzi-nya](https://mkzi-nya.github.io)_  
-_Last updated on 2025.04.26 21:00 (UTC)_
+_Last updated on 2025.04.30 22:15 (UTC)_
 
 > 如果界面渲染出现问题，请[在 GitHub 上访问](https://github.com/mkzi-nya/milthm-calculator-web/blob/main/usage/usage_zh.md)
 
@@ -266,8 +266,8 @@ function reality(score, constant) {
 结算评级分为八种：
 
 - **R**：即 Rain，达成理论值 1010000 分（RHYTHM of RAIN，所有音符均为大 Perfect）。
-- **紫S**：达成 All Perfect（所有音符均为 Perfect 且未达成 R 评，分数在 1000000-1009999 之间）。
-- **青S**：达成 Full Combo（所有音符均无 Bad/Miss 判定且未达成紫S评，此时不考虑下列分数要求）。
+- **紫S**：达成 All Perfect（所有音符均为 Perfect 且未达成 R 评，分数在 750000-1009999 之间）。
+- **青S**：达成 Full Combo（所有音符均无 Bad/Miss 判定且未达成紫S评，300000-1009999分）。
 - **S**：950000-1009999 分。
 - **A**：900000-949999 分。
 - **B**：850000-899999 分。

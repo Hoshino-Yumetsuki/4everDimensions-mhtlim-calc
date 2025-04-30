@@ -25,7 +25,7 @@
 ---
 
 _by [mkzi-nya](https://mkzi-nya.github.io)_  
-_Last updated on 2025.04.26 21:00 (UTC)_
+_Last updated on 2025.04.30 22:15 (UTC)_
 
 > If the interface does not render correctly, please [visit on GitHub](https://github.com/mkzi-nya/milthm-calculator-web/blob/main/usage/)
 
@@ -239,8 +239,8 @@ Within each range, the score and accuracy are proportional. The detailed ranges 
 There are eight result ratings:
 
 - **R:** Rain, achieving the theoretical score of 1010000 (RHYTHM of RAIN, where all notes are Perfect).
-- **Purple S:** Achieving All Perfect (all notes are Perfect but not reaching an R rating, score between 1000000-1009999).
-- **Blue S:** Achieving Full Combo (all notes hit without any Bad/Miss, regardless of the score requirements below).
+- **Purple S:** Achieving All Perfect (all notes are Perfect but not reaching an R rating, score between 750000-1009999).
+- **Blue S:** Achieving Full Combo (all notes hit without any Bad/Miss, 300000-1009999).
 - **S:** 950000-1009999.
 - **A:** 900000-949999.
 - **B:** 850000-899999.

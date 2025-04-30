@@ -25,7 +25,7 @@
 ---
 
 _by [mkzi-nya](https://mkzi-nya.github.io)_  
-_Last updated on 2025.04.26 21:00 (UTC)_
+_Last updated on 2025.04.30 22:15 (UTC)_
 
 > インターフェースが正しく表示されない場合は、[GitHubでご確認ください](https://github.com/mkzi-nya/milthm-calculator-web/blob/main/usage/)
 
@@ -239,8 +239,8 @@ function reality(score, constant) {
 評価結果は全部で 8 種類あります:
 
 - **R:** Rain – 理論値 1010000 点を達成（RHYTHM of RAIN、全てのノートが Perfect）。
-- **Purple S:** All Perfect を達成（全てのノートが Perfect だが R 評価には届かず、スコアは 1000000-1009999 の間）。
-- **Blue S:** Full Combo を達成（全てのノートをミスなくヒット、以下のスコア要件は無視）。
+- **Purple S:** All Perfect を達成（全てのノートが Perfect だが R 評価には届かず、スコアは 750000-1009999 の間）。
+- **Blue S:** Full Combo を達成（全てのノートをミスなくヒット、300000-1009999 点）。
 - **S:** 950000-1009999 点。
 - **A:** 900000-949999 点。
 - **B:** 850000-899999 点。

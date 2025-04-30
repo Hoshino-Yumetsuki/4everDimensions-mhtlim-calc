@@ -25,7 +25,7 @@
 ---
 
 _by [mkzi-nya](https://mkzi-nya.github.io)_  
-_Last updated on 2025.04.26 21:00 (UTC)_
+_Last updated on 2025.04.30 22:15 (UTC)_
 
 > Nếu giao diện không hiển thị đúng, vui lòng [truy cập trên GitHub](https://github.com/mkzi-nya/milthm-calculator-web/blob/main/usage/)
 
@@ -239,8 +239,8 @@ Trong mỗi khoảng, điểm số và độ chính xác tỷ lệ thuận. Các
 Có tám xếp hạng kết quả:
 
 - **R:** Rain – đạt được điểm lý thuyết 1010000 (RHYTHM of RAIN, khi tất cả các nốt đều là Perfect).
-- **Purple S:** Đạt được All Perfect (tất cả các nốt đều là Perfect nhưng không đạt xếp hạng R, với điểm từ 1000000 đến 1009999).
-- **Blue S:** Đạt được Full Combo (tất cả các nốt được đánh mà không có Bad/Miss, không xét các yêu cầu về điểm bên dưới).
+- **Purple S:** Đạt được All Perfect (tất cả các nốt đều là Perfect nhưng không đạt xếp hạng R, với điểm từ 750000 đến 1009999).
+- **Blue S:** Đạt được Full Combo (tất cả các nốt được đánh mà không có Bad/Miss, 300000-1009999).
 - **S:** 950000-1009999.
 - **A:** 900000-949999.
 - **B:** 850000-899999.

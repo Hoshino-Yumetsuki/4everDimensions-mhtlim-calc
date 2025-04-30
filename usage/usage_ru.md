@@ -25,7 +25,7 @@
 ---
 
 _by [mkzi-nya](https://mkzi-nya.github.io)_  
-_Last updated on 2025.04.26 21:00 (UTC)_
+_Last updated on 2025.04.30 22:15 (UTC)_
 
 > Если интерфейс отображается некорректно, пожалуйста, [посетите GitHub](https://github.com/mkzi-nya/milthm-calculator-web/blob/main/usage/)
 
@@ -239,8 +239,8 @@ function reality(score, constant) {
 Существует восемь уровней оценки результата:
 
 - **R:** Rain – достижение теоретического результата 1010000 (RHYTHM of RAIN, когда все ноты — Perfect).
-- **Purple S:** Достижение All Perfect (все ноты Perfect, но не достигается рейтинг R, баллы от 1000000 до 1009999).
-- **Blue S:** Достижение Full Combo (все ноты попадают без Bad/Miss, без учёта требований по баллам ниже).
+- **Purple S:** Достижение All Perfect (все ноты Perfect, но не достигается рейтинг R, баллы от 750000 до 1009999).
+- **Blue S:** Достижение Full Combo (все ноты попадают без Bad/Miss, 300000-1009999).
 - **S:** 950000-1009999.
 - **A:** 900000-949999.
 - **B:** 850000-899999.
