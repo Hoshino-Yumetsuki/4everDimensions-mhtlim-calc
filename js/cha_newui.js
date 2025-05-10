@@ -274,7 +274,7 @@ function findScore(constant, target) {
   }
   return 114514;
 }
-
+var shitValue = 0.114514;
 /* ========== 核心流程 ========== */
 function processData() {
   const inputData = document.getElementById('inputData').value.replace(/\n/g, '').replace(/  /g, '');
@@ -306,8 +306,16 @@ function processData() {
   // 显示用户信息
   drawUserInfo(username, items);
   // 绘制所有卡片
+  
+  const outputDiv = document.getElementById('output');
+  const card = document.createElement('div');
+  card.classList.add('card');
+  card.classList.add('card-info');
+  card.innerHTML = `1145141919810`;
+  outputDiv.appendChild(card);
+  shitValue = Math.max(1, Math.min(20, card.offsetWidth * 0.07));
+  outputDiv.innerHTML='';
   items.forEach(drawCard);
-
   // 格式化写回 inputData
   formatInput(username, items);
 }
@@ -537,16 +545,11 @@ function drawCard(result, index) {
   title.innerText = result.name;
   card.appendChild(title);
   const maxCardWidth = card.offsetWidth * 0.7;
-  title.style.fontSize = `${fontSize * 1.3}px`;
   title.style.whiteSpace = 'nowrap';
   title.style.overflow = 'hidden';
   title.style.textOverflow = 'ellipsis';
-  // 若标题过长就减小字号
-  while (title.offsetWidth > maxCardWidth && fontSize > 2) {
-    fontSize--;
-    title.style.fontSize = `${fontSize}px`;
-  }
-  // Info 行
+  title.style.maxWidth = "90%";
+  
   const info = document.createElement('div');
   info.classList.add('info');
   Object.assign(info.style, {
@@ -571,6 +574,7 @@ function drawCard(result, index) {
     singleRealitySpan.style.color = '#ff4040';
   }
   info.innerHTML = `${result.category} ${constantText}`;
+  info.style.maxWidth="100%"
   info.appendChild(singleRealitySpan);
   // 准度
   const accuracySpan = document.createElement('span');
@@ -587,7 +591,7 @@ function drawCard(result, index) {
   const score = document.createElement('div');
   score.classList.add('score');
   score.innerText = result.bestScore;
-  score.style.fontSize = `${fontSize * 2.5}px`;
+  // score.style.fontSize = `${fontSize * 2.5}px`;
   score.style.marginBottom = `${marginBottom}px`;
   score.style.whiteSpace = 'nowrap';
   score.style.overflow = 'hidden';
@@ -625,6 +629,12 @@ function drawCard(result, index) {
   card.appendChild(indexElem);
   // 加入到输出
   outputDiv.appendChild(card);
+  // 注意：调整大小一定需要在生成完成后！
+  // const fontSize1 = Math.max(1, Math.min(20, card.offsetWidth * 0.07));
+  info.style.fontSize = `${shitValue*0.8}px`;
+  title.style.fontSize = `${shitValue * 1.2}px`;
+  score.style.fontSize = `${shitValue * 1.8}px`;
+  // console.log(`Card width: ${card.offsetWidth}px, Font size: ${shitValue}px`);
 }
 
 /* ========== 列数调整 ========== */
