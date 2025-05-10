@@ -7,6 +7,10 @@
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* 卡片最小宽度150px，自动填充列 */
     gap: 5px; /* 卡片间距 */
     width: 100%; 
+    justify-content: space-between;
+    }
+    .card-inside{
+        border-radius: 5px;
     }
     .card {
         min-width: 0;
