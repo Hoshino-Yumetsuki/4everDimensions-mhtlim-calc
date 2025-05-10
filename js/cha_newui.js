@@ -1,4 +1,4 @@
-const Updated = "Updated at 2025.05.05 13:25(UTC+8)"
+const Updated = "Updated at 2025.05.09 10:35(UTC+8)"
 console.log(Updated)
 console.log(" ███  ███                               \n\
  ███  ███                               \n\
@@ -43,7 +43,7 @@ const constantsData = {
   "04d821ff-493a-421d-83a5-a61a59b2d3d3": [11.1, "CB", "命日", 211, 3.118, 2.5, 2,],
   "80df6e22-69c3-4983-a712-adeebb47fb2b": [11.1, "CB", "Regnaissance", 227, 2.86, 3.5, 4,],
   "22bd5632-25cc-412f-9299-bcf2cdd64aed": [10.9, "CB", "樱落繁花", 205, 2.789, 4, 3,],
-  "f7b864bc-72a3-4c9d-ab7c-b57946fb77ec": [10.8, "CB", "Elsorhg", 204, , , ,],
+  "f7b864bc-72a3-4c9d-ab7c-b57946fb77ec": [10.9, "CB", "Elsorhg", 204, , , ,],
   "aafec4af-3479-445b-9b30-b6822b9f5e19": [10.8, "CB", "Moving on", 206, , 1.5, 1.5,],
   "a6ef2d0a-057b-4ada-be88-23dcde06ada5": [10.7, "CB", "Hikari", 193, 2.44, , 1.5,],
   "6db4cb9b-adec-4ce5-bb0a-71d4761e88f8": [10.6, "CB", "WATER", 206, 1.624, 1.5, 2.5,],
@@ -214,7 +214,7 @@ const constantsData = {
   "e9ae00a5-355c-45ff-b099-91cd5455193c": [10.6, "CB", "Virtual S0da", , , , ,],
   "5d4a26e7-8810-4a97-87b8-26dd3876463f": [6.6, "SK", "Virtual S0da", , , , ,],
   "e9789bd9-bc33-412c-a1c9-d00ded16b324": [3.0, "DZ", "Virtual S0da", , , , ,],
-  "575ea000-3a9e-4c68-b20e-73a16b4f044d": [10.6, "CB", "apOapSis(Edit)", , , , ,],
+  "575ea000-3a9e-4c68-b20e-73a16b4f044d": [10.7, "CB", "apOapSis(Edit)", , , , ,],
   "bf05f32a-9a94-4915-b91c-877a0e7c99a4": [6.4, "SK", "apOapSis(Edit)", , , , ,],
   "433e8313-04b8-4abc-aaf0-d4d102bb7f24": [3.5, "DZ", "apOapSis(Edit)", , , , ,],
   "eb802d90-72c0-4b95-856a-b2951a57c0ec": [-1, "CB*", "Sheer Ice Torrent", , , , ,],
@@ -392,7 +392,6 @@ async function processDBFile(arrayBuffer, SQL) {
     const extracted = extractJSON(playerFileJSON);
     if (extracted) {
       document.getElementById('inputData').value = extracted;
-      window.data = extracted;
       processData();
     } else {
       alert("数据库存档解析失败！\nDatabase save parsing failed!");
@@ -485,6 +484,7 @@ function processPrefsFile(prefsContent) {
 }
 
 function extractJSON(jsonString) {
+  window.data = jsonString
   const start = jsonString.indexOf('{"UserName":');
   const end = jsonString.indexOf(']}]', start);
   return (start !== -1 && end !== -1) ? `${jsonString.slice(start, end + 3)}}` : null;
@@ -507,8 +507,9 @@ function drawUserInfo(username, results) {
   usercontainer.style.display = 'block';
   const avg = (results.filter(item => item.singleRealityRaw > 0)
     .slice(0, 20)
-    .reduce((acc, item) => acc + item.singleRealityRaw, 0) / 20).toFixed(4) || '0.0000';
-  userInfoDiv.innerHTML = `${username} ${avg}`;
+    .reduce((acc, item) => acc + item.singleRealityRaw, 0) / 20) || '0.0000';
+  window.average1 = Math.floor(avg*10000)/10000
+  userInfoDiv.innerHTML = `${username} ${window.average1}`;
   window.username = username;
   window.average = avg;
 }
@@ -1190,7 +1191,7 @@ function downloadImage() {
       if (yrjds == "true") {
         ctx.fillText(`Reality: ${(window.average * 20).toFixed(4)}`, 660, 150);
       } else {
-        ctx.fillText(`Reality: ${window.average}`, 660, 150);
+        ctx.fillText(`Reality: ${window.average1}`, 660, 150);
       }
       const now = new Date();
       const dateStr = `${now.toISOString().split('T')[0]} ${now.toTimeString().split(' ')[0]}`;
