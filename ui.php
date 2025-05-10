@@ -19,7 +19,6 @@
         top: 50%; 
         left: 50%; 
         transform: translate(-50%, -50%); 
-        background: #2a2a2a; 
         color: #fff; 
         padding: 30px; 
         border-radius: 15px; 
@@ -53,12 +52,12 @@
         display: inline-block;
         cursor: pointer;
     }
-    #settingsModal .cancel-btn {
+    /* #settingsModal .cancel-btn {
         background-color: #777;
     }
     #settingsModal .apply-btn {
         background-color: #5cb85c;
-    }
+    } */
     #overlay { 
         display: none; 
         position: fixed; 
@@ -66,7 +65,7 @@
         left: 0; 
         width: 100%; 
         height: 100%; 
-        background-color: rgba(0,0,0,0.7); 
+        background-color: rgba(0,0,0,0.45); 
         z-index: 9999; 
     }
   </style>
@@ -96,7 +95,10 @@
     <script src="./new_ui.js"></script>
     <div class="layui-header header-opa">
         <div class="layui-logo header-opa-bg2" style="padding: 16px;">
-            <h1 style="color:turquoise;">MilthmCalc <span style="font-size: medium;color:gold;">Ultra</span><span style="font-size: small;color:lightgreen;">&nbsp;v<?php if (file_exists("version.txt")) {echo file_get_contents("version.txt");}else{echo "_unknown";} ?></span></h1>
+            <div class="header-opa-content">
+                <h1 style="color:turquoise;"><div>MilthmCalc <span style="font-size: medium;color:gold;">Pro</span><span style="font-size: small;color:lightgreen;">&nbsp;v<?php if (file_exists("version.txt")) {echo file_get_contents("version.txt");}else{echo "_unknown";} ?></span></div></h1>
+
+            </div>
         </div>
     </div>
 
@@ -178,8 +180,14 @@
                     <hr/> -->
                     <button class="layui-btn layui-btn-primary" onclick="javascript:processData();" data-i18n="parse">解析</button>
                     <button class="layui-btn layui-btn-primary" onclick="javascript:upl();" data-i18n="uploadFile">上传文件</button>
+                    <hr/>
                     <button class="layui-btn layui-btn-primary" onclick="javascript:downloadImage();" data-i18n="generateImage">生成图像</button>
                     <button class="layui-btn layui-btn-primary" onclick="showSettings();" data-i18n="settings">查分图设置</button>
+
+                    
+                    
+
+                    
                     <br>
                     <div id="picgen" style="display: none";>
                         <br>
