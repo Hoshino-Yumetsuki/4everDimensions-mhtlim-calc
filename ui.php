@@ -129,7 +129,7 @@
                 <div class="layui-card-header"><h2 data-i18n="welcome">Welcome</h2></div>
                 <div class="layui-card-body">
                     <p data-i18n="greeting">欢迎来到MilthmCalc！(Reality计算器) (http://k9.lv/c)</p>
-                    <p data-i18n="description">这是一个用于计算Milthm Reality分数的网站，你可以在这里导入存档并解析。</p><hr>
+                    <p data-i18n="description">这是一个用于计算Milthm Reality分数的网站，你可以在这里导入并解析存档。</p><hr>
                     <span data-i18n="usage">使用说明：</span><a href="./usage/usage.html" target="_blank"><span class="superlink" data-i18n="viewUsage">查看帮助信息</span></a><hr>
                     <span data-i18n="qqGroup">QQ交流群：</span><a href="https://qm.qq.com/q/Utb6sNDvki" target="_blank"><span class="superlink" data-i18n="viewQQGroup">Milthm#√-1洨巟羣</span></a>
                 </div>
@@ -178,7 +178,7 @@
                      <!-- 暂时禁用 -->
                     <!-- <button class="layui-btn layui-btn-primary layui-btn-disabled layui-btn-sm" onclick="javascript:qqbot_ua();" disabled>QQ Bot选项 (不可用)</button>
                     <hr/> -->
-                    <button class="layui-btn layui-btn-primary" onclick="javascript:processData();" data-i18n="parse">解析</button>
+                    <button class="layui-btn layui-btn-primary" onclick="javascript:startProcess();" data-i18n="parse">解析</button>
                     <button class="layui-btn layui-btn-primary" onclick="javascript:upl();" data-i18n="uploadFile">上传文件</button>
                     <hr/>
                     <button class="layui-btn layui-btn-primary" onclick="javascript:downloadImage();" data-i18n="generateImage">生成图像</button>

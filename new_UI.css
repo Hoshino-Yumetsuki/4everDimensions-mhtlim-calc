@@ -76,21 +76,21 @@ body{
 .rccc{
     /* 设置半透明背景最高优先级,覆盖layui的设置 */
     background-color: rgba(33, 33, 33, 0.3) !important;
-    backdrop-filter: blur(32px); /* 模糊效果 */
-    border-radius: 10px !important; /* 圆角边框 */
-    border: 1px solid #aaaaaa2a !important;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.5) !important; 
+    backdrop-filter: blur(16px); /* 模糊效果 */
+    border-radius: 16px !important; /* 圆角边框 */
+    /* border: 1px solid #aaaaaa2a !important; */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important; 
 }
 #settingsModal{
     /* 设置半透明背景最高优先级,覆盖layui的设置 */
     background-color: rgba(50, 50, 50, 0.3) !important;
     backdrop-filter: blur(6px); /* 模糊效果 */
-    border-radius: 10px !important; /* 圆角边框 */
+    border-radius: 16px !important; /* 圆角边框 */
     border: 1px solid #aaaaaa2a !important;
 }
 #settingsModal input{
     background-color: rgba(33, 33, 33, 0.3) !important;
-    border-radius: 10px !important; /* 圆角边框 */
+    border-radius: 12px !important; /* 圆角边框 */
     border: 1px solid #aaaaaa2a !important;
 }
 #settingsModal input:focus{
@@ -98,12 +98,12 @@ body{
     background-color: rgba(33, 33, 33, 0.5) !important;
 }
 #settingsModal .apply-btn{
-    border-radius: 16px !important;
+    border-radius: 24px !important;
     border-color: #3a8e52 !important;
     background-color: #2c9f4d2d !important;
 }
 #settingsModal .cancel-btn{
-    border-radius: 16px !important;
+    border-radius: 24px !important;
     border-color: #7d7979 !important;
     background-color: #37373732 !important;
 }
@@ -141,7 +141,7 @@ body{
 } */
 #inputData{
     border-color: #555555 !important;
-    border-radius: 12px !important;
+    border-radius: 16px !important;
     background-color: rgba(33, 33, 33, 0.1) !important;
 }
 #inputData:focus{
@@ -152,7 +152,7 @@ body{
     border-color: #73cb8c !important;
 }
 .layui-btn{
-    border-radius: 14px !important;
+    border-radius: 24px !important;
     border-color: #5FB878 !important;
     background-color: #1e5e3052 !important;
 }
@@ -164,10 +164,10 @@ body{
 .header-opa-bg2{
     color: #ffffff;
     text-align: center;
-
+    box-shadow: 0 6px 12px rgba(0,0,0,0.5) !important;
     background-color: rgba(33, 33, 33, 0.3) !important;
     backdrop-filter: blur(12px); 
-    border: 1px solid #aaaaaa2a !important;
+    /* border: 1px solid #aaaaaa2a !important; */
 }
 /* .header-opa-content{
     padding: 12px; 

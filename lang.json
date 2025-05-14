@@ -3,7 +3,7 @@
     "title": "Milthm 查分器（原Reality计算器）",
     "welcome": "欢迎",
     "greeting": "欢迎来到MilthmCalc！(Reality计算器) (http://k9.lv/c)",
-    "description": "这是一个用于计算Milthm Reality分数的网站，你可以在这里导入存档并解析。",
+    "description": "这是一个用于计算Milthm Reality分数的网站，你可以在这里导入并解析存档。",
     "usage": "使用说明：",
     "viewUsage": "查看帮助信息",
     "qqGroup": "QQ交流群：",
@@ -36,7 +36,7 @@
     "title": "Milthm 查分器（原Reality計算器）",
     "welcome": "歡迎",
     "greeting": "歡迎來到MilthmCalc！（Reality計算器） (http://k9.lv/c)",
-    "description": "這是一個用於計算Milthm Reality分數的網站，你可以在這裡導入存檔並解析。",
+    "description": "這是一個用於計算Milthm Reality分數的網站，你可以在這裡導入並解析存檔。",
     "usage": "使用說明：",
     "viewUsage": "查看幫助信息",
     "qqGroup": "QQ交流群：",
@@ -64,12 +64,12 @@
     "cancel": "取消",
     "apply": "應用",
     "yrjds": "愚人節定數"
-  }
+  },
   "en": {
     "title": "Milthm Score Calculator (known as Reality Calculator)",
     "welcome": "Welcome",
     "greeting": "Welcome to MilthmCalc! (Reality Calculator) (http://k9.lv/c)",
-    "description": "This is a website to calculate Milthm Reality scores. You can import and parse your archives here.",
+    "description": "This is a website to calculate Milthm Reality scores. You can import and parse your saves here.",
     "usage": "Usage:",
     "viewUsage": "View help information",
     "qqGroup": "QQ Group: ",
