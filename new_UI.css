@@ -11,6 +11,13 @@
     }
     .card-inside{
         border-radius: 5px;
+        height: 100%;
+        position: relative; /* 必须是 relative，以便子元素可以使用 absolute */
+        text-align: left;
+        aspect-ratio: 2 / 1; /* 宽高比始终为2:1 */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
     .card {
         min-width: 0;
