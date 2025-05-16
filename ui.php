@@ -7,7 +7,7 @@
     <title data-i18n="title">Milthm 查分器（原Reality计算器）</title>
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="new_UI.css">
-
+    <script src="js/constant.js"></script>
     <link href="./layui/css/layui.css" rel="stylesheet">
 
     <input type="file" id="fileupLoad" style="display:none;" />
