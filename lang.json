@@ -30,7 +30,9 @@
     "excludeRealityLabel": "额外绘制不记入Reality的曲目:",
     "cancel": "取消",
     "apply": "应用",
-    "yrjds":"愚人节定数"
+    "yrjds":"愚人节定数",
+    "donation": "捐赠",
+    "donationText":"捐赠："
   },
   "zh-tw": {
     "title": "Milthm 查分器（原Reality計算器）",
@@ -64,7 +66,8 @@
     "cancel": "取消",
     "apply": "應用",
     "yrjds": "愚人節定數",
-    "donation": "捐赠"
+    "donation": "捐赠",
+    "donationText":"捐赠："
   },
   "en": {
     "title": "Milthm Score Calculator (known as Reality Calculator)",
@@ -98,7 +101,8 @@
     "cancel": "Cancel",
     "apply": "Apply",
     "yrjds": "April Fool's Day score",
-    "donation": "Donate"
+    "donation": "Donate",
+    "donationText":"Donate: "
   },
   "es": {
     "title": "Calculadora de Puntuación Milthm (Calculadora Original de Reality)",
@@ -132,7 +136,8 @@
     "cancel": "Cancelar",
     "apply": "Aplicar",
     "yrjds": "Puntuación del Día de los Inocentes",
-    "donation": "Donar"
+    "donation": "Donar",
+    "donationText":"Donar: "
   },
   "lo": {
     "title": "Kalkulator Pungutan Milthm (Kalkulator Asli Reality)",
@@ -166,7 +171,8 @@
     "cancel": "Batal",
     "apply": "Terapkan",
     "yrjds": "Skor Hari Kenaikan Harga",
-    "donation": "Donasi"
+    "donation": "Donasi",
+    "donationText":"Donasi: "
   },
   "ru": {
     "title": "Калькулятор баллов Milthm (Исходный калькулятор Reality)",
@@ -200,7 +206,8 @@
     "cancel": "Отмена",
     "apply": "Применить",
     "yrjds": "Баллы Дня Мудреца",
-    "donation": "Пожертвование"
+    "donation": "Пожертвование",
+    "donationText":"Пожертвование: "
   },
   "ja": {
     "title": "Milthm スコア計算機（元の Reality 計算機）",
@@ -234,7 +241,8 @@
     "cancel": "キャンセル",
     "apply": "適用",
     "yrjds": "愚者の日定数",
-    "donation": "寄付"
+    "donation": "寄付",
+    "donationText":"寄付："
   },
   "vi": {
     "title": "Máy tính điểm Milthm (Máy tính Reality gốc)",
@@ -268,6 +276,7 @@
     "cancel": "Hủy",
     "apply": "Áp dụng",
     "yrjds": "Điểm ngày Giàu Trí Tuệ",
-    "donation": "Tài trợ"
+    "donation": "Tài trợ",
+    "donationText":"Tài trợ: "
   }
 }
