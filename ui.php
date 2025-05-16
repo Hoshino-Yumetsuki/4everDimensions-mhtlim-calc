@@ -295,5 +295,27 @@
     });
     </script>
     <script src="./js/cha_newui.js"></script>
+
+    <!-- Autoparse -->
+     <script>
+        // logic of auto-parse
+        // read the link if had the ?data = xxx and xxx is base64, if exists, decode and put into input textarea.
+        function autoParse(){
+        let url = new URL(window.location.href);
+        let data = url.searchParams.get("data");
+        if (data != null){
+            try{
+            document.getElementById('inputData').value = atob(data);
+            startProcess();
+            }catch (e){
+            console.log(e);
+            }
+            
+        }else{
+            console.log("no data found");
+        }
+        }
+        autoParse();
+    </script>
 </body>
 </html>

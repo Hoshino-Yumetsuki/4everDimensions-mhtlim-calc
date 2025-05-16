@@ -74,3 +74,4 @@ function genPicDialog(){
   // });
   document.getElementById('picgen').style.display='block';
 }
+
