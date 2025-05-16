@@ -12,6 +12,20 @@ function show_author_info() {
     offset: ['32px']
   });
 }
+
+function show_donation() {
+  layer.open({
+    type: 2,
+    area: ['90%', '90%'],
+    title: '捐赠',
+    shade: 0.6, // 遮罩透明度
+    shadeClose: true, // 点击遮罩区域，关闭弹层
+    maxmin: false,
+    anim: 0, // 0-6 的动画形式，-1 不开启
+    content: `./donate.html`,
+    offset: ['32px']
+  });
+}
 function show_usage() {
   console.log(window.screen.availWidth)
   layer.open({

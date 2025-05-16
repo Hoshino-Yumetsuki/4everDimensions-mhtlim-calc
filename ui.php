@@ -167,6 +167,7 @@
                     <!-- 网站作者：<button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:show_author_info();">查看</button><br> -->
                     <span data-i18n="OtherAddress">其他地址: </span><a href="https://mkzi-nya.github.io/milthm-calculator-web/index.html" target="_blank"><span class="superlink">Mkzi Nya's Fork</span></a><br>
                     <span data-i18n="siteAuthor">网站作者：</span><a href="javascript:void(0);" onclick="show_author_info();" style="color:lightblue;text-decoration:none;" data-i18n="viewAuthor">查看</a><br>
+                    <span data-i18n="siteAuthor">网站作者：</span><a href="javascript:void(0);" onclick="show_donation();" style="color:lightblue;text-decoration:none;" data-i18n="donation">捐赠</a><br>
                     <span data-i18n="visit">本站访问数量：</span><span id="accessCount"></span><br>
                     <!-- <div class="layui-collapse">
                         <div class="layui-colla-item">
