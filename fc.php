@@ -1,6 +1,6 @@
 <?php
 function dbc(){
-    return new PDO("mysql:host=localhost;dbname=k9lv", "k9lv", "kMPnhPYT4R6bheXW");
+    return new PDO("mysql:host=klms.local;dbname=k9lv", "k9lv", "kMPnhPYT4R6bheXW");
 }
 
 function query($pdo, $sql){
