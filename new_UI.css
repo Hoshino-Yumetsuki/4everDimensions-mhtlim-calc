@@ -12,10 +12,9 @@
     .card-inside{
         border-radius: 5px;
         height: 100%;
-        position: relative; /* 必须是 relative，以便子元素可以使用 absolute */
+        position: relative; 
         text-align: left;
-        aspect-ratio: 2 / 1; /* 宽高比始终为2:1 */
-        display: flex;
+        /* aspect-ratio: 2 / 1; */
         flex-direction: column;
         justify-content: space-between;
     }
@@ -26,8 +25,8 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         position: relative; /* 必须是 relative，以便子元素可以使用 absolute */
         text-align: left;
-        aspect-ratio: 2 / 1; /* 宽高比始终为2:1 */
-        display: flex;
+        /* aspect-ratio: 2 / 1;  */
+        /* display: flex; */
         flex-direction: column;
         justify-content: space-between;
         }
@@ -38,6 +37,7 @@
             /* transform: translate(-50%, 190%);  */
             font-weight: bold;
             text-align: center;
+            overflow: visible;
             /* font-size: 18px; */
             color: #DDA0DD;
             width: 100%; /* 保证宽度撑满卡片的宽度 */
