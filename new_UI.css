@@ -12,6 +12,7 @@
     .card-inside{
         border-radius: 5px;
         height: 100%;
+        padding: 0px;
         position: relative; 
         text-align: left;
         /* aspect-ratio: 2 / 1; */
@@ -21,7 +22,7 @@
     .card {
         min-width: 0;
         border-radius: 5px;
-        padding: 3px;
+        padding: 5px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         position: relative; /* 必须是 relative，以便子元素可以使用 absolute */
         text-align: left;
