@@ -1,6 +1,6 @@
 # 欢迎来到 Milthm 查分器 的史山代码库
 
-本项目is under the WTFPL license.
+本项目is under the WTFPL.
 
 ## 在线服务请转到 [k9.lv/c](http://k9.lv/c)
 
