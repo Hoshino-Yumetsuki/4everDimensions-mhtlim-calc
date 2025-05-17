@@ -97,10 +97,71 @@
             background-color: rgba(0, 0, 0, 0.45);
             z-index: 9999;
         }
+
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #000;
+            /* 设置背景颜色为黑色 */
+            overflow: auto;
+        }
+
+        .rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .raindrop {
+            position: absolute;
+            top: -10px;
+            width: 2px;
+            height: 64px;
+            background-color:rgb(126, 137, 207);
+            border-radius: 1px;
+            opacity: 0.6;
+            animation: fall linear;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(100vh) scale(1);
+                opacity: 0;
+            }
+        }
     </style>
     <!-- Chunk: sql_wasm -->
     <script src="./js/sql-wasm.js"></script>
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const rain = document.querySelector(".rain");
+
+            function createRainDrop() {
+                const drop = document.createElement("div");
+                drop.classList.add("raindrop");
+                drop.style.left = Math.random() * window.innerWidth + "px";
+                drop.style.animationDuration = 0.5 + Math.random() * 1.5 + "s"; // 随机动画时长
+                rain.appendChild(drop);
+
+                setTimeout(() => {
+                    rain.removeChild(drop);
+                }, 2000); // 2秒后移除雨滴
+            }
+
+            setInterval(createRainDrop, 50); // 每50毫秒创建一个雨滴
+        });
+
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('./js/sw.js')
                 .then(reg => console.log("Service Worker 注册成功:", reg.scope))
@@ -121,6 +182,7 @@
 </head>
 
 <body>
+    <div class="rain"></div>
     <script src="./layui/layui.js"></script>
     <script src="./new_ui.js"></script>
     <div class="layui-header header-opa">
@@ -228,7 +290,7 @@
                     <hr />
 
                     <h3 data-i18n="uploadYourSaves">上传你的存档：</h3>
-                    
+
                     <button class="layui-btn layui-btn-primary" onclick="javascript:doSavesUpload();" data-i18n="uploadBtnText">上传</button>
                     <hr />
                     <h3 data-i18n="charts">图表：</h3>
@@ -487,49 +549,50 @@
         }
 
         document.getElementById("upload_btn").onclick = function() {
-                var dt = document.getElementById("upload_data").innerHTML;
-                var title = document.getElementById("upload_title").value;
-                var desc = document.getElementById("upload_description").value;
-                var info = document.getElementById("upload_info").innerHTML;
-                var token = getStorage("token");
-                var username = getStorage("username");
-                var loadingDiv = document.getElementById("uploadPanel-t");
-                var normalDiv = document.getElementById("uploadPanel-normal");
-                var lplt = document.getElementById("uploadPanel-t-text");
-                var loading = layer.load(1)
-                try {
-                    loadingDiv.style.display = "block";
-                    normalDiv.style.display = "none";
-                    lplt.innerHTML = "Uploading... / 正在上传...";
-                    fetch("user/postSave.php", {
-                        method: "POST",
-                        body: new URLSearchParams({
-                            data: dt,
-                            title: title,
-                            description: desc,
-                            score: info,
-                            username: username,
-                            token: token
-                        })
-                    }).then(response => response.json()).then(data => {
-                            layer.msg(data.msg);
-                            if (data.code === 0) {
-                                closeUploadPanel();
-                            }
-                            loadingDiv.style.display = "none";
-                            normalDiv.style.display = "block";
-                            layer.close(loading);
-                        });
-                    }catch (e) {
-                        layer.msg("An error occurred / 发生错误");
-                        console.log(e);
-                        loadingDiv.style.display = "none";
-                        layer.close(loading);
-                        normalDiv.style.display = "block";
+            var dt = document.getElementById("upload_data").innerHTML;
+            var title = document.getElementById("upload_title").value;
+            var desc = document.getElementById("upload_description").value;
+            var info = document.getElementById("upload_info").innerHTML;
+            var token = getStorage("token");
+            var username = getStorage("username");
+            var loadingDiv = document.getElementById("uploadPanel-t");
+            var normalDiv = document.getElementById("uploadPanel-normal");
+            var lplt = document.getElementById("uploadPanel-t-text");
+            var loading = layer.load(1)
+            try {
+                loadingDiv.style.display = "block";
+                normalDiv.style.display = "none";
+                lplt.innerHTML = "Uploading... / 正在上传...";
+                fetch("user/postSave.php", {
+                    method: "POST",
+                    body: new URLSearchParams({
+                        data: dt,
+                        title: title,
+                        description: desc,
+                        score: info,
+                        username: username,
+                        token: token
+                    })
+                }).then(response => response.json()).then(data => {
+                    layer.msg(data.msg);
+                    if (data.code === 0) {
+                        closeUploadPanel();
                     }
+                    loadingDiv.style.display = "none";
+                    normalDiv.style.display = "block";
+                    layer.close(loading);
+                });
+            } catch (e) {
+                layer.msg("An error occurred / 发生错误");
+                console.log(e);
+                loadingDiv.style.display = "none";
+                layer.close(loading);
+                normalDiv.style.display = "block";
+            }
 
-                }
+        }
     </script>
+    
 </body>
 
 </html>
