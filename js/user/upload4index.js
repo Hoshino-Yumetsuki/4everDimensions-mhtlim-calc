@@ -1,11 +1,14 @@
-function doSavesUpload() {
-    if (!isLogged()) {
-        var loginUI = document.getElementById("loginModal");
+function goLogin() {
+    var loginUI = document.getElementById("loginModal");
         var o2l = document.getElementById("over2lay");
         var x2l = document.getElementById("loginPanel-t");
         x2l.style.display = "none";
         loginUI.style.display = "block";
         o2l.style.display = "block";
+}
+function doSavesUpload() {
+    if (!isLogged()) {
+        goLogin();
         return;
     } else {
         showUploadPanel();
@@ -78,7 +81,7 @@ function initLogging() {
         userInfoDraw.innerHTML = "欢迎，" + getStorage("nickname") + "！<a onclick='javascript:logout();initLogging();'>登出</a> / " +
             "<a onclick='javascript:logoutAll();'>在所有设备上登出</a>";
     } else {
-        userInfoDraw.innerHTML = "未登陆 / Not logged in.";
+        userInfoDraw.innerHTML = "未登陆 / Not logged in. <a onclick='javascript:logout();goLogin();'>登录</a>";
         localStorage.removeItem("username");
         localStorage.removeItem("token");
         localStorage.removeItem("nickname");
