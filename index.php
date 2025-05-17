@@ -12,7 +12,8 @@ if (!$dev_mode) {
     } else {
         $ip = $_SERVER['REMOTE_ADDR'];
     }
-    execute($dbc, "INSERT INTO `cha_stat` (`ip`,`ms`) VALUES ('$ip','$ms_time')");
+    $st = $dbc->prepare("INSERT INTO `cha_stat` (`ip`,`ms`) VALUES (:ip,:ms)");
+    $st->execute(['ip' => $ip, 'ms' => $ms_time]);
 }
 
 ?>

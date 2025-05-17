@@ -46,10 +46,10 @@ if (($loginPass == $loginInfo["loginToken"])) {
     $ps = $server->prepare($st);
     $ps->bindParam(":uid", $uid);
     $ps->bindParam(":suid", $suid);
-    $ps->bindParam(":title", base64_encode($title));
-    $ps->bindParam(":score", base64_encode($score));
-    $ps->bindParam(":description", base64_encode($description));
-    $ps->bindParam(":save", base64_encode($save));
+    $ps->bindParam(":title", htmlspecialchars($title));
+    $ps->bindParam(":score", htmlspecialchars($score));
+    $ps->bindParam(":description", htmlspecialchars($description));
+    $ps->bindParam(":save", htmlspecialchars($save));
     $ps->bindParam(":user_id", $loginInfo['id']);
     $ps->bindParam(":time", $datetime);
     $ps->execute();

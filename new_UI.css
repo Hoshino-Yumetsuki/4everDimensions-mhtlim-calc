@@ -141,7 +141,7 @@ body {
 }
 
 .layui-layer {
-    background-color: rgba(33, 33, 33, 0.5) !important;
+    background-color: rgba(33, 33, 33, 0.68) !important;
     backdrop-filter: blur(6px);
     border-radius: 10px !important;
     border: 1px solid #aaaaaa2a !important;
@@ -163,29 +163,30 @@ body {
     background-color: rgba(0, 0, 0, 0.8) !important;
 }
 
-#inputData {
+#inputData,.layui-layer-input {
     border-color: #00000000 !important;
     border-radius: 16px !important;
     background-color: rgba(33, 33, 33, 0.1) !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3) !important;
 }
 
-#inputData:focus {
+#inputData:focus,.layui-layer-input:focus {
     border-color: #73cb8c !important;
     background-color: rgba(33, 33, 33, 0.5) !important;
 }
 
-#inputData:hover {
+#inputData:hover,.layui-layer-input:hover {
     border-color: #73cb8c !important;
 }
 
-.layui-btn {
+.layui-btn,.layui-layer-btn0,.layui-layer-btn1 {
     border-radius: 24px !important;
     background-color: #595d8352 !important;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3) !important;
+    border-color: #00000000 !important;
 }
 
-.layui-btn:hover {
+.layui-btn:hover,.layui-layer-btn0:hover,.layui-layer-btn1:hover {
     border-color: #ffffff !important;
     background-color: #595d83bf !important;
     color: #ffffff !important;
@@ -197,4 +198,64 @@ body {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5) !important;
     background-color: rgba(33, 33, 33, 0.3) !important;
     backdrop-filter: blur(12px);
+}
+.nowrap{
+    white-space: nowrap !important;
+}
+.saves_list_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-height: 50vh;
+    padding: 16px;
+    box-sizing: border-box;
+    overflow: scroll;
+    border-radius: 24px;
+    background-color: rgba(34, 34, 34, 0.186);
+    box-shadow:inset 0 4px 8px rgba(0, 0, 0, 0.5) !important;
+}
+.saves_list_container table{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5) !important;
+    border: 0px !important;
+    border-radius: 24px !important;
+    background-color: rgba(102, 108, 173, 0.066) !important;
+    
+}
+.saves_list_container button{
+    /* nowrap */
+    white-space: nowrap;
+    width: 100%;
+    font-size: small !important;
+}
+/* second */
+.saves_list_container table tbody tr td:nth-child(5){
+    white-space:normal !important;
+    text-overflow:ellipsis;
+    max-width:64vw;
+    overflow: hidden;
+    word-break:keep-all;
+}
+.saves_list_container table thead tr th{
+    white-space: nowrap;
+}
+.saves_list_container .action{
+    white-space: nowrap;
+    font-size: small !important;
+    color:lightblue;
+    border: 1px solid #ffffff47;
+    padding: 6px;
+    border-radius: 16px;
+    box-sizing: border-box;
+    line-height:36px !important;
+}
+.saves_list_container .delete{
+    color:rgb(255, 133, 133);
+}
+.superlinkR{
+    color:lightblue !important;
+    text-decoration: none;
+    font-size: normal !important;
+}
+.superlinkR:hover{
+    color:rgb(100, 178, 211) !important;
 }

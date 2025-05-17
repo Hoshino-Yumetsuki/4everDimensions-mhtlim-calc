@@ -124,7 +124,7 @@
             top: -10px;
             width: 2px;
             height: 64px;
-            background-color:rgb(126, 137, 207);
+            background-color: rgb(126, 137, 207);
             border-radius: 1px;
             opacity: 0;
             animation: fall linear;
@@ -143,6 +143,7 @@
             50% {
                 opacity: 0.6;
             }
+
             100% {
                 transform: translateY(100vh) scale(1);
                 opacity: 0;
@@ -355,6 +356,9 @@
                 <br>
                 <button class="apply-btn" id="login_btn">Login / 登录</button>
                 <button class="cancel-btn" onclick="closeLogin()">Cancel / 取消</button>
+                <br>
+                <hr />
+                <p>或者，在输入用户名和密码后 <a class='superlinkR' href="javascript:void(0);" onclick="reg_user()">注册</a></p>
             </div>
 
 
@@ -385,6 +389,56 @@
                 <br>
                 <button class="apply-btn" id="upload_btn">Upload / 上传</button>
                 <button class="cancel-btn" onclick="closeUploadPanel()">Cancel / 取消</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Saves Viewer -->
+    <div id="over4lay" class="overlay" onclick="javascript:closeSavesBrowser();"></div>
+    <div class="settingsModal" id="savesModal" style="border: 1px solid #eeeeee;display: none;width:auto !important;max-width:60vw !important;">
+        <div style="text-align: left;">
+            <h2><a href="javascript:void(0);" style="font-size:large;color:rgb(255, 255, 255);text-decoration:none;padding:6px;border:1px;border-style:solid;border-color: #ffffff33;background-color:rgba(255, 255, 255, 0.08);border-radius:16px" onclick="javascript:closeSavesBrowser();">返回</a> Saves Browser </h2>
+            <br>
+            <span id="saves_count" style="box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;color:rgb(255, 255, 255);border-radius:16px">总数: Loading...</span>
+            <hr>
+            <p>这个分页有可能有bug,由于时间原因就先不修了还要去tm上学。 --4everDimensions</p>
+            <hr>
+            <div style="line-height: 32px;">
+                <a href="javascript:void(0);" style="white-space:nowrap;color:lightblue;text-decoration:none;box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;border-radius:16px;" onclick="javascript:fetch_saves();">Refresh / 刷新</a>
+                <a href="javascript:void(0);" style="white-space:nowrap;color:lightblue;text-decoration:none;box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;border-radius:16px;" onclick="javascript:sb_prep();">Previous / 上一页</a>
+                <a href="javascript:void(0);" style="white-space:nowrap;color:lightblue;text-decoration:none;box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;border-radius:16px;" onclick="javascript:sb_nexp();">Next / 下一页</a>
+            </div>
+            <hr>
+            <div class="saves_list_container">
+                <table class="layui-table" lay-skin="line">
+                    <colgroup>
+                        <col style="min-width:3vw;max-width:16vw">
+                        <col style="max-width:32vw ">
+                        <col>
+                        <col>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>Title / 标题</th>
+                            <th>Info / 概要</th>
+                            <th>Created Time / 创建时间</th>
+                            <th>Operation / 操作</th>
+                            <th>Desc / 备注</th>
+                        </tr>
+                    </thead>
+                    <tbody id="savesList_sub">
+                        <!-- <tr>
+                            <td>title</td>
+                            <td>info</td>
+                            <td>time</td>
+                            <td>
+                                <a href="javascript:void(0);" class="action" onclick="javascript:fetch_save('id');">View / 查看</a>
+                                <a href="javascript:void(0);" class="action delete" onclick="javascript:delete_save('id');">Delete / 删除</a>
+                            </td>
+                        </tr> -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -549,7 +603,7 @@
 
         // for upload
         function initUpload() {
-            var dt = btoa(encodeURIComponent(document.getElementById("inputData").value))
+            var dt = ((document.getElementById("inputData").value))
 
             document.getElementById("upload_data").innerHTML = dt
             document.getElementById("upload_info").innerHTML = document.getElementById("userInfo").innerHTML
@@ -599,8 +653,71 @@
             }
 
         }
+
+        // for reg
+        function reg_user() {
+            var username = document.getElementById("login_username").value;
+            var password = document.getElementById("login_password").value;
+            if (username == '' || password == '') return;
+            if (username.length > 48) {
+                layer.msg("用户名过长");
+                return;
+            }
+            if (password.length > 128) {
+                layer.msg("密码过长");
+                return;
+            }
+            if (password.length < 8) {
+                layer.msg("密码过短");
+                return;
+            }
+            if (username.length < 6) {
+                layer.msg("用户名过短");
+                return;
+            }
+            layer.prompt({
+                title: '重复密码：',
+                formType: 1,
+                shade: 0.6
+            }, function(text, index) {
+                if (text != password) {
+                    layer.msg("两次密码不一致");
+                    return;
+                }
+
+
+                var loading = layer.load(1)
+                try {
+                    fetch("user/reg.php", {
+                        method: "POST",
+                        body: new URLSearchParams({
+                            username: username,
+                            password: password
+                        })
+                    }).then(response => response.json()).then(data => {
+                        layer.msg(data.msg);
+                        if (data.code === 0) {
+                            setStorage("token", data.token);
+                            setStorage("username", data.username);
+                            setStorage("nickname", data.nickname);
+                            initLogging();
+                            
+                        }
+                        layer.close(loading);
+                        layer.close(index);
+                    })
+                } catch (e) {
+                    layer.msg("An error occurred / 发生未知错误");
+                    console.log(e);
+                    layer.close(loading);
+                    layer.close(index);
+                } finally {
+                    closeLogin();
+                }
+            });
+        }
     </script>
-    
+
 </body>
 
 </html>

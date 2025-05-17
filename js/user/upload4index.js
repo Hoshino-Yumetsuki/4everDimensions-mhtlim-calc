@@ -32,6 +32,7 @@ function logout() {
     localStorage.removeItem("nickname");
 }
 function logoutAll() {
+    var loading= layer.load(1);
     var username = getStorage("username");
     var token = getStorage("token");
     try {
@@ -47,10 +48,12 @@ function logoutAll() {
                 logout();
                 initLogging();
             }
+            layer.close(loading);
         });
     } catch (e) {
         layer.msg("发生错误。");
         console.log(e);
+        layer.close(loading);
     }
 
 }
@@ -78,19 +81,16 @@ function initLogging() {
     //init
     var userInfoDraw = document.getElementById("logInfo");
     if (isLogged()) {
-        userInfoDraw.innerHTML = "欢迎，" + getStorage("nickname") + "！<a href='javascript:void(0);' style='color:lightblue;text-decoration:none;' onclick='javascript:logout();initLogging();'>登出</a> / " +
-            "<a style='color:lightblue;text-decoration:none;' href='javascript:void(0);' onclick='javascript:logoutAll();'>在所有设备上登出</a>";
+        userInfoDraw.innerHTML = "欢迎，" + getStorage("nickname") + "！<a class='nowrap' href='javascript:void(0);' style='color:lightblue;text-decoration:none;' onclick='javascript:openSavesBrowser_btn();'>查看我的存档</a> / <a href='javascript:void(0);' style='color:lightblue;text-decoration:none;' onclick='javascript:logout();initLogging();'>登出</a> / " +
+            "<a style='color:lightblue;text-decoration:none;' class='nowrap' href='javascript:void(0);' onclick='javascript:logoutAll();'>在所有设备上登出</a>";
     } else {
-        userInfoDraw.innerHTML = "未登陆 / Not logged in. <a href='javascript:void(0);' style='color:lightblue;text-decoration:none;' onclick='javascript:logout();goLogin();'>登录</a>";
+        userInfoDraw.innerHTML = "未登陆 / Not logged in. <a href='javascript:void(0);' class='nowrap' style='color:lightblue;text-decoration:none;' onclick='javascript:logout();goLogin();'>登录</a>";
         localStorage.removeItem("username");
         localStorage.removeItem("token");
         localStorage.removeItem("nickname");
     }
 }
-
-//on page load
-window.onload = function () {
-    //check login
+function checkLogin() {
     if (isLogged()) {
         try {
             fetch("user/check.php", {
@@ -116,5 +116,13 @@ window.onload = function () {
     }else{
         initLogging();
     }
+
+    return isLogged();
+}
+
+//on page load
+window.onload = function () {
+    //check login
+    checkLogin();
 
 }
