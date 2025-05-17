@@ -7,7 +7,7 @@ function doSavesUpload() {
         loginUI.style.display = "block";
         o2l.style.display = "block";
         return;
-    }else{
+    } else {
         showUploadPanel();
     }
 }
@@ -28,24 +28,24 @@ function logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("nickname");
 }
-function logoutAll(){
+function logoutAll() {
     var username = getStorage("username");
     var token = getStorage("token");
-    try{
-    fetch("user/logOutAll.php", {
-        method: "POST",
-        body: new URLSearchParams({
-            username: username,
-            token: token
-        })
-    }).then(res => res.json()).then(data => {
-        layer.msg(data.msg);
-        if(data.code === 0){
-            logout();
-            initLogging();
-        }
-    });
-    }catch(e){
+    try {
+        fetch("user/logOutAll.php", {
+            method: "POST",
+            body: new URLSearchParams({
+                username: username,
+                token: token
+            })
+        }).then(res => res.json()).then(data => {
+            layer.msg(data.msg);
+            if (data.code === 0) {
+                logout();
+                initLogging();
+            }
+        });
+    } catch (e) {
         layer.msg("发生错误。");
         console.log(e);
     }
@@ -75,8 +75,8 @@ function initLogging() {
     //init
     var userInfoDraw = document.getElementById("logInfo");
     if (isLogged()) {
-        userInfoDraw.innerHTML = "欢迎，" + getStorage("nickname") + "！<a onclick='javascript:logout();initLogging();'>登出</a> / "+
-        "<a onclick='javascript:logoutAll();'>在所有设备上登出</a>";
+        userInfoDraw.innerHTML = "欢迎，" + getStorage("nickname") + "！<a onclick='javascript:logout();initLogging();'>登出</a> / " +
+            "<a onclick='javascript:logoutAll();'>在所有设备上登出</a>";
     } else {
         userInfoDraw.innerHTML = "未登陆 / Not logged in.";
         localStorage.removeItem("username");
@@ -84,4 +84,32 @@ function initLogging() {
         localStorage.removeItem("nickname");
     }
 }
-initLogging();
+
+//on page load
+window.onload = function () {
+    //check login
+    if (isLogged()) {
+        try {
+            fetch("user/check.php", {
+                method: "POST",
+                body: new URLSearchParams({
+                    username: getStorage("username"),
+                    token: getStorage("token")
+                })
+            }).then(res => res.json()).then(data => {
+                if (data.code === 0) {
+                    initLogging();
+                } else {
+                    logout();
+                    initLogging();
+                    layer.msg("登录已过期，请重新登录。");
+                    
+                }
+            })
+        } catch (e) {
+            layer.msg("登陆校验发生错误。");
+            console.log("登陆校验发生错误。", e);
+        }
+    }
+
+}

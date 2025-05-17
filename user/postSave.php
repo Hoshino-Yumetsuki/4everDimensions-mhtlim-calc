@@ -14,6 +14,10 @@ $description = $_POST["description"];
 $loginName = trim($loginName);
 $loginPass = trim($loginPass);
 
+if (strlen($save) > 15000000){
+    echo json_encode(["msg" => "Save is too large / 保存内容过大", "code" => -114]);
+    exit;
+}
 
 if (empty($loginName) || empty($loginPass) || empty($save) || empty($title) || empty($score) || empty($description)){
     echo json_encode(["msg" => "Empty is not allowed / 任何内容都不能为空", "code" => -1]);

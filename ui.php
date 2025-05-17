@@ -165,6 +165,10 @@
                     <span data-i18n="usage">使用说明：</span><a href="./usage/usage.html" target="_blank"><span class="superlink" data-i18n="viewUsage">查看帮助信息</span></a>
                     <hr>
                     <span data-i18n="qqGroup">QQ交流群：</span><a href="https://qm.qq.com/q/Utb6sNDvki" target="_blank"><span class="superlink" data-i18n="viewQQGroup">Milthm#√-1洨巟羣</span></a>
+                    <hr>
+                    <div style="padding: 3px">
+                        <span id="logInfo">正在检测登录状态...</span>
+                    </div>
                 </div>
             </div>
             <div class="layui-card rccc">
@@ -224,9 +228,7 @@
                     <hr />
 
                     <h3 data-i18n="uploadYourSaves">上传你的存档：</h3>
-                    <div style="padding: 3px">
-                        <span id="logInfo"></span>
-                    </div>
+                    
                     <button class="layui-btn layui-btn-primary" onclick="javascript:doSavesUpload();" data-i18n="uploadBtnText">上传</button>
                     <hr />
                     <h3 data-i18n="charts">图表：</h3>
