@@ -78,10 +78,10 @@ function initLogging() {
     //init
     var userInfoDraw = document.getElementById("logInfo");
     if (isLogged()) {
-        userInfoDraw.innerHTML = "欢迎，" + getStorage("nickname") + "！<a onclick='javascript:logout();initLogging();'>登出</a> / " +
-            "<a onclick='javascript:logoutAll();'>在所有设备上登出</a>";
+        userInfoDraw.innerHTML = "欢迎，" + getStorage("nickname") + "！<a href='javascript:void(0);' style='color:lightblue;text-decoration:none;' onclick='javascript:logout();initLogging();'>登出</a> / " +
+            "<a style='color:lightblue;text-decoration:none;' href='javascript:void(0);' onclick='javascript:logoutAll();'>在所有设备上登出</a>";
     } else {
-        userInfoDraw.innerHTML = "未登陆 / Not logged in. <a onclick='javascript:logout();goLogin();'>登录</a>";
+        userInfoDraw.innerHTML = "未登陆 / Not logged in. <a href='javascript:void(0);' style='color:lightblue;text-decoration:none;' onclick='javascript:logout();goLogin();'>登录</a>";
         localStorage.removeItem("username");
         localStorage.removeItem("token");
         localStorage.removeItem("nickname");
