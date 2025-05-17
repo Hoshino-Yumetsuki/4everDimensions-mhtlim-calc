@@ -229,14 +229,18 @@ body {
 }
 /* second */
 .saves_list_container table tbody tr td:nth-child(5){
-    white-space:normal !important;
+    white-space:nowrap !important;
     text-overflow:ellipsis;
     max-width:64vw;
+    max-height: 16vh !important;
     overflow: hidden;
     word-break:keep-all;
 }
 .saves_list_container table thead tr th{
     white-space: nowrap;
+}
+.saves_list_container table tbody tr{
+    max-height: 16vh !important;
 }
 .saves_list_container .action{
     white-space: nowrap;
