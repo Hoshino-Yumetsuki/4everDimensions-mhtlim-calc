@@ -210,14 +210,14 @@ body {
     padding: 16px;
     box-sizing: border-box;
     overflow: scroll;
-    border-radius: 24px;
+    border-radius: 6px;
     background-color: rgba(34, 34, 34, 0.186);
     box-shadow:inset 0 4px 8px rgba(0, 0, 0, 0.5) !important;
 }
 .saves_list_container table{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5) !important;
     border: 0px !important;
-    border-radius: 24px !important;
+    border-radius: 12px !important;
     background-color: rgba(102, 108, 173, 0.066) !important;
     
 }
