@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en" class="dark">
 
 <head>
@@ -13,6 +12,7 @@
 
     <input type="file" id="fileupLoad" style="display:none;" />
     <style>
+
         #languageMenu {
             position: absolute;
             right: 0;
@@ -37,7 +37,7 @@
             background-color: #444
         }
 
-        #settingsModal {
+        .settingsModal {
             display: none;
             position: fixed;
             top: 50%;
@@ -48,17 +48,18 @@
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
             z-index: 10000;
+            box-sizing: content-box !important;
             width: 300px;
         }
 
-        #settingsModal h3 {
+        .settingsModal h3 {
             text-align: center;
             font-size: 18px;
             margin-bottom: 20px;
         }
 
-        #settingsModal input,
-        #settingsModal button {
+        .settingsModal input,
+        .settingsModal button {
             margin-bottom: 15px;
             padding: 8px;
             width: 100%;
@@ -68,20 +69,23 @@
             border-radius: 12px;
             font-size: 16px;
         }
-
-        #settingsModal input:focus,
-        #settingsModal button:focus {
+        .settingsModal input {
+            box-sizing: border-box !important;
+            /* padding: 6px !important; */
+        }
+        .settingsModal input:focus,
+        .settingsModal button:focus {
             outline: none;
             border-color: #888;
         }
 
-        #settingsModal button {
+        .settingsModal button {
             width: 48%;
             display: inline-block;
             cursor: pointer;
         }
 
-        #overlay {
+        #overlay, .overlay {
             display: none;
             position: fixed;
             top: 0;
@@ -91,6 +95,7 @@
             background-color: rgba(0, 0, 0, 0.45);
             z-index: 9999;
         }
+    
     </style>
     <!-- Chunk: sql_wasm -->
     <script src="./js/sql-wasm.js"></script>
@@ -169,22 +174,7 @@
                     <span data-i18n="siteAuthor">网站作者：</span><a href="javascript:void(0);" onclick="show_author_info();" style="color:lightblue;text-decoration:none;" data-i18n="viewAuthor">查看</a><br>
                     <span data-i18n="donationText">赞助：</span><a href="javascript:void(0);" onclick="show_donation();" style="color:lightblue;text-decoration:none;" data-i18n="donation">捐赠</a><br>
                     <span data-i18n="visit">本站访问数量：</span><span id="accessCount"></span><br>
-                    <!-- <div class="layui-collapse">
-                        <div class="layui-colla-item">
-                            <div class="layui-colla-title rccc">服务器信息</div>
-                            <div class="layui-colla-content">
-                                <?php
-                                // echo '运行在 '.shell_exec('uname -p')." 的 ".shell_exec('uname -s')." 上，";
-                                // echo 'PHP版本：'.phpversion().'<br>';
-                                // echo '距离上次页面更新：'.(time()-filemtime(__FILE__)).'秒<br>';
-                                // echo '服务器负载：'.implode(' ', sys_getloadavg()).'<br>';
-                                // echo '服务器CPU核心数：'.shell_exec('nproc').'<br>';
-                                // echo '服务器CPU型号：'.shell_exec('cat /proc/cpuinfo | grep "model name" | uniq | awk -F : \'{print $2}\' | sed \'s/^[ \t]*//\'').'<br>';
-                                // echo '服务器内存剩余：'.shell_exec('free -m | grep 内存 | awk \'{print $7}\'').'MB<br>';
-                                ?>
-                            </div>
-                        </div>
-                    </div> -->
+
 
                 </div>
             </div>
@@ -231,11 +221,18 @@
                     <h4 id="userInfo"></h4>
                     <!-- end chunk: userinfo -->
                     <hr />
+                    
+                    <h3 data-i18n="uploadYourSaves">上传你的存档：</h3>
+                    <div style="padding: 3px">
+                        <span id="logInfo"></span>
+                    </div>
+                    <button class="layui-btn layui-btn-primary" onclick="javascript:doSavesUpload();" data-i18n="uploadBtnText">上传</button>
+                    <hr />
                     <h3 data-i18n="charts">图表：</h3>
                     <button class="layui-btn layui-btn-primary" onclick="javascript:changeColumns(1);" data-i18n="increaseColumn">增加列</button>
                     <button class="layui-btn layui-btn-primary" onclick="javascript:changeColumns(-1);" data-i18n="decreaseColumn">减少列</button>
                     <br>
-                    <hr>
+                    <hr />
                     <!-- chunk: res container -->
                     <div class="container" id="output"></div>
                     <!-- end chunk: res container -->
@@ -245,7 +242,7 @@
         </div>
     </div>
     <div id="overlay" onclick="closeSettings()"></div>
-    <div id="settingsModal" style="border: 1px solid #eeeeee;">
+    <div id="settingsModal" class="settingsModal" style="border: 1px solid #eeeeee;">
         <h3 data-i18n="settingsTitle">查分图设置</h3>
         <label for="cardCount" data-i18n="cardCountLabel" style="font-size: 18px;">卡片数量:</label>
         <input type="number" id="cardCount" value="22" min="1" data-i18n-placeholder="cardCountPlaceholder"><br>
@@ -265,6 +262,36 @@
         <button onclick="closeSettings()" class="cancel-btn" data-i18n="cancel">取消</button>
         <button onclick="applySettings()" class="apply-btn" data-i18n="apply">应用</button>
     </div>
+
+    <!-- Chunk login -->
+    <div id="over2lay" class="overlay" onclick="javascript:closeLogin();"></div>
+    <div class="settingsModal" id="loginModal" style="border: 1px solid #eeeeee;display: none;">
+        <div style="text-align: left;">
+            <h2>Authencation (身份验证)</h2>
+            <hr>
+            <b>不是你的Milthm账户或TapTap账户！！！</b>
+            <h1>Login / 登录：</h1><br>
+            <div id="loginPanel-t" style="display: none;padding:6px;border:1px;border-style:solid;border-color: #ffffff33;color:rgb(255, 255, 255);background-color:#ffffff33;border-radius:16px">
+                <h2 id="loginPanel-t-text">Loading...</h2>
+            </div>
+            <div id="loginPanel-normal">
+
+                
+                <h4>Username / 用户名：</h4>
+                <input type="text" class="layui-input inputR" id="login_username" />
+                <h4>Password / 密码：</h4>
+                <input type="password" class="layui-input inputR" id="login_password" />
+                <br>
+                <button class="apply-btn" id="login_btn">Login / 登录</button>
+                <button class="cancel-btn" onclick="closeLogin()">Cancel / 取消</button>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
     <script>
         function showSettings() {
             document.getElementById('overlay').style.display = 'block';
@@ -339,7 +366,7 @@
         });
     </script>
     <script src="./js/cha_newui.js"></script>
-
+    <script src="./js/user/upload4index.js"></script>
     <!-- Autoparse -->
     <script>
         function autoParse() {
@@ -358,6 +385,68 @@
             }
         }
         autoParse();
+    </script>
+
+
+    <!-- Login -->
+    <script>
+        var lplt = document.getElementById("loginPanel-t-text");
+        var pr = document.getElementById("loginPanel-normal");
+        var pr2 = document.getElementById("loginPanel-t");
+        var login_username = document.getElementById("login_username");
+        var login_password = document.getElementById("login_password");
+        var login_btn = document.getElementById("login_btn");
+        var reg_username = document.getElementById("reg_username");
+        var reg_nick = document.getElementById("reg_nick");
+        var reg_password = document.getElementById("reg_password");
+        var reg_repassword = document.getElementById("reg_repassword");
+        var reg_btn = document.getElementById("reg_btn");
+
+        login_btn.onclick = function() {
+            login();
+        }
+
+        function login() {
+            var username = login_username.value;
+            var password = login_password.value;
+            if (username == "" || password == "") {
+                layer.msg("Please enter username and password / 请输入用户名和密码");
+            } else {
+                pr.style.display = "none";
+                var loading = layer.load(1)
+
+                try {
+                    pr2.style.display = "block";
+                    lplt.innerHTML = "Logging in... / 正在登入...";
+                    
+                    fetch("user/requestLogin.php", {
+                        method: "POST",
+                        body: new URLSearchParams({
+                            username: username,
+                            password: password
+                        })
+                    }).then(response => response.json()).then(data => {
+                        lplt.innerHTML = data.msg
+                        if (data.code !== 0) {
+                            return;
+                        } else {
+                            setStorage("username", data.data.username);
+                            setStorage("nickname", data.data.nickName);
+                            setStorage("token", data.token);
+                            closeLogin();
+                            initLogging();
+                            return;
+                        }
+                    })
+                } catch (e) {
+                    lplt.innerHTML = ("An error occurred / 发生错误");
+                } finally {
+                    pr.style.display = "block";
+                    // pr2.style.display = "none";
+                    layer.close(loading);
+                }
+            }
+        }
     </script>
 </body>
 

@@ -16,6 +16,7 @@ if (!$dev_mode) {
 }
 
 ?>
+<!DOCTYPE html>
 <script>
     const accessCount = <?php
                         if (!$dev_mode) {
