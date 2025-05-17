@@ -119,7 +119,7 @@
         }
 
         .raindrop {
-            position: absolute;
+            position: fixed;
             top: -10px;
             width: 2px;
             height: 64px;
