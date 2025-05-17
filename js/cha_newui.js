@@ -48,15 +48,7 @@ function startProcess(){
   if (inp.length>0){
     processData();
   }else{
-    layer.open({
-    type: 1,
-    title: '提示',
-    shadeClose: true,
-    shade: 0.8,
-    area: ['50%', '20%'],
-    content: '<h3 style="padding:12px;">请输入内容！</h3>',
-    offset: ['32px']
-  });
+    layer.msg("请输入内容！");
   }
 }
 var shitValue = 0.114514;

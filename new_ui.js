@@ -56,15 +56,7 @@ function qqbot_ua() {
 
 
 function alert_invalid() {
-  layer.open({
-    type: 1,
-    title: '提示',
-    shadeClose: true,
-    shade: 0.8,
-    area: ['50%', '20%'],
-    content: '<h3 style="padding:12px;">存档数据无效或无法解析。</h3>',
-    offset: ['32px']
-  });
+  layer.msg("存档数据无效或无法解析。")
 }
 function genPicDialog() {
   document.getElementById('picgen').style.display = 'block';
