@@ -103,13 +103,15 @@ window.onload = function () {
                     logout();
                     initLogging();
                     layer.msg("登录已过期，请重新登录。");
-                    
+
                 }
             })
         } catch (e) {
             layer.msg("登陆校验发生错误。");
             console.log("登陆校验发生错误。", e);
         }
+    }else{
+        initLogging();
     }
 
 }
