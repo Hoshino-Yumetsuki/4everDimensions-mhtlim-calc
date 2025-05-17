@@ -11,7 +11,7 @@ $loginName = trim($loginName);
 $loginKey = trim($loginKey);
 
 if (empty($loginName) || empty($loginKey)) {
-    echo json_encode(["msg" => "用户名或令牌不能为空", "code" => -1]);
+    echo json_encode(["msg" => "Empty username or token is not allowed / 用户名或令牌不能为空", "code" => -1]);
     exit;
 }
 
@@ -24,7 +24,7 @@ $ps->bindParam(":lN", $loginName);
 $ps->execute();
 $loginInfo = $ps->fetch(PDO::FETCH_ASSOC);
 if (empty($loginInfo)) {
-    echo json_encode(["msg" => "用户不存在", "code" => -3]);
+    echo json_encode(["msg" => "User not found / 用户不存在", "code" => -3]);
     exit;
 }
 if (($loginKey == $loginInfo["loginToken"])) {
@@ -33,9 +33,9 @@ if (($loginKey == $loginInfo["loginToken"])) {
     $ps->bindParam(":lT", generateUUID());
     $ps->bindParam(":lN", $loginName);
     $ps->execute();
-    echo json_encode(["msg" => "成功", "code" => 0]);
+    echo json_encode(["msg" => "Success / 操作成功", "code" => 0]);
 } else {
-    echo json_encode(["msg" => "密码错误", "code" => -4]);
+    echo json_encode(["msg" => "Key is incorrect, re-login and try again / 校验错误，请重新登录后重试", "code" => -4]);
 }
 
 

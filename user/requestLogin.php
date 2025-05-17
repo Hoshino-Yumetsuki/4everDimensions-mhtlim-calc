@@ -11,11 +11,11 @@ $loginName = trim($loginName);
 $loginPass = trim($loginPass);
 
 if (empty($loginName) || empty($loginPass)) {
-    echo json_encode(["msg" => "用户名或密码不能为空", "code" => -1]);
+    echo json_encode(["msg" => "Empty username or password is not allowed / 用户名或密码不能为空", "code" => -1]);
     exit;
 }
 if($loginName == "admin" && $loginPass == "admin"){
-    echo json_encode(["msg" => "未知错误", "code" => -2]);
+    echo json_encode(["msg" => "Unknown error / 未知错误", "code" => -2]);
     exit;
 }
 
@@ -28,14 +28,14 @@ $ps->bindParam(":lN", $loginName);
 $ps->execute();
 $loginInfo = $ps->fetch(PDO::FETCH_ASSOC);
 if (empty($loginInfo)) {
-    echo json_encode(["msg" => "用户不存在", "code" => -3]);
+    echo json_encode(["msg" => "User not found / 用户不存在", "code" => -3]);
     exit;
 }
 if (password_verify($loginPass, $loginInfo["password"])) {
-    echo json_encode(["msg" => "验证成功", "code" => 0, "data" => ["nickName" => $loginInfo['nickName'], "username" => 
+    echo json_encode(["msg" => "Logged in / 登录成功", "code" => 0, "data" => ["nickName" => $loginInfo['nickName'], "username" => 
     $loginInfo['loginName'], "status" => $loginInfo['status']], "token" => $loginInfo['loginToken']]);
 } else {
-    echo json_encode(["msg" => "密码错误", "code" => -4]);
+    echo json_encode(["msg" => "Password is incorrect / 密码错误", "code" => -4]);
 }
 
 

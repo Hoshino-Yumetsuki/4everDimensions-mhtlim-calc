@@ -12,7 +12,6 @@
 
     <input type="file" id="fileupLoad" style="display:none;" />
     <style>
-
         #languageMenu {
             position: absolute;
             right: 0;
@@ -69,10 +68,12 @@
             border-radius: 12px;
             font-size: 16px;
         }
+
         .settingsModal input {
             box-sizing: border-box !important;
             /* padding: 6px !important; */
         }
+
         .settingsModal input:focus,
         .settingsModal button:focus {
             outline: none;
@@ -85,7 +86,8 @@
             cursor: pointer;
         }
 
-        #overlay, .overlay {
+        #overlay,
+        .overlay {
             display: none;
             position: fixed;
             top: 0;
@@ -95,7 +97,6 @@
             background-color: rgba(0, 0, 0, 0.45);
             z-index: 9999;
         }
-    
     </style>
     <!-- Chunk: sql_wasm -->
     <script src="./js/sql-wasm.js"></script>
@@ -221,7 +222,7 @@
                     <h4 id="userInfo"></h4>
                     <!-- end chunk: userinfo -->
                     <hr />
-                    
+
                     <h3 data-i18n="uploadYourSaves">上传你的存档：</h3>
                     <div style="padding: 3px">
                         <span id="logInfo"></span>
@@ -272,11 +273,9 @@
             <b>不是你的Milthm账户或TapTap账户！！！</b>
             <h1>Login / 登录：</h1><br>
             <div id="loginPanel-t" style="display: none;padding:6px;border:1px;border-style:solid;border-color: #ffffff33;color:rgb(255, 255, 255);background-color:#ffffff33;border-radius:16px">
-                <h2 id="loginPanel-t-text">Loading...</h2>
+                <b id="loginPanel-t-text">Loading...</b>
             </div>
             <div id="loginPanel-normal">
-
-                
                 <h4>Username / 用户名：</h4>
                 <input type="text" class="layui-input inputR" id="login_username" />
                 <h4>Password / 密码：</h4>
@@ -291,6 +290,33 @@
         </div>
 
     </div>
+
+    <!-- Chunk upload -->
+    <div id="over3lay" class="overlay" onclick="javascript:closeUploadPanel();"></div>
+    <div class="settingsModal" id="uploadModal" style="border: 1px solid #eeeeee;display: none;">
+        <div style="text-align: left;">
+            <h2>Upload / 上传</h2>
+            <hr>
+            <div id="uploadPanel-t" style="display: none;padding:6px;border:1px;border-style:solid;border-color: #ffffff33;color:rgb(255, 255, 255);background-color:#ffffff33;border-radius:16px">
+                <b id="uploadPanel-t-text">Loading...</b>
+            </div>
+            <div id="uploadPanel-normal">
+                <h4>Title / 标题：</h4>
+                <input type="text" class="layui-input inputR" id="upload_title" />
+                <h4>Description / 描述：</h4>
+                <textarea type="text" class="layui-textarea inputR" id="upload_description"></textarea>
+                <br>
+                <h4>Main Info / 主要信息：<span id="upload_info" style="box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;color:rgb(255, 255, 255);background-color:rgba(255, 255, 255, 0.08);border-radius:16px">Loading...</span></h4>
+                <h4>Data / 数据：</h4>
+                <div id="upload_data_display" style="box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;color:rgb(255, 255, 255);background-color:rgba(255, 255, 255, 0.08);border-radius:16px"></div>
+                <span style="display:none;" id="upload_data"></span>
+                <br>
+                <button class="apply-btn" id="upload_btn">Upload / 上传</button>
+                <button class="cancel-btn" onclick="closeUploadPanel()">Cancel / 取消</button>
+            </div>
+        </div>
+    </div>
+
 
     <script>
         function showSettings() {
@@ -410,7 +436,7 @@
             var username = login_username.value;
             var password = login_password.value;
             if (username == "" || password == "") {
-                layer.msg("Please enter username and password / 请输入用户名和密码");
+                // Pass
             } else {
                 pr.style.display = "none";
                 var loading = layer.load(1)
@@ -418,7 +444,7 @@
                 try {
                     pr2.style.display = "block";
                     lplt.innerHTML = "Logging in... / 正在登入...";
-                    
+
                     fetch("user/requestLogin.php", {
                         method: "POST",
                         body: new URLSearchParams({
@@ -427,6 +453,9 @@
                         })
                     }).then(response => response.json()).then(data => {
                         lplt.innerHTML = data.msg
+                        layer.msg(data.msg);
+                        pr.style.display = "block";
+                        layer.close(loading);
                         if (data.code !== 0) {
                             return;
                         } else {
@@ -440,13 +469,64 @@
                     })
                 } catch (e) {
                     lplt.innerHTML = ("An error occurred / 发生错误");
-                } finally {
                     pr.style.display = "block";
-                    // pr2.style.display = "none";
                     layer.close(loading);
                 }
             }
         }
+
+        // for upload
+        function initUpload() {
+            var dt = btoa(encodeURIComponent(document.getElementById("inputData").value))
+
+            document.getElementById("upload_data").innerHTML = dt
+            document.getElementById("upload_info").innerHTML = document.getElementById("userInfo").innerHTML
+            document.getElementById("upload_data_display").innerHTML = dt.substr(0, (dt.length < 32 ? dt.length : 32)) + "...";
+        }
+
+        document.getElementById("upload_btn").onclick = function() {
+                var dt = document.getElementById("upload_data").innerHTML;
+                var title = document.getElementById("upload_title").value;
+                var desc = document.getElementById("upload_description").value;
+                var info = document.getElementById("upload_info").innerHTML;
+                var token = getStorage("token");
+                var username = getStorage("username");
+                var loadingDiv = document.getElementById("uploadPanel-t");
+                var normalDiv = document.getElementById("uploadPanel-normal");
+                var lplt = document.getElementById("uploadPanel-t-text");
+                var loading = layer.load(1)
+                try {
+                    loadingDiv.style.display = "block";
+                    normalDiv.style.display = "none";
+                    lplt.innerHTML = "Uploading... / 正在上传...";
+                    fetch("user/postSave.php", {
+                        method: "POST",
+                        body: new URLSearchParams({
+                            data: dt,
+                            title: title,
+                            description: desc,
+                            score: info,
+                            username: username,
+                            token: token
+                        })
+                    }).then(response => response.json()).then(data => {
+                            layer.msg(data.msg);
+                            if (data.code === 0) {
+                                closeUploadPanel();
+                            }
+                            loadingDiv.style.display = "none";
+                            normalDiv.style.display = "block";
+                            layer.close(loading);
+                        });
+                    }catch (e) {
+                        layer.msg("An error occurred / 发生错误");
+                        console.log(e);
+                        loadingDiv.style.display = "none";
+                        layer.close(loading);
+                        normalDiv.style.display = "block";
+                    }
+
+                }
     </script>
 </body>
 
