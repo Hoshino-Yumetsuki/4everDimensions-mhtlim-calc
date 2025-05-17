@@ -109,7 +109,8 @@
         }
 
         .rain {
-            position: absolute;
+            overflow: hidden;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -119,22 +120,29 @@
         }
 
         .raindrop {
-            position: fixed;
+            position: absolute;
             top: -10px;
             width: 2px;
             height: 64px;
             background-color:rgb(126, 137, 207);
             border-radius: 1px;
-            opacity: 0.6;
+            opacity: 0;
             animation: fall linear;
         }
 
         @keyframes fall {
             0% {
-                transform: translateY(0) scale(0.5);
+                transform: translateY(-20vh) scale(0.5);
+                opacity: 0;
+            }
+
+            5% {
                 opacity: 0.8;
             }
 
+            50% {
+                opacity: 0.6;
+            }
             100% {
                 transform: translateY(100vh) scale(1);
                 opacity: 0;
