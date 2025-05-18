@@ -258,8 +258,9 @@ body {
 .superlinkR{
     color:lightblue !important;
     text-decoration: none;
+    white-space: nowrap !important;
     font-size: normal !important;
 }
 .superlinkR:hover{
-    color:rgb(100, 178, 211) !important;
+    color:rgb(223, 246, 255) !important;
 }

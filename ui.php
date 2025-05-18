@@ -233,9 +233,9 @@
                     <p data-i18n="greeting">欢迎来到MilthmCalc！(Reality计算器) (http://k9.lv/c)</p>
                     <p data-i18n="description">这是一个用于计算Milthm Reality分数的网站，你可以在这里导入并解析存档。</p>
                     <hr>
-                    <span data-i18n="usage">使用说明：</span><a href="./usage/usage.html" target="_blank"><span class="superlink" data-i18n="viewUsage">查看帮助信息</span></a>
+                    <span data-i18n="usage">使用说明：</span><a href="./usage/usage.html" target="_blank"><span class="superlinkR" data-i18n="viewUsage">查看帮助信息</span></a>
                     <hr>
-                    <span data-i18n="qqGroup">QQ交流群：</span><a href="https://qm.qq.com/q/Utb6sNDvki" target="_blank"><span class="superlink" data-i18n="viewQQGroup">Milthm#√-1洨巟羣</span></a>
+                    <span data-i18n="qqGroup">QQ交流群：</span><a href="https://qm.qq.com/q/Utb6sNDvki" target="_blank"><span class="superlinkR" data-i18n="viewQQGroup">Milthm#√-1洨巟羣</span></a>
                     <hr>
                     <div style="padding: 3px">
                         <span id="logInfo">正在检测登录状态...</span>
@@ -246,11 +246,11 @@
                 <div class="layui-card-header" data-i18n="siteInfo">网站信息</div>
                 <div class="layui-card-body">
                     <!-- 网站作者：<button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:show_author_info();">查看</button><br> -->
-                    <span data-i18n="OtherAddress">其他地址: </span><a href="https://mkzi-nya.github.io/milthm-calculator-web/index.html" target="_blank"><span class="superlink">Mkzi Nya's Fork</span></a><br>
-                    <span data-i18n="siteAuthor">网站作者：</span><a href="javascript:void(0);" onclick="show_author_info();" style="color:lightblue;text-decoration:none;" data-i18n="viewAuthor">查看</a><br>
-                    <span data-i18n="donationText">赞助：</span><a href="javascript:void(0);" onclick="show_donation();" style="color:lightblue;text-decoration:none;" data-i18n="donation">捐赠</a><br>
+                    <span data-i18n="OtherAddress">其他地址: </span><a href="https://mkzi-nya.github.io/milthm-calculator-web/index.html" target="_blank"><span class="superlinkR">Mkzi Nya's Fork</span></a><br>
+                    <span data-i18n="siteAuthor">网站作者：</span><a href="javascript:void(0);" onclick="show_author_info();" class="superlinkR" data-i18n="viewAuthor">查看</a><br>
+                    <span data-i18n="donationText">赞助：</span><a href="javascript:void(0);" onclick="show_donation();" class="superlinkR" data-i18n="donation">捐赠</a><br>
                     <span data-i18n="visit">本站访问数量：</span><span id="accessCount"></span><br>
-
+                    <a class="superlinkR" href="javascript:void(0);" onclick="openLicenseAndPrivacy();" data-i18n="seeLicenseAndPrivacy">查看隐私政策和开源协议</a>
 
                 </div>
             </div>
@@ -299,8 +299,7 @@
                     <hr />
 
                     <h3 data-i18n="uploadYourSaves">上传你的存档：</h3>
-
-                    <button class="layui-btn layui-btn-primary" onclick="javascript:doSavesUpload();" data-i18n="uploadBtnText">上传</button>
+                    <a href="javascript:void(0);" class="superlinkR" onclick="javascript:doSavesUpload();" data-i18n="uploadBtnText">上传</a>
                     <hr />
                     <h3 data-i18n="charts">图表：</h3>
                     <button class="layui-btn layui-btn-primary" onclick="javascript:changeColumns(1);" data-i18n="increaseColumn">增加列</button>
@@ -353,12 +352,15 @@
                 <input type="text" class="layui-input inputR" id="login_username" />
                 <h4>Password / 密码：</h4>
                 <input type="password" class="layui-input inputR" id="login_password" />
-                <br>
+                <hr/>
+                <a class="superlinkR" href="javascript:void(0);" onclick="openLicenseAndPrivacy();" data-i18n="seeLicenseAndPrivacy">查看隐私政策和开源协议</a>
+                <hr/>
                 <button class="apply-btn" id="login_btn">Login / 登录</button>
                 <button class="cancel-btn" onclick="closeLogin()">Cancel / 取消</button>
-                <br>
-                <hr />
+                <hr/>
                 <p>或者，在输入用户名和密码后 <a class='superlinkR' href="javascript:void(0);" onclick="reg_user()">注册</a></p>
+                <hr/>
+                
             </div>
 
 
@@ -386,7 +388,9 @@
                 <h4>Data / 数据：</h4>
                 <div id="upload_data_display" style="box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;color:rgb(255, 255, 255);background-color:rgba(255, 255, 255, 0.08);border-radius:16px"></div>
                 <span style="display:none;" id="upload_data"></span>
-                <br>
+                <br><hr/>
+                <a class="superlinkR" href="javascript:void(0);" onclick="openLicenseAndPrivacy();" data-i18n="seeLicenseAndPrivacy">查看隐私政策和开源协议</a>
+                <br><hr/>
                 <button class="apply-btn" id="upload_btn">Upload / 上传</button>
                 <button class="cancel-btn" onclick="closeUploadPanel()">Cancel / 取消</button>
             </div>
@@ -620,6 +624,10 @@
             var loadingDiv = document.getElementById("uploadPanel-t");
             var normalDiv = document.getElementById("uploadPanel-normal");
             var lplt = document.getElementById("uploadPanel-t-text");
+            if( dt == "" || title == "" || desc == "" || info == "") {
+                layer.msg("Please fill in all the fields / 请填写所有字段: data(Auto/自动获取), title, description, info(Auto/自动获取)");
+                return;
+            }
             var loading = layer.load(1)
             try {
                 loadingDiv.style.display = "block";

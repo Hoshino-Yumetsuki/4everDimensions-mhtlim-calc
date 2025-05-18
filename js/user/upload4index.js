@@ -31,7 +31,18 @@ function logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("nickname");
 }
-function logoutAll() {
+function logout_Btn(){
+    layer.confirm('确定登出？', {
+        btn: ['确定', '取消'] //按钮
+    }, function (i) {
+        logout();
+        initLogging();
+        layer.close(i);
+        layer.msg("登出成功。");
+    })
+}
+function logoutAll_impl() {
+
     var loading= layer.load(1);
     var username = getStorage("username");
     var token = getStorage("token");
@@ -57,6 +68,13 @@ function logoutAll() {
     }
 
 }
+function logoutAll() {
+    layer.confirm('确定在所有设备上登出？', {
+        btn: ['确定', '取消'] //按钮
+    }, function () {
+        logoutAll_impl();
+    });
+}
 function closeLogin() {
     var loginUI = document.getElementById("loginModal");
     var o2l = document.getElementById("over2lay");
@@ -81,10 +99,10 @@ function initLogging() {
     //init
     var userInfoDraw = document.getElementById("logInfo");
     if (isLogged()) {
-        userInfoDraw.innerHTML = "欢迎，" + getStorage("nickname") + "！<a class='nowrap' href='javascript:void(0);' style='color:lightblue;text-decoration:none;' onclick='javascript:openSavesBrowser_btn();'>查看我的存档</a> / <a href='javascript:void(0);' style='color:lightblue;text-decoration:none;' onclick='javascript:logout();initLogging();'>登出</a> / " +
-            "<a style='color:lightblue;text-decoration:none;' class='nowrap' href='javascript:void(0);' onclick='javascript:logoutAll();'>在所有设备上登出</a>";
+        userInfoDraw.innerHTML = "欢迎，" + getStorage("nickname") + "！<a href='javascript:void(0);' class='superlinkR' onclick='javascript:openSavesBrowser_btn();'>查看我的存档</a> / <a href='javascript:void(0);' class='superlinkR' onclick='javascript:logout_Btn();'>登出</a> / " +
+            "<a class='nowrap superlinkR' href='javascript:void(0);' onclick='javascript:logoutAll();'>在所有设备上登出</a>";
     } else {
-        userInfoDraw.innerHTML = "未登陆 / Not logged in. <a href='javascript:void(0);' class='nowrap' style='color:lightblue;text-decoration:none;' onclick='javascript:logout();goLogin();'>登录</a>";
+        userInfoDraw.innerHTML = "未登陆 / Not logged in. <a href='javascript:void(0);' class='superlinkR' onclick='javascript:logout();goLogin();'>登录</a>";
         localStorage.removeItem("username");
         localStorage.removeItem("token");
         localStorage.removeItem("nickname");

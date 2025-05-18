@@ -34,7 +34,8 @@
     "donation": "捐赠",
     "donationText":"捐赠：",
     "uploadYourSaves": "上传你的存档：",
-    "uploadBtnText": "上传存档"
+    "uploadBtnText": "上传存档",
+    "seeLicenseAndPrivacy": "查看开源许可和隐私政策"
   },
   "zh-tw": {
     "title": "Milthm 查分器（原Reality計算器）",
@@ -71,7 +72,8 @@
     "donation": "捐赠",
     "donationText":"捐赠：",
     "uploadYourSaves": "上傳你的存檔：",
-    "uploadBtnText": "上傳存檔"
+    "uploadBtnText": "上傳存檔",
+    "seeLicenseAndPrivacy": "查看開源許可和隱私政策"
   },
   "en": {
     "title": "Milthm Score Calculator (known as Reality Calculator)",
@@ -108,7 +110,8 @@
     "donation": "Donate",
     "donationText":"Donate: ",
     "uploadYourSaves": "Upload your saves: ",
-    "uploadBtnText": "Upload saves"
+    "uploadBtnText": "Upload saves",
+    "seeLicenseAndPrivacy": "View license and privacy policy"
   },
   "es": {
     "title": "Calculadora de Puntuación Milthm (Calculadora Original de Reality)",
@@ -145,7 +148,8 @@
     "donation": "Donar",
     "donationText":"Donar: ",
     "uploadYourSaves": "Sube tus guardados: ",
-    "uploadBtnText": "Subir guardados"
+    "uploadBtnText": "Subir guardados",
+    "seeLicenseAndPrivacy": "Ver licencia y política de privacidad"
   },
   "lo": {
     "title": "Kalkulator Pungutan Milthm (Kalkulator Asli Reality)",
@@ -182,7 +186,8 @@
     "donation": "Donasi",
     "donationText":"Donasi: ",
     "uploadYourSaves": "Unggah penyimpanan Anda: ",
-    "uploadBtnText": "Unggah penyimpanan"
+    "uploadBtnText": "Unggah penyimpanan",
+    "seeLicenseAndPrivacy": "Lihat lisensi dan kebijakan privasi"
   },
   "ru": {
     "title": "Калькулятор баллов Milthm (Исходный калькулятор Reality)",
@@ -219,7 +224,8 @@
     "donation": "Пожертвование",
     "donationText":"Пожертвование: ",
     "uploadYourSaves": "Загрузите свои сохранения: ",
-    "uploadBtnText": "Загрузить сохранения"
+    "uploadBtnText": "Загрузить сохранения",
+    "seeLicenseAndPrivacy": "Смотреть лицензию и политику конфиденциальности"
   },
   "ja": {
     "title": "Milthm スコア計算機（元の Reality 計算機）",
@@ -256,7 +262,8 @@
     "donation": "寄付",
     "donationText":"寄付：",
     "uploadYourSaves": "セーブデータをアップロード：",
-    "uploadBtnText": "セーブデータをアップロード"
+    "uploadBtnText": "セーブデータをアップロード",
+    "seeLicenseAndPrivacy": "ライセンスとプライバシーポリシーを見る"
   },
   "vi": {
     "title": "Máy tính điểm Milthm (Máy tính Reality gốc)",
@@ -293,6 +300,7 @@
     "donation": "Tài trợ",
     "donationText":"Tài trợ: ",
     "uploadYourSaves": "Tải lên các tệp lưu trữ của bạn: ",
-    "uploadBtnText": "Tải lên các tệp lưu trữ"
+    "uploadBtnText": "Tải lên các tệp lưu trữ",
+    "seeLicenseAndPrivacy": "Xem giấy phép và chính sách bảo mật"
   }
 }
