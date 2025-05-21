@@ -1,17 +1,35 @@
 
 var new_ui_js_ver = 1
+var authors_dialog;
 function show_author_info() {
-  layer.open({
-    type: 2,
-    area: ['90%', '90%'],
+  // layer.open({
+  //   type: 2,
+  //   area: ['90%', '90%'],
+  //   title: '作者信息',
+  //   shade: 0.6, // 遮罩透明度
+  //   shadeClose: true, // 点击遮罩区域，关闭弹层
+  //   maxmin: false,
+  //   anim: 0, // 0-6 的动画形式，-1 不开启
+  //   content: `./authors.html`,
+  //   offset: ['32px']
+  // });
+  authors_dialog = layer.open({
+    type: 1,
     title: '作者信息',
-    shade: 0.6, // 遮罩透明度
-    shadeClose: true, // 点击遮罩区域，关闭弹层
-    maxmin: false,
-    anim: 0, // 0-6 的动画形式，-1 不开启
-    content: `./authors.html`,
-    offset: ['32px']
+    content: '<div id="Authors_content" style="padding:32px"></div>',
+    area: ['80vw', '80vh'],
+    shade: 0.6
   });
+  var loading = layer.load(1);
+  try {
+    fetch('authors.txt').then(res => res.text()).then(data => {
+      layer.close(loading);
+      document.getElementById("Authors_content").innerHTML = `<pre>${data}</pre><hr><button class="layui-btn layui-btn-normal" onclick="layer.close(authors_dialog)">关闭</button>`
+    })
+  } catch (e) {
+    layer.close(loading);
+    layer.msg("Error / 出现错误，请检查网络连接。");
+  }
 }
 
 function show_donation() {

@@ -1,0 +1,15 @@
+主要负责人：
+    • mkzi_nya (查分核心功能开发&脚本&基本实现开发)
+    • 4everDimensions (UI/前端&后端&托管&云相关功能开发)
+    • libchara-dev
+    • Autumn
+特别鸣谢：
+    • mkzi_nya(归梦)
+    • 4everDimensions
+    • libchara-dev
+    • Autumn
+    • Panyi
+    • Eric_Lian
+
+感谢所有参与贡献的人！
+Copyleft 2024~2025. Reality Calculator Project.

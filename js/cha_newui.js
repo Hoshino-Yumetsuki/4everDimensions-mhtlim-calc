@@ -1,4 +1,4 @@
-const Updated = "Updated at 2025.05.21"
+const Updated = "Updated at 2025.05.22"
 var cha_newui_js_ver = 1
 console.log(Updated)
 console.log(" ███  ███                               \n\
