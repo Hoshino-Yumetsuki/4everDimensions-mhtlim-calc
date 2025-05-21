@@ -290,6 +290,15 @@
         <div class="" style="text-align: left;max-width:1200px;margin:auto;">
             <div class="layui-card rccc">
                 <div class="layui-card-header">
+                    温馨提示
+                </div>
+                <div class="layui-card-body">
+                    使用则代表你确定：<br>我们不是 Milthm 官方，也与其无关。<br>我们会尽可能保护你的隐私，所有密码都是加密储存。<br>但我们无法防范网络中间人窃听。请在安全的环境下使用本站。
+                    <br>新地址：https://milthm.top
+                </div>
+            </div>
+            <div class="layui-card rccc">
+                <div class="layui-card-header">
                     <h2 data-i18n="welcome">Welcome</h2>
                 </div>
                 <div class="layui-card-body">
