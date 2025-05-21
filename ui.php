@@ -12,7 +12,11 @@
     <script>
         // function isdef
         function oiiaioooooiai(v) {
-            return typeof v !== 'undefined'? v : -1;
+            try{
+                return v;
+            }catch(e){
+                return -1;
+            }
         }
         var latest_versions = {
             "cha_newui.js":1,
