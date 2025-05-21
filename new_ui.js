@@ -1,4 +1,5 @@
 
+var new_ui_js_ver = 1
 function show_author_info() {
   layer.open({
     type: 2,
@@ -96,41 +97,22 @@ function closeSavesBrowser() {
 function fetch_saves() {
   var loading = layer.load(1);
   c = (count == 0 ? split_c : (count - fromIndex > split_c ? split_c : count - fromIndex));
-  try {
-    fetch('user/fetchSaves.php', {
-      method: "POST",
-      body: new URLSearchParams({
-        username: getStorage("username"),
-        token: getStorage("token"),
-        from: fromIndex,
-        to: split_c // 这里应该是offset //不用 c 变量，因为考虑到新增的存档，总数 可能会变化
-      })
-    }).then(res => res.json()).then(data => {
-
-      if (data.code === 0) {
-        mountSaves(data.data);
-        count = data.count;
-        if (data.data.length == 0 && count > 0) {
-          fromIndex = (Math.ceil(count / split_c) - 1) * split_c;
-          layer.msg("当前页没有存档，已自动跳转至最后一页。");
-          fetch_saves();
-          return;
-        }
-
-        c = (count == 0 ? split_c : (count - fromIndex > split_c ? split_c : count - fromIndex));
-        document.getElementById("saves_count").innerHTML = "Count / 总数：" + data.count + ", Current / 当前：" + fromIndex + "-" + (fromIndex + c);
-      } else {
-        layer.msg(data.msg);
-        logout(); initLogging(); layer.msg("登录已过期，请重新登录。"); // almost the same as in upload4index.js
-        closeSavesBrowser();
-        isSavesGotOnce = false;
+  apiAuth('user/fetchSaves.php', getStorage("username"), getStorage("token"), { from: fromIndex, to: split_c }, () => {
+    closeSavesBrowser();
+    isSavesGotOnce = false;
+  }, (e) => { layer.msg(e.msg) },
+    (e) => {
+      mountSaves(e.data);
+      count = e.count;
+      if (e.data.length == 0 && count > 0) {
+        fromIndex = (Math.ceil(count / split_c) - 1) * split_c;
+        layer.msg("当前页没有存档，已自动跳转至最后一页。");
+        fetch_saves();
+        return;
       }
-      layer.close(loading);
-    });
-  } catch (e) {
-    layer.close(loading);
-    layer.msg("Error / 出现错误，请检查网络连接。");
-  }
+      c = (count == 0 ? split_c : (count - fromIndex > split_c ? split_c : count - fromIndex));
+         document.getElementById("saves_count").innerHTML = "Count / 总数：" + e.count + ", Current / 当前：" + fromIndex + "-" + (fromIndex + c);
+    }, (e) => { layer.msg(e.msg) }, undefined)
 }
 function openSavesBrowser_btn() {
 
@@ -166,59 +148,17 @@ function mountSaves(items) {
   }
 }
 function fetch_save(id) {
-  var loading = layer.load(1);
-  try {
-    fetch('user/fetchSave.php', {
-      method: "POST",
-      body: new URLSearchParams({
-        username: getStorage("username"),
-        token: getStorage("token"),
-        id: id
-      })
-    }).then(res => res.json()).then(data => {
-      layer.close(loading);
-      layer.msg(data.msg);
-      if (data.code === 0) {
-        document.getElementById("inputData").value = decodeURIComponent((data.data[0].content));
-        startProcess();
-      } else if (data.code === -4) {
-        logout();
-        initLogging();
-        layer.msg("登录已过期，请重新登录。");
-      }
-      closeSavesBrowser();
-    });
-  } catch (e) {
-    layer.close(loading);
-    layer.msg("Error / 出现错误，请检查网络连接。");
-  }
+  apiAuth('user/fetchSave.php', getStorage("username"), getStorage("token"), { id: id }, () => { closeSavesBrowser() }, (e) => { layer.msg(e.msg) }, (e) => {
+    layer.msg(e.msg);
+    document.getElementById("inputData").value = decodeURIComponent((e.data[0].content));
+    startProcess();
+  }, (e) => { layer.msg(e.msg) }, closeSavesBrowser)
 }
 function delete_save_r(id) {
-  var loading = layer.load(1);
-  try {
-    fetch('user/delSave.php', {
-      method: "POST",
-      body: new URLSearchParams({
-        username: getStorage("username"),
-        token: getStorage("token"),
-        id: id
-      })
-    }).then(res => res.json()).then(data => {
-      layer.close(loading);
-      layer.msg(data.msg);
-      if (data.code === -4) {
-        logout();
-        initLogging();
-        layer.msg("登录已过期，请重新登录。");
-
-        closeSavesBrowser();
-      }
-      fetch_saves();
-    });
-  } catch (e) {
-    layer.close(loading);
-    layer.msg("Error / 出现错误，请检查网络连接。");
-  }
+  apiAuth('user/delSave.php', getStorage("username"), getStorage("token"), { id: id }, () => { closeSavesBrowser() }, (e) => { layer.msg(e.msg) }, (e) => {
+    layer.msg(e.msg);
+    fetch_saves();
+  }, (e) => { layer.msg(e.msg) })
 }
 function delete_save(id) {
   layer.confirm('Are you sure to delete this save? / 你确定要删除这个存档吗？', {
@@ -255,9 +195,46 @@ function openLicenseAndPrivacy() {
       layer.close(loading);
       document.getElementById("LP_content").innerHTML = `<pre>${data}</pre><hr><button class="layui-btn layui-btn-normal" onclick="layer.close(license_dialog)">关闭</button>`
     })
-  }catch (e) {
+  } catch (e) {
     layer.close(loading);
     layer.msg("Error / 出现错误，请检查网络连接。");
   }
-  
+
+}
+
+// for API
+function apiAuth(path, username, token, custonParams, afterLoginFailed, afterOpFailed, afterSuccess, afterError, final) {
+  var loading = layer.load(1);
+  try {
+    fetch(path, {
+      method: "POST",
+      body: new URLSearchParams({
+        username: username,
+        token: token,
+        ...custonParams
+      })
+    }).then(res => res.json()).then(data => {
+      layer.close(loading);
+      if (data.code === 0) {
+        if (afterSuccess) afterSuccess(data);
+      } else if (data.code === -4) {
+        loginExpired(function () {
+          if (afterLoginFailed) afterLoginFailed(data);
+        })
+      } else {
+        if (afterOpFailed) afterOpFailed(data);
+      }
+      if (final) final();
+    })
+  } catch (e) {
+    layer.close(loading);
+    if (afterError) afterError(e);
+    if (final) final();
+  }
+}
+function loginExpired(after) {
+  logout();
+  initLogging();
+  layer.msg("登录已过期，请重新登录。");
+  if (after) after();
 }

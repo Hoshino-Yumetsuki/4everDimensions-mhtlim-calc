@@ -9,7 +9,55 @@
     <link rel="stylesheet" href="new_UI.css">
     <script src="js/constant.js"></script>
     <link href="./layui/css/layui.css" rel="stylesheet">
+    <script>
+        // function isdef
+        function oiiaioooooiai(v) {
+            return typeof v !== 'undefined'? v : -1;
+        }
+        var latest_versions = {
+            "cha_newui.js":1,
+            "new_ui.js":1,
+            "upload4index.js":1
+        }
+        function checkVersions(){
+            var ruOK = true;
+            // cha newui.js
+            if (oiiaioooooiai(cha_newui_js_ver) !== latest_versions["cha_newui.js"]){
+                ruOK = false;
+            }
+            // new_ui.js
+            if (oiiaioooooiai(new_ui_js_ver) !== latest_versions["new_ui.js"]){
+                ruOK = false;
+            }
+            // upload4index.js
+            if (oiiaioooooiai(upload4index_js_ver) !== latest_versions["upload4index.js"]){
+                ruOK = false;
+            }
+            if(!ruOK){
+                layer.open({
+                    title: '版本异常',
+                    content: 'JS文件版本过旧，请删除缓存并刷新页面',
+                    btn: ['查看详情', '忽略并继续'],
+                    yes: function(index, layero){
+                        license_dialog = layer.open({
+                            type: 1,
+                            title: 'JS版本异常',
+                            content: `<div style="padding: 20px; line-height: 22px; font-size: 16px; text-align: center;">
+<h3>是什么导致了这个问题？</h3>
+<p>简单地说，可能是因为本网站的js代码已经更新，但是你的浏览器仍然在使用旧版本的js缓存，导致版本和当前页面所需版本不匹配。这可能引起一些未知的问题。</p>
+<br>
+<h3>我要怎么做</h3>
+<p>刷新你的浏览器缓存，电脑上可以尝试 Ctrl + Shift + R , Shift + F5 等快捷键，手机上可以尝试退出浏览器，长按浏览器点击应用信息，找到储存空间，点击清除缓存（注意不是清除数据！），然后重新打开即可。</p></div>`,
+                            area: ['80vw', '80vh'],
+                            shade: 0.6,
+                            shadeClose: true
+                        });
+                    }
+                })
+            }
 
+        }
+    </script>
     <input type="file" id="fileupLoad" style="display:none;" />
     <style>
         #languageMenu {
@@ -153,22 +201,33 @@
     <!-- Chunk: sql_wasm -->
     <script src="./js/sql-wasm.js"></script>
     <script>
+        var rain_anim_length = 1.5;
+        var rain_interval_ms = 50;
+        var rain_interval;
+        var rain_stop = false;
+        var rain_stoped = false;
+        var rain_update;
         document.addEventListener("DOMContentLoaded", function() {
             const rain = document.querySelector(".rain");
 
             function createRainDrop() {
+                if(rain_stop){
+                    clearInterval(rain_interval);
+                    rain_stoped = true;
+                    return;
+                }
                 const drop = document.createElement("div");
                 drop.classList.add("raindrop");
                 drop.style.left = Math.random() * window.innerWidth + "px";
-                drop.style.animationDuration = 0.5 + Math.random() * 1.5 + "s"; // 随机动画时长
+                drop.style.animationDuration = 0.5 + Math.random() * rain_anim_length + "s"; // 随机动画时长
                 rain.appendChild(drop);
 
                 setTimeout(() => {
                     rain.removeChild(drop);
-                }, 2000); // 2秒后移除雨滴
+                }, 2000);
             }
 
-            setInterval(createRainDrop, 50); // 每50毫秒创建一个雨滴
+            rain_interval = setInterval(createRainDrop, rain_interval_ms);
         });
 
         if ('serviceWorker' in navigator) {
@@ -314,7 +373,7 @@
             <!-- end chunk result show-->
         </div>
     </div>
-    <div id="overlay" onclick="closeSettings()"></div>
+    <div id="overlay" class="overlay" onclick="closeSettings()"></div>
     <div id="settingsModal" class="settingsModal" style="border: 1px solid #eeeeee;">
         <h3 data-i18n="settingsTitle">查分图设置</h3>
         <label for="cardCount" data-i18n="cardCountLabel" style="font-size: 18px;">卡片数量:</label>
@@ -446,6 +505,19 @@
             </div>
         </div>
     </div>
+
+
+    <!-- User Panel -->
+    <div id="over5lay" class="overlay" onclick="javascript:closeUserPanel();"></div>
+    <div class="settingsModal" id="userModal" style="border: 1px solid #eeeeee;display: none;">
+        <div style="text-align: left;">
+            <h2><a href="javascript:void(0);" style="font-size:large;color:rgb(255, 255, 255);text-decoration:none;padding:6px;border:1px;border-style:solid;border-color: #ffffff33;background-color:rgba(255, 255, 255, 0.08);border-radius:16px" onclick="javascript:closeUserPanel();">返回</a> 用户设置</h2>
+            <hr/>
+            <a class='nowrap superlinkR' href='javascript:void(0);' onclick='javascript:logoutAll();'>在所有设备上登出</a>
+            
+        </div>
+    </div>
+
 
 
     <script>
@@ -724,6 +796,11 @@
                 }
             });
         }
+
+
+
+        // Check version
+        checkVersions();
     </script>
 
 </body>

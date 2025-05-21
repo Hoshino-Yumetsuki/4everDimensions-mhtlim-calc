@@ -264,3 +264,15 @@ body {
 .superlinkR:hover{
     color:rgb(223, 246, 255) !important;
 }
+
+.settingsModal, .overlay{
+    animation: show 0.3s;
+}
+@keyframes show {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

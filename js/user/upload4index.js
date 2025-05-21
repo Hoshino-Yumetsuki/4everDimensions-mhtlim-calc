@@ -1,3 +1,4 @@
+var upload4index_js_ver = 1
 function goLogin() {
     var loginUI = document.getElementById("loginModal");
         var o2l = document.getElementById("over2lay");
@@ -58,6 +59,7 @@ function logoutAll_impl() {
             if (data.code === 0) {
                 logout();
                 initLogging();
+                closeUserPanel();
             }
             layer.close(loading);
         });
@@ -99,8 +101,9 @@ function initLogging() {
     //init
     var userInfoDraw = document.getElementById("logInfo");
     if (isLogged()) {
-        userInfoDraw.innerHTML = "欢迎，" + getStorage("nickname") + "！<a href='javascript:void(0);' class='superlinkR' onclick='javascript:openSavesBrowser_btn();'>查看我的存档</a> / <a href='javascript:void(0);' class='superlinkR' onclick='javascript:logout_Btn();'>登出</a> / " +
-            "<a class='nowrap superlinkR' href='javascript:void(0);' onclick='javascript:logoutAll();'>在所有设备上登出</a>";
+        userInfoDraw.innerHTML = "欢迎，" + getStorage("nickname") + "！<a href='javascript:void(0);' class='superlinkR' onclick='javascript:openSavesBrowser_btn();'>查看我的存档</a> / " +
+            "<a class='nowrap superlinkR' href='javascript:void(0);' onclick='javascript:loadUserPanel();'>用户设置</a> / <a href='javascript:void(0);' class='superlinkR' onclick='javascript:logout_Btn();'>登出</a>";
+            // <a class='nowrap superlinkR' href='javascript:void(0);' onclick='javascript:logoutAll();'>在所有设备上登出</a>
     } else {
         userInfoDraw.innerHTML = "未登陆 / Not logged in. <a href='javascript:void(0);' class='superlinkR' onclick='javascript:logout();goLogin();'>登录</a>";
         localStorage.removeItem("username");
@@ -143,4 +146,20 @@ window.onload = function () {
     //check login
     checkLogin();
 
+}
+
+function loadUserPanel(){
+    if (isLogged()){
+        openUserPanel();
+    }else{
+        goLogin();
+    }
+}
+function openUserPanel(){
+    document.getElementById("over5lay").style.display = "block";
+    document.getElementById("userModal").style.display = "block";
+}
+function closeUserPanel(){
+    document.getElementById("over5lay").style.display = "none";
+    document.getElementById("userModal").style.display = "none";
 }
