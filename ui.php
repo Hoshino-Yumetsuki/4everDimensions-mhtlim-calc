@@ -13,7 +13,7 @@
         // function isdef
         function oiiaioooooiai(v) {
             try{
-                return v;
+                return eval(v);
             }catch(e){
                 return -1;
             }
@@ -26,15 +26,15 @@
         function checkVersions(){
             var ruOK = true;
             // cha newui.js
-            if (oiiaioooooiai(cha_newui_js_ver) !== latest_versions["cha_newui.js"]){
+            if (oiiaioooooiai('cha_newui_js_ver') !== latest_versions["cha_newui.js"]){
                 ruOK = false;
             }
             // new_ui.js
-            if (oiiaioooooiai(new_ui_js_ver) !== latest_versions["new_ui.js"]){
+            if (oiiaioooooiai('new_ui_js_ver') !== latest_versions["new_ui.js"]){
                 ruOK = false;
             }
             // upload4index.js
-            if (oiiaioooooiai(upload4index_js_ver) !== latest_versions["upload4index.js"]){
+            if (oiiaioooooiai('upload4index_js_ver') !== latest_versions["upload4index.js"]){
                 ruOK = false;
             }
             if(!ruOK){
