@@ -293,7 +293,7 @@
                     <h2 data-i18n="welcome">Welcome</h2>
                 </div>
                 <div class="layui-card-body">
-                    <p data-i18n="greeting">欢迎来到MilthmCalc！(Reality计算器) (http://k9.lv/c)</p>
+                    <p data-i18n="greeting">欢迎来到MilthmCalc！(Reality计算器) (https://milthm.top)</p>
                     <p data-i18n="description">这是一个用于计算Milthm Reality分数的网站，你可以在这里导入并解析存档。</p>
                     <hr>
                     <span data-i18n="usage">使用说明：</span><a href="./usage/usage.html" target="_blank"><span class="superlinkR" data-i18n="viewUsage">查看帮助信息</span></a>
