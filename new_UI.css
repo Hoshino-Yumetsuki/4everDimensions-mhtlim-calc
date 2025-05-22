@@ -163,7 +163,7 @@ body {
     background-color: rgba(0, 0, 0, 0.8) !important;
 }
 
-#inputData,.layui-layer-input {
+#inputData,.layui-layer-input,.textareaR {
     border-color: #00000000 !important;
     border-radius: 16px !important;
     background-color: rgba(33, 33, 33, 0.1) !important;

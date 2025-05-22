@@ -20,7 +20,7 @@
         }
         var latest_versions = {
             "cha_newui.js":1,
-            "new_ui.js":1,
+            "new_ui.js":2,
             "upload4index.js":1
         }
         function checkVersions(){
@@ -40,7 +40,7 @@
             if(!ruOK){
                 layer.open({
                     title: '版本异常',
-                    content: 'JS文件版本过旧，请删除缓存并刷新页面',
+                    content: 'JS文件检测异常，请尝试删除缓存并刷新页面',
                     btn: ['查看详情', '忽略并继续'],
                     yes: function(index, layero){
                         license_dialog = layer.open({
@@ -48,7 +48,8 @@
                             title: 'JS版本异常',
                             content: `<div style="padding: 20px; line-height: 22px; font-size: 16px; text-align: center;">
 <h3>是什么导致了这个问题？</h3>
-<p>简单地说，可能是因为本网站的js代码已经更新，但是你的浏览器仍然在使用旧版本的js缓存，导致版本和当前页面所需版本不匹配。这可能引起一些未知的问题。</p>
+<p>可能是因为本网站的js代码已经更新，但是你的浏览器仍然在使用旧版本的js缓存，导致版本和当前页面所需版本不匹配。这可能引起一些未知的问题。</p>
+<p>另外，如果你的浏览器过旧，也很可能出现这个问题。（这种情况是无解的）</p>
 <br>
 <h3>我要怎么做</h3>
 <p>刷新你的浏览器缓存，电脑上可以尝试 Ctrl + Shift + R , Shift + F5 等快捷键，手机上可以尝试退出浏览器，长按浏览器点击应用信息，找到储存空间，点击清除缓存（注意不是清除数据！），然后重新打开即可。</p></div>`,
@@ -293,8 +294,8 @@
                     温馨提示
                 </div>
                 <div class="layui-card-body">
-                    使用则代表你确定：<br>我们不是 Milthm 官方，也与其无关。<br>我们会尽可能保护你的隐私，所有密码都是Hash储存。<br>但我们无法防范网络中间人窃听。请在安全的环境下使用本站。
-                    <br>新地址：https://mhtlim.top
+                    务必查看使用须知<br>
+                    <a href="javascript:void(0);" onclick="show_alertInfo();"><span class="superlinkR">查看使用须知</span></a>
                 </div>
             </div>
             <div class="layui-card rccc">
@@ -306,6 +307,8 @@
                     <p data-i18n="description">这是一个用于计算Milthm Reality分数的网站，你可以在这里导入并解析存档。</p>
                     <hr>
                     <span data-i18n="usage">使用说明：</span><a href="./usage/usage.html" target="_blank"><span class="superlinkR" data-i18n="viewUsage">查看帮助信息</span></a>
+                    <br>
+                    <span>更新日志：</span><a href="javascript:void(0);" onclick="open_changelog()"><span class="superlinkR">查看更新日志</span></a>
                     <hr>
                     <span data-i18n="qqGroup">QQ交流群：</span><a href="https://qm.qq.com/q/Utb6sNDvki" target="_blank"><span class="superlinkR" data-i18n="viewQQGroup">Milthm#√-1洨巟羣</span></a>
                     <hr>
@@ -425,7 +428,7 @@
                 <h4>Password / 密码：</h4>
                 <input type="password" class="layui-input inputR" id="login_password" />
                 <hr/>
-                <a class="superlinkR" href="javascript:void(0);" onclick="openLicenseAndPrivacy();" data-i18n="seeLicenseAndPrivacy">查看隐私政策和开源协议</a>
+                <a class="superlinkR" href="javascript:void(0);" onclick="openLicenseAndPrivacy();" data-i18n="seeLicenseAndPrivacy">查看隐私政策和开源协议</a>、<a href="javascript:void(0);" onclick="show_alertInfo();"><span class="superlinkR">查看使用条款</span></a>
                 <hr/>
                 <button class="apply-btn" id="login_btn">Login / 登录</button>
                 <button class="cancel-btn" onclick="closeLogin()">Cancel / 取消</button>
@@ -461,7 +464,8 @@
                 <div id="upload_data_display" style="box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;color:rgb(255, 255, 255);background-color:rgba(255, 255, 255, 0.08);border-radius:16px"></div>
                 <span style="display:none;" id="upload_data"></span>
                 <br><hr/>
-                <a class="superlinkR" href="javascript:void(0);" onclick="openLicenseAndPrivacy();" data-i18n="seeLicenseAndPrivacy">查看隐私政策和开源协议</a>
+                <a class="superlinkR" href="javascript:void(0);" onclick="openLicenseAndPrivacy();" data-i18n="seeLicenseAndPrivacy">查看隐私政策和开源协议</a>、
+                <a href="javascript:void(0);" onclick="show_alertInfo();"><span class="superlinkR">查看使用条款</span></a>
                 <br><hr/>
                 <button class="apply-btn" id="upload_btn">Upload / 上传</button>
                 <button class="cancel-btn" onclick="closeUploadPanel()">Cancel / 取消</button>
@@ -477,8 +481,6 @@
             <h2><a href="javascript:void(0);" style="font-size:large;color:rgb(255, 255, 255);text-decoration:none;padding:6px;border:1px;border-style:solid;border-color: #ffffff33;background-color:rgba(255, 255, 255, 0.08);border-radius:16px" onclick="javascript:closeSavesBrowser();">返回</a> Saves Browser </h2>
             <br>
             <span id="saves_count" style="box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;color:rgb(255, 255, 255);border-radius:16px">总数: Loading...</span>
-            <hr>
-            <p>这个分页有可能有bug,由于时间原因就先不修了还要去tm上学。 --4everDimensions</p>
             <hr>
             <div style="line-height: 32px;">
                 <a href="javascript:void(0);" style="white-space:nowrap;color:lightblue;text-decoration:none;box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;border-radius:16px;" onclick="javascript:fetch_saves();">Refresh / 刷新</a>
@@ -526,6 +528,8 @@
         <div style="text-align: left;">
             <h2><a href="javascript:void(0);" style="font-size:large;color:rgb(255, 255, 255);text-decoration:none;padding:6px;border:1px;border-style:solid;border-color: #ffffff33;background-color:rgba(255, 255, 255, 0.08);border-radius:16px" onclick="javascript:closeUserPanel();">返回</a> 用户设置</h2>
             <hr/>
+            <a class='nowrap superlinkR' href='javascript:void(0);' onclick='javascript:securityDesc();'>密保设置</a>
+            <br>
             <a class='nowrap superlinkR' href='javascript:void(0);' onclick='javascript:logoutAll();'>在所有设备上登出</a>
             
         </div>

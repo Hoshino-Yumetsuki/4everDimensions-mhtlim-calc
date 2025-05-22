@@ -12,10 +12,10 @@ if (empty($loginName) || empty($loginKey)) {
 function onSuccess($loginInfo) {
     $server = dbc();
     $newToken = generateUUID(); // 生成新的 UUID 作为新的登录令牌
-    $st = "update user_users set loginToken = :lT where loginName = :lN";
+    $st = "update user_users set loginToken = :lT where id = :lN";
     $ps = $server->prepare($st);
     $ps->bindParam(":lT", $newToken);
-    $ps->bindParam(":lN", $loginInfo['loginName']);
+    $ps->bindParam(":lN", $loginInfo['id']);
     $ps->execute();
     echo json_encode(["msg" => "Success / 操作成功", "code" => 0, "newToken" => $newToken]);
 }
