@@ -294,7 +294,7 @@
                 </div>
                 <div class="layui-card-body">
                     使用则代表你确定：<br>我们不是 Milthm 官方，也与其无关。<br>我们会尽可能保护你的隐私，所有密码都是Hash储存。<br>但我们无法防范网络中间人窃听。请在安全的环境下使用本站。
-                    <br>新地址：https://milthm.top
+                    <br>新地址：https://mhtlim.top
                 </div>
             </div>
             <div class="layui-card rccc">
@@ -302,7 +302,7 @@
                     <h2 data-i18n="welcome">Welcome</h2>
                 </div>
                 <div class="layui-card-body">
-                    <p data-i18n="greeting">欢迎来到MilthmCalc！(Reality计算器) (https://milthm.top)</p>
+                    <p data-i18n="greeting">欢迎来到MilthmCalc！(Reality计算器) (https://mhtlim.top)</p>
                     <p data-i18n="description">这是一个用于计算Milthm Reality分数的网站，你可以在这里导入并解析存档。</p>
                     <hr>
                     <span data-i18n="usage">使用说明：</span><a href="./usage/usage.html" target="_blank"><span class="superlinkR" data-i18n="viewUsage">查看帮助信息</span></a>

@@ -11,6 +11,6 @@
 （不要对本项目公益托管服务器发起攻击，否则我们会停止服务并删除所有仓库代码。）
 
 其它信息：
-    本服务由 _4everDimensions 的公益服务器提供托管，服务器地址为：http://k9.lv/c 或 https://milthm.top
+    本服务由 _4everDimensions 的公益服务器提供托管，服务器地址为：http://k9.lv/c 或 https://mhtlim.top
     查分逻辑和基本实现由 Mkzi_Nya 完成并维护,后端服务 & 前端UI 由 _4everDimensions 开发&维护。
     如果有任何问题，请联系对应的开发者。
