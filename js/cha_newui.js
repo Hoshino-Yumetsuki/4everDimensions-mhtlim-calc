@@ -1,5 +1,4 @@
-const Updated = "Updated at 2025.05.22"
-var cha_newui_js_ver = 1
+const Updated = "Updated at 2025.05.16 22:55(UTC+8)"
 console.log(Updated)
 console.log(" ███  ███                               \n\
  ███  ███                               \n\
@@ -172,12 +171,15 @@ async function initSQL() {
 async function processDBFile(arrayBuffer, SQL) {
   try {
     const db = new SQL.Database(new Uint8Array(arrayBuffer));
-    // 查询 `kv` 表中的 `PlayerFile`
-    const results = db.exec("SELECT value FROM kv WHERE key='PlayerFile'");
-    if (results.length === 0 || results[0].values.length === 0) {
-      alert("未找到 PlayerFile 存档");
-      return;
-    }
+    // 查询 `kv` 表中的 `PlayerFile`或V2
+    let results = db.exec("SELECT value FROM kv WHERE key='PlayerFileV2'");
+if (results.length === 0 || results[0].values.length === 0) {
+  results = db.exec("SELECT value FROM kv WHERE key='PlayerFile'");
+  if (results.length === 0 || results[0].values.length === 0) {
+    alert("未找到 PlayerFile/PlayerFileV2 存档");
+    return;
+  }
+}
     // 提取 JSON 并解析
     const playerFileJSON = results[0].values[0][0];
     const extracted = extractJSON(playerFileJSON);
@@ -1046,7 +1048,7 @@ function downloadImage() {
       ctx.font = '50px Arial';
       ctx.fillText('Milthm-calculator', 100, 130);
       ctx.font = '30px Arial';
-      ctx.fillText('http://k9.lv/c/', 100, 180);
+      ctx.fillText('http://mhtlim.top/', 100, 180);
       ctx.font = '20px Arial';
       ctx.fillText(Updated, 100, 210);
       const items = [...window.processedItems.slice(0, actualCardCount), ...window.norlt];
