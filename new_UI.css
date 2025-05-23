@@ -73,7 +73,7 @@ body {
     background-size: cover;
 }
 
-#languageButton {
+#languageButton,.lb-style {
     background-color: rgba(33, 33, 33, 0.1) !important;
     backdrop-filter: blur(6px);
     border-radius: 10px !important;

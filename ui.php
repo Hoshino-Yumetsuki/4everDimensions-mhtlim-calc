@@ -20,7 +20,7 @@
         }
         var latest_versions = {
             "cha_newui.js":2,
-            "new_ui.js":2,
+            "new_ui.js":3,
             "upload4index.js":1
         }
         function checkVersions(){
@@ -209,28 +209,22 @@
         var rain_anim_length = 1.5;
         var rain_interval_ms = 50;
         var rain_interval;
-        var rain_stop = false;
-        var rain_stoped = false;
-        var rain_update;
-        document.addEventListener("DOMContentLoaded", function() {
-            const rain = document.querySelector(".rain");
-
-            function createRainDrop() {
-                if(rain_stop){
-                    clearInterval(rain_interval);
-                    rain_stoped = true;
-                    return;
-                }
+        var removeTime = 2000;
+        function createRainDrop() {
+                const l=0.5 + Math.random() * rain_anim_length;
+                const rain = document.querySelector(".rain");
                 const drop = document.createElement("div");
                 drop.classList.add("raindrop");
                 drop.style.left = Math.random() * window.innerWidth + "px";
-                drop.style.animationDuration = 0.5 + Math.random() * rain_anim_length + "s"; // 随机动画时长
+                drop.style.animationDuration = l+"s"; // 随机动画时长
                 rain.appendChild(drop);
 
                 setTimeout(() => {
                     rain.removeChild(drop);
-                }, 2000);
+                }, 1000*l);
             }
+        document.addEventListener("DOMContentLoaded", function() {
+            
 
             rain_interval = setInterval(createRainDrop, rain_interval_ms);
         });
@@ -239,6 +233,10 @@
             navigator.serviceWorker.register('./js/sw.js')
                 .then(reg => console.log("Service Worker 注册成功:", reg.scope))
                 .catch(err => console.log("Service Worker 注册失败:", err));
+        }
+        function downloadImage_pr(){
+            layer.msg('正在生成图片，由于需要下载图片资源，可能需要一些时间。若一直没有反应，可以多次尝试。');
+            downloadImage()
         }
     </script>
     <script>
@@ -262,7 +260,7 @@
         <div class="layui-logo header-opa-bg2" style="padding: 16px;">
             <div class="header-opa-content">
                 <h1 style="color:turquoise;">
-                    <div>MilthmCalc <span style="font-size: medium;color:gold;">Pro</span><span style="font-size: small;color:lightgreen;">&nbsp;v<?php if (file_exists("version.txt")) {
+                    <div><span style="color:lightskyblue">MilthmCalc</span><span style="font-size: small;color:lightgreen;">&nbsp;v<?php if (file_exists("version.txt")) {
                                                                                                                                                         echo file_get_contents("version.txt");
                                                                                                                                                     } else {
                                                                                                                                                         echo "_unknown";
@@ -273,8 +271,9 @@
         </div>
     </div>
 
-    <div style="position:absolute;right:20px;top:20px;z-index:9999;">
+    <div style="position:absolute;right:20px;top:20px;z-index:114514;">
         <button id="languageButton" style="background:transparent;border:none;cursor:pointer;font-size:20px;">🌐</button>
+        <button class="lb-style" id="rainSettingsButton" onclick="javascript:openRainSettings();" style="background:transparent;border:none;cursor:pointer;font-size:20px;">🌧️</button>
         <div id="languageMenu">
             <div id="langZh">简体中文</div>
             <div id="langZhTw">繁體中文</div>
@@ -345,7 +344,7 @@
                     <button class="layui-btn layui-btn-primary" onclick="javascript:startProcess();" data-i18n="parse">解析</button>
                     <button class="layui-btn layui-btn-primary" onclick="javascript:upl();" data-i18n="uploadFile">上传文件</button>
                     <hr />
-                    <button class="layui-btn layui-btn-primary" onclick="javascript:downloadImage();" data-i18n="generateImage">生成图像</button>
+                    <button class="layui-btn layui-btn-primary" onclick="javascript:downloadImage_pr();" data-i18n="generateImage">生成图像</button>
                     <button class="layui-btn layui-btn-primary" onclick="showSettings();" data-i18n="settings">查分图设置</button>
 
 
@@ -475,7 +474,7 @@
 
 
     <!-- Saves Viewer -->
-    <div id="over4lay" class="overlay" onclick="javascript:closeSavesBrowser();"></div>
+    <!-- <div id="over4lay" class="overlay" onclick="javascript:closeSavesBrowser();"></div>
     <div class="settingsModal" id="savesModal" style="border: 1px solid #eeeeee;display: none;width:auto !important;max-width:60vw !important;">
         <div style="text-align: left;">
             <h2><a href="javascript:void(0);" style="font-size:large;color:rgb(255, 255, 255);text-decoration:none;padding:6px;border:1px;border-style:solid;border-color: #ffffff33;background-color:rgba(255, 255, 255, 0.08);border-radius:16px" onclick="javascript:closeSavesBrowser();">返回</a> Saves Browser </h2>
@@ -506,20 +505,11 @@
                         </tr>
                     </thead>
                     <tbody id="savesList_sub">
-                        <!-- <tr>
-                            <td>title</td>
-                            <td>info</td>
-                            <td>time</td>
-                            <td>
-                                <a href="javascript:void(0);" class="action" onclick="javascript:fetch_save('id');">View / 查看</a>
-                                <a href="javascript:void(0);" class="action delete" onclick="javascript:delete_save('id');">Delete / 删除</a>
-                            </td>
-                        </tr> -->
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <!-- User Panel -->

@@ -1,5 +1,5 @@
 
-var new_ui_js_ver = 2
+var new_ui_js_ver = 3
 var authors_dialog;
 function show_author_info() {
   // layer.open({
@@ -83,6 +83,43 @@ function genPicDialog() {
 
 
 // User utils
+
+//saves browser
+var sb_ui;
+const sb_main = `
+        <div style="text-align: left;padding:16px">
+        <h2>云存档浏览器</h2><hr>
+            <span id="saves_count" style="box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;color:rgb(255, 255, 255);border-radius:16px">总数: Loading...</span>
+            <hr>
+            <div style="line-height: 32px;">
+                <a href="javascript:void(0);" style="white-space:nowrap;color:lightblue;text-decoration:none;box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;border-radius:16px;" onclick="javascript:fetch_saves();">Refresh / 刷新</a>
+                <a href="javascript:void(0);" style="white-space:nowrap;color:lightblue;text-decoration:none;box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;border-radius:16px;" onclick="javascript:sb_prep();">Previous / 上一页</a>
+                <a href="javascript:void(0);" style="white-space:nowrap;color:lightblue;text-decoration:none;box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;border-radius:16px;" onclick="javascript:sb_nexp();">Next / 下一页</a>
+            </div>
+            <hr>
+            <div class="saves_list_container">
+                <table class="layui-table" lay-skin="line">
+                    <colgroup>
+                        <col style="min-width:3vw;max-width:16vw">
+                        <col style="max-width:32vw ">
+                        <col>
+                        <col>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>Title / 标题</th>
+                            <th>Info / 概要</th>
+                            <th>Created Time / 创建时间</th>
+                            <th>Operation / 操作</th>
+                            <th>Desc / 备注</th>
+                        </tr>
+                    </thead>
+                    <tbody id="savesList_sub">
+                    </tbody>
+                </table>
+            </div>
+        </div>`
+
 function customEscape(str) {
   return str.replace(/[\x00-\x7F]/g, function (char) {
     return char;
@@ -101,16 +138,25 @@ var fromIndex = 0;
 var count = 0;
 var split_c = 3;
 function openSavesBrowser() { // 'll be called when the user clicks the button to open the file browser
-  var over4lay = document.getElementById('over4lay');
-  var savesModal = document.getElementById('savesModal');
-  over4lay.style.display = 'block';
-  savesModal.style.display = 'block';
+  // var over4lay = document.getElementById('over4lay');
+  // var savesModal = document.getElementById('savesModal');
+  // over4lay.style.display = 'block';
+  // savesModal.style.display = 'block';
+  sb_ui = layer.open({
+    type: 1,
+    title: 'Saves Browser',
+    shadeClose: true,
+    shade: 0.8,
+    area: ['70vw',"60vh"],
+    content: sb_main
+  })
 }
 function closeSavesBrowser() {
-  var over4lay = document.getElementById('over4lay');
-  var savesModal = document.getElementById('savesModal');
-  over4lay.style.display = 'none';
-  savesModal.style.display = 'none';
+  // var over4lay = document.getElementById('over4lay');
+  // var savesModal = document.getElementById('savesModal');
+  // over4lay.style.display = 'none';
+  // savesModal.style.display = 'none';
+  layer.close(sb_ui);
 }
 function fetch_saves() {
   var loading = layer.load(1);
@@ -223,22 +269,24 @@ function show_alertInfo() {
   layer.open({
     type: 1,
     title: '使用须知',
-    content: `<div id="show_alertInfo_content_" style="padding:32px"><pre>使用本项目（MilthmCalc）的在线服务（https://mhtlim.top），则表示你已知晓：
-
-1、我们不是Milthm官方，也和Milthm官方无关。
-2、我们致力于提供一个安全、便捷的工具来帮助用户计算Milthm Reality，但用户需自行承担使用本服务过程中可能面临的风险。（针对云存档而言，例如账号密码过于简单而被盗，或忘记密码但没设置密保内容导致的损失等。）
-3、我们非常重视用户的隐私保护，所有用户输入的密码均会通过Hash算法进行加密存储，以确保数据的安全性。然而，由于网络环境的复杂性，我们无法排除网络中间人攻击的可能性。因此，用户在使用本服务时，应确保网络连接的安全性，避免在公共Wi-Fi等不安全的网络环境下操作。（密码虽然会加密储存，但仍然采用明文传输。）
-4、用户在使用本服务过程中，应确保上传的数据（如游戏存档等）均为合法获取且拥有使用权限，不得上传任何侵犯他人版权或包含非法内容的文件。
-5、本服务可能会因技术维护、服务器故障或其他不可抗力因素而暂时中断或无法使用。我们会在第一时间努力恢复服务，但不对由此给用户带来的不便或损失承担法律责任。
-6、用户在使用本服务时，应遵守相关法律法规以及本服务的使用条款。若用户违反上述规定，我们有权终止其使用权限，并保留追究相关责任的权利。
-7、本服务可能会根据用户反馈和技术发展进行更新和改进。我们会在网站上及时发布更新信息，用户应关注并及时了解相关变化。</pre>
+    content: `<div id="show_alertInfo_content_" style="padding:32px"><pre id="show_alertInfo_content_pre"></pre>
 <hr>
 <button class="layui-btn layui-btn-normal" onclick="layer.closeAll()">关闭</button></div>
 </div>`,
     area: ['80vw', '80vh'],
     shade: 0.6,
     shadeClose: true
-  })
+  });
+  var loading = layer.load(1);
+  try {
+    fetch('up.txt').then(res => res.text()).then(data => {
+      layer.close(loading);
+      document.getElementById("show_alertInfo_content_pre").innerHTML = data;
+    })
+  }catch (e) {
+    layer.close(loading);
+    layer.msg("Error / 出现错误，请检查网络连接。");
+  }
 }
 
 // for API
@@ -344,4 +392,36 @@ function open_changelog() {
     layer.msg("Error / 出现错误，请检查网络连接。");
   }
 
+}
+function openRainSettings(){
+  layer.open({
+    type: 1,
+    title: 'Rain Settings / 雨滴设置',
+    content: `<div id="rain_settings_content" style="padding:32px;text-align:center;line-height:8vh">
+    <button class="layui-btn layui-btn-normal" onclick="setRain(1.5,50)">正常</button><br>
+    <button class="layui-btn layui-btn-normal" onclick="setRain(3,100)">慢</button><br>
+    <button class="layui-btn layui-btn-normal" onclick="setRain(0.6,15)">快</button><br>
+    <button class="layui-btn layui-btn-normal" onclick="stopRain()">禁用</button><br>
+    <button class="layui-btn layui-btn-normal" onclick="layer.closeAll()">完成</button>
+    </div>`,
+    area: ['auto', '80vh'],
+    shade: 0.6,
+    shadeClose: true
+  })
+
+}
+function reRain() {
+  clearInterval(rain_interval);
+  rain_interval = setInterval(createRainDrop, rain_interval_ms);
+}
+function setRain(_rain_anim_length,_rain_interval_ms,after) {
+  rain_anim_length = _rain_anim_length;
+  rain_interval_ms = _rain_interval_ms;
+  if (!after) {layer.closeAll();layer.msg("设置成功");}
+  reRain();
+}
+function stopRain() {
+  clearInterval(rain_interval);
+  layer.closeAll();
+  layer.msg("已禁用雨滴动画。");
 }
