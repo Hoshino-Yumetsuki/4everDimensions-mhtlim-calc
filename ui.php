@@ -473,43 +473,7 @@
     </div>
 
 
-    <!-- Saves Viewer -->
-    <!-- <div id="over4lay" class="overlay" onclick="javascript:closeSavesBrowser();"></div>
-    <div class="settingsModal" id="savesModal" style="border: 1px solid #eeeeee;display: none;width:auto !important;max-width:60vw !important;">
-        <div style="text-align: left;">
-            <h2><a href="javascript:void(0);" style="font-size:large;color:rgb(255, 255, 255);text-decoration:none;padding:6px;border:1px;border-style:solid;border-color: #ffffff33;background-color:rgba(255, 255, 255, 0.08);border-radius:16px" onclick="javascript:closeSavesBrowser();">返回</a> Saves Browser </h2>
-            <br>
-            <span id="saves_count" style="box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;color:rgb(255, 255, 255);border-radius:16px">总数: Loading...</span>
-            <hr>
-            <div style="line-height: 32px;">
-                <a href="javascript:void(0);" style="white-space:nowrap;color:lightblue;text-decoration:none;box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;border-radius:16px;" onclick="javascript:fetch_saves();">Refresh / 刷新</a>
-                <a href="javascript:void(0);" style="white-space:nowrap;color:lightblue;text-decoration:none;box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;border-radius:16px;" onclick="javascript:sb_prep();">Previous / 上一页</a>
-                <a href="javascript:void(0);" style="white-space:nowrap;color:lightblue;text-decoration:none;box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;border-radius:16px;" onclick="javascript:sb_nexp();">Next / 下一页</a>
-            </div>
-            <hr>
-            <div class="saves_list_container">
-                <table class="layui-table" lay-skin="line">
-                    <colgroup>
-                        <col style="min-width:3vw;max-width:16vw">
-                        <col style="max-width:32vw ">
-                        <col>
-                        <col>
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th>Title / 标题</th>
-                            <th>Info / 概要</th>
-                            <th>Created Time / 创建时间</th>
-                            <th>Operation / 操作</th>
-                            <th>Desc / 备注</th>
-                        </tr>
-                    </thead>
-                    <tbody id="savesList_sub">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div> -->
+
 
 
     <!-- User Panel -->
