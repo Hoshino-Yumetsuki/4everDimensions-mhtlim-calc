@@ -467,7 +467,9 @@ function remount_nickNameSettings() {
   //   return;
   // }
   // document.getElementById("nickNameSettings_content_name").innerHTML = getStorage("nickname");
-  apiAuth('user/check.php', getStorage("username"), getStorage("token"), undefined, undefined, (e) => {
+  apiAuth('user/check.php', getStorage("username"), getStorage("token"), undefined, (e)=>{
+    closeNickNameSettingsDialog();closeUserPanel();
+  }, (e) => {
     layer.msg(e.msg); closeNickNameSettingsDialog();
   }, (e) => {
     setStorage("nickname", e.nickname);
@@ -490,7 +492,11 @@ function changeNickName() {
       layer.msg("昵称不能为空。");
       return;
     }
-    apiAuth('user/setNickname.php', getStorage("username"), getStorage("token"), { nickname: nickName }, () => { }, (e) => { layer.msg(e.msg); }, (e) => {
+    apiAuth('user/setNickname.php', getStorage("username"), getStorage("token"), { nickname: nickName }, () => {
+      closeNickNameSettingsDialog();
+      closeUserPanel();
+      layer.close(index);
+    }, (e) => { layer.msg(e.msg); }, (e) => {
       layer.msg(e.msg);
       layer.close(index);
       setStorage("nickname", nickName);
