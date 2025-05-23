@@ -1,4 +1,4 @@
-var upload4index_js_ver = 1
+var upload4index_js_ver = 2
 function goLogin() {
     var loginUI = document.getElementById("loginModal");
         var o2l = document.getElementById("over2lay");
@@ -122,6 +122,7 @@ function checkLogin() {
                 })
             }).then(res => res.json()).then(data => {
                 if (data.code === 0) {
+                    localStorage.setItem("nickname", data.nickname);
                     initLogging();
                 } else {
                     logout();

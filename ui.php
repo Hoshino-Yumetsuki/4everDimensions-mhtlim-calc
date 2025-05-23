@@ -20,8 +20,8 @@
         }
         var latest_versions = {
             "cha_newui.js":2,
-            "new_ui.js":3,
-            "upload4index.js":1
+            "new_ui.js":4,
+            "upload4index.js":2
         }
         function checkVersions(){
             var ruOK = true;
@@ -483,6 +483,8 @@
             <h2><a href="javascript:void(0);" style="font-size:large;color:rgb(255, 255, 255);text-decoration:none;padding:6px;border:1px;border-style:solid;border-color: #ffffff33;background-color:rgba(255, 255, 255, 0.08);border-radius:16px" onclick="javascript:closeUserPanel();">返回</a> 用户设置</h2>
             <hr/>
             <a class='nowrap superlinkR' href='javascript:void(0);' onclick='javascript:securityDesc();'>密保设置</a>
+            <br>
+            <a class='nowrap superlinkR' href='javascript:void(0);' onclick='javascript:nickNameSettings();'>昵称设置</a>
             <br>
             <a class='nowrap superlinkR' href='javascript:void(0);' onclick='javascript:logoutAll();'>在所有设备上登出</a>
             

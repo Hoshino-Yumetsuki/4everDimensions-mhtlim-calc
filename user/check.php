@@ -10,7 +10,7 @@ if (empty($loginName) || empty($loginKey)) {
 }
 
 function onSuccess($loginInfo) {
-    echo json_encode(["msg" => "Success / 会话有效", "code" => 0]);
+    echo json_encode(["msg" => "Success / 会话有效", "code" => 0, "nickname" => $loginInfo["nickName"]]);
 }
 
 function onFailure($error) {

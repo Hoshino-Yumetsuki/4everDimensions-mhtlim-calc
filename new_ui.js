@@ -1,5 +1,5 @@
 
-var new_ui_js_ver = 3
+var new_ui_js_ver = 4
 var authors_dialog;
 function show_author_info() {
   // layer.open({
@@ -18,7 +18,8 @@ function show_author_info() {
     title: '作者信息',
     content: '<div id="Authors_content" style="padding:32px"></div>',
     area: ['80vw', '80vh'],
-    shade: 0.6
+    shade: 0.6,
+    skin: 'layui-layer-win10'
   });
   var loading = layer.load(1);
   try {
@@ -42,7 +43,8 @@ function show_donation() {
     maxmin: false,
     anim: 0, // 0-6 的动画形式，-1 不开启
     content: `./donate.html`,
-    offset: ['32px']
+    offset: ['32px'],
+    skin: 'layui-layer-win10'
   });
 }
 function show_usage() {
@@ -147,8 +149,9 @@ function openSavesBrowser() { // 'll be called when the user clicks the button t
     title: 'Saves Browser',
     shadeClose: true,
     shade: 0.8,
-    area: ['70vw',"60vh"],
-    content: sb_main
+    area: ['70vw', "60vh"],
+    content: sb_main,
+    skin: 'layui-layer-win10'
   })
 }
 function closeSavesBrowser() {
@@ -251,7 +254,9 @@ function openLicenseAndPrivacy() {
     title: 'License & Privacy / 许可证 & 隐私政策',
     content: '<div id="LP_content" style="padding:32px"></div>',
     area: ['80vw', '80vh'],
-    shade: 0.6
+    shade: 0.6,
+    skin: 'layui-layer-win10',
+    shadeClose: true
   });
   var loading = layer.load(1);
   try {
@@ -275,7 +280,8 @@ function show_alertInfo() {
 </div>`,
     area: ['80vw', '80vh'],
     shade: 0.6,
-    shadeClose: true
+    shadeClose: true,
+    skin: 'layui-layer-win10'
   });
   var loading = layer.load(1);
   try {
@@ -283,7 +289,7 @@ function show_alertInfo() {
       layer.close(loading);
       document.getElementById("show_alertInfo_content_pre").innerHTML = data;
     })
-  }catch (e) {
+  } catch (e) {
     layer.close(loading);
     layer.msg("Error / 出现错误，请检查网络连接。");
   }
@@ -341,9 +347,10 @@ function securityDesc() {
     type: 1,
     title: '账号安全验证信息',
     content: `<div id="_securityDesc_content" style="padding:32px">请稍等...</div>`,
-    area: ['80vw', '80vh'],
+    area: ['60vw', '80vh'],
     shade: 0.6,
-    shadeClose: true
+    shadeClose: true,
+    skin: 'layui-layer-win10'
   })
   updateSD();
 }
@@ -355,7 +362,8 @@ function securityDesc_edit() {
     content: `<div id="_securityDesc_edit_content" style="padding:32px">请稍等...</div>`,
     area: ['80vw', '80vh'],
     shade: 0.6,
-    shadeClose: true
+    shadeClose: true,
+    skin: 'layui-layer-win10'
   })
   document.getElementById("_securityDesc_edit_content").innerHTML = `你可以填写用于重置密码的安全验证方案，例如写你的qq号、邮箱、微信号，甚至是简单的密保问题。后续需要找回时找站点管理员处理即可。<hr><textarea id="securityDesc_edit_textarea" style="width:100%;height:40vh" class="layui-textarea textareaR"></textarea><hr><button class="layui-btn layui-btn-normal" onclick="securityDesc_edit_save()">覆盖并保存</button><button class="layui-btn layui-btn-normal" onclick="layer.close(securityDesc_edit_dialog)">取消修改</button>`
   document.getElementById("securityDesc_edit_textarea").value = document.getElementById("_securityDesc_content_pre").innerHTML
@@ -379,7 +387,9 @@ function open_changelog() {
     title: 'ChangeLog / 更新日志',
     content: '<div id="cl_content" style="padding:32px"></div>',
     area: ['80vw', '80vh'],
-    shade: 0.6
+    shade: 0.6,
+    shadeClose: true,
+    skin: 'layui-layer-win10'
   });
   var loading = layer.load(1);
   try {
@@ -393,7 +403,7 @@ function open_changelog() {
   }
 
 }
-function openRainSettings(){
+function openRainSettings() {
   layer.open({
     type: 1,
     title: 'Rain Settings / 雨滴设置',
@@ -406,7 +416,8 @@ function openRainSettings(){
     </div>`,
     area: ['auto', '80vh'],
     shade: 0.6,
-    shadeClose: true
+    shadeClose: true,
+    skin: 'layui-layer-win10'
   })
 
 }
@@ -414,14 +425,77 @@ function reRain() {
   clearInterval(rain_interval);
   rain_interval = setInterval(createRainDrop, rain_interval_ms);
 }
-function setRain(_rain_anim_length,_rain_interval_ms,after) {
+function setRain(_rain_anim_length, _rain_interval_ms, after) {
   rain_anim_length = _rain_anim_length;
   rain_interval_ms = _rain_interval_ms;
-  if (!after) {layer.closeAll();layer.msg("设置成功");}
+  if (!after) { layer.closeAll(); layer.msg("设置成功"); }
   reRain();
 }
 function stopRain() {
   clearInterval(rain_interval);
   layer.closeAll();
   layer.msg("已禁用雨滴动画。");
+}
+// For nickname settings
+var nickNameSettingsDialog;
+function nickNameSettings() {
+  // ll be triggered if button is clicked.
+  openNickNameSettingsDialog();
+  remount_nickNameSettings();
+}
+function openNickNameSettingsDialog() {
+  nickNameSettingsDialog = layer.open({
+    type: 1,
+    title: 'Nickname Settings / 昵称设置',
+    content: `<div id="nickNameSettings_content" style="padding:32px;text-align:center;line-height:4vh">
+    <h3>您的用户名（登录名）：<span id="nickNameSettings_content_username"></span></h3>
+    <h3>您当前的昵称：<span id="nickNameSettings_content_name"></span></h3>
+    <button class="layui-btn layui-btn-normal" onclick="changeNickName()">修改昵称</button><br>
+    <hr>
+    <p>此昵称将在首页登陆后显示，修改昵称不会影响登陆用户名，登陆请仍然使用登陆用户名。（昵称可以和别人相同。）</p>
+    </div>`,
+    area: ['60vw', '80vh'],
+    shade: 0.6,
+    shadeClose: true,
+    skin: 'layui-layer-win10'
+  })
+}
+function remount_nickNameSettings() {
+  // initLogging();
+  // if(!isLogged){
+  //   closeNickNameSettingsDialog();
+  //   return;
+  // }
+  // document.getElementById("nickNameSettings_content_name").innerHTML = getStorage("nickname");
+  apiAuth('user/check.php', getStorage("username"), getStorage("token"), undefined, undefined, (e) => {
+    layer.msg(e.msg); closeNickNameSettingsDialog();
+  }, (e) => {
+    setStorage("nickname", e.nickname);
+    mount_nickNameSettings();
+  }, (e) => { layer.msg(e.msg); });
+}
+function mount_nickNameSettings() {
+  document.getElementById("nickNameSettings_content_name").innerHTML = getStorage("nickname");
+    document.getElementById("nickNameSettings_content_username").innerHTML = getStorage("username");
+}
+function closeNickNameSettingsDialog() {
+  layer.close(nickNameSettingsDialog);
+}
+function changeNickName() {
+  layer.prompt({ title: '请输入新的昵称', formType: 0}, function (nickName, index) {
+    if (nickName.length > 60) {
+      layer.msg("昵称过长，请限制在60字以内。");
+      return;
+    }else if(nickName.length == 0){
+      layer.msg("昵称不能为空。");
+      return;
+    }
+    apiAuth('user/setNickname.php', getStorage("username"), getStorage("token"), { nickname: nickName }, () => { }, (e) => { layer.msg(e.msg); }, (e) => {
+      layer.msg(e.msg);
+      layer.close(index);
+      setStorage("nickname", nickName);
+      mount_nickNameSettings();
+      initLogging();
+    })
+  })
 }
