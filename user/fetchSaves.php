@@ -73,10 +73,21 @@ $to = trim($to);
 $from = intval($from);
 $to = intval($to);
 
+// if empty
+if (empty($loginName) || empty($loginKey)) {
+    echo json_encode(["msg" => "Empty username or token is not allowed / 用户名或令牌不能为空", "code" => -1]);
+    exit;
+}
 if ($from < 0 || $to < 0) {
     echo json_encode(["msg" => "Invalid range / 无效范围", "code" => -7]);
     exit;
 }
+// if range > 32
+if ($to - $from > 32) {
+    echo json_encode(["msg" => "Range too large / 范围过大", "code" => -8]);
+    exit;
+}
+
 
 function onSuccess($loginInfo) {
     global $from, $to;

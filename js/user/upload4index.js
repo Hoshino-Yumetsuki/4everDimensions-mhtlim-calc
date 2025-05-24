@@ -1,4 +1,4 @@
-var upload4index_js_ver = 2
+var upload4index_js_ver = 3
 function goLogin() {
     var loginUI = document.getElementById("loginModal");
         var o2l = document.getElementById("over2lay");
@@ -111,7 +111,8 @@ function initLogging() {
         localStorage.removeItem("nickname");
     }
 }
-function checkLogin() {
+function checkLogin(alertNoSecret) {
+    if (!alertNoSecret) alertNoSecret = false;
     if (isLogged()) {
         try {
             fetch("user/check.php", {
@@ -124,6 +125,9 @@ function checkLogin() {
                 if (data.code === 0) {
                     localStorage.setItem("nickname", data.nickname);
                     initLogging();
+                    if(alertNoSecret && !data.hasSecret){
+                        alertSetSecret();
+                    }
                 } else {
                     logout();
                     initLogging();
@@ -145,8 +149,7 @@ function checkLogin() {
 //on page load
 window.onload = function () {
     //check login
-    checkLogin();
-
+    checkLogin(true);
 }
 
 function loadUserPanel(){

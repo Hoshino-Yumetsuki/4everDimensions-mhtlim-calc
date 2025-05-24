@@ -33,7 +33,7 @@ if (empty($loginInfo)) {
 }
 if (password_verify($loginPass, $loginInfo["password"])) {
     echo json_encode(["msg" => "Logged in / 登录成功", "code" => 0, "data" => ["nickName" => $loginInfo['nickName'], "username" => 
-    $loginInfo['loginName'], "status" => $loginInfo['status']], "token" => $loginInfo['loginToken']]);
+    $loginInfo['loginName'], "status" => $loginInfo['status']], "token" => $loginInfo['loginToken'], "hasSecret" => ($loginInfo['authInfo'] != null)]);
 } else {
     echo json_encode(["msg" => "Password is incorrect / 密码错误", "code" => -4]);
 }

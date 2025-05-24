@@ -1,18 +1,6 @@
-
-var new_ui_js_ver = 4
+var new_ui_js_ver = 5
 var authors_dialog;
 function show_author_info() {
-  // layer.open({
-  //   type: 2,
-  //   area: ['90%', '90%'],
-  //   title: '作者信息',
-  //   shade: 0.6, // 遮罩透明度
-  //   shadeClose: true, // 点击遮罩区域，关闭弹层
-  //   maxmin: false,
-  //   anim: 0, // 0-6 的动画形式，-1 不开启
-  //   content: `./authors.html`,
-  //   offset: ['32px']
-  // });
   authors_dialog = layer.open({
     type: 1,
     title: '作者信息',
@@ -91,9 +79,12 @@ var sb_ui;
 const sb_main = `
         <div style="text-align: left;padding:16px">
         <h2>云存档浏览器</h2><hr>
+        <div style="line-height:32px">
             <span id="saves_count" style="box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;color:rgb(255, 255, 255);border-radius:16px">总数: Loading...</span>
+            </div>
             <hr>
             <div style="line-height: 32px;">
+                <a href="javascript:void(0);" style="white-space:nowrap;color:lightblue;text-decoration:none;box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;border-radius:16px;" onclick="javascript:sb_changeCount();">修改单页显示数量</a>
                 <a href="javascript:void(0);" style="white-space:nowrap;color:lightblue;text-decoration:none;box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;border-radius:16px;" onclick="javascript:fetch_saves();">Refresh / 刷新</a>
                 <a href="javascript:void(0);" style="white-space:nowrap;color:lightblue;text-decoration:none;box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;border-radius:16px;" onclick="javascript:sb_prep();">Previous / 上一页</a>
                 <a href="javascript:void(0);" style="white-space:nowrap;color:lightblue;text-decoration:none;box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;border-radius:16px;" onclick="javascript:sb_nexp();">Next / 下一页</a>
@@ -134,7 +125,22 @@ function customEscape(str) {
     }
   });
 }
+function sb_changeCount() {
+  layer.prompt({
+    formType: 0,
+    value: split_c,
+    title: '输入单页显示数量'
+  }, function (value, index, elem) {
+    layer.close(index);
+    split_c = parseInt(value);
+    if (isNaN(split_c)) {
+      layer.msg("输入无效，已自动重置为默认值。");
+      split_c = 3;
+    }
+    fetch_saves();
+  })
 
+}
 var isSavesGotOnce = false; // 是否已经获取过存档 (Disabled)
 var fromIndex = 0;
 var count = 0;
@@ -149,7 +155,7 @@ function openSavesBrowser() { // 'll be called when the user clicks the button t
     title: 'Saves Browser',
     shadeClose: true,
     shade: 0.8,
-    area: ['70vw', "60vh"],
+    area: ['70vw', "80vh"],
     content: sb_main,
     skin: 'layui-layer-win10'
   })
@@ -467,8 +473,8 @@ function remount_nickNameSettings() {
   //   return;
   // }
   // document.getElementById("nickNameSettings_content_name").innerHTML = getStorage("nickname");
-  apiAuth('user/check.php', getStorage("username"), getStorage("token"), undefined, (e)=>{
-    closeNickNameSettingsDialog();closeUserPanel();
+  apiAuth('user/check.php', getStorage("username"), getStorage("token"), undefined, (e) => {
+    closeNickNameSettingsDialog(); closeUserPanel();
   }, (e) => {
     layer.msg(e.msg); closeNickNameSettingsDialog();
   }, (e) => {
@@ -478,17 +484,17 @@ function remount_nickNameSettings() {
 }
 function mount_nickNameSettings() {
   document.getElementById("nickNameSettings_content_name").innerHTML = getStorage("nickname");
-    document.getElementById("nickNameSettings_content_username").innerHTML = getStorage("username");
+  document.getElementById("nickNameSettings_content_username").innerHTML = getStorage("username");
 }
 function closeNickNameSettingsDialog() {
   layer.close(nickNameSettingsDialog);
 }
 function changeNickName() {
-  layer.prompt({ title: '请输入新的昵称', formType: 0}, function (nickName, index) {
+  layer.prompt({ title: '请输入新的昵称', formType: 0 }, function (nickName, index) {
     if (nickName.length > 60) {
       layer.msg("昵称过长，请限制在60字以内。");
       return;
-    }else if(nickName.length == 0){
+    } else if (nickName.length == 0) {
       layer.msg("昵称不能为空。");
       return;
     }
@@ -504,4 +510,9 @@ function changeNickName() {
       initLogging();
     })
   })
+}
+
+// alert to set secret
+function alertSetSecret() {
+  layer.msg("强烈建议打开\"用户设置\"为自己的账号设置\"密保\"信息，以防止账号的密码丢失。");
 }

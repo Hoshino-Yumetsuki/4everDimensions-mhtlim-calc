@@ -7,6 +7,11 @@ function authenticate($loginName, $loginKey, $afterSuccess, $afterFailed) {
         call_user_func($afterFailed, ["msg" => "Empty username or token is not allowed / 用户名或令牌不能为空", "code" => -1]);
         return;
     }
+    // a过长
+    if (strlen($loginName) > 48 || strlen($loginKey) > 48) {
+        call_user_func($afterFailed, ["msg" => "Username or token is too long / 用户名或令牌过长", "code" => 403]);
+        return;
+    }
 
     include "../fc.php";
     $server = dbc();

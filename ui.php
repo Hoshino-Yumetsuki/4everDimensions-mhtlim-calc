@@ -12,41 +12,49 @@
     <script>
         // function isdef
         function oiiaioooooiai(v) {
-            try{
+            try {
                 return eval(v);
-            }catch(e){
+            } catch (e) {
                 return -1;
             }
         }
         var latest_versions = {
-            "cha_newui.js":2,
-            "new_ui.js":4,
-            "upload4index.js":2
+            "cha_newui.js": 2,
+            "new_ui.js": 5,
+            "upload4index.js": 3
         }
-        function checkVersions(){
+
+        function checkVersions() {
             var ruOK = true;
+            var v_e = "";
             // cha newui.js
-            if (oiiaioooooiai('cha_newui_js_ver') !== latest_versions["cha_newui.js"]){
+            if (oiiaioooooiai('cha_newui_js_ver') !== latest_versions["cha_newui.js"]) {
                 ruOK = false;
+                v_e += `cha_newui.js\n`;
             }
             // new_ui.js
-            if (oiiaioooooiai('new_ui_js_ver') !== latest_versions["new_ui.js"]){
+            if (oiiaioooooiai('new_ui_js_ver') !== latest_versions["new_ui.js"]) {
                 ruOK = false;
+                v_e += `new_ui.js\n`;
             }
             // upload4index.js
-            if (oiiaioooooiai('upload4index_js_ver') !== latest_versions["upload4index.js"]){
+            if (oiiaioooooiai('upload4index_js_ver') !== latest_versions["upload4index.js"]) {
                 ruOK = false;
+                v_e += `upload4index.js\n`;
             }
-            if(!ruOK){
+            if (!ruOK) {
                 layer.open({
                     title: '版本异常',
                     content: 'JS文件检测异常，请尝试删除缓存并刷新页面',
                     btn: ['查看详情', '忽略并继续'],
-                    yes: function(index, layero){
+                    yes: function(index, layero) {
                         license_dialog = layer.open({
                             type: 1,
                             title: 'JS版本异常',
                             content: `<div style="padding: 20px; line-height: 22px; font-size: 16px; text-align: center;">
+<h3>以下文件发生异常：</h3>
+<p>${v_e}</p>
+<br>
 <h3>是什么导致了这个问题？</h3>
 <p>可能是因为本网站的js代码已经更新，但是你的浏览器仍然在使用旧版本的js缓存，导致版本和当前页面所需版本不匹配。这可能引起一些未知的问题。</p>
 <p>另外，如果你的浏览器过旧，也很可能出现这个问题。（这种情况是无解的）</p>
@@ -210,21 +218,22 @@
         var rain_interval_ms = 50;
         var rain_interval;
         var removeTime = 2000;
-        function createRainDrop() {
-                const l=0.5 + Math.random() * rain_anim_length;
-                const rain = document.querySelector(".rain");
-                const drop = document.createElement("div");
-                drop.classList.add("raindrop");
-                drop.style.left = Math.random() * window.innerWidth + "px";
-                drop.style.animationDuration = l+"s"; // 随机动画时长
-                rain.appendChild(drop);
 
-                setTimeout(() => {
-                    rain.removeChild(drop);
-                }, 1000*l);
-            }
+        function createRainDrop() {
+            const l = 0.5 + Math.random() * rain_anim_length;
+            const rain = document.querySelector(".rain");
+            const drop = document.createElement("div");
+            drop.classList.add("raindrop");
+            drop.style.left = Math.random() * window.innerWidth + "px";
+            drop.style.animationDuration = l + "s"; // 随机动画时长
+            rain.appendChild(drop);
+
+            setTimeout(() => {
+                rain.removeChild(drop);
+            }, 1000 * l);
+        }
         document.addEventListener("DOMContentLoaded", function() {
-            
+
 
             rain_interval = setInterval(createRainDrop, rain_interval_ms);
         });
@@ -234,7 +243,8 @@
                 .then(reg => console.log("Service Worker 注册成功:", reg.scope))
                 .catch(err => console.log("Service Worker 注册失败:", err));
         }
-        function downloadImage_pr(){
+
+        function downloadImage_pr() {
             layer.msg('正在生成图片，由于需要下载图片资源，可能需要一些时间。若一直没有反应，可以多次尝试。');
             downloadImage()
         }
@@ -261,10 +271,10 @@
             <div class="header-opa-content">
                 <h1 style="color:turquoise;">
                     <div><span style="color:lightskyblue">MilthmCalc</span><span style="font-size: small;color:lightgreen;">&nbsp;v<?php if (file_exists("version.txt")) {
-                                                                                                                                                        echo file_get_contents("version.txt");
-                                                                                                                                                    } else {
-                                                                                                                                                        echo "_unknown";
-                                                                                                                                                    } ?></span></div>
+                                                                                                                                        echo file_get_contents("version.txt");
+                                                                                                                                    } else {
+                                                                                                                                        echo "_unknown";
+                                                                                                                                    } ?></span></div>
                 </h1>
 
             </div>
@@ -426,15 +436,15 @@
                 <input type="text" class="layui-input inputR" id="login_username" />
                 <h4>Password / 密码：</h4>
                 <input type="password" class="layui-input inputR" id="login_password" />
-                <hr/>
+                <hr />
                 <a class="superlinkR" href="javascript:void(0);" onclick="openLicenseAndPrivacy();" data-i18n="seeLicenseAndPrivacy">查看隐私政策和开源协议</a>、<a href="javascript:void(0);" onclick="show_alertInfo();"><span class="superlinkR">查看使用条款</span></a>
-                <hr/>
+                <hr />
                 <button class="apply-btn" id="login_btn">Login / 登录</button>
                 <button class="cancel-btn" onclick="closeLogin()">Cancel / 取消</button>
-                <hr/>
+                <hr />
                 <p>或者，在输入用户名和密码后 <a class='superlinkR' href="javascript:void(0);" onclick="reg_user()">注册</a></p>
-                <hr/>
-                
+                <hr />
+
             </div>
 
 
@@ -462,10 +472,12 @@
                 <h4>Data / 数据：</h4>
                 <div id="upload_data_display" style="box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;color:rgb(255, 255, 255);background-color:rgba(255, 255, 255, 0.08);border-radius:16px"></div>
                 <span style="display:none;" id="upload_data"></span>
-                <br><hr/>
+                <br>
+                <hr />
                 <a class="superlinkR" href="javascript:void(0);" onclick="openLicenseAndPrivacy();" data-i18n="seeLicenseAndPrivacy">查看隐私政策和开源协议</a>、
                 <a href="javascript:void(0);" onclick="show_alertInfo();"><span class="superlinkR">查看使用条款</span></a>
-                <br><hr/>
+                <br>
+                <hr />
                 <button class="apply-btn" id="upload_btn">Upload / 上传</button>
                 <button class="cancel-btn" onclick="closeUploadPanel()">Cancel / 取消</button>
             </div>
@@ -481,13 +493,13 @@
     <div class="settingsModal" id="userModal" style="border: 1px solid #eeeeee;display: none;">
         <div style="text-align: left;">
             <h2><a href="javascript:void(0);" style="font-size:large;color:rgb(255, 255, 255);text-decoration:none;padding:6px;border:1px;border-style:solid;border-color: #ffffff33;background-color:rgba(255, 255, 255, 0.08);border-radius:16px" onclick="javascript:closeUserPanel();">返回</a> 用户设置</h2>
-            <hr/>
+            <hr />
             <a class='nowrap superlinkR' href='javascript:void(0);' onclick='javascript:securityDesc();'>密保设置</a>
             <br>
             <a class='nowrap superlinkR' href='javascript:void(0);' onclick='javascript:nickNameSettings();'>昵称设置</a>
             <br>
             <a class='nowrap superlinkR' href='javascript:void(0);' onclick='javascript:logoutAll();'>在所有设备上登出</a>
-            
+
         </div>
     </div>
 
@@ -639,6 +651,10 @@
                             setStorage("token", data.token);
                             closeLogin();
                             initLogging();
+                            // checkLogin();
+                            if (!data.hasSecret) {
+                                alertSetSecret();
+                            }
                             return;
                         }
                     })
@@ -669,7 +685,7 @@
             var loadingDiv = document.getElementById("uploadPanel-t");
             var normalDiv = document.getElementById("uploadPanel-normal");
             var lplt = document.getElementById("uploadPanel-t-text");
-            if( dt == "" || title == "" || desc == "" || info == "") {
+            if (dt == "" || title == "" || desc == "" || info == "") {
                 layer.msg("Please fill in all the fields / 请填写所有字段: data(Auto/自动获取), title, description, info(Auto/自动获取)");
                 return;
             }
@@ -754,7 +770,7 @@
                             setStorage("username", data.username);
                             setStorage("nickname", data.nickname);
                             initLogging();
-                            
+
                         }
                         layer.close(loading);
                         layer.close(index);

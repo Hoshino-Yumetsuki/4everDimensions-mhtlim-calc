@@ -8,6 +8,11 @@ if (empty($loginName) || empty($loginKey)) {
     echo json_encode(["msg" => "Empty username or token is not allowed / 用户名或令牌不能为空", "code" => -1]);
     exit;
 }
+// if all long > 48 ret 403
+if (strlen($loginName) > 48 || strlen($loginKey) > 48) {
+    echo json_encode(["msg" => "Username or token is too long / 用户名或令牌过长", "code" => 403]);
+    exit;
+}
 
 function onSuccess($loginInfo) {
     echo json_encode(["msg" => "Success / 获取成功", "code" => 0, "authInfo" => $loginInfo['authInfo']]);
