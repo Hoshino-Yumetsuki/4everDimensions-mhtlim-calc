@@ -1,12 +1,13 @@
 主要负责人：
-    • mkzi_nya (查分核心功能开发&脚本&基本实现开发)
-    • 4everDimensions (UI/前端&后端&托管&云相关功能开发)
-    • libchara-dev
+    • <a href="https://mkzi-nya.github.io/" {}>mkzi_nya</a> (查分核心功能开发&脚本&基本实现开发)
+    • <a href="https://k9.lv/klm/" {}>4everDimensions</a> (UI/前端&后端&托管&云相关功能开发)
+    • <a href="https://github.com/jsjsjsjsjsjsjson" {}>libchara-dev</a>
     • Autumn
+
 特别鸣谢：
-    • mkzi_nya(归梦)
-    • 4everDimensions
-    • libchara-dev
+    • <a href="https://mkzi-nya.github.io/" {}>mkzi_nya (归梦)</a>
+    • <a href="https://k9.lv/klm/" {}>4everDimensions</a>
+    • <a href="https://github.com/jsjsjsjsjsjsjson" {}>libchara-dev</a>
     • Autumn
     • Panyi
     • Eric_Lian

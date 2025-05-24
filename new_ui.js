@@ -13,7 +13,7 @@ function show_author_info() {
   try {
     fetch('authors.txt').then(res => res.text()).then(data => {
       layer.close(loading);
-      document.getElementById("Authors_content").innerHTML = `<pre>${data}</pre><hr><button class="layui-btn layui-btn-normal" onclick="layer.close(authors_dialog)">关闭</button>`
+      document.getElementById("Authors_content").innerHTML = `<pre>${data.replaceAll("{}",'target="_blank" class="superlinkR"')}</pre><hr><button class="layui-btn layui-btn-normal" onclick="layer.close(authors_dialog)">关闭</button>`
     })
   } catch (e) {
     layer.close(loading);
@@ -490,7 +490,7 @@ function closeNickNameSettingsDialog() {
   layer.close(nickNameSettingsDialog);
 }
 function changeNickName() {
-  layer.prompt({ title: '请输入新的昵称', formType: 0 }, function (nickName, index) {
+  layer.prompt({ title: '请输入新的昵称', formType: 0, value: getStorage("nickname") }, function (nickName, index) {
     if (nickName.length > 60) {
       layer.msg("昵称过长，请限制在60字以内。");
       return;
