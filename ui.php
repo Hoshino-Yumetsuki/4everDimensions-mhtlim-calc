@@ -20,7 +20,7 @@
         }
         var latest_versions = {
             "cha_newui.js": 4,
-            "new_ui.js": 5,
+            "new_ui.js": 6,
             "upload4index.js": 3
         }
 
@@ -642,13 +642,8 @@
                         lplt.innerHTML = data.msg
                         layer.msg(data.msg);
                         pr.style.display = "block";
-                        layer.close(loading);
-                        if (data.code !== 0) {
-                            return;
-                        } else {
-                            setStorage("username", data.data.username);
-                            setStorage("nickname", data.data.nickName);
-                            setStorage("token", data.token);
+            
+                 setStorage("token", data.token);
                             closeLogin();
                             initLogging();
                             // checkLogin();
@@ -656,8 +651,8 @@
                                 alertSetSecret();
                             }
                             return;
-                        }
-                    })
+                        })
+                    
                 } catch (e) {
                     lplt.innerHTML = ("An error occurred / 发生错误");
                     pr.style.display = "block";
@@ -687,6 +682,18 @@
             var lplt = document.getElementById("uploadPanel-t-text");
             if (dt == "" || title == "" || desc == "" || info == "") {
                 layer.msg("Please fill in all the fields / 请填写所有字段: data(Auto/自动获取), title, description, info(Auto/自动获取)");
+                return;
+            }
+            if (title.length>1024) {
+                layer.msg("Title is too long / 标题过长");
+                return;
+            }
+            if (desc.length>131072) {
+                layer.msg("Description is too long / 描述过长");
+                return;
+            }
+            if (info.length>1024) {
+                layer.msg("Info is too long / 信息过长");
                 return;
             }
             var loading = layer.load(1)

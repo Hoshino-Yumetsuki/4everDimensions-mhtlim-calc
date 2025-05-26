@@ -1,4 +1,4 @@
-var new_ui_js_ver = 5
+var new_ui_js_ver = 6
 var authors_dialog;
 function show_author_info() {
   authors_dialog = layer.open({
@@ -399,7 +399,7 @@ function open_changelog() {
   });
   var loading = layer.load(1);
   try {
-    fetch('changelog.txt').then(res => res.text()).then(data => {
+    fetch('changelog.php').then(res => res.text()).then(data => {
       layer.close(loading);
       document.getElementById("cl_content").innerHTML = `<pre>${data}</pre><hr><button class="layui-btn layui-btn-normal" onclick="layer.closeAll()">关闭</button>`
     })

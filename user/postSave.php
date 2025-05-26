@@ -12,6 +12,20 @@ if (strlen($save) > 15000000) {
     echo json_encode(["msg" => "Save is too large / 保存内容过大", "code" => -114]);
     exit;
 }
+if (strlen($title) > 1024) {
+    echo json_encode(["msg" => "Title is too long / 标题过长", "code" => -115]);
+    exit;
+}
+
+if (strlen($description) > 131072) {
+    echo json_encode(["msg" => "Description is too long / 描述过长", "code" => -116]);
+    exit;
+}
+
+if (strlen($score) > 1024) {
+    echo json_encode(["msg" => "Score is too long / Score字段过长", "code" => -117]);
+    exit;
+}
 
 if (empty($loginName) || empty($loginPass) || empty($save) || empty($title) || empty($score) || empty($description)) {
     echo json_encode(["msg" => "Empty is not allowed / 任何内容都不能为空", "code" => -1]);
