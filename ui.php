@@ -642,8 +642,20 @@
                         lplt.innerHTML = data.msg
                         layer.msg(data.msg);
                         pr.style.display = "block";
-            
-                 setStorage("token", data.token);
+                        layer.close(loading);
+
+                        if (data.code !== 0) {
+
+                            return;
+
+                        } else {
+
+                            setStorage("username", data.data.username);
+
+                            setStorage("nickname", data.data.nickName);
+
+                            setStorage("token", data.token);
+                            setStorage("token", data.token);
                             closeLogin();
                             initLogging();
                             // checkLogin();
@@ -651,7 +663,8 @@
                                 alertSetSecret();
                             }
                             return;
-                        })
+                        }
+                })
                     
                 } catch (e) {
                     lplt.innerHTML = ("An error occurred / 发生错误");
