@@ -303,8 +303,9 @@
                     温馨提示
                 </div>
                 <div class="layui-card-body">
-                    务必查看使用须知<br>
-                    <a href="javascript:void(0);" onclick="show_alertInfo();"><span class="superlinkR">查看使用须知</span></a>
+                    务必查看使用须知：<a href="javascript:void(0);" onclick="show_alertInfo();"><span class="superlinkR">查看使用须知</span></a>
+                    <br>
+                    <span style="font-size:1.4514em">查看文档：</span><a href="./usage/usage.html" target="_blank"><span class="superlinkR" data-i18n="viewUsage">查看帮助信息</span></a>
                 </div>
             </div>
             <div class="layui-card rccc">
@@ -313,10 +314,8 @@
                 </div>
                 <div class="layui-card-body">
                     <p data-i18n="greeting">欢迎来到MilthmCalc！(Reality计算器) (https://mhtlim.top)</p>
-                    <p data-i18n="description">这是一个用于计算Milthm Reality分数的网站，你可以在这里导入并解析存档。</p>
+                    <p data-i18n="description">这是一个用于计算Milthm Reality分数的网站，你可以在这里导入存档并解析。</p>
                     <hr>
-                    <span data-i18n="usage">使用说明：</span><a href="./usage/usage.html" target="_blank"><span class="superlinkR" data-i18n="viewUsage">查看帮助信息</span></a>
-                    <br>
                     <span>更新日志：</span><a href="javascript:void(0);" onclick="open_changelog()"><span class="superlinkR">查看更新日志</span></a>
                     <hr>
                     <span data-i18n="qqGroup">QQ交流群：</span><a href="https://qm.qq.com/q/Utb6sNDvki" target="_blank"><span class="superlinkR" data-i18n="viewQQGroup">Milthm#√-1洨巟羣</span></a>
@@ -352,7 +351,7 @@
                     <textarea id="inputData" class="layui-textarea" placeholder="粘贴数据在此处... / Paste Data Here..."></textarea>
                     <hr />
                     <button class="layui-btn layui-btn-primary" onclick="javascript:startProcess();" data-i18n="parse">解析</button>
-                    <button class="layui-btn layui-btn-primary" onclick="javascript:upl();" data-i18n="uploadFile">上传文件</button>
+                    <button class="layui-btn layui-btn-primary" onclick="javascript:upl_pre();" data-i18n="uploadFile">上传文件</button>
                     <hr />
                     <button class="layui-btn layui-btn-primary" onclick="javascript:downloadImage_pr();" data-i18n="generateImage">生成图像</button>
                     <button class="layui-btn layui-btn-primary" onclick="showSettings();" data-i18n="settings">查分图设置</button>

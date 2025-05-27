@@ -1179,7 +1179,9 @@ function loadImage(src) {
 
 
 
-
+function cha_newui_js_debug(){
+  document.getElementById("debug_cha_newui_js").innerHTML = "cha_newui.js is running.";
+}
 /* ========== QQ 上传逻辑 & 其他 UI  ========== 
 const qqEntry = document.getElementById("qqEntry");
 const qqBotResultDialog = new mdui.Dialog("#qqBotResultDialog", { modal: true, closeOnEsc: false });

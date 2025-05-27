@@ -516,3 +516,32 @@ function changeNickName() {
 function alertSetSecret() {
   layer.msg("强烈建议打开\"用户设置\"为自己的账号设置\"密保\"信息，以防止账号的密码丢失。");
 }
+// upl_pre
+function upl_pre() {
+  if(document.getElementById("inputData").value != "debug"){
+    upl();
+  }else{
+    upl_debug();
+  }
+}
+
+function TRY(func) {
+  try{eval(func)}catch(e){}
+}
+function upl_debug(){
+  layer.open({
+    type: 1,
+    title: 'Debug / 调试',
+    content: `<div id="debug_content" style="padding:32px;text-align:center;">
+    <span id="debug_new_ui_css_show" style="display:none;">new_ui.css is running.</span>
+    <span id="debug_new_ui_css_hide" style="display:inline;">new_ui.css is not running.</span><br>
+    <span id="debug_new_ui_js">new_ui.js is running.</span><br>
+    <span id="debug_upload4index_js">upload4index.js is not running.</span><br>
+    <span id="debug_cha_newui_js">cha_newui.js is not running.</span><hr/>
+    <button class="layui-btn layui-btn-normal" onclick="layer.closeAll()">完成</button>
+    </div>`,
+    skin: 'layui-layer-win10'
+  });
+    TRY("upload4index_debug()");
+    TRY("cha_newui_js_debug()");
+}

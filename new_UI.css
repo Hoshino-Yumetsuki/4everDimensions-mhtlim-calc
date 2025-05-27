@@ -276,3 +276,11 @@ body {
         opacity: 1;
     }
 }
+
+
+#debug_new_ui_css_show{
+    display:inline !important;
+}
+#debug_new_ui_css_hide{
+    display:none !important;
+}

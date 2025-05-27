@@ -167,3 +167,7 @@ function closeUserPanel(){
     document.getElementById("over5lay").style.display = "none";
     document.getElementById("userModal").style.display = "none";
 }
+
+function upload4index_debug(){
+    document.getElementById("debug_upload4index_js").innerHTML = "upload4index.js is running.";
+}
