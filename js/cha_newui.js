@@ -1,4 +1,4 @@
-const Updated = "Updated at 2025.05.26 11:30(UTC+8)"
+const Updated = "Updated at 2025.05.27 15:30(UTC+8)"
 var cha_newui_js_ver = 4
 console.log(Updated)
 console.log(" ███  ███                               \n\
@@ -1040,7 +1040,7 @@ function downloadImage() {
       } else {
         ctx.fillText(`Reality: ${window.average1}`, 660, 135);
       }
-      ctx.fillText(`Ytilaer: ${(window.utlr).toFixed(4)}`, 660, 170);
+      ctx.fillText(`Ytilaer: ${Math.floor(window.utlr*10000)/10000}`, 660, 170);
       const now = new Date();
       const dateStr = `${now.toISOString().split('T')[0]} ${now.toTimeString().split(' ')[0]}`;
       ctx.fillText(`Date: ${dateStr}`, 660, 205);
