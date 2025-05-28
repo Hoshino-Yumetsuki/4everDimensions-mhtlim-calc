@@ -19,7 +19,7 @@ function onSuccess($loginInfo) {
     $server = dbc();
     $st = "select selfid,content from user_saves where owner = :lN and selfid = :lS limit 1";
     $ps = $server->prepare($st);
-    $ps->bindParam(":lS", htmlspecialchars($id));
+    $ps->bindParam(":lS", ($id));
     $ps->bindParam(":lN", $loginInfo['id']);
     $ps->execute();
     $saves = $ps->fetchAll(PDO::FETCH_ASSOC);

@@ -30,7 +30,7 @@ function show_donation() {
     shadeClose: true, // 点击遮罩区域，关闭弹层
     maxmin: false,
     anim: 0, // 0-6 的动画形式，-1 不开启
-    content: `./donate.html`,
+    content: `./static/donate/donate.html`,
     offset: ['32px'],
     skin: 'layui-layer-win10'
   });
