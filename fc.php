@@ -1,7 +1,9 @@
 <?php
 function dbc()
 {
-    return new PDO("mysql:host=klms.local;dbname=k9lv", "k9lv", "kMPnhPYT4R6bheXW");
+    $pdo = new PDO("mysql:host=klms.local;dbname=k9lv", "k9lv", "kMPnhPYT4R6bheXW");
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    return $pdo;
 }
 
 function query($pdo, $sql)

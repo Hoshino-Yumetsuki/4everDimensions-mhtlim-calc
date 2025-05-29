@@ -1,4 +1,4 @@
-var new_ui_js_ver = 6
+var new_ui_js_ver = 7
 var authors_dialog;
 function show_author_info() {
   authors_dialog = layer.open({
@@ -544,4 +544,83 @@ function upl_debug(){
   });
     TRY("upload4index_debug()");
     TRY("cha_newui_js_debug()");
+}
+
+// for stat
+var stat_dialog;
+function openStat(){
+  stat_dialog=layer.open({
+    type: 1,
+    title: '统计',
+    content: `<div id="stat_content" style="padding:32px;text-align:center;height:100%">
+
+            <div id="stat_chart" style="width: 100%;min-width:400px;height: 70%;"> </div>
+    </div>`,
+    skin: 'layui-layer-win10',
+    area: ['75vw', '80vh'],
+    shade: 0.6,
+    shadeClose: true,
+  });
+  console.log(stat_dialog)
+  var f=layer.load(1);
+  try{
+    fetch("wtf/stat.php").then((res)=>{
+    res.json().then((data)=>{
+      
+      if(data.data.code!=0){
+        layer.msg(data.data.msg);
+        return;
+      }
+      console.log(data)
+      mount_stat(data);
+    })
+  })
+  }catch(e){
+    layer.msg("获取数据失败，请检查网络连接。");
+  }finally{
+    layer.close(f);
+  }
+  
+}
+function mount_stat(content){
+  var f=document.getElementById('stat_chart')
+var ccc = echarts.init(f);
+var p=content.data.data;
+var dates = p.map((item => item.date));
+var data = {
+        title: {
+            text: '访问统计',
+            textStyle: {
+                color: '#fff',
+                fontSize: 20,
+                fontWeight: 'bold'
+            }
+        },
+        tooltip: {},
+        legend: {
+            data: ["访问量"],
+            textStyle: {
+                color: '#fff'
+            }
+        },
+        xAxis: {
+            data: dates
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: '{value}',
+                color: '#fff'
+            }
+        },
+        series: [{
+            name: '访问量',
+            type: 'line',
+            data: p.map((item => item.visits))
+        }
+            ]
+    };
+ccc.setOption(data,true);
+ccc.resize({height: f.clientHeight*0.8});
+console.log(f.clientHeight*0.8)
 }

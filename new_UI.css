@@ -284,3 +284,11 @@ body {
 #debug_new_ui_css_hide{
     display:none !important;
 }
+
+/* for stat */
+/* #stat_chart div{
+    height: 100% !important;
+}
+#stat_chart div canvas{
+    height: 100% !important;
+} */
