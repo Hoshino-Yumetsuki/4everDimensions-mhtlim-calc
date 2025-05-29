@@ -427,8 +427,8 @@
         <div style="text-align: left;">
             <h2>Authencation (身份验证)</h2>
             <hr>
-            <b>不是你的Milthm账户或TapTap账户！！！</b>
-            <h1>Login / 登录：</h1><br>
+            <b style="font-size:1.1451em;text-shadow: 0px 0px 10px rgb(0, 225, 255), 0px 0px 20px #fff;">不是你的TapTap或其他任何平台的账户！</b>
+            <br><hr>
             <div id="loginPanel-t" style="display: none;padding:6px;border:1px;border-style:solid;border-color: #ffffff33;color:rgb(255, 255, 255);background-color:#ffffff33;border-radius:16px">
                 <b id="loginPanel-t-text">Loading...</b>
             </div>
