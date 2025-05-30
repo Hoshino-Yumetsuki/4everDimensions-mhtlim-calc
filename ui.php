@@ -319,7 +319,7 @@
                     <hr>
                     <span>更新日志：</span><a href="javascript:void(0);" onclick="open_changelog()"><span class="superlinkR">查看更新日志</span></a>
                     <hr>
-                    <span data-i18n="qqGroup">QQ交流群：</span><a href="https://qm.qq.com/q/Utb6sNDvki" target="_blank"><span class="superlinkR" data-i18n="viewQQGroup">Milthm#√-1洨巟羣</span></a>
+                    <span data-i18n="qqGroup">QQ交流群：</span><a href="https://qm.qq.com/q/Utb6sNDvki" target="_blank"><span class="superlinkR" data-i18n="viewQQGroup">Mhtlim#√-1洨巟羣</span></a>
                     <hr>
                     <div style="padding: 3px">
                         <span id="logInfo">正在检测登录状态...</span>
