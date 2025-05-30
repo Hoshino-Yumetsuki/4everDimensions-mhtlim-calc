@@ -331,6 +331,7 @@
                 <div class="layui-card-body">
                     <!-- 网站作者：<button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:show_author_info();">查看</button><br> -->
                     <span data-i18n="OtherAddress">其他地址: </span><a href="https://mkzi-nya.github.io/milthm-calculator-web/index.html" target="_blank"><span class="superlinkR">Mkzi Nya's Fork</span></a><br>
+                    <span>友情链接: </span><a href="http://xuziyao.com/" target="_blank"><span class="superlinkR">Dason</span></a> & <a href="https://milthm.adproqwq.top/" target="_blank"><span class="superlinkR">Adpro</span></a> Page<br>
                     <span data-i18n="siteAuthor">网站作者：</span><a href="javascript:void(0);" onclick="show_author_info();" class="superlinkR" data-i18n="viewAuthor">查看</a><br>
                     <span data-i18n="donationText">赞助：</span><a href="javascript:void(0);" onclick="show_donation();" class="superlinkR" data-i18n="donation">捐赠</a><br>
                     <span data-i18n="visit">本站访问数量：</span><span id="accessCount"></span>
