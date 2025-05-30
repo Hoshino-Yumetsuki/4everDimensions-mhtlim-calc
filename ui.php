@@ -331,12 +331,12 @@
                 <div class="layui-card-body">
                     <!-- 网站作者：<button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:show_author_info();">查看</button><br> -->
                     <span data-i18n="OtherAddress">其他地址: </span><a href="https://mkzi-nya.github.io/milthm-calculator-web/index.html" target="_blank"><span class="superlinkR">Mkzi Nya's Fork</span></a><br>
-                    <span>友情链接: </span><a href="http://xuziyao.com/" target="_blank"><span class="superlinkR">Dason</span></a> & <a href="https://milthm.adproqwq.top/" target="_blank"><span class="superlinkR">Adpro</span></a> Page<br>
+                    <span>友情链接: </span><a href="http://xuziyao.com/" target="_blank"><span class="superlinkR">Dason</span></a> & <a href="https://milthm.adproqwq.top/" target="_blank"><span class="superlinkR">Adpro's</span></a> Page<br>
                     <span data-i18n="siteAuthor">网站作者：</span><a href="javascript:void(0);" onclick="show_author_info();" class="superlinkR" data-i18n="viewAuthor">查看</a><br>
                     <span data-i18n="donationText">赞助：</span><a href="javascript:void(0);" onclick="show_donation();" class="superlinkR" data-i18n="donation">捐赠</a><br>
                     <span data-i18n="visit">本站访问数量：</span><span id="accessCount"></span>
                     <a class="superlinkR" href="javascript:void(0);" onclick="openStat();">查看访问统计</a><br>
-                    <a class="superlinkR" href="javascript:void(0);" onclick="openLicenseAndPrivacy();" data-i18n="seeLicenseAndPrivacy">查看隐私政策和开源协议</a>
+                    <!-- <a class="superlinkR" href="javascript:void(0);" onclick="openLicenseAndPrivacy();" data-i18n="seeLicenseAndPrivacy">查看隐私政策和开源协议</a> -->
 
                 </div>
             </div>
@@ -429,7 +429,8 @@
             <h2>Authencation (身份验证)</h2>
             <hr>
             <b style="font-size:1.1451em;text-shadow: 0px 0px 10px rgb(0, 225, 255), 0px 0px 20px #fff;">不是你的TapTap或其他任何平台的账户！</b>
-            <br><hr>
+            <br>
+            <hr>
             <div id="loginPanel-t" style="display: none;padding:6px;border:1px;border-style:solid;border-color: #ffffff33;color:rgb(255, 255, 255);background-color:#ffffff33;border-radius:16px">
                 <b id="loginPanel-t-text">Loading...</b>
             </div>
@@ -439,7 +440,8 @@
                 <h4>Password / 密码：</h4>
                 <input type="password" class="layui-input inputR" id="login_password" />
                 <hr />
-                <a class="superlinkR" href="javascript:void(0);" onclick="openLicenseAndPrivacy();" data-i18n="seeLicenseAndPrivacy">查看隐私政策和开源协议</a>、<a href="javascript:void(0);" onclick="show_alertInfo();"><span class="superlinkR">查看使用条款</span></a>
+                <!-- <a class="superlinkR" href="javascript:void(0);" onclick="openLicenseAndPrivacy();" data-i18n="seeLicenseAndPrivacy">查看隐私政策和开源协议</a>、-->
+                <a href="javascript:void(0);" onclick="show_alertInfo();"><span class="superlinkR">查看使用条款</span></a>
                 <hr />
                 <button class="apply-btn" id="login_btn">Login / 登录</button>
                 <button class="cancel-btn" onclick="closeLogin()">Cancel / 取消</button>
@@ -476,7 +478,7 @@
                 <span style="display:none;" id="upload_data"></span>
                 <br>
                 <hr />
-                <a class="superlinkR" href="javascript:void(0);" onclick="openLicenseAndPrivacy();" data-i18n="seeLicenseAndPrivacy">查看隐私政策和开源协议</a>、
+                <!-- <a class="superlinkR" href="javascript:void(0);" onclick="openLicenseAndPrivacy();" data-i18n="seeLicenseAndPrivacy">查看隐私政策和开源协议</a>、 -->
                 <a href="javascript:void(0);" onclick="show_alertInfo();"><span class="superlinkR">查看使用条款</span></a>
                 <br>
                 <hr />
@@ -666,8 +668,8 @@
                             }
                             return;
                         }
-                })
-                    
+                    })
+
                 } catch (e) {
                     lplt.innerHTML = ("An error occurred / 发生错误");
                     pr.style.display = "block";
@@ -699,15 +701,15 @@
                 layer.msg("Please fill in all the fields / 请填写所有字段: data(Auto/自动获取), title, description, info(Auto/自动获取)");
                 return;
             }
-            if (title.length>1024) {
+            if (title.length > 1024) {
                 layer.msg("Title is too long / 标题过长");
                 return;
             }
-            if (desc.length>131072) {
+            if (desc.length > 131072) {
                 layer.msg("Description is too long / 描述过长");
                 return;
             }
-            if (info.length>1024) {
+            if (info.length > 1024) {
                 layer.msg("Info is too long / 信息过长");
                 return;
             }
