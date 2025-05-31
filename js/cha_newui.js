@@ -430,18 +430,18 @@ function drawCard(result, index) {
   // score.style.fontSize = `${fontSize * 2.5}px`;
   score.style.marginBottom = `${marginBottom}px`;
   score.style.whiteSpace = 'nowrap';
-  score.style.overflow = 'hidden';
+  score.style.overflow = 'ellipsis';
   // 根据等级分数渐变
   if (result.bestLevel < 3) {
     Object.assign(score.style, {
-      background: 'linear-gradient(to right, #12a9fb, #ee80ff)',
+      background: 'linear-gradient(to right, #12a9fb, #ee80ff) border-box',
       color: 'transparent',
       backgroundClip: 'text',
       WebkitBackgroundClip: 'text'
     });
   } else if (result.bestLevel < 5) {
     Object.assign(score.style, {
-      background: 'linear-gradient(to right, #5e94f3, #80b2ff)',
+      background: 'linear-gradient(to right, #5e94f3, #80b2ff) border-box',
       color: 'transparent',
       backgroundClip: 'text',
       WebkitBackgroundClip: 'text'
@@ -449,6 +449,7 @@ function drawCard(result, index) {
   } else {
     score.style.color = '#D1D1D1';
   }
+  score.style.lineHeight="1.2"
 
   card.appendChild(score);
   // 序号
@@ -457,10 +458,11 @@ function drawCard(result, index) {
   indexElem.innerText = `#${index + 1}`;
   Object.assign(indexElem.style, {
     fontSize: `${fontSize}px`,
-    marginBottom: `${marginBottom}px`,
+    // marginBottom: `${marginBottom*0.5}px`,
     whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis'
+    overflow: 'ellipsis',
+    textOverflow: 'ellipsis',
+    top: "0px"
   });
   card.appendChild(indexElem);
   // 加入到输出
@@ -470,7 +472,8 @@ function drawCard(result, index) {
   // const fontSize1 = Math.max(1, Math.min(20, card.offsetWidth * 0.07));
   info.style.fontSize = `${shitValue*1.14514}px`;
   title.style.fontSize = `${shitValue * 1.2}px`;
-  score.style.fontSize = `${shitValue * 2}px`;
+  score.style.fontSize = `${shitValue * 2.4}px`;
+  indexElem.style.fontSize = `${shitValue * 1.2}px`;
   // console.log(`Card width: ${card.offsetWidth}px, Font size: ${shitValue}px`);
 }
 
