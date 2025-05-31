@@ -11,6 +11,28 @@
     <link href="./layui/css/layui.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.1/dist/echarts.min.js"></script>
     <script>
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)); // 将天数转换为毫秒
+                expires = "; expires=" + date.toUTCString(); // 设置过期时间
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/"; // 设置 Cookie
+        }
+
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+        
+
         // function isdef
         function oiiaioooooiai(v) {
             try {
@@ -306,7 +328,8 @@
                     温馨提示
                 </div>
                 <div class="layui-card-body">
-                    务必查看使用须知：<a href="javascript:void(0);" onclick="show_alertInfo();"><span class="superlinkR">查看使用须知</span></a>
+                    <span style="font-size:1.4514em">务必查看重要使用说明：</span><a href="javascript:void(0);" onclick="openIN();"><span class="superlinkR">重要说明！</span></a>
+                    
                     <br>
                     <span style="font-size:1.4514em">查看文档：</span><a href="./usage/usage.html" target="_blank"><span class="superlinkR" data-i18n="viewUsage">查看帮助信息</span></a>
                 </div>
@@ -338,6 +361,7 @@
                     <span data-i18n="donationText">赞助：</span><a href="javascript:void(0);" onclick="show_donation();" class="superlinkR" data-i18n="donation">捐赠</a><br>
                     <span data-i18n="visit">本站访问数量：</span><span id="accessCount"></span>
                     <a class="superlinkR" href="javascript:void(0);" onclick="openStat();">查看访问统计</a><br>
+                    务必查看使用须知：<a href="javascript:void(0);" onclick="show_alertInfo();"><span class="superlinkR">查看使用须知</span></a>
                     <!-- <a class="superlinkR" href="javascript:void(0);" onclick="openLicenseAndPrivacy();" data-i18n="seeLicenseAndPrivacy">查看隐私政策和开源协议</a> -->
 
                 </div>
@@ -816,6 +840,23 @@
 
         // Check version
         checkVersions();
+
+
+        // NOTICE
+        if(getCookie("importantNoticeRead") !== "true"){
+            openIN();
+        }
+        function openIN(){
+            layer.open({
+                title: '使用必读 / Important Notice',
+                content: `<?php echo file_get_contents("importantNotice.txt"); ?>`,
+                btn: ['确定并半天不再提示'],
+                yes: function(index, layero) {
+                    setCookie("importantNoticeRead", "true", 0.5);
+                    layer.close(index);
+                }
+            });
+        }
     </script>
 
 </body>
