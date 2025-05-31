@@ -215,6 +215,8 @@
     <!-- Chunk: sql_wasm -->
     <script src="./js/sql-wasm.js"></script>
     <script>
+        var enableExperimentalFeatures = true;
+
         var rain_anim_length = 1.5;
         var rain_interval_ms = 50;
         var rain_interval;

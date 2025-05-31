@@ -1,5 +1,6 @@
 const Updated = "Updated at 2025.05.27 15:30(UTC+8)"
 var cha_newui_js_ver = 4
+var chart_data = [];
 console.log(Updated)
 console.log(" ███  ███                               \n\
  ███  ███                               \n\
