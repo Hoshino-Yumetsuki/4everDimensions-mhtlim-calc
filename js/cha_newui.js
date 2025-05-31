@@ -490,9 +490,10 @@ function changeColumns(delta) {
 function upl() {
   document.getElementById('fileupLoad').click();
 }
-
+var global_file_temp = null;
 document.getElementById('fileupLoad').addEventListener("change", async function (e) {
   const file = e.target.files[0];
+  global_file_temp = file;
   if (!file) return;
 
   const fileName = file.name.toLowerCase();
