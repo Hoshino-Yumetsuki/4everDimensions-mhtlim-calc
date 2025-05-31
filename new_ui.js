@@ -365,13 +365,13 @@ function securityDesc_edit() {
   securityDesc_edit_dialog = layer.open({
     type: 1,
     title: '修改账号安全验证信息',
-    content: `<div id="_securityDesc_edit_content" style="padding:32px">请稍等...</div>`,
-    area: ['80vw', '80vh'],
+    content: `<div id="_securityDesc_edit_content" style="padding:32px">你可以填写用于重置密码的安全验证方案，例如写你的qq号、邮箱、微信号，甚至是简单的密保问题。后续需要找回时找站点管理员处理即可。<hr><textarea id="securityDesc_edit_textarea" style="width:100%;height:40vh" class="layui-textarea textareaR"></textarea><hr><button class="layui-btn layui-btn-normal" onclick="securityDesc_edit_save()">覆盖并保存</button><button class="layui-btn layui-btn-normal" onclick="layer.close(securityDesc_edit_dialog)">取消修改</button></div>`,
+    // area: ['80vw', '80vh'],
     shade: 0.6,
     shadeClose: true,
     skin: 'layui-layer-win10'
   })
-  document.getElementById("_securityDesc_edit_content").innerHTML = `你可以填写用于重置密码的安全验证方案，例如写你的qq号、邮箱、微信号，甚至是简单的密保问题。后续需要找回时找站点管理员处理即可。<hr><textarea id="securityDesc_edit_textarea" style="width:100%;height:40vh" class="layui-textarea textareaR"></textarea><hr><button class="layui-btn layui-btn-normal" onclick="securityDesc_edit_save()">覆盖并保存</button><button class="layui-btn layui-btn-normal" onclick="layer.close(securityDesc_edit_dialog)">取消修改</button>`
+  // document.getElementById("_securityDesc_edit_content").innerHTML = ``
   document.getElementById("securityDesc_edit_textarea").value = document.getElementById("_securityDesc_content_pre").innerHTML
 }
 function securityDesc_edit_save() {
@@ -460,7 +460,7 @@ function openNickNameSettingsDialog() {
     <hr>
     <p>此昵称将在首页登陆后显示，修改昵称不会影响登陆用户名，登陆请仍然使用登陆用户名。（昵称可以和别人相同。）</p>
     </div>`,
-    area: ['60vw', '80vh'],
+    // area: ['60vw', '80vh'],
     shade: 0.6,
     shadeClose: true,
     skin: 'layui-layer-win10'

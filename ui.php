@@ -854,7 +854,12 @@
                 yes: function(index, layero) {
                     setCookie("importantNoticeRead", "true", 0.5);
                     layer.close(index);
-                }
+                },
+                resize: true,
+                maxmin: true,
+                scrollbar: false,
+                anim: 2
+                // fixed: true
             });
         }
     </script>

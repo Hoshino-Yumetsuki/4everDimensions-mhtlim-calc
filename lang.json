@@ -34,7 +34,7 @@
     "donation": "捐赠",
     "donationText":"捐赠：",
     "uploadYourSaves": "上传你的存档：",
-    "uploadBtnText": "上传存档",
+    "uploadBtnText": "上传存档到云端",
     "seeLicenseAndPrivacy": "查看开源许可和隐私政策"
   },
   "zh-tw": {
@@ -72,7 +72,7 @@
     "donation": "捐赠",
     "donationText":"捐赠：",
     "uploadYourSaves": "上傳你的存檔：",
-    "uploadBtnText": "上傳存檔",
+    "uploadBtnText": "上傳存檔到雲端",
     "seeLicenseAndPrivacy": "查看開源許可和隱私政策"
   },
   "en": {
