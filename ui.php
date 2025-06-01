@@ -493,6 +493,8 @@
                 <b id="uploadPanel-t-text">Loading...</b>
             </div>
             <div id="uploadPanel-normal">
+                <h4>这里不是导入文件解析的地方！这是云存档储存！不要把db文件一堆乱码复制到这来！</h4>
+                <hr>
                 <h4>Title / 标题：</h4>
                 <input type="text" class="layui-input inputR" id="upload_title" />
                 <h4>Description / 描述：</h4>
@@ -731,7 +733,7 @@
                 layer.msg("Title is too long / 标题过长");
                 return;
             }
-            if (desc.length > 131072) {
+            if (desc.length > 2048) {
                 layer.msg("Description is too long / 描述过长");
                 return;
             }

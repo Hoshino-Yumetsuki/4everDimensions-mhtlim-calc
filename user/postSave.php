@@ -17,7 +17,7 @@ if (strlen($title) > 1024) {
     exit;
 }
 
-if (strlen($description) > 131072) {
+if (strlen($description) > 2048) {
     echo json_encode(["msg" => "Description is too long / 描述过长", "code" => -116]);
     exit;
 }
