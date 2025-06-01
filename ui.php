@@ -380,7 +380,7 @@
                     <textarea id="inputData" class="layui-textarea" placeholder="粘贴数据在此处... / Paste Data Here..."></textarea>
                     <hr />
                     <button class="layui-btn layui-btn-primary" onclick="javascript:startProcess();" data-i18n="parse">解析</button>
-                    <button class="layui-btn layui-btn-primary" onclick="javascript:upl_pre();" data-i18n="uploadFile">上传文件</button>
+                    <button class="layui-btn layui-btn-primary" onclick="javascript:upl_pre();" data-i18n="uploadFile">导入文件</button>
                     <hr />
                     <button class="layui-btn layui-btn-primary" onclick="javascript:downloadImage_pr();" data-i18n="generateImage">生成图像</button>
                     <button class="layui-btn layui-btn-primary" onclick="showSettings();" data-i18n="settings">查分图设置</button>
