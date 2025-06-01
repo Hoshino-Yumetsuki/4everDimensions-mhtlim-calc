@@ -1,6 +1,5 @@
-const Updated = "Updated at 2025.05.27 15:30(UTC+8)"
+const Updated = "Updated at 2025.05.26 11:30(UTC+8)"
 var cha_newui_js_ver = 4
-var chart_data = [];
 console.log(Updated)
 console.log(" ███  ███                               \n\
  ███  ███                               \n\
@@ -431,18 +430,18 @@ function drawCard(result, index) {
   // score.style.fontSize = `${fontSize * 2.5}px`;
   score.style.marginBottom = `${marginBottom}px`;
   score.style.whiteSpace = 'nowrap';
-  score.style.overflow = 'ellipsis';
+  score.style.overflow = 'hidden';
   // 根据等级分数渐变
   if (result.bestLevel < 3) {
     Object.assign(score.style, {
-      background: 'linear-gradient(to right, #12a9fb, #ee80ff) border-box',
+      background: 'linear-gradient(to right, #12a9fb, #ee80ff)',
       color: 'transparent',
       backgroundClip: 'text',
       WebkitBackgroundClip: 'text'
     });
   } else if (result.bestLevel < 5) {
     Object.assign(score.style, {
-      background: 'linear-gradient(to right, #5e94f3, #80b2ff) border-box',
+      background: 'linear-gradient(to right, #5e94f3, #80b2ff)',
       color: 'transparent',
       backgroundClip: 'text',
       WebkitBackgroundClip: 'text'
@@ -450,7 +449,6 @@ function drawCard(result, index) {
   } else {
     score.style.color = '#D1D1D1';
   }
-  score.style.lineHeight="1.2"
 
   card.appendChild(score);
   // 序号
@@ -459,11 +457,10 @@ function drawCard(result, index) {
   indexElem.innerText = `#${index + 1}`;
   Object.assign(indexElem.style, {
     fontSize: `${fontSize}px`,
-    // marginBottom: `${marginBottom*0.5}px`,
+    marginBottom: `${marginBottom}px`,
     whiteSpace: 'nowrap',
-    overflow: 'ellipsis',
-    textOverflow: 'ellipsis',
-    top: "0px"
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
   });
   card.appendChild(indexElem);
   // 加入到输出
@@ -473,8 +470,7 @@ function drawCard(result, index) {
   // const fontSize1 = Math.max(1, Math.min(20, card.offsetWidth * 0.07));
   info.style.fontSize = `${shitValue*1.14514}px`;
   title.style.fontSize = `${shitValue * 1.2}px`;
-  score.style.fontSize = `${shitValue * 2.4}px`;
-  indexElem.style.fontSize = `${shitValue * 1.2}px`;
+  score.style.fontSize = `${shitValue * 2}px`;
   // console.log(`Card width: ${card.offsetWidth}px, Font size: ${shitValue}px`);
 }
 
@@ -490,10 +486,9 @@ function changeColumns(delta) {
 function upl() {
   document.getElementById('fileupLoad').click();
 }
-var global_file_temp = null;
+
 document.getElementById('fileupLoad').addEventListener("change", async function (e) {
   const file = e.target.files[0];
-  global_file_temp = file;
   if (!file) return;
 
   const fileName = file.name.toLowerCase();
@@ -1045,7 +1040,7 @@ function downloadImage() {
       } else {
         ctx.fillText(`Reality: ${window.average1}`, 660, 135);
       }
-      ctx.fillText(`Ytilaer: ${Math.floor(window.utlr*10000)/10000}`, 660, 170);
+      ctx.fillText(`Ytilaer: ${(window.utlr).toFixed(4)}`, 660, 170);
       const now = new Date();
       const dateStr = `${now.toISOString().split('T')[0]} ${now.toTimeString().split(' ')[0]}`;
       ctx.fillText(`Date: ${dateStr}`, 660, 205);
@@ -1184,9 +1179,7 @@ function loadImage(src) {
 
 
 
-function cha_newui_js_debug(){
-  document.getElementById("debug_cha_newui_js").innerHTML = "cha_newui.js is running.";
-}
+
 /* ========== QQ 上传逻辑 & 其他 UI  ========== 
 const qqEntry = document.getElementById("qqEntry");
 const qqBotResultDialog = new mdui.Dialog("#qqBotResultDialog", { modal: true, closeOnEsc: false });
