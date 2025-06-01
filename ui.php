@@ -11,6 +11,12 @@
     <link href="./layui/css/layui.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.1/dist/echarts.min.js"></script>
     <script>
+        var mhtlim_top=true;
+        function doTarget(it){
+            if(mhtlim_top) {
+                it();
+            }
+        }
         function setCookie(name, value, days) {
             var expires = "";
             if (days) {

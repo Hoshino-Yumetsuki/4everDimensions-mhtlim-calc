@@ -624,3 +624,5 @@ ccc.setOption(data,true);
 ccc.resize({height: f.clientHeight*0.8});
 console.log(f.clientHeight*0.8)
 }
+
+
