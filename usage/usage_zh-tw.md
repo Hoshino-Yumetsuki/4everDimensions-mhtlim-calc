@@ -186,8 +186,9 @@ $$
 $$
 \text{Reality}(s, c) =
 \begin{cases} 
+\mathbf{0}, & c \in (-\infty, 0.001) \\
 \mathbf{1 + c}, & s \in [1005000, 1010000] \\
-\displaystyle \frac{1.4}{e^{-3.65 \cdot \left(\frac{s}{10000} - 99.5\right)} + 1} - 0.4 + c, 
+\displaystyle \frac{1.4}{e^{3.65 \cdot \left(99.5 - \frac{s}{10000}\right)} + 1} - 0.4 + c, 
 & s \in [995000, 1005000) \\
 \displaystyle \frac{e^{3.1 \cdot \frac{s - 980000}{15000}} - 1}{e^{3.1} - 1} \cdot 0.8 - 0.5 + c, 
 & s \in [980000, 995000) \\
@@ -201,16 +202,13 @@ $$
 #### 代碼實現：
 
 ```js
-function reality(score, constant) {
-    if (score >= 1005000)
-        return Math.max(1 + constant, 0);
-    if (score >= 995000) 
-        return Math.max(1.4 / (Math.exp(-3.65 * (score / 10000 - 99.5)) + 1) - 0.4 + constant, 0);
-    if (score >= 980000) 
-        return Math.max(((Math.exp(3.1 * (score - 980000) / 15000) - 1) / (Math.exp(3.1) - 1)) * 0.8 - 0.5 + constant, 0);
-    if (score >= 700000) 
-        return Math.max(score / 280000 - 4 + constant, 0);
-    return 0;
+function reality(score, c) {
+  if (c < 0.001) return 0;
+  if (score >= 1005000) return 1 + c;
+  if (score >= 995000) return 1.4 / (Math.exp(363.175 - score * 0.000365) + 1) - 0.4 + c;
+  if (score >= 980000) return ((Math.exp(3.1 * (score - 980000) / 15000) - 1) / (Math.exp(3.1) - 1)) * 0.8 - 0.5 + c;
+  if (score >= 700000) return score / 280000 - 4 + c;
+  return 0;
 }
 ```
 
