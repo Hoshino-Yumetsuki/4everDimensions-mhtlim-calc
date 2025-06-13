@@ -48,7 +48,7 @@
             }
         }
         var latest_versions = {
-            "cha_newui.js": 4,
+            "cha_newui.js": 5,
             "new_ui.js": 7,
             "upload4index.js": 3
         }
