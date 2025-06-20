@@ -147,7 +147,6 @@ function processSongFromOldFormat(record) {
     else if (AchievedStatus.includes(4)){bl=4}
     else bl=6
   }else if(BestLevel!=0){bl=BestLevel+4;}
-  }
   
   return {
     singleRealityRaw,
