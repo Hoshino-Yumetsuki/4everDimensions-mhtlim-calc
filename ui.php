@@ -5,11 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="title">Milthm 查分器（原Reality计算器）</title>
+    <meta name="description" content="Milthm音游查分器 - 精准计算Reality分数，提供详细音游成绩分析。在线使用。">
+    <meta name="keywords" content="Milthm, Reality, 查分器, 音游, Reality计算, 节奏游戏, 成绩分析">
+    <meta name="author" content="MkziAndInetPigman">
+    <meta name="robots" content="index, follow">
+        <!-- Open Graph 社交分享优化 -->
+    <meta property="og:title" content="Milthm音游查分器 - Reality计算工具">
+    <meta property="og:description" content="详细分析Reality分数，提升你的游戏水平">
+    <meta property="og:image" content="https://mhtlim.top/static/bg_night.avif">
+    <meta property="og:url" content="https://mhtlim.top">
+    <meta property="og:type" content="website">
+
+
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="new_UI.css">
     <script src="js/constant.js"></script>
     <link href="./layui/css/layui.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.1/dist/echarts.min.js"></script>
+    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
+    <script src="//cdn.jsdelivr.net/npm/echarts@5.1.1/dist/echarts.min.js"></script>
+    <!-- <script src="//cdn.jsdelivr.net/npm/unifont@0.5.0/dist/index.min.js"></script> -->
+    <link href="//fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
     <script>
         var mhtlim_top=true;
         function doTarget(it){
@@ -48,8 +63,8 @@
             }
         }
         var latest_versions = {
-            "cha_newui.js": 6,
-            "new_ui.js": 7,
+            "cha_newui.js": 7,
+            "new_ui.js": 8,
             "upload4index.js": 3
         }
 
@@ -301,7 +316,9 @@
         <div class="layui-logo header-opa-bg2" style="padding: 16px;">
             <div class="header-opa-content">
                 <h1 style="color:turquoise;">
-                    <div><span style="color:lightskyblue">MilthmCalc</span><span style="font-size: small;color:lightgreen;">&nbsp;v<?php if (file_exists("version.txt")) {
+                    <div><span style="color:lightskyblue">
+                        <img src="./static/title.webp" alt="logo" style="height: 42px;margin-right: 10px;">
+                    </span><span style="font-size: small;color:lightgreen;">&nbsp;v<?php if (file_exists("version.txt")) {
                                                                                                                                         echo file_get_contents("version.txt");
                                                                                                                                     } else {
                                                                                                                                         echo "_unknown";
@@ -334,23 +351,22 @@
                     温馨提示
                 </div>
                 <div class="layui-card-body">
-                    <span style="font-size:1.4514em">务必查看重要使用说明：</span><a href="javascript:void(0);" onclick="openIN();"><span class="superlinkR">重要说明！</span></a>
+                    <!-- <i class="fa-solid fa-circle-exclamation"></i> -->
+                    <span style="font-size:1.4514em">在使用前请务必查看重要使用说明！！！</span><a href="javascript:void(0);" onclick="openIN();"><span class="superlinkR">重要说明！</span></a>
                     
                     <br>
                     <span style="font-size:1.4514em">查看文档：</span><a href="./usage/usage.html" target="_blank"><span class="superlinkR" data-i18n="viewUsage">查看帮助信息</span></a>
-                </div>
-            </div>
-            <div class="layui-card rccc">
-                <div class="layui-card-header">
-                    <h2 data-i18n="welcome">Welcome</h2>
-                </div>
-                <div class="layui-card-body">
-                    <p data-i18n="greeting">欢迎来到MilthmCalc！(Reality计算器) (https://mhtlim.top)</p>
-                    <p data-i18n="description">这是一个用于计算Milthm Reality分数的网站，你可以在这里导入存档并解析。</p>
+
                     <hr>
-                    <span>更新日志：</span><a href="javascript:void(0);" onclick="open_changelog()"><span class="superlinkR">查看更新日志</span></a>
-                    <hr>
-                    <span data-i18n="qqGroup">QQ交流群：</span><a href="https://qm.qq.com/q/Utb6sNDvki" target="_blank"><span class="superlinkR" data-i18n="viewQQGroup">Mhtlim#√-1洨巟羣</span></a>
+                    <span>更新日志：</span><a href="javascript:void(0);" onclick="open_changelog()"><span class="superlinkR">查看更新日志</span></a><br>
+
+                    <span data-i18n="qqGroup">反馈交流 QQ群：</span><a href="https://qm.qq.com/q/Utb6sNDvki" target="_blank"><span class="superlinkR" data-i18n="viewQQGroup">Mhtlim#√-1洨巟羣</span></a><br>
+
+                    <span data-i18n="siteAuthor">网站作者：</span><a href="javascript:void(0);" onclick="show_author_info();" class="superlinkR" data-i18n="viewAuthor">查看</a>&nbsp;
+                    <span data-i18n="donationText">赞助：</span><a href="javascript:void(0);" onclick="show_donation();" class="superlinkR" data-i18n="donation">捐赠</a><br>
+                    <span data-i18n="visit">本站访问数量：</span><span id="accessCount"></span>
+                    <a class="superlinkR" href="javascript:void(0);" onclick="openStat();">查看访问统计</a><br>
+                    务必查看使用须知：<a href="javascript:void(0);" onclick="show_alertInfo();"><span class="superlinkR">查看使用须知</span></a>
                     <hr>
                     <div style="padding: 3px">
                         <span id="logInfo">正在检测登录状态...</span>
@@ -358,16 +374,14 @@
                 </div>
             </div>
             <div class="layui-card rccc">
-                <div class="layui-card-header" data-i18n="siteInfo">网站信息</div>
+                <div class="layui-card-header" >友情链接</div>
+                <!-- data-i18n="siteInfo" -->
                 <div class="layui-card-body">
                     <!-- 网站作者：<button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:show_author_info();">查看</button><br> -->
-                    <span data-i18n="OtherAddress">其他地址: </span><a href="https://mkzi-nya.github.io/milthm-calculator-web/index.html" target="_blank"><span class="superlinkR">Mkzi Nya's Fork</span></a><br>
-                    <span>友情链接: </span><a href="http://xuziyao.com/" target="_blank"><span class="superlinkR">Dason</span></a> & <a href="https://milthm.adproqwq.top/" target="_blank"><span class="superlinkR">Adpro's</span></a> Page<br>
-                    <span data-i18n="siteAuthor">网站作者：</span><a href="javascript:void(0);" onclick="show_author_info();" class="superlinkR" data-i18n="viewAuthor">查看</a><br>
-                    <span data-i18n="donationText">赞助：</span><a href="javascript:void(0);" onclick="show_donation();" class="superlinkR" data-i18n="donation">捐赠</a><br>
-                    <span data-i18n="visit">本站访问数量：</span><span id="accessCount"></span>
-                    <a class="superlinkR" href="javascript:void(0);" onclick="openStat();">查看访问统计</a><br>
-                    务必查看使用须知：<a href="javascript:void(0);" onclick="show_alertInfo();"><span class="superlinkR">查看使用须知</span></a>
+                    <a href="https://mkzi-nya.github.io/milthm-calculator-web/index.html" target="_blank"><span class="superlinkR">Mkzi Nya Edition</span></a> |
+                    <a href="http://xuziyao.com/" target="_blank"><span class="superlinkR">Dason's Page</span></a> |
+                    <a href="https://milthm.adproqwq.top/" target="_blank"><span class="superlinkR">Adpro's Page</span></a> |
+                    
                     <!-- <a class="superlinkR" href="javascript:void(0);" onclick="openLicenseAndPrivacy();" data-i18n="seeLicenseAndPrivacy">查看隐私政策和开源协议</a> -->
 
                 </div>
@@ -398,7 +412,7 @@
                     <br>
                     <div id="picgen" style="display: none" ;>
                         <br>
-                        <span class="layui-badge layui-bg-black" data-i18n="generatingImage">正在生成图片，由于需要下载图片资源，可能需要一些时间。若一直没有反应，可以多次尝试。资源不会超过4MB</span>
+                        <span id='img_gen_process' class="layui-badge layui-bg-black" data-i18n="generatingImage">请稍候...</span>
                     </div>
 
                     <!-- end chunk: data processing operations -->
@@ -872,6 +886,7 @@
         }
     </script>
 
+        <?php include "includes/footerLdJson.php"; ?>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-var new_ui_js_ver = 7
+var new_ui_js_ver = 8
 var authors_dialog;
 function show_author_info() {
   authors_dialog = layer.open({
@@ -625,4 +625,10 @@ ccc.resize({height: f.clientHeight*0.8});
 console.log(f.clientHeight*0.8)
 }
 
-
+function ol_runner(func, args){
+  func(...args)
+}
+function ol_updateImgGenProcess(text){
+  var f=document.getElementById('img_gen_process')
+  f.innerHTML=text
+}

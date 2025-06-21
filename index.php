@@ -1,5 +1,6 @@
 <?php
 $dev_mode = false;
+$vcon = false;
 if (!$dev_mode) {
     include "fc.php";
     // 统计信息
@@ -31,5 +32,12 @@ if (!$dev_mode) {
 </script>
 
 <?php
+if ($vcon) {
+    echo '<script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
+<script>
+var vConsole = new window.VConsole();
+</script>';
+}
+
 include "ui.php";
 ?>
