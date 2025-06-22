@@ -291,7 +291,7 @@
         }
 
         function downloadImage_pr() {
-            layer.msg('正在生成图片，由于需要下载图片资源，可能需要一些时间。若一直没有反应，可以多次尝试。');
+            layer.msg('正在生成...由于需要下载资源，可能需要一些时间。若一直没有反应，可以多次尝试。');
             downloadImage()
         }
     </script>

@@ -2,7 +2,7 @@
 
 本项目is under the WTFPL.
 
-## 在线服务请转到 [k9.lv/c](http://k9.lv/c)
+## 在线服务请转到 [mhtlim.top](https://mhtlim.top)
 
 感谢所有的贡献者！
 
