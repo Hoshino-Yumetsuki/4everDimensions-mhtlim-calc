@@ -7,7 +7,7 @@ $r=$r->fetch(PDO::FETCH_ASSOC);
 if(!empty($r['value'])){
     echo $r['value'];
 }
-echo "\n最后更新信息：\n\n";
+echo "\n最新提交：\n\n";
 exec("git log -1 --stat", $output);
 foreach ($output as $line) {
     if (strpos($line, 'bitbucket.org') === false) {
