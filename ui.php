@@ -378,9 +378,9 @@
                 <!-- data-i18n="siteInfo" -->
                 <div class="layui-card-body">
                     <!-- 网站作者：<button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:show_author_info();">查看</button><br> -->
-                    <a href="https://mkzi-nya.github.io/milthm-calculator-web/index.html" target="_blank"><span class="superlinkR">Mkzi Nya Edition</span></a> |
+                    <a href="https://mkzi-nya.github.io/milthm-calculator-web/index.html" target="_blank"><span class="superlinkR">Mkzi Nya Version</span></a> |
                     <a href="http://xuziyao.com/" target="_blank"><span class="superlinkR">Dason's Page</span></a> |
-                    <a href="https://milthm.adproqwq.top/" target="_blank"><span class="superlinkR">Adpro's Page</span></a> |
+                    <a href="https://milthm.adproqwq.top/" target="_blank"><span class="superlinkR">Adpro's Page</span></a>
                     
                     <!-- <a class="superlinkR" href="javascript:void(0);" onclick="openLicenseAndPrivacy();" data-i18n="seeLicenseAndPrivacy">查看隐私政策和开源协议</a> -->
 
