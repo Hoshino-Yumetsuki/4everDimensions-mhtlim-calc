@@ -365,6 +365,7 @@ function tlr() {
 
     return reality(as, ar) - 1;
   }
+  else return 0;
 }
 
 /* ========== 绘制单张卡片 ========== */

@@ -8,7 +8,6 @@ const ASSETS_TO_CACHE = [
     "/script.js",
     "/sw.js", // Service Worker 自己也要缓存
     "/jpgs/NYA.jpg",
-    "/jpgs/查分图.jpg",
     "/jpgs/default.png",
     "/jpgs/等级1.png",
     "/jpgs/等级2.png",
