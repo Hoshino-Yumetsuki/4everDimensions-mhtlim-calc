@@ -651,7 +651,8 @@ function reality(score, c) {
 - **IOS**
 
   如果在 `文件` 应用中找不到此 iPhone/iPad 的文件夹，请前往应用主页，在右上角的设置中查看是否隐藏了本地文件。  
-  如果仍未找到 Milthm 的文件夹，检查您是否使用了正确的 Milthm 版本。
+  如果仍未找到 Milthm 的文件夹，检查您是否使用了正确的 Milthm 版本。  
+  [IOS演示视频](./files/ios.mp4)
 
 #### 怎么备份存档
 
