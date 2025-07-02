@@ -318,7 +318,7 @@
                 <h1 style="color:turquoise;">
                     <div><span style="color:lightskyblue">
                         <img src="./static/title.webp" alt="logo" style="height: 42px;margin-right: 10px;">
-                    </span><span style="font-size: small;color:lightgreen;">&nbsp;v<?php if (file_exists("version.txt")) {
+                    </span><span style="font-size: small;color:lightgreen;">v<?php if (file_exists("version.txt")) {
                                                                                                                                         echo file_get_contents("version.txt");
                                                                                                                                     } else {
                                                                                                                                         echo "_unknown";
@@ -366,7 +366,7 @@
                     <span data-i18n="donationText">赞助：</span><a href="javascript:void(0);" onclick="show_donation();" class="superlinkR" data-i18n="donation">捐赠</a><br>
                     <span data-i18n="visit">本站访问数量：</span><span id="accessCount"></span>
                     <a class="superlinkR" href="javascript:void(0);" onclick="openStat();">查看访问统计</a><br>
-                    务必查看使用须知：<a href="javascript:void(0);" onclick="show_alertInfo();"><span class="superlinkR">查看使用须知</span></a>
+                    <!-- 务必查看使用须知：<a href="javascript:void(0);" onclick="show_alertInfo();"><span class="superlinkR">查看使用须知</span></a> -->
                     <hr>
                     <div style="padding: 3px">
                         <span id="logInfo">正在检测登录状态...</span>
