@@ -1,5 +1,7 @@
 <html lang="en" class="dark">
-
+<?php
+$version_hash = sha1_file(filename: "version.txt");
+?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,7 +21,7 @@
 
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="new_UI.css">
-    <script src="js/constant.js"></script>
+    <script src="js/constant.js?<?php echo $version_hash; ?>"></script>
     <link href="./layui/css/layui.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
     <script src="//cdn.jsdelivr.net/npm/echarts@5.1.1/dist/echarts.min.js"></script>
@@ -311,7 +313,7 @@
 <body>
     <div class="rain"></div>
     <script src="./layui/layui.js"></script>
-    <script src="./new_ui.js"></script>
+    <script src="./new_ui.js?<?php echo $version_hash; ?>"></script>
     <div class="layui-header header-opa">
         <div class="layui-logo header-opa-bg2" style="padding: 16px;">
             <div class="header-opa-content">
@@ -346,6 +348,24 @@
 
     <div style="padding: 30px; text-align:center;display:flex;">
         <div class="" style="text-align: left;max-width:1200px;margin:auto;">
+
+
+            <div class="layui-card rccc">
+                <div class="layui-card-header">
+                    经常无法访问本站？
+                </div>
+                <div class="layui-card-body">
+                    <pre>最近网站的远程反向代理服务器网络非常不稳定。
+目前检测认为不太像是GFW的阻断。
+应该是大陆地区走的链路中间有节点在抽风。
+目前仍在持续跟进，如果急切需要使用核心功能，
+请考虑前往mkzi_nya的Github Pages。
+给您带来的不便敬请谅解！</pre>
+                    
+                </div>
+            </div>
+
+
             <div class="layui-card rccc">
                 <div class="layui-card-header">
                     温馨提示
@@ -630,7 +650,7 @@
             loadTranslations();
         });
     </script>
-    <script src="./js/cha_newui.js"></script>
+    <script src="./js/cha_newui.js?<?php echo $version_hash; ?>"></script>
     <script src="./js/user/upload4index.js"></script>
     <!-- Autoparse -->
     <script>
