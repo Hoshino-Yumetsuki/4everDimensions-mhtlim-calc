@@ -355,12 +355,8 @@ $version_hash = sha1_file(filename: "version.txt");
                     经常无法访问本站？
                 </div>
                 <div class="layui-card-body">
-                    <pre>最近网站的远程反向代理服务器网络非常不稳定。
-目前检测认为不太像是GFW的阻断。
-应该是大陆地区走的链路中间有节点在抽风。
-目前仍在持续跟进，如果急切需要使用核心功能，
-请考虑前往mkzi_nya的Github Pages。
-给您带来的不便敬请谅解！</pre>
+                    <pre>网站代理服务器正在被攻击，所以容易出现较大丢包
+如果的确访问不了可去Mkzi_Nya的网站。</pre>
                     
                 </div>
             </div>
