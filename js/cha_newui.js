@@ -346,6 +346,7 @@ function drawUserInfo(username, results) {
 }
 
 function tlr() {
+  //倒观rlt
   let as, ar;
   if (window.processedItems.length >= 20) {
     let items = window.processedItems;
