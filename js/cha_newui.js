@@ -35,6 +35,7 @@ function reality(score, c) {
 }
 
 function findScore(constant, target) {
+  //倒观rlt
   if (target <= constant - 1.5) return 700000;
   if (target > 1 + constant) return "Unable to deduce points";
   if (target == (1 + constant)) return 1005000;
@@ -346,7 +347,6 @@ function drawUserInfo(username, results) {
 }
 
 function tlr() {
-  //倒观rlt
   let as, ar;
   if (window.processedItems.length >= 20) {
     let items = window.processedItems;
