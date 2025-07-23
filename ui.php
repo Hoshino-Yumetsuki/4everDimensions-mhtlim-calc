@@ -420,6 +420,8 @@ $version_hash = sha1_file(filename: "version.txt");
                     <hr />
                     <button class="layui-btn layui-btn-primary" onclick="javascript:downloadImage_pr();" data-i18n="generateImage">生成图像</button>
                     <button class="layui-btn layui-btn-primary" onclick="showSettings();" data-i18n="settings">查分图设置</button>
+                    <button class="layui-btn layui-btn-primary" onclick="geturltc();">生成雷达图</button>
+
 
 
 
