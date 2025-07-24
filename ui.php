@@ -24,7 +24,7 @@ $version_hash = sha1_file(filename: "version.txt");
     <script src="js/constant.js?<?php echo $version_hash; ?>"></script>
     <link href="./layui/css/layui.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
-    <script src="//cdn.jsdelivr.net/npm/echarts@5.1.1/dist/echarts.min.js"></script>
+    <script src="//cdn.staticfile.net/echarts/5.1.1/echarts.min.js"></script>
     <!-- <script src="//cdn.jsdelivr.net/npm/unifont@0.5.0/dist/index.min.js"></script> -->
     <link href="//fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
     <script>
