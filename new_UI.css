@@ -295,3 +295,17 @@ body {
   font-weight: 400;
   font-style: normal;
 }
+
+/* fix button */
+.btn_container{
+  display: flex;
+  flex-wrap: wrap; /* 允许换行 */
+  gap: 10px; /* 按钮间水平/垂直间距 */
+  align-items: flex-start; /* 顶部对齐 */
+  padding: 0; /* 清除容器内边距 */
+  margin: 0; /* 清除容器外边距 */
+}
+.btn_container  .layui-btn {
+  flex: 0 0 auto; /* 不伸缩不收缩 */
+  margin: 1.5px 0 !important; /* 垂直间距保障 */
+}

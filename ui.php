@@ -2,6 +2,7 @@
 <?php
 $version_hash = sha1_file(filename: "version.txt");
 ?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +12,7 @@ $version_hash = sha1_file(filename: "version.txt");
     <meta name="keywords" content="Milthm, Reality, 查分器, 音游, Reality计算, 节奏游戏, 成绩分析">
     <meta name="author" content="MkziAndInetPigman">
     <meta name="robots" content="index, follow">
-        <!-- Open Graph 社交分享优化 -->
+    <!-- Open Graph 社交分享优化 -->
     <meta property="og:title" content="Milthm音游查分器 - Reality计算工具">
     <meta property="og:description" content="详细分析Reality分数，提升你的游戏水平">
     <meta property="og:image" content="https://mhtlim.top/static/bg_night.avif">
@@ -28,12 +29,14 @@ $version_hash = sha1_file(filename: "version.txt");
     <!-- <script src="//cdn.jsdelivr.net/npm/unifont@0.5.0/dist/index.min.js"></script> -->
     <link href="//fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
     <script>
-        var mhtlim_top=true;
-        function doTarget(it){
-            if(mhtlim_top) {
+        var mhtlim_top = true;
+
+        function doTarget(it) {
+            if (mhtlim_top) {
                 it();
             }
         }
+
         function setCookie(name, value, days) {
             var expires = "";
             if (days) {
@@ -54,7 +57,7 @@ $version_hash = sha1_file(filename: "version.txt");
             }
             return null;
         }
-        
+
 
         // function isdef
         function oiiaioooooiai(v) {
@@ -319,12 +322,12 @@ $version_hash = sha1_file(filename: "version.txt");
             <div class="header-opa-content">
                 <h1 style="color:turquoise;">
                     <div><span style="color:lightskyblue">
-                        <img src="./static/title.webp" alt="logo" style="height: 42px;margin-right: 10px;">
-                    </span><span style="font-size: small;color:lightgreen;">v<?php if (file_exists("version.txt")) {
-                                                                                                                                        echo file_get_contents("version.txt");
-                                                                                                                                    } else {
-                                                                                                                                        echo "_unknown";
-                                                                                                                                    } ?></span></div>
+                            <img src="./static/title.webp" alt="logo" style="height: 42px;margin-right: 10px;">
+                        </span><span style="font-size: small;color:lightgreen;">v<?php if (file_exists("version.txt")) {
+                                                                                        echo file_get_contents("version.txt");
+                                                                                    } else {
+                                                                                        echo "_unknown";
+                                                                                    } ?></span></div>
                 </h1>
 
             </div>
@@ -357,7 +360,7 @@ $version_hash = sha1_file(filename: "version.txt");
                 <div class="layui-card-body">
                     <pre>网站代理服务器正在被攻击，所以容易出现较大丢包
 如果的确访问不了可去Mkzi_Nya的网站。</pre>
-                    
+
                 </div>
             </div>
 
@@ -369,7 +372,7 @@ $version_hash = sha1_file(filename: "version.txt");
                 <div class="layui-card-body">
                     <!-- <i class="fa-solid fa-circle-exclamation"></i> -->
                     <span style="font-size:1.4514em">在使用前请务必查看重要使用说明！！！</span><a href="javascript:void(0);" onclick="openIN();"><span class="superlinkR">重要说明！</span></a>
-                    
+
                     <br>
                     <span style="font-size:1.4514em">查看文档：</span><a href="./usage/usage.html" target="_blank"><span class="superlinkR" data-i18n="viewUsage">查看帮助信息</span></a>
 
@@ -390,14 +393,14 @@ $version_hash = sha1_file(filename: "version.txt");
                 </div>
             </div>
             <div class="layui-card rccc">
-                <div class="layui-card-header" >友情链接</div>
+                <div class="layui-card-header">友情链接</div>
                 <!-- data-i18n="siteInfo" -->
                 <div class="layui-card-body">
                     <!-- 网站作者：<button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:show_author_info();">查看</button><br> -->
                     <a href="https://mkzi-nya.github.io/milthm-calculator-web/index.html" target="_blank"><span class="superlinkR">Mkzi Nya Version</span></a> |
                     <a href="http://xuziyao.com/" target="_blank"><span class="superlinkR">Dason's Page</span></a> |
                     <a href="https://milthm.adproqwq.top/" target="_blank"><span class="superlinkR">Adpro's Page</span></a>
-                    
+
                     <!-- <a class="superlinkR" href="javascript:void(0);" onclick="openLicenseAndPrivacy();" data-i18n="seeLicenseAndPrivacy">查看隐私政策和开源协议</a> -->
 
                 </div>
@@ -418,16 +421,11 @@ $version_hash = sha1_file(filename: "version.txt");
                     <button class="layui-btn layui-btn-primary" onclick="javascript:startProcess();" data-i18n="parse">解析</button>
                     <button class="layui-btn layui-btn-primary" onclick="javascript:upl_pre();" data-i18n="uploadFile">导入文件</button>
                     <hr />
-                    <button class="layui-btn layui-btn-primary" onclick="javascript:downloadImage_pr();" data-i18n="generateImage">生成图像</button>
-                    <button class="layui-btn layui-btn-primary" onclick="showSettings();" data-i18n="settings">查分图设置</button>
-                    <button class="layui-btn layui-btn-primary" onclick="geturltc();">生成雷达图</button>
-
-
-
-
-
-
-                    <br>
+                    <div class="btn_container">
+                        <button class="layui-btn layui-btn-primary" onclick="javascript:downloadImage_pr();" data-i18n="generateImage">生成图像</button>
+                        <button class="layui-btn layui-btn-primary" onclick="showSettings();" data-i18n="settings">查分图设置</button>
+                        <button class="layui-btn layui-btn-primary" onclick="geturltc();">生成雷达图</button>
+                    </div>
                     <div id="picgen" style="display: none" ;>
                         <br>
                         <span id='img_gen_process' class="layui-badge layui-bg-black" data-i18n="generatingImage">请稍候...</span>
@@ -883,10 +881,11 @@ $version_hash = sha1_file(filename: "version.txt");
 
 
         // NOTICE
-        if(getCookie("importantNoticeRead") !== "true"){
+        if (getCookie("importantNoticeRead") !== "true") {
             openIN();
         }
-        function openIN(){
+
+        function openIN() {
             layer.open({
                 title: '使用必读 / Important Notice',
                 content: `<?php echo file_get_contents("importantNotice.txt"); ?>`,
@@ -904,7 +903,7 @@ $version_hash = sha1_file(filename: "version.txt");
         }
     </script>
 
-        <?php include "includes/footerLdJson.php"; ?>
+    <?php include "includes/footerLdJson.php"; ?>
 </body>
 
 </html>
