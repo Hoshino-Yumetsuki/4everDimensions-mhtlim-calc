@@ -300,7 +300,7 @@ body {
 .btn_container{
   display: flex;
   flex-wrap: wrap; /* 允许换行 */
-  gap: 10px; /* 按钮间水平/垂直间距 */
+  gap: 10px 14px; /* 按钮间水平/垂直间距 */
   align-items: flex-start; /* 顶部对齐 */
   padding: 0; /* 清除容器内边距 */
   margin: 0; /* 清除容器外边距 */
