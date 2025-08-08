@@ -1161,7 +1161,10 @@ function downloadImage() {
       ctx.fillText('http://mhtlim.top/', 100, 125);
       ctx.fillText('http://k9.lv/c/', 100, 153);
       ctx.fillText('https://mkzi-nya.github.io/c/', 100, 181);
+      ctx.font = '30px Arial';
+      ctx.fillText('←查分上这里', 400, 130);
       ctx.font = '20px Arial';
+      ctx.fillText("3个网址都行", 450, 155);
       ctx.fillText(Updated, 100, 210);
       const items = [...window.processedItems.slice(0, actualCardCount), ...window.norlt];
       Promise.all(items.map(i => Promise.all([
