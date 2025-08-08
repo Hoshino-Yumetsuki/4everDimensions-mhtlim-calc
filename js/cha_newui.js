@@ -1146,11 +1146,15 @@ function downloadImage() {
         ctx.fillText(star, 660, 75);
       }
       ctx.fillText(`Player: ${window.username}`, 660, 100);
-      if (yrjds == "true") {
-        ctx.fillText(`Reality: ${(window.average * 20).toFixed(4)}`, 660, 135);
-      } else {
-        ctx.fillText(`Reality: ${window.average1}`, 660, 135);
-      }
+if (yrjds == "true") {
+  ctx.fillText(`Reality: ${(window.average * 20).toFixed(4)}    🐉👃👈😨`, 660, 135);
+} else {
+  let text = `Reality: ${window.average1}`;
+  if (window.average1 >= 12.5) {
+    text += "    🐉👃👈😨";
+  }
+  ctx.fillText(text, 660, 135);
+}
       ctx.fillText(`Ytilaer: ${(window.utlr).toFixed(4)}`, 660, 170);
       const now = new Date();
       const dateStr = `${now.toISOString().split('T')[0]} ${now.toTimeString().split(' ')[0]}`;
