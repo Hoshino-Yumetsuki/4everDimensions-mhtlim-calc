@@ -7,11 +7,6 @@ const ASSETS_TO_CACHE = [
     "/styles.css",
     "/script.js",
     "/sw.js", // Service Worker 自己也要缓存
-    "/jpgs/NYA.jpg",
-    "/jpgs/default.png",
-    "/jpgs/等级1.png",
-    "/jpgs/等级2.png",
-    "/jpgs/等级3.png",
     "/fonts/arial.ttf" // 示例字体
 ];
 
