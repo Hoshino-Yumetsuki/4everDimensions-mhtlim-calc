@@ -24,7 +24,6 @@ $version_hash = sha1_file(filename: "version.txt");
     <link rel="stylesheet" href="new_UI.css">
     <script src="js/constant.js?<?php echo $version_hash; ?>"></script>
     <link href="./layui/css/layui.css" rel="stylesheet">
-    <link rel="stylesheet" href="images.css">
     <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
     <script src="//cdn.staticfile.net/echarts/5.1.1/echarts.min.js"></script>
     <!-- <script src="//cdn.jsdelivr.net/npm/unifont@0.5.0/dist/index.min.js"></script> -->
@@ -298,7 +297,7 @@ $version_hash = sha1_file(filename: "version.txt");
 
         function downloadImage_pr() {
             layer.msg('正在生成...由于需要下载资源，可能需要一些时间。若一直没有反应，可以多次尝试。');
-            downloadImage()
+            loadImageCSS()
         }
     </script>
     <script>
