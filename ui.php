@@ -400,7 +400,7 @@ $version_hash = sha1_file(filename: "version.txt");
                     <a href="https://mkzi-nya.github.io/milthm-calculator-web/index.html" target="_blank"><span class="superlinkR">Mkzi Nya Version</span></a> |
                     <a href="http://xuziyao.com/" target="_blank"><span class="superlinkR">Dason's Page</span></a> |
                     <a href="https://milthm.adproqwq.top/" target="_blank"><span class="superlinkR">Adpro's Page</span></a><br>
-                    <a href="mkzi-nya.github.io/mil/" target="_blank"><span class="superlinkR">Score V3 网页计算器</span></a>
+                    <a href="https://mkzi-nya.github.io/mil/" target="_blank"><span class="superlinkR">Score V3 网页计算器</span></a>
 
                     <!-- <a class="superlinkR" href="javascript:void(0);" onclick="openLicenseAndPrivacy();" data-i18n="seeLicenseAndPrivacy">查看隐私政策和开源协议</a> -->
 
