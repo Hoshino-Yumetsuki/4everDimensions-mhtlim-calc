@@ -35,14 +35,14 @@ let columns = 3; //默认三列布局
 function songNameToCssClass(name) {
   // 与 py 中 class_name 的生成方式一致：空格与“-” -> “_”，转小写
   // 并去掉常见不安全字符（文件名里可能去掉了它们）
-const cleaned = String(name)
-  .replace(/[ \-]/g, '_')   // 替换所有空格和连字符为下划线
-  .replace(/[()?]/g, '')    // 删除所有括号和问号
-  .replace(/\!/g, '')
-  .replace(/\./g, '')
-  .replace(/\#/g, '')
-  .replace(/\~/g, '')
-  .toLowerCase();
+  const cleaned = String(name)
+    .replace(/[ \-]/g, '_')   // 替换所有空格和连字符为下划线
+    .replace(/[()?]/g, '')    // 删除所有括号和问号
+    .replace(/\!/g, '')
+    .replace(/\./g, '')
+    .replace(/\#/g, '')
+    .replace(/\~/g, '')
+    .toLowerCase();
   return cleaned || 'nya';
 }
 
@@ -82,19 +82,19 @@ function loadImageCSS() {
   const link = document.createElement('link');
   link.rel = 'stylesheet';
   link.href = 'images.css';
-  
+
   // ✅ 监听 CSS 加载完成事件
   link.onload = () => {
     console.log('CSS 加载完成！');
     downloadImage(); // 确保在这里调用
   };
-  
+
   // ❌ 错误处理（可选）
   link.onerror = () => {
     console.error('CSS 加载失败！');
     downloadImage();
   };
-  
+
   document.head.appendChild(link);
 }
 async function tryLoadFirstCssImage(classNames) {
@@ -128,6 +128,14 @@ function reality(score, c) {
   return 0;
 }
 
+/* ========== UserReality 计算相关 ========== */
+function calcurlt(results) {
+  const avg = (results.filter(item => item.singleRealityRaw > 0)
+    .slice(0, 20)
+    .reduce((acc, item) => acc + item.singleRealityRaw, 0) / 20) || '0.0000';
+  return avg;
+}
+
 function findScore(constant, target) {
   //倒观rlt
   if (target <= constant - 1.5) return 700000;
@@ -140,7 +148,6 @@ function findScore(constant, target) {
   } else {
     return Math.ceil((target - constant + 4) * 280000);
   }
-  return 114514;
 }
 function startProcess() {
   var inp = document.getElementById('inputData').value;
@@ -223,10 +230,10 @@ function processSong(song) {
     .split(',')
     .map(n => parseInt(n, 10));
 
-  const constantVal  = parseFloat(constant);
-  const scoreVal     = parseInt(score, 10);
-  const accuracyVal  = parseFloat(accuracy);
-  const levelVal     = parseInt(level, 10);
+  const constantVal = parseFloat(constant);
+  const scoreVal = parseInt(score, 10);
+  const accuracyVal = parseFloat(accuracy);
+  const levelVal = parseInt(level, 10);
 
   const singleRealityRaw = reality(scoreVal, constantVal);
 
@@ -261,7 +268,7 @@ function processSongFromOldFormat(record) {
     yct,
     bestScore: BestScore,
     bestAccuracy: BestAccuracy.toFixed(4),
-    bestLevel: BestLevel, 
+    bestLevel: BestLevel,
     achievedStatus: AchievedStatus
   };
 }
@@ -410,9 +417,7 @@ function drawUserInfo(username, results) {
   const userInfoDiv = document.getElementById('userInfo');
   const usercontainer = document.getElementById('usercontainer');
   usercontainer.style.display = 'block';
-  const avg = (results.filter(item => item.singleRealityRaw > 0)
-    .slice(0, 20)
-    .reduce((acc, item) => acc + item.singleRealityRaw, 0) / 20) || '0.0000';
+  const avg = calcurlt(results);
   window.average1 = Math.floor(avg * 10000) / 10000
   userInfoDiv.innerHTML = `${username} ${window.average1}`;
 
@@ -499,7 +504,7 @@ function drawCard(result, index) {
     overflow: 'visible',
     textOverflow: 'ellipsis',
     fontSize: `${fontSize}px`,
-    marginBottom: `${marginBottom*0.5}px`
+    marginBottom: `${marginBottom * 0.5}px`
   });
   const constantText = `${parseFloat(result.constant).toFixed(1)}->&nbsp`;
   const singleRealitySpan = document.createElement('span');
@@ -547,7 +552,7 @@ function drawCard(result, index) {
     score.style.color = '#D1D1D1';
     score.style.background = '';
   }
-  score.style.lineHeight="1.2"
+  score.style.lineHeight = "1.2"
   card.appendChild(score);
 
   const indexElem = document.createElement('div');
@@ -617,10 +622,10 @@ document.getElementById('fileupLoad').addEventListener("change", async function 
       reader.readAsText(file);
     }
     console.log("文件处理完成\nFile processing completed.");
-  }catch (error) {
+  } catch (error) {
     console.error("处理文件时出错:", error, "\nAn error occurred while processing the file:", error);
-    layer.msg("处理文件时出错，请检查文件格式是否正确\nAn error occurred while processing the file, please check if the file format is correct.", {icon: 2});
-  }finally {
+    layer.msg("处理文件时出错，请检查文件格式是否正确\nAn error occurred while processing the file, please check if the file format is correct.", { icon: 2 });
+  } finally {
     layer.closeAll('loading');
   }
 });
@@ -682,8 +687,8 @@ function processHistoryRecords(scores) {
 
   const userrealityHistory = calculateUserReality(scores);
   const username = scores[0]?.username;
-  window.dataurlt=userrealityHistory;
-  window.datas=scores;
+  window.dataurlt = userrealityHistory;
+  window.datas = scores;
   formatInput(username, items);
   urltc(userrealityHistory, scores);
   processData()
@@ -717,17 +722,17 @@ function calculateUserReality(scores) {
       lastUserReality = userreality;
     }
   });
-  window.items = Array.from(b20_lg.values()).map(({ score, singleReality, score_accuracy, grade, score_perfect_count, score_good_count, score_bad_count, score_miss_count, 
-  ...rest }) => ({
-    ...rest,
-    bestScore: score,
-    singleRealityRaw: singleReality,
-    singleReality: singleReality.toFixed(2),
-    bestAccuracy: score_accuracy,
-    bestLevel: score===1010000?0:score>=1005000?1:score>=950000?2:score>=900000?3:score>=850000?4:score>=800000?5:6,
-    achievedStatus: (() => { const a=[3]; score>=800000&&a.push(0); score_good_count+score_bad_count+score_miss_count===0&&a.push(5); score_bad_count+score_miss_count===0&&a.push(4); score<800000&&a.push(6); return a })()
+  window.items = Array.from(b20_lg.values()).map(({ score, singleReality, score_accuracy, grade, score_perfect_count, score_good_count, score_bad_count, score_miss_count,
+    ...rest }) => ({
+      ...rest,
+      bestScore: score,
+      singleRealityRaw: singleReality,
+      singleReality: singleReality.toFixed(2),
+      bestAccuracy: score_accuracy,
+      bestLevel: score === 1010000 ? 0 : score >= 1005000 ? 1 : score >= 950000 ? 2 : score >= 900000 ? 3 : score >= 850000 ? 4 : score >= 800000 ? 5 : 6,
+      achievedStatus: (() => { const a = [3]; score >= 800000 && a.push(0); score_good_count + score_bad_count + score_miss_count === 0 && a.push(5); score_bad_count + score_miss_count === 0 && a.push(4); score < 800000 && a.push(6); return a })()
 
-  }));
+    }));
   return userrealityHistory;
 }
 
@@ -842,7 +847,7 @@ function urltc(userrealityHistory, scores) {
 
       for (const it of sim) {
         if (it.name === track.name && Math.abs(it.constant - track.constant) < 1e-3) {
-          it.bestScore        = 1010000;
+          it.bestScore = 1010000;
           it.singleRealityRaw = reality(1010000, track.constant);
           found = true;
           break;
@@ -895,7 +900,7 @@ function urltc(userrealityHistory, scores) {
       const x = tableX + colW.slice(0, i).reduce((a, b) => a + b, 0);
       ctx.strokeStyle = "rgba(173,216,230,0.7)";
       ctx.strokeRect(x, tableY, colW[i], rowH);
-      ctx.fillStyle  = "#fff";
+      ctx.fillStyle = "#fff";
       ctx.fillText(t, x + 6, tableY + rowH / 2);
     });
 
@@ -910,14 +915,14 @@ function urltc(userrealityHistory, scores) {
       ctx.fillStyle = "#fff";
       ctx.font = "16px Arial";
       ctx.fillText(info.constant.toFixed(1), tableX + 6, y + rowH / 2);
-      ctx.fillText(info.name,            tableX + colW[0] + 6, y + rowH / 2);
+      ctx.fillText(info.name, tableX + colW[0] + 6, y + rowH / 2);
       ctx.fillText(info.gain.toFixed(4), tableX + colW[0] + colW[1] + 6, y + rowH / 2);
 
-      const curRlt  = window.processedItems.find(p => p.name === info.name && Math.abs(p.constant - info.constant) < 1e-3)?.singleRealityRaw ?? 0;
-      const deltaR  = Math.ceil(window.average * 100 - 0.5) + 0.5 !== window.average * 100
-          ? (Math.ceil(window.average * 100 - 0.5) + 0.5 - window.average * 100) / 5 +
-            Math.max(curRlt, window.processedItems?.[19]?.singleRealityRaw ?? 0)
-          : 114514;
+      const curRlt = window.processedItems.find(p => p.name === info.name && Math.abs(p.constant - info.constant) < 1e-3)?.singleRealityRaw ?? 0;
+      const deltaR = Math.ceil(window.average * 100 - 0.5) + 0.5 !== window.average * 100
+        ? (Math.ceil(window.average * 100 - 0.5) + 0.5 - window.average * 100) / 5 +
+        Math.max(curRlt, window.processedItems?.[19]?.singleRealityRaw ?? 0)
+        : 114514;
 
       const scoreNeed = findScore(info.constant, deltaR);
 
@@ -927,8 +932,8 @@ function urltc(userrealityHistory, scores) {
         ctx.font = "16px Arial";
       }
       ctx.fillText(String(scoreNeed),
-                  tableX + colW[0] + colW[1] + colW[2] + 6,
-                  y + rowH / 2);
+        tableX + colW[0] + colW[1] + colW[2] + 6,
+        y + rowH / 2);
     });
 
     // 最近 10 次分数卡（封面 & 图标也从 CSS 取）
@@ -1034,12 +1039,12 @@ function lg_drawCards(ctx, items, xOffset, yOffset) {
     let strScore = item.score.toString().padStart(7, '0');
 
     let scoreColor;
-    if (item.score_good_count+item.score_bad_count+item.score_miss_count==0) {
+    if (item.score_good_count + item.score_bad_count + item.score_miss_count == 0) {
       const gradient = ctx.createLinearGradient(x, y + 40 * scale, x, y + 70 * scale);
       gradient.addColorStop(0, '#99C5FB');
       gradient.addColorStop(1, '#D8C3FA');
       scoreColor = gradient;
-    } else if (item.score_bad_count+item.score_miss_count==0) {
+    } else if (item.score_bad_count + item.score_miss_count == 0) {
       scoreColor = '#90CAEF';
     } else {
       scoreColor = '#FFFFFF';
@@ -1088,7 +1093,7 @@ function lg_drawCards(ctx, items, xOffset, yOffset) {
 function downloadImage() {
   // 显示生成进度 UI（项目里已有 ol_runner/ol_updateImgGenProcess）
   if (typeof ol_runner === 'function') {
-    ol_runner((e)=>{document.getElementById('picgen').style.display = 'block'}, [114, 514]);
+    ol_runner((e) => { document.getElementById('picgen').style.display = 'block' }, [114, 514]);
   }
 
   // 读取要导出的卡片数量 & 过滤设置
@@ -1170,48 +1175,48 @@ function downloadImage() {
     drawTip();
 
 
-// 绘制 tip 的函数
-function drawTip() {
-  if (!window.tipsCache) {
-    console.warn('Tips 尚未加载完成！');
-    return;
-  }
-  let lines=window.tipsCache;
-  const n = 1;
-  let tip;
+    // 绘制 tip 的函数
+    function drawTip() {
+      if (!window.tipsCache) {
+        console.warn('Tips 尚未加载完成！');
+        return;
+      }
+      let lines = window.tipsCache;
+      const n = 1;
+      let tip;
 
-  if (window.average1 >= 12.7 && Math.random() < 0.75) {
-    tip = lines[Math.floor(Math.random() * Math.min(n, lines.length))];
-  } else {
-    tip = lines[Math.floor(Math.random() * lines.length)];
-  }
+      if (window.average1 >= 12.7 && Math.random() < 0.75) {
+        tip = lines[Math.floor(Math.random() * Math.min(n, lines.length))];
+      } else {
+        tip = lines[Math.floor(Math.random() * lines.length)];
+      }
 
-  // 替换 {Name} 并加前缀
-  tip = 'Tip: ' + tip.replace(/\{Name\}/g, window.username || "玩家");
+      // 替换 {Name} 并加前缀
+      tip = 'Tip: ' + tip.replace(/\{Name\}/g, window.username || "玩家");
 
-  // 自动换行（逐字符）
-  const maxWidth = 500;
-  const lineHeight = 24;
-  ctx.font = '20px Arial';
-  ctx.fillStyle = 'white';
-  ctx.textAlign = 'left';
+      // 自动换行（逐字符）
+      const maxWidth = 500;
+      const lineHeight = 24;
+      ctx.font = '20px Arial';
+      ctx.fillStyle = 'white';
+      ctx.textAlign = 'left';
 
-  let line = '', y = 220, x = 660;
-  for (let char of tip) {
-    const testLine = line + char;
-    const testWidth = ctx.measureText(testLine).width;
-    if (testWidth > maxWidth) {
-      ctx.fillText(line, x, y);
-      line = char;
-      y += lineHeight;
-    } else {
-      line = testLine;
+      let line = '', y = 220, x = 660;
+      for (let char of tip) {
+        const testLine = line + char;
+        const testWidth = ctx.measureText(testLine).width;
+        if (testWidth > maxWidth) {
+          ctx.fillText(line, x, y);
+          line = char;
+          y += lineHeight;
+        } else {
+          line = testLine;
+        }
+      }
+      if (line) ctx.fillText(line, x, y);
     }
-  }
-  if (line) ctx.fillText(line, x, y);
-}
 
-      
+
     // 左侧标题与链接
     ctx.font = '50px Arial';
     ctx.fillText('Milthm-calculator', 100, 95);
@@ -1355,7 +1360,7 @@ function drawCards(ctx, canvas, items, imgPairs) {
 
   items.forEach((it, i) => {
     const x = x0 + (i % 2) * col,
-          y = y0 + Math.floor(i / 2) * row - (i % 2 ? 0 : 50);
+      y = y0 + Math.floor(i / 2) * row - (i % 2 ? 0 : 50);
 
     // 卡底
     ctx.fillStyle = 'rgba(128,128,128,.4)';
@@ -1413,16 +1418,16 @@ function drawCards(ctx, canvas, items, imgPairs) {
       it.constant ?? 0,
       Math.ceil((window.average ?? 0) * 100 - 0.5) + 0.5 !== (window.average ?? 0) * 100
         ? (Math.ceil((window.average ?? 0) * 100 - 0.5) + 0.5 - (window.average ?? 0) * 100) / 5 +
-          Math.max(it.singleRealityRaw ?? 0, items?.[19]?.singleRealityRaw ?? 0)
+        Math.max(it.singleRealityRaw ?? 0, items?.[19]?.singleRealityRaw ?? 0)
         : 114514
     );
     ctx.fillText(`>>${targetScore}`, x + 212, y + 86);
 
     // 封面与段位图
     const coverImg = imgPairs[i]?.[0] || null;
-    const iconImg  = imgPairs[i]?.[1] || null;
+    const iconImg = imgPairs[i]?.[1] || null;
     if (coverImg) ctx.drawImage(coverImg, x + 13, y + 13, imgW, imgH);
-    if (iconImg)  ctx.drawImage(iconImg,  x + 351, y + 26, icon, icon);
+    if (iconImg) ctx.drawImage(iconImg, x + 351, y + 26, icon, icon);
   });
 
   exportImage(canvas);
