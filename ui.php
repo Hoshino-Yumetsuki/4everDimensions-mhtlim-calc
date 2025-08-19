@@ -297,7 +297,7 @@ $version_hash = sha1_file(filename: "version.txt");
 
         function downloadImage_pr() {
             layer.msg('正在生成...由于需要下载资源，可能需要一些时间。若一直没有反应，可以多次尝试。');
-            loadImageCSS()
+            loadImage_nya()
         }
     </script>
     <script>
