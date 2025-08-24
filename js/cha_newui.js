@@ -1217,7 +1217,7 @@ function drawTip() {
     ctx.font = '50px Arial';
     ctx.fillText('Milthm-calculator', 100, 95);
     ctx.font = '25px Arial';
-    ctx.fillText('http://mhtlim.top/', 100, 125);
+    ctx.fillText('https://mhtlim.top/', 100, 125);
     ctx.fillText('http://k9.lv/c/', 100, 153);
     ctx.fillText('https://mkzi-nya.github.io/c/', 100, 181);
     ctx.font = '30px Arial';
