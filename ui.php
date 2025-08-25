@@ -314,6 +314,10 @@ $version_hash = sha1_file(filename: "version.txt");
 </head>
 
 <body>
+
+        <?php include __DIR__ . "/floating.php"; ?> 
+        <!-- TAG: FloatingWindow -->
+
     <div class="rain"></div>
     <script src="./layui/layui.js"></script>
     <script src="./new_ui.js?<?php echo $version_hash; ?>"></script>
