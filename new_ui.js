@@ -224,7 +224,14 @@ function fetch_save(id) {
   apiAuth('user/fetchSave.php', getStorage("username"), getStorage("token"), { id: id }, () => { closeSavesBrowser() }, (e) => { layer.msg(e.msg) }, (e) => {
     layer.msg(e.msg);
     document.getElementById("inputData").value = decodeURIComponent((e.data[0].content));
-    startProcess();
+    layer.confirm('Process now? / 是否立即解析（如果解析失败，应当选否并手动检查）？', {
+      btn: ['Yes / 是', 'No / 否']
+    }, function () {
+      layer.closeAll();
+      startProcess(); // TODO
+      
+    });
+    
   }, (e) => { layer.msg(e.msg) }, closeSavesBrowser)
 }
 function delete_save_r(id) {

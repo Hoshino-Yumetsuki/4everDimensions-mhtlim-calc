@@ -544,7 +544,7 @@ $version_hash = sha1_file(filename: "version.txt");
                 <h4>Main Info / 主要信息：<span id="upload_info" style="box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;color:rgb(255, 255, 255);background-color:rgba(255, 255, 255, 0.08);border-radius:16px">Loading...</span></h4>
                 <h4>Data / 数据：</h4>
                 <div id="upload_data_display" style="box-sizing:border-box;padding:3px;border:1px;border-style:solid;border-color: #ffffff33;color:rgb(255, 255, 255);background-color:rgba(255, 255, 255, 0.08);border-radius:16px"></div>
-                <span style="display:none;" id="upload_data"></span>
+                <pre style="display:none;" id="upload_data"></pre>
                 <br>
                 <hr />
                 <!-- <a class="superlinkR" href="javascript:void(0);" onclick="openLicenseAndPrivacy();" data-i18n="seeLicenseAndPrivacy">查看隐私政策和开源协议</a>、 -->
@@ -749,7 +749,7 @@ $version_hash = sha1_file(filename: "version.txt");
 
         // for upload
         function initUpload() {
-            var dt = ((document.getElementById("inputData").value))
+            var dt = ((document.getElementById("inputData").value.replace("<","&lt;").replace(">","&gt;")))
 
             document.getElementById("upload_data").innerHTML = dt
             document.getElementById("upload_info").innerHTML = document.getElementById("userInfo").innerHTML
