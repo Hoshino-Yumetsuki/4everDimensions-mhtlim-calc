@@ -357,7 +357,7 @@ $version_hash = sha1_file(filename: "version.txt");
         <div class="" style="text-align: left;max-width:1200px;margin:auto;">
 
 
-            <div class="layui-card rccc">
+            <!-- <div class="layui-card rccc">
                 <div class="layui-card-header">
                     经常无法访问本站？
                 </div>
@@ -366,7 +366,7 @@ $version_hash = sha1_file(filename: "version.txt");
 如果的确访问不了可去Mkzi_Nya的网站。</pre>
 
                 </div>
-            </div>
+            </div> -->
 
 
             <div class="layui-card rccc">
