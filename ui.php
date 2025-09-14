@@ -315,7 +315,7 @@ $version_hash = sha1_file(filename: "version.txt");
 
 <body>
 
-        <?php include __DIR__ . "/floating.php"; ?> 
+        <?//php include __DIR__ . "/floating.php"; ?>
         <!-- TAG: FloatingWindow -->
 
     <div class="rain"></div>
