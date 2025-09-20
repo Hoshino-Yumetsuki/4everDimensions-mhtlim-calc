@@ -401,7 +401,7 @@ $version_hash = sha1_file(filename: "version.txt");
                 <!-- data-i18n="siteInfo" -->
                 <div class="layui-card-body">
                     <!-- 网站作者：<button class="layui-btn layui-btn-primary layui-border-green" onclick="javascript:show_author_info();">查看</button><br> -->
-                    <a href="https://mkzi-nya.github.io/milthm-calculator-web/index.html" target="_blank"><span class="superlinkR">Mkzi Nya Version</span></a> |
+                    <a href="https://milcalc.netlify.app/" target="_blank"><span class="superlinkR">Mkzi Nya Version</span></a> |
                     <a href="http://xuziyao.com/" target="_blank"><span class="superlinkR">Dason's Page</span></a> |
                     <a href="https://milthm.adproqwq.top/" target="_blank"><span class="superlinkR">Adpro's Page</span></a><br>
                     <a href="https://mkzi-nya.github.io/mil/" target="_blank"><span class="superlinkR">Score V3 网页计算器</span></a>
