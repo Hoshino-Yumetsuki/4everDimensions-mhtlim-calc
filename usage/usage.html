@@ -5,13 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Usage</title>
-  <!-- 替换原先的 load.js 加载方式 -->
-<script>
-  const rand = `rand=${Date.now()}`;
-  const script = document.createElement('script');
-  script.src = `./load.js?${rand}`;
-  document.head.appendChild(script);
-</script>
+
+  <!-- 本地资源（不再注入 load.js） -->
   <link rel="stylesheet" href="./github-markdown-dark.min.css">
   <script src="./marked.min.js"></script>
   <script src="./katex.min.js"></script>
@@ -31,32 +26,16 @@
       align-items: center;
       position: relative;
     }
-
-    .container {
-      width: 100%;
-      max-width: 900px;
-    }
-
-    .markdown-body {
-      width: 100%;
-      overflow-wrap: break-word;
-    }
-
+    .container { width: 100%; max-width: 900px; }
+    .markdown-body { width: 100%; overflow-wrap: break-word; }
     .katex-display {
       display: block !important;
       text-align: center;
       margin: 10px 0;
       font-size: 1em;
     }
-
-    .toc {
-      display: none;
-    }
-
-    pre,
-    code {
-      user-select: text;
-    }
+    .toc { display: none; }
+    pre, code { user-select: text; }
 
     .language-selector {
       position: absolute;
@@ -64,14 +43,11 @@
       right: 10px;
       background: #222;
       padding: 5px;
-      /* 調小內邊距 */
       border-radius: 5px;
       cursor: pointer;
       color: white;
       font-size: 2em;
-      /* 可選：縮小字體 */
     }
-
     .language-menu {
       display: none;
       position: absolute;
@@ -83,36 +59,34 @@
       list-style: none;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
-
     .language-menu li {
       padding: 8px 12px;
       cursor: pointer;
       color: white;
     }
+    .language-menu li:hover { background: #444; }
 
-    .language-menu li:hover {
-      background: #444;
-    }
-
-    /* 隐藏aaa标签的弹窗并允许点击 */
+    /* 默认隐藏 dev（aaa）并平滑显隐；增加 top/left 过渡用于移动动画 */
     div[aaa] {
       visibility: hidden;
       opacity: 0;
-      transition: opacity 0.2s ease-in-out, visibility 0.3s ease-in-out;
-
+      transition:
+        opacity 0.12s ease-in-out,
+        visibility 0.12s ease-in-out,
+        top 0.12s ease,
+        left 0.12s ease;
     }
-
-    /* 显示时的样式 */
     div[aaa].visible {
       visibility: visible;
       opacity: 1;
     }
   </style>
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-L5K3QVRHFZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
+    function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-L5K3QVRHFZ');
   </script>
@@ -132,10 +106,13 @@
     <li onclick="changeLanguage('vi')">Tiếng Việt</li>
     <li onclick="changeLanguage('ken')">⋿ウᏵ㆑エㄎサ</li>
   </ul>
+
   <div class="container">
     <article id="content" class="markdown-body"></article>
   </div>
+
   <script>
+    // ===== Markdown & 高亮 & KaTeX =====
     marked.use(markedKatex());
     marked.setOptions({
       highlight: (code, lang) => {
@@ -143,39 +120,31 @@
         return hljs.highlightAuto(code).value;
       }
     });
+
     function getUserLanguage() {
       const langMap = {
-        "zh": "zh",
-        "zh-cn": "zh",
-        "zh-tw": "zh-tw",
-        "en": "en",
-        "ja": "ja",
-        "ko": "ko",
-        "ru": "ru",
-        "es": "es",
-        "vi": "vi",
-        "ken": "ken"
+        "zh": "zh", "zh-cn": "zh", "zh-tw": "zh-tw",
+        "en": "en", "ja": "ja", "ko": "ko", "ru": "ru",
+        "es": "es", "vi": "vi", "ken": "ken"
       };
-      // 读取URL参数中的 `lang`（如果存在）
       const urlParams = new URLSearchParams(window.location.search);
       let lang = urlParams.get('lang') || navigator.language.toLowerCase();
-      return langMap[lang] || "en"; // 默认英文
+      return langMap[lang] || "en";
     }
+
     function loadMarkdown() {
       const lang = getUserLanguage();
       fetch(`./usage_${lang}.md?${Date.now()}`)
         .then(res => res.text())
         .then(md => {
-          // 在这里进行链接的自动转义处理
+          // 链接自动转义处理（保留原逻辑）
           md = md.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function (match, p1, p2) {
-            // 只处理包含 'info:' 的链接
             if (p2.startsWith('info:')) {
-              const [protocol, rest] = p2.split(':', 2);  // 分离协议和剩余部分
-              const encodedRest = encodeURIComponent(rest);  // 对剩余部分进行编码
-              return `[${p1}](${protocol}:${encodedRest})`;  // 保持 'info:' 协议不变
+              const [protocol, rest] = p2.split(':', 2);
+              const encodedRest = encodeURIComponent(rest);
+              return `[${p1}](${protocol}:${encodedRest})`;
             }
-            const encodedUrl = p2;
-            return `[${p1}](${encodedUrl})`;
+            return `[${p1}](${p2})`;
           });
           content.innerHTML = marked.parse(md, { headerIds: true, mangle: false });
           content.querySelectorAll('h2,h3,h4').forEach(h => {
@@ -184,10 +153,12 @@
           hljs.highlightAll();
           resizeKatex();
           runJavascriptLinks();
-          loaddiv()
+          // 载入 dev
+          loadDev();
         })
         .catch(() => {
           content.innerHTML = `<p style="color: red;">未找到 <b>usage_${lang}.md</b> 文件</p>`;
+          loadDev();
         });
     }
 
@@ -195,7 +166,7 @@
       const links = document.querySelectorAll('a[href^="info:info"], a[href^="info:info"]');
       links.forEach(link => {
         link.addEventListener('click', function (event) {
-          event.preventDefault(); // 阻止默认的链接跳转
+          event.preventDefault();
         });
       });
     }
@@ -203,7 +174,7 @@
     function resizeKatex() {
       const w = document.querySelector('.markdown-body').clientWidth;
       document.querySelectorAll('.katex-display').forEach(e => {
-        e.style.fontSize = ''; // 先还原默认大小
+        e.style.fontSize = '';
         const actual = e.scrollWidth;
         if (actual > w) {
           const fs = parseFloat(getComputedStyle(e).fontSize);
@@ -216,110 +187,242 @@
       const menu = document.getElementById("language-menu");
       menu.style.display = (menu.style.display === "block") ? "none" : "block";
     }
-    function changeLanguage(lang) {
-      // 刷新页面并加上 `?lang=xx` 参数
-      window.location.search = `?lang=${lang}`;
+    function changeLanguage(lang) { window.location.search = `?lang=${lang}`; }
+
+    // ===== 悬停状态管理：保持 dev 内可交互，离开两端再隐藏 =====
+    const hoverState = new Map(); // key -> { hoverLink: bool, hoverDev: bool, el: HTMLElement, timer: number|null }
+    const HIDE_DELAY_MS = 120;
+
+    function ensureState(key) {
+      if (!hoverState.has(key)) {
+        hoverState.set(key, { hoverLink: false, hoverDev: false, el: null, timer: null });
+      }
+      return hoverState.get(key);
     }
-    // 初始化
-    window.addEventListener('resize', resizeKatex);
-    window.addEventListener('load', loadMarkdown);
-    function checkMouseOnLink(event) {
-      const target = event.target;
 
-      // 确保鼠标停留在一个链接上
-      if (target.tagName === 'A') {
-        const url = decodeURIComponent(target.href); // 解码链接URL
+    function scheduleHide(key) {
+      const state = ensureState(key);
+      if (state.timer) clearTimeout(state.timer);
+      state.timer = setTimeout(() => {
+        if (!state.hoverLink && !state.hoverDev && state.el) {
+          state.el.classList.remove('visible');
+        }
+        state.timer = null;
+      }, HIDE_DELAY_MS);
+    }
 
-        const regex = /(info)\(([^)]*)\)/;
-        const match = url.match(regex);
+    function placeAndShowForLink(aaaElement, linkRect) {
+      if (!aaaElement) return;
+      // 显示
+      aaaElement.classList.add('visible');
+      // 放在链接正下方并水平居中
+      const topPosition = linkRect.bottom + window.scrollY;
+      let leftPosition = linkRect.left + linkRect.width / 2 + window.scrollX - aaaElement.offsetWidth / 2;
 
-        if (match) {
-          const funcName = match[1];
-          const params = match[2].split(',').map(param => param.trim().replace(/['"]/g, ''));  // 获取函数参数并去除引号
+      const screenWidth = window.innerWidth;
+      const elementWidth = aaaElement.offsetWidth;
+      if (leftPosition + elementWidth > screenWidth) leftPosition = screenWidth - elementWidth;
+      else if (leftPosition < 0) leftPosition = 0;
 
-          // 获取链接的位置信息
-          const linkRect = target.getBoundingClientRect();
+      aaaElement.style.position = 'absolute';
+      aaaElement.style.top = `${topPosition}px`;
+      aaaElement.style.left = `${leftPosition}px`;
+    }
 
-          // 鼠标停留在链接时处理显示
-          if (params.length === 2) {
-            // 如果有两个参数，将aaa设置为显示状态，并显示为 "a,b"
-            const [param1, param2] = params;
-            const aaaElement = document.querySelector(`div[aaa="${param1},${param2}"]`);
-            if (aaaElement) {
-              aaaElement.classList.add('visible');
+    // ===== 从 chartdev.html 直接载入并挂到 body（保持与原 load.js 一致）=====
+// ===== 从 chartdev.html 直接载入并挂到 body（保持与原 load.js 一致）=====
+function loadDev() {
+  fetch(`./chartdev.html?${Date.now()}`)
+    .then(res => {
+      if (!res.ok) throw new Error(`加载 chartdev.html 失败：${res.status}`);
+      return res.text();
+    })
+    .then(html => {
+      const temp = document.createElement('div');
+      temp.innerHTML = html;
 
-              // 计算div的位置，放置在链接的正下方，并确保div的中心与链接的中心对齐
-              const topPosition = linkRect.bottom + window.scrollY; // 计算顶部位置
-              let leftPosition = linkRect.left + linkRect.width / 2 + window.scrollX - aaaElement.offsetWidth / 2; // 计算左边位置，居中显示
+      const nodes = temp.querySelectorAll('div[aaa]');
+      nodes.forEach(node => {
+        const key = node.getAttribute('aaa');
+        if (!document.querySelector(`body > div[aaa="${CSS.escape(key)}"]`)) {
+          node.style.position = node.style.position || 'absolute';
+          document.body.appendChild(node);
 
-              // 确保div不超出屏幕左边或右边
-              const screenWidth = window.innerWidth;
-              const elementWidth = aaaElement.offsetWidth;
-              if (leftPosition + elementWidth > screenWidth) {
-                leftPosition = screenWidth - elementWidth; // 超出右边界时调整
-              } else if (leftPosition < 0) {
-                leftPosition = 0; // 超出左边界时调整
-              }
+          // dev 悬停监听：进入 dev 时保持显示，离开 dev 时可能隐藏
+          node.addEventListener('mouseenter', () => {
+            const k = node.getAttribute('aaa');   // ✅ 动态读取
+            const st = ensureState(k);
+            st.el = node;
+            st.hoverDev = true;
+            node.classList.add('visible');
+            if (st.timer) { clearTimeout(st.timer); st.timer = null; }
+          });
 
-              // 设置div的位置
-              aaaElement.style.position = 'absolute';
-              aaaElement.style.top = `${topPosition}px`;
-              aaaElement.style.left = `${leftPosition}px`;
-
-            }
-          }
-          // 检查是否只有一个参数
-          else if (params.length === 1 && params[0]) {
-            // 如果有一个参数，将aaa设置为显示状态，并显示为 "a"
-            const [param] = params;
-            const aaaElement = document.querySelector(`div[aaa="${param}"]`);
-            if (aaaElement) {
-              aaaElement.classList.add('visible');
-
-              // 计算div的位置，放置在链接的正下方，并确保div的中心与链接的中心对齐
-              const topPosition = linkRect.bottom + window.scrollY; // 计算顶部位置
-              let leftPosition = linkRect.left + linkRect.width / 2 + window.scrollX - aaaElement.offsetWidth / 2; // 计算左边位置，居中显示
-
-              // 确保div不超出屏幕左边或右边
-              const screenWidth = window.innerWidth;
-              const elementWidth = aaaElement.offsetWidth;
-              if (leftPosition + elementWidth > screenWidth) {
-                leftPosition = screenWidth - elementWidth; // 超出右边界时调整
-              } else if (leftPosition < 0) {
-                leftPosition = 0; // 超出左边界时调整
-              }
-
-              // 设置div的位置
-              aaaElement.style.position = 'absolute';
-              aaaElement.style.top = `${topPosition}px`;
-              aaaElement.style.left = `${leftPosition}px`;
-
-            }
-          }
-
-          // 鼠标移开时将 aaa 元素隐藏
-          target.addEventListener('mouseleave', () => {
-            if (params.length === 2) {
-              const aaaElement = document.querySelector(`div[aaa="${params.join(',')}"]`);
-              if (aaaElement) {
-                aaaElement.classList.remove('visible');
-              }
-            } else if (params.length === 1 && params[0]) {
-              const aaaElement = document.querySelector(`div[aaa="${params[0]}"]`);
-              if (aaaElement) {
-                aaaElement.classList.remove('visible');
-              }
-            }
+          node.addEventListener('mouseleave', () => {
+            const k = node.getAttribute('aaa');   // ✅ 动态读取
+            const st = ensureState(k);
+            st.hoverDev = false;
+            scheduleHide(k);
           });
         }
+      });
+    })
+    .catch(err => console.error(err));
+}
+
+    // ===== Morph 相关：点击链接时顺滑切换 =====
+    let currentKey = null;             // 当前“主”窗口绑定的 key
+    let currentEl = null;              // 当前“主”窗口引用的 DOM 元素（会被复用以移动/换内容）
+    let isMorphing = false;            // 动画中防抖
+    const MORPH_SWAP_DELAY = 40;       // 轻微延迟以确保位置先到再替换内容
+
+    /**
+     * 将上一个窗口（currentEl）移动到新链接下方，并把内容替换为新窗口内容
+     * @param {HTMLElement} targetEl  目标 key 的 dev 节点（供取内容使用）
+     * @param {DOMRect} linkRect      新链接的 rect
+     * @param {String} targetKey      目标 key
+     */
+    function morphToTarget(targetEl, linkRect, targetKey) {
+      if (!currentEl || !targetEl || currentEl === targetEl) return;
+
+      // 1) 取消老 key 的隐藏、定时器，并标记当前元素为可见
+      if (currentKey) {
+        const oldState = ensureState(currentKey);
+        if (oldState.timer) { clearTimeout(oldState.timer); oldState.timer = null; }
+        oldState.hoverLink = false; // 点击时不强依赖 hover
+        oldState.hoverDev = false;
+        oldState.el = currentEl;
       }
+      currentEl.classList.add('visible');
+
+      // 2) 平滑移动到新位置
+      placeAndShowForLink(currentEl, linkRect);
+
+      // 3) 微延迟后替换内容与 key（让用户先看到“飞过去”，再变文字）
+      setTimeout(() => {
+        // 替换内部内容
+        currentEl.innerHTML = targetEl.innerHTML;
+        // 更新 aaa key（后续 hover/隐藏依赖）
+        currentEl.setAttribute('aaa', targetKey);
+
+        // 隐藏/移除目标原节点，避免重复（保留在 DOM 但不可见即可）
+        targetEl.classList.remove('visible');
+        targetEl.style.top = '-99999px';
+        targetEl.style.left = '-99999px';
+
+        // 更新 currentKey & 状态
+        currentKey = targetKey;
+        const newState = ensureState(currentKey);
+        newState.el = currentEl;
+        newState.hoverLink = false;
+        newState.hoverDev = false;
+
+        isMorphing = false;
+      }, MORPH_SWAP_DELAY);
     }
 
+    /**
+     * 以“当前元素优先”的策略显示目标窗口：
+     * - 若已有 currentEl：将其移动并替换为目标内容（morph）
+     * - 否则正常显示目标元素本身
+     */
+    function showByMorphOrDirect(targetKey, linkRect) {
+      const targetEl = document.querySelector(`div[aaa="${targetKey}"]`);
+      if (!targetEl) return;
 
-    // 在文档上监听鼠标移动事件
+      // 如果从未有过 currentEl，则以 targetEl 为主
+      if (!currentEl) {
+        currentEl = targetEl;
+        currentKey = targetKey;
+        const st = ensureState(targetKey);
+        st.el = currentEl;
+        st.hoverLink = true;
+        if (st.timer) { clearTimeout(st.timer); st.timer = null; }
+        placeAndShowForLink(currentEl, linkRect);
+        return;
+      }
+
+      // 若已有 currentEl 且 key 不同，执行 morph
+      if (currentEl && currentKey !== targetKey && !isMorphing) {
+        isMorphing = true;
+        morphToTarget(targetEl, linkRect, targetKey);
+        return;
+      }
+
+      // key 相同或正在 morph，就直接更新位置即可
+      placeAndShowForLink(currentEl, linkRect);
+    }
+
+    // ===== 监听鼠标移动到链接（hover）与点击（click）=====
+    function parseInfoKeyFromAnchor(anchor) {
+      const url = decodeURIComponent(anchor.href || '');
+      const match = url.match(/(info)\(([^)]*)\)/);
+      if (!match) return null;
+      const params = match[2].split(',').map(param => param.trim().replace(/['"]/g, ''));
+      const key = (params.length === 2) ? params.join(',') : params[0];
+      return key || null;
+    }
+
+    function bindLinkHoverAndClick(target) {
+      if (target.dataset.aaaBound) return;
+      target.dataset.aaaBound = '1';
+
+      // Hover 行为：与之前一致（但会优先复用 currentEl 以避免两个窗口闪烁）
+      target.addEventListener('mouseenter', () => {
+        const key = parseInfoKeyFromAnchor(target);
+        if (!key) return;
+        const state = ensureState(key);
+        state.hoverLink = true;
+        if (state.timer) { clearTimeout(state.timer); state.timer = null; }
+        showByMorphOrDirect(key, target.getBoundingClientRect());
+      });
+
+      target.addEventListener('mouseleave', () => {
+        const key = parseInfoKeyFromAnchor(target);
+        if (!key) return;
+        const state = ensureState(key);
+        state.hoverLink = false;
+        scheduleHide(key);
+      });
+
+      // 点击行为：触发“平滑切换”动画（morph 优先）
+      target.addEventListener('click', (e) => {
+        // 原本我们已阻止 info:info 的默认跳转；此处确保一次
+        e.preventDefault();
+        const key = parseInfoKeyFromAnchor(target);
+        if (!key) return;
+        showByMorphOrDirect(key, target.getBoundingClientRect());
+      });
+    }
+
+    // 捕获全局鼠标移动，动态绑定链接（保持与原有逻辑兼容）
+    function checkMouseOnLink(event) {
+      const target = event.target;
+      if (target.tagName !== 'A') return;
+      const key = parseInfoKeyFromAnchor(target);
+      if (!key) return;
+
+      // 先绑定 hover/click
+      bindLinkHoverAndClick(target);
+
+      // 在 mousemove 命中时也刷新位置与显示，保证体验顺滑
+      const aaaElement = currentEl && currentKey === key
+        ? currentEl
+        : document.querySelector(`div[aaa="${key}"]`);
+      if (!aaaElement) return;
+
+      const state = ensureState(key);
+      state.el = currentEl || aaaElement;
+      state.hoverLink = true;
+
+      // 若当前就是这个 key，用当前元素定位即可
+      placeAndShowForLink(state.el, target.getBoundingClientRect());
+    }
+
+    // ===== 初始化 =====
+    window.addEventListener('resize', resizeKatex);
+    window.addEventListener('load', loadMarkdown);
     document.addEventListener('mousemove', checkMouseOnLink);
-
   </script>
 </body>
-
 </html>
