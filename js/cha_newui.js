@@ -315,13 +315,14 @@ function processSong(songBlock) {
     .filter(n => Number.isFinite(n));
 
   const constantVal = parseFloat(constant);
+  const constantv3Val = parseFloat(constant);
   const scoreVal    = parseInt(score, 10);
   const accuracyVal = parseFloat(accuracy);
   const levelVal    = parseInt(level, 10);
 
 // 同时计算 v2 与 v3 的 reality
 const r_v2 = reality(scoreVal, constantVal);
-const r_v3 = realityv3(scoreVal, constantVal);
+const r_v3 = realityv3(scoreVal, constantv3Val);
 
 // —— 关键逻辑：是否改用 v3 公式
 const useV3 =
@@ -422,14 +423,14 @@ function processSongFromOldFormat(record, isV3 = false) {
   const constantObj = constants[BeatmapID];
   if (!constantObj) return null;
 
-  const { constant, category, name, yct } = constantObj;
+  const { constant, constantv3, category, name, yct } = constantObj;
   const scoreVal = BestScore || 0;
   const accVal   = Number.isFinite(BestAccuracy) ? BestAccuracy : 0;
   const levelVal = Number.isFinite(BestLevel) ? BestLevel : 0;
   const status   = Array.isArray(AchievedStatus) ? AchievedStatus : [];
 
   const r_v2 = reality(scoreVal, constant);
-  const r_v3 = realityv3(scoreVal, constant);
+  const r_v3 = realityv3(scoreVal, constantv3);
 
   // —— 核心：和 processSong 保持一致的判定逻辑
   const useV3 =
@@ -448,6 +449,7 @@ function processSongFromOldFormat(record, isV3 = false) {
     singleRealityRaw,
     singleReality: singleRealityRaw.toFixed(2),
     constant,
+    constantv3,
     name,
     category,
     yct,
@@ -463,8 +465,9 @@ function formatInput(username, items) {
   // items 为 processSong / processSongFromOldFormat 的统一对象
   // 若 isV3 为 true，则在尾部追加 ,v3
   const formattedItems = (items || []).map(item => {
-    const base = `[${item.name},${item.category},${item.constant},${item.bestScore},${item.bestAccuracy},${item.bestLevel},[${(item.achievedStatus || []).join(',')}]]`;
-    return item.isV3 ? base.replace(/\]$/, ',v3]') : base;
+    if (item.isV3) {return `[${item.name},${item.category},${item.constantv3},${item.bestScore},${item.bestAccuracy},${item.bestLevel},[${(item.achievedStatus || []).join(',')}],v3]`}
+    else return `[${item.name},${item.category},${item.constant},${item.bestScore},${item.bestAccuracy},${item.bestLevel},[${(item.achievedStatus || []).join(',')}]]`;
+
   }).join(',\n  ');
 
   document.getElementById('inputData').value = `[${username || ''}],{\n  ${formattedItems}\n}`;
