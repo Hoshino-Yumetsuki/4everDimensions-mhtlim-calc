@@ -1411,7 +1411,7 @@ function drawTip() {
   const n = 1;
   let tip;
 
-  if (window.average1 >= 12.7 && Math.random() < 0.75) {
+  if (window.average1 >= 13.4 && Math.random() < 0.75) {
     tip = lines[Math.floor(Math.random() * Math.min(n, lines.length))];
   } else {
     tip = lines[Math.floor(Math.random() * lines.length)];
