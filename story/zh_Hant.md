@@ -5,8 +5,8 @@
 - [主綫故事](#story)
   - [序章: 雨之聲](#chapter0)
   - [主綫章節一: 甜與苦的一體兩面](#chapter1)
-- [](#side)
-  - [](#side1)
+- [Side Story 1](#side)
+  - [A Spring Waiting in Blossoms](#side1)
 - [合作](#Collaboration)
   - [雨世界](#rainworld)
   - [Notanote](#notanote)
@@ -530,7 +530,7 @@
 
 ## 支綫故事 <a id="side"></a>
 
-###  <a id="side1"></a>
+### A Spring Waiting in Blossoms <a id="side1"></a>
 
 - [Contents](#contents)
 
