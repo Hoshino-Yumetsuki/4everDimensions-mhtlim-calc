@@ -1684,6 +1684,10 @@ async function downloadImage() {
                 justify-items: start;
             }
 
+            .hidden {
+              display: none;
+            }
+
             h1 {
                 font-weight: normal;
                 font-size: 2.5em;
@@ -2110,6 +2114,7 @@ async function downloadImage() {
               <button id="capture">保存图片</button>
               <button onclick="changeBackground()">换一张背景</button>
             </div>
+            <h2 style="text-align: center; margin: 15px; font-weight: normal;" id="safari-tip">检测到当前浏览器为 Safari 内核，可能会出现兼容问题，若遇到无法保存 / 图片异常等问题，请尝试使用其他设备浏览。</h2>
             <h2 style="text-align: center; margin: 15px; font-weight: normal;">如果发现图片资源未加载完全的情况，可以尝试退出重新生成几次。</h2>
         <script>
         const date = "${new Date().toISOString().replace(/[:\-T]/g, '_').split('.')[0]}"
@@ -2177,6 +2182,15 @@ async function downloadImage() {
                 link.href = URL.createObjectURL(blob);
                 link.download = 'output_MilAerno_' + date + '.png';
                 link.click();
+            }
+
+            function isSafari() {
+              const ua = navigator.userAgent;
+              return /Safari/.test(ua) && !/Chrome|Chromium|Edg|OPR/.test(ua);
+            }
+
+            if (!isSafari()) {
+              document.querySelector("#safari-tip").classList.add("hidden");
             }
 
             document.querySelector('#capture').addEventListener('click', async () => {
