@@ -1604,7 +1604,7 @@ async function downloadImage() {
 
 
             body {
-                background-color: #1e1e24;
+                background-color: #191820;
                 color: white;
             }
             main {
@@ -1817,17 +1817,23 @@ async function downloadImage() {
                 align-items: center;
                 justify-content: center;
                 /* text-align: center; */
-                font-size: 1.5em;
+                font-size: 1.3em;
                 transition: background-color 0.2s;
                 margin: 20px;
+                color: #FFF;
+                box-shadow: 0 8px 5pxrgba(222, 195, 252, 0.6);
+                /* background: linear-gradient(90deg, #DEC3FC, #A1C5FC);*/
+                background: #0B0A0F88;
+                font-weight: 200;
+                border: 2px solid #56555A;
             }
 
             button:hover {
-                background-color: #DDD;
+                background-color:#262333;
             }
 
             button:active {
-                background-color: #BBB;
+                background-color:#363346;
             }
 
             .cardtext {
@@ -2104,6 +2110,7 @@ async function downloadImage() {
               <button id="capture">保存图片</button>
               <button onclick="changeBackground()">换一张背景</button>
             </div>
+            <h2 style="text-align: center; margin: 15px; font-weight: normal;">如果发现图片资源未加载完全的情况，可以尝试退出重新生成几次。</h2>
         <script>
         const date = "${new Date().toISOString().replace(/[:\-T]/g, '_').split('.')[0]}"
         const parents = document.querySelectorAll('.down');

@@ -296,7 +296,7 @@ $version_hash = sha1_file(filename: "version.txt");
         }
 
         function downloadImage_pr() {
-            // layer.msg('正在生成...由于需要下载资源，可能需要一些时间。若一直没有反应，可以多次尝试。');
+            layer.msg('正在生成...若没有跳转到新的标签页请检查浏览器弹窗权限。');
             loadImage_nya()
         }
 
