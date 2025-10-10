@@ -1,5 +1,5 @@
 
-const Updated = "Updated at 2025.10.10 22:00(UTC+8)"
+const Updated = "Updated at 2025.10.10 23:50(UTC+8)"
 var cha_newui_js_ver = 7
 
 async function renderToCanvas(element) {
