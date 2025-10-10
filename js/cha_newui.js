@@ -1451,7 +1451,7 @@ async function downloadImage() {
     }
   });
   items.forEach(item => {
-    if (item.achievedStatus?.includes(5) && (( yrjds == 'true' ? item.yct ?? item.constantv3 : item.constantv3 ) > maxConstant)) {
+    if (item.achievedStatus?.includes(5) && ((yrjds == 'true' ? item.yct ?? item.constantv3 : item.constantv3) > maxConstant)) {
       maxConstant = yrjds == 'true' ? item.yct ?? item.constantv3 : item.constantv3;
     }
     if (item.category == "DZ" || item.category == "SK" || item.category == "CB" || item.category == "CL") {
@@ -1478,7 +1478,7 @@ async function downloadImage() {
   else if (maxConstant > 12) star = 3;
   else if (maxConstant > 9) star = 2;
   else if (maxConstant > 6) star = 1;
-  
+
   // 选择背景图：优先文件输入（自定义），否则随机选
   const bgInput = document.getElementById('bgImage');
   const hasFile = bgInput && bgInput.files && bgInput.files[0];
@@ -1487,9 +1487,9 @@ async function downloadImage() {
       const bg_filename = await readFileAsDataURL(hasFile);
       return bg_filename;
     } else if (yrjds == 'true') {
-      return `./jpgs/background/yrj-${Math.floor(Math.random() * 3) + 1}.jpg`;
+      return `./jpgs/background/yrj-${Math.floor(Math.random() * 4) + 1}.jpg`;
     } else {
-      return `./jpgs/background/${Math.floor(Math.random() * 8) + 1}.jpg`;
+      return `./jpgs/background/${Math.floor(Math.random() * 11) + 1}.jpg`;
     }
   }
   const bg_filename = await getBgFile();
@@ -2269,12 +2269,12 @@ function archiveDownloadImage() {
 
       if (window.average1 >= 13.475 && Math.random() < 0.5) {
         tip = lines[Math.floor(Math.random() * Math.min(1, lines.length))];
-      } else 
-      if (window.average1 >= 13.45 && Math.random() < 0.3) {
-        tip = lines[Math.floor(Math.random() * Math.min(2, lines.length))];
-      } else {
-        tip = lines[Math.floor(Math.random() * lines.length)];
-      }
+      } else
+        if (window.average1 >= 13.45 && Math.random() < 0.3) {
+          tip = lines[Math.floor(Math.random() * Math.min(2, lines.length))];
+        } else {
+          tip = lines[Math.floor(Math.random() * lines.length)];
+        }
 
       // 替换 {Name} 并加前缀
       tip = 'Tip: ' + tip.replace(/\{Name\}/g, window.username || "玩家");
