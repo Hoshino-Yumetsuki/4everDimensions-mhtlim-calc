@@ -1,10 +1,10 @@
 <?php
-$dev_mode = true;
+$dev_mode = false;
 $vcon = false;
 if (!$dev_mode) {
     include "fc.php";
     // 统计信息
-    $time_now = date("Y-m-d H:i:s");
+    //$time_now = date("Y-m-d H:i:s");
     $dbc = dbc();
     $ms_time = microtime(true);
     // $gen_uuid=uuid(); //生成唯一id
