@@ -1,5 +1,5 @@
 
-const Updated = "Updated at 2025.10.11 01:13 (UTC+8)"
+const Updated = "Updated at 2025.10.11 01:20 (UTC+8)"
 var cha_newui_js_ver = 7
 const BACKGROUND_COUNT = 11
 const BACKGROUND_COUNT_YRJ = 4
@@ -1504,9 +1504,9 @@ async function downloadImage() {
       const bg_filename = await readFileAsDataURL(hasFile);
       return bg_filename;
     } else if (yrjds == 'true') {
-      return `./jpgs/background/yrj-${index}.jpg`;
+      return `./jpgs/background/yrj-${index}.avif`;
     } else {
-      return `./jpgs/background/${index}.jpg`;
+      return `./jpgs/background/${index}.avif`;
     }
   }
   const bg_index = yrjds == 'true' ? Math.floor(Math.random() * BACKGROUND_COUNT_YRJ) + 1 : Math.floor(Math.random() * BACKGROUND_COUNT) + 1;
@@ -2122,7 +2122,7 @@ async function downloadImage() {
           if (imgIndex >= nums.length) {
             imgIndex = 0;
           }
-          bg_element.style.backgroundImage = 'url(./jpgs/background/' + prefix + nums[imgIndex] + '.jpg)';
+          bg_element.style.backgroundImage = 'url(./jpgs/background/' + prefix + nums[imgIndex] + '.avif)';
           imgIndex++;
         }
         function waitForImages(selector = 'img') {
