@@ -1,6 +1,23 @@
 
-const Updated = "Updated at 2025.10.10 23:50(UTC+8)"
+const Updated = "Updated at 2025.10.11 01:13 (UTC+8)"
 var cha_newui_js_ver = 7
+const BACKGROUND_COUNT = 11
+const BACKGROUND_COUNT_YRJ = 4
+
+function getStrLength(str) {
+  let len = 0;
+  for (const ch of str) {
+    const code = ch.charCodeAt(0);
+    if (code > 255) len += 2;                // 全角
+    else if (/[A-Z]/.test(ch) && ch !== 'I') len += 1.5; // 大写但非 I
+    else len += 1;                           // 其他半角
+  }
+  return len;
+}
+function buildNumArray(n) {
+  const arr = Array.from({ length: n }, (_, i) => i + 1);
+  return arr
+}
 
 async function renderToCanvas(element) {
   // 动态加载 html2canvas
@@ -1482,17 +1499,18 @@ async function downloadImage() {
   // 选择背景图：优先文件输入（自定义），否则随机选
   const bgInput = document.getElementById('bgImage');
   const hasFile = bgInput && bgInput.files && bgInput.files[0];
-  async function getBgFile() {
+  async function getBgFile(index) {
     if (hasFile) {
       const bg_filename = await readFileAsDataURL(hasFile);
       return bg_filename;
     } else if (yrjds == 'true') {
-      return `./jpgs/background/yrj-${Math.floor(Math.random() * 4) + 1}.jpg`;
+      return `./jpgs/background/yrj-${index}.jpg`;
     } else {
-      return `./jpgs/background/${Math.floor(Math.random() * 11) + 1}.jpg`;
+      return `./jpgs/background/${index}.jpg`;
     }
   }
-  const bg_filename = await getBgFile();
+  const bg_index = yrjds == 'true' ? Math.floor(Math.random() * BACKGROUND_COUNT_YRJ) + 1 : Math.floor(Math.random() * BACKGROUND_COUNT) + 1;
+  const bg_filename = await getBgFile(bg_index);
   // console.log("bgfile", bg_filename)
 
   const isRealityV3 = checkTop20V3Condition();
@@ -1558,6 +1576,7 @@ async function downloadImage() {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>查分结果-${new Date().toISOString().replace(/[:\-T]/g, '_').split('.')[0]}</title>
+        <link rel="icon" type="image/x-icon" href="./favicon.ico">
         <style>
             @font-face {
                 font-family: 'Chill Round';
@@ -1592,7 +1611,6 @@ async function downloadImage() {
                 width: 100%;
                 min-height: 1778px;
                 background-color: #0009;
-                /* backdrop-filter: blur(10px); */
             }
 
             .main-container {
@@ -1710,7 +1728,7 @@ async function downloadImage() {
                 background: url(./jpgs/v50-bg.png);
                 background-size: cover;
                 text-shadow: 1px 1px 0 #00000081;
-                box-shadow: 0 0 14px rgba(255, 45, 45, 0.77);
+                box-shadow: 0 0 14px rgba(255, 70, 70, 0.77);
                 /* background-position-y: 1px; */
                 color: white;
             }
@@ -1763,7 +1781,6 @@ async function downloadImage() {
                 height: 100%;
                 border-radius: 15px;
                 overflow: hidden;
-                backdrop-filter: blur(10px);
             }
 
             .cardcover {
@@ -1779,7 +1796,7 @@ async function downloadImage() {
 
             .cardcover-v3 {
                 /* background: linear-gradient(45deg,rgba(58, 57, 88, 0.85),rgba(49, 41, 77, 0.85)); */
-                background-color: rgba(49, 48, 85, 0.85);
+                background-color: rgba(47, 46, 77, 0.85);
             }
 
             .card {
@@ -1789,7 +1806,7 @@ async function downloadImage() {
                 border-radius: 25px;
             }
 
-            #capture {
+            button {
                 padding: 10px;
                 width: 200px;
                 border-radius: 100px;
@@ -1805,11 +1822,11 @@ async function downloadImage() {
                 margin: 20px;
             }
 
-            #capture:hover {
+            button:hover {
                 background-color: #DDD;
             }
 
-            #capture:active {
+            button:active {
                 background-color: #BBB;
             }
 
@@ -1937,7 +1954,7 @@ async function downloadImage() {
 
             .progress p {
                 margin-right: 5px;
-                font-size: 0.85em;
+                font-size: 0.9em;
             }
 
             .prog-line {
@@ -2083,7 +2100,10 @@ async function downloadImage() {
                 </footer>
             </main>
             </div>
-            <button id="capture">保存图片</button>
+            <div style="display: flex; justify-content: center;">
+              <button id="capture">保存图片</button>
+              <button onclick="changeBackground()">换一张背景</button>
+            </div>
         <script>
         const date = "${new Date().toISOString().replace(/[:\-T]/g, '_').split('.')[0]}"
         const parents = document.querySelectorAll('.down');
@@ -2094,6 +2114,17 @@ async function downloadImage() {
                 }
             })
         let isDownloading = false;
+        let imgIndex = ${bg_index + 1};
+        function changeBackground() {
+          const nums = [${yrjds != "true" ? buildNumArray(BACKGROUND_COUNT) : buildNumArray(BACKGROUND_COUNT_YRJ)}];
+          const prefix = ${yrjds != "true" ? '""' : '"yrj-"'}
+          const bg_element = document.querySelector('.bg');
+          if (imgIndex >= nums.length) {
+            imgIndex = 0;
+          }
+          bg_element.style.backgroundImage = 'url(./jpgs/background/' + prefix + nums[imgIndex] + '.jpg)';
+          imgIndex++;
+        }
         function waitForImages(selector = 'img') {
                 const images = Array.from(document.querySelectorAll(selector));
                 const promises = images.map(img => {
@@ -2460,21 +2491,36 @@ function getLevelIconName(it) {
 }
 
 function limitText(str, len = 16) {
-  return str.length > len ? str.slice(0, len) + '...' : str;
+  console.log("str", str, "len", len)
+  let resultstr = str;
+  if (getStrLength(str) > len) {
+    let l = 0;
+    let cut = false;
+    Array.from(str).forEach((s, i) => {
+      l += getStrLength(s)
+      console.log("str", s, getStrLength(s), "totallen", l)
+      if (l >= len && !cut) {
+        resultstr = str.slice(0, Math.max(i - 2, 0)) + "...";
+        cut = true;
+        return
+      }
+    })
+  }
+  return resultstr;
 }
 
 // 得到卡片 html
 function getCardHtml(items, maxCount) {
   const htmls = []
-  const getItemHtml = (it, i, ignoreMaxCount = false, numberPrefix = '#', maxTitleLen = 14) => {
+  const getItemHtml = (it, i, ignoreMaxCount = false, numberPrefix = '#', maxTitleLen = 21) => {
     if (i + 1 > maxCount && !ignoreMaxCount) {
       return
     }
-    const number = numberPrefix + (i + 1);
+    const numStr = numberPrefix + (i + 1);
 
     // 分数（含渐变颜色）
     const scoreStr = String(it.bestScore ?? 0).padStart(7, '0');
-    const songName = escapeHtml(limitText(it.name, maxTitleLen))
+    const songName = escapeHtml(limitText(it.name, maxTitleLen - numStr.length))
 
     // 评级/常数/准确率 行
     // ctx.font = '20px Arial';
@@ -2523,6 +2569,7 @@ function getCardHtml(items, maxCount) {
     }
 
     const scoreIsV3 = it.isV3 || it.bestLevel <= 1 || it.bestScore >= 1005000 || (it.achievedStatus.includes(2) || it.achievedStatus.includes(5))
+    // const scoreIsV3 = true;
 
     const cardHtmlText = `
   <section class="card">
@@ -2539,7 +2586,7 @@ function getCardHtml(items, maxCount) {
           </div>
           <div style="position: relative;">
               <p
-                  style="text-align: right; position: absolute; right: 0; top: 6px;  color:#dde3ffc9">${number}</p>
+                  style="text-align: right; position: absolute; right: 0; top: 6px;  color:${scoreIsV3 ? '#cbbeffee' : '#dde3ffc9'}">${numStr}</p>
               <div class="cardtext">
                   <div
                       style="display: flex; align-items: center; padding-bottom: 9px; position: relative;">
@@ -2563,7 +2610,7 @@ function getCardHtml(items, maxCount) {
                       <p
                           style="color: #ffffffd7;">${acc}</p>
                       <p
-                          style="text-align: right; color:#a4ceff; font-size: 1em;">${rating}</p>
+                          style="text-align: right; color:${scoreIsV3 ? '#9ac9ff' : '#ffffffd7'}; font-size: 1em;">${rating}</p>
                   </div>
               </div>
           </div>
@@ -2596,7 +2643,7 @@ function getCardHtml(items, maxCount) {
       <aside class="down">
     `)
   }
-  window.norlt.forEach((it, i) => { getItemHtml(it, i, true, "EX #", 11) });
+  window.norlt.forEach((it, i) => { getItemHtml(it, i, true, "EX #") });
   const cardsHtml = `<aside class="down">
   ${htmls.join("\n")}
   </aside>`
