@@ -1719,7 +1719,7 @@ async function downloadImage() {
                 background: url(./jpgs/v50-bg.png);
                 background-size: cover;
                 text-shadow: 1px 1px 0 #00000081;
-                box-shadow: 0 0 14pxrgb(255, 45, 45);
+                box-shadow: 0 0 14px rgba(255, 45, 45, 0.77);
                 /* background-position-y: 1px; */
                 color: white;
             }
@@ -1752,10 +1752,12 @@ async function downloadImage() {
             }
 
             .cardimg {
+                /* max-width: 210px; */
+                /* width: 100%; */
                 height: 100%;
                 display: flex;
                 justify-self: center;
-                border-radius: 15px;
+                /* border-radius: 15px; */
             }
 
             .cardimgcover {
@@ -1765,12 +1767,11 @@ async function downloadImage() {
                 border-radius: 15px;
             }
 
-
             .cardbg {
                 width: 100%;
                 height: 100%;
                 border-radius: 15px;
-                background-color:rgba(4, 4, 5, 0.59);
+                overflow: hidden;
                 backdrop-filter: blur(10px);
             }
 
