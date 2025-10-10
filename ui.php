@@ -296,8 +296,13 @@ $version_hash = sha1_file(filename: "version.txt");
         }
 
         function downloadImage_pr() {
-            layer.msg('正在生成...由于需要下载资源，可能需要一些时间。若一直没有反应，可以多次尝试。');
+            // layer.msg('正在生成...由于需要下载资源，可能需要一些时间。若一直没有反应，可以多次尝试。');
             loadImage_nya()
+        }
+
+        function achive_downloadImage_pr() {
+            layer.msg('正在生成...由于需要下载资源，可能需要一些时间。若一直没有反应，可以多次尝试。');
+            achive_loadImage_nya()
         }
     </script>
     <script>
@@ -428,6 +433,8 @@ $version_hash = sha1_file(filename: "version.txt");
                     <hr />
                     <div class="btn_container">
                         <button class="layui-btn layui-btn-primary" onclick="javascript:downloadImage_pr();" data-i18n="generateImage">生成图像</button>
+                        <!-- TODO: generateImageLegacy i18n -->
+                        <button class="layui-btn layui-btn-primary" onclick="javascript:achive_downloadImage_pr();" data-i18n="generateImageLegacy">生成图像(旧版)</button>
                         <button class="layui-btn layui-btn-primary" onclick="showSettings();" data-i18n="settings">查分图设置</button>
                         <button class="layui-btn layui-btn-primary" onclick="geturltc();">生成雷达图</button>
                     </div>

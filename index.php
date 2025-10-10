@@ -1,5 +1,5 @@
 <?php
-$dev_mode = false;
+$dev_mode = true;
 $vcon = false;
 if (!$dev_mode) {
     include "fc.php";

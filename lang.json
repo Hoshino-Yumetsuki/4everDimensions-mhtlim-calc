@@ -18,6 +18,9 @@
     "parse": "解析",
     "uploadFile": "导入文件",
     "generateImage": "生成图像",
+
+    "generateImageLegacy": "生成图像（旧版）",
+
     "generatingImage": "正在生成图片，由于需要下载图片资源，可能需要一些时间。若一直没有反应，可以多次尝试。资源不会超过3MB",
     "dataResult": "数据处理结果",
     "userInfo": "用户信息：",
@@ -30,9 +33,9 @@
     "excludeRealityLabel": "额外绘制不记入Reality的曲目:",
     "cancel": "取消",
     "apply": "应用",
-    "yrjds":"愚人节定数",
+    "yrjds": "愚人节定数",
     "donation": "捐赠",
-    "donationText":"捐赠：",
+    "donationText": "捐赠：",
     "uploadYourSaves": "上传你的存档：",
     "uploadBtnText": "上传存档到云端",
     "seeLicenseAndPrivacy": "查看开源许可和隐私政策"
@@ -56,6 +59,9 @@
     "parse": "解析",
     "uploadFile": "導入文件",
     "generateImage": "生成圖像",
+
+    "generateImageLegacy": "生成圖像（舊版）",
+
     "generatingImage": "正在生成圖片，由於需要下載圖片資源，可能需要一些時間。若一直沒有反應，可以多次嘗試。資源不會超過3MB",
     "dataResult": "數據處理結果",
     "userInfo": "用戶信息：",
@@ -70,7 +76,7 @@
     "apply": "應用",
     "yrjds": "愚人節定數",
     "donation": "捐赠",
-    "donationText":"捐赠：",
+    "donationText": "捐赠：",
     "uploadYourSaves": "上傳你的存檔：",
     "uploadBtnText": "上傳存檔到雲端",
     "seeLicenseAndPrivacy": "查看開源許可和隱私政策"
@@ -94,6 +100,9 @@
     "parse": "Parse",
     "uploadFile": "Import file",
     "generateImage": "Generate image",
+
+    "generateImageLegacy": "生成图像（旧版）",
+
     "generatingImage": "Generating image, it may take some time due to the need to download image resources. If there is no response, you can try multiple times. Resources will not exceed 3MB",
     "dataResult": "Data processing result",
     "userInfo": "User information: ",
@@ -108,7 +117,7 @@
     "apply": "Apply",
     "yrjds": "April Fool's Day score",
     "donation": "Donate",
-    "donationText":"Donate: ",
+    "donationText": "Donate: ",
     "uploadYourSaves": "Upload your saves: ",
     "uploadBtnText": "Upload saves",
     "seeLicenseAndPrivacy": "View license and privacy policy"
@@ -132,6 +141,9 @@
     "parse": "Analizar",
     "uploadFile": "Cargar archivo",
     "generateImage": "Generar imagen",
+
+    "generateImageLegacy": "生成图像（旧版）",
+
     "generatingImage": "Generando imagen, puede tardar algún tiempo debido a la necesidad de descargar recursos de imagen. Si no hay respuesta, puede intentarlo varias veces. Los recursos no excederán 3MB",
     "dataResult": "Resultado del procesamiento de datos",
     "userInfo": "Información del usuario: ",
@@ -146,7 +158,7 @@
     "apply": "Aplicar",
     "yrjds": "Puntuación del Día de los Inocentes",
     "donation": "Donar",
-    "donationText":"Donar: ",
+    "donationText": "Donar: ",
     "uploadYourSaves": "Sube tus guardados: ",
     "uploadBtnText": "Subir guardados",
     "seeLicenseAndPrivacy": "Ver licencia y política de privacidad"
@@ -170,6 +182,9 @@
     "parse": "Memecah",
     "uploadFile": "Unggah file",
     "generateImage": "Hasikan gambar",
+
+    "generateImageLegacy": "生成图像（旧版）",
+
     "generatingImage": "Menghasilkan gambar, ini mungkin memakan waktu karena kebutuhan untuk mengunduh sumber daya gambar. Jika tidak ada respon, Anda dapat mencobanya beberapa kali. Sumber daya tidak akan melebihi 3MB",
     "dataResult": "Hasil pemrosesan data",
     "userInfo": "Informasi pengguna: ",
@@ -184,7 +199,7 @@
     "apply": "Terapkan",
     "yrjds": "Skor Hari Kenaikan Harga",
     "donation": "Donasi",
-    "donationText":"Donasi: ",
+    "donationText": "Donasi: ",
     "uploadYourSaves": "Unggah penyimpanan Anda: ",
     "uploadBtnText": "Unggah penyimpanan",
     "seeLicenseAndPrivacy": "Lihat lisensi dan kebijakan privasi"
@@ -208,6 +223,9 @@
     "parse": "Анализировать",
     "uploadFile": "Загрузить файл",
     "generateImage": "Создать изображение",
+
+    "generateImageLegacy": "生成图像（旧版）",
+
     "generatingImage": "Создание изображения, это может занять некоторое время из-за необходимости загрузки ресурсов изображения. Если нет реакции, попробуйте несколько раз. Ресурсы не превышают 3MB",
     "dataResult": "Результат обработки данных",
     "userInfo": "Информация пользователя: ",
@@ -222,7 +240,7 @@
     "apply": "Применить",
     "yrjds": "Баллы Дня Мудреца",
     "donation": "Пожертвование",
-    "donationText":"Пожертвование: ",
+    "donationText": "Пожертвование: ",
     "uploadYourSaves": "Загрузите свои сохранения: ",
     "uploadBtnText": "Загрузить сохранения",
     "seeLicenseAndPrivacy": "Смотреть лицензию и политику конфиденциальности"
@@ -246,6 +264,9 @@
     "parse": "解析",
     "uploadFile": "ファイルをアップロード",
     "generateImage": "画像を生成",
+
+    "generateImageLegacy": "生成图像（旧版）",
+
     "generatingImage": "画像を生成しています、画像リソースをダウンロードする必要があるため、少し時間がかかる場合があります。反応がない場合は、複数回試行してください。リソースは3MBを超えていません",
     "dataResult": "データ処理結果",
     "userInfo": "ユーザー情報：",
@@ -260,7 +281,7 @@
     "apply": "適用",
     "yrjds": "愚者の日定数",
     "donation": "寄付",
-    "donationText":"寄付：",
+    "donationText": "寄付：",
     "uploadYourSaves": "セーブデータをアップロード：",
     "uploadBtnText": "セーブデータをアップロード",
     "seeLicenseAndPrivacy": "ライセンスとプライバシーポリシーを見る"
@@ -284,6 +305,9 @@
     "parse": "Phân tích",
     "uploadFile": "Tải lên tệp",
     "generateImage": "Tạo hình ảnh",
+
+    "generateImageLegacy": "生成图像（旧版）",
+
     "generatingImage": "Đang tạo hình ảnh, có thể mất một chút thời gian do cần tải xuống các tài nguyên hình ảnh. Nếu không có phản hồi, hãy thử nhiều lần. Các tài nguyên không vượt quá 3MB",
     "dataResult": "Kết quả xử lý dữ liệu",
     "userInfo": "Thông tin người dùng: ",
@@ -298,7 +322,7 @@
     "apply": "Áp dụng",
     "yrjds": "Điểm ngày Giàu Trí Tuệ",
     "donation": "Tài trợ",
-    "donationText":"Tài trợ: ",
+    "donationText": "Tài trợ: ",
     "uploadYourSaves": "Tải lên các tệp lưu trữ của bạn: ",
     "uploadBtnText": "Tải lên các tệp lưu trữ",
     "seeLicenseAndPrivacy": "Xem giấy phép và chính sách bảo mật"
