@@ -1,14 +1,14 @@
 主要负责人：
     • <a href="https://mkzi-nya.github.io/" {}>mkzi_nya</a> (查分核心功能开发&脚本&基本实现开发)
     • <a href="https://www.xzadudu179.top/" {}>xzadudu179</a> (UI/前端&新查分图)
-    • <a href="https://k9.lv/klm/" {}>_4everDimensions</a> (UI/前端&后端&托管&云相关功能开发)
+    • <a href="https://k9.lv/klm/" {}>CalaMity-Zero</a> (UI/前端&后端&托管&云相关功能开发)
     • <a href="https://github.com/jsjsjsjsjsjsjson" {}>libchara-dev</a>
     • Autumn
 
 特别鸣谢：
     • <a href="https://mkzi-nya.github.io/" {}>mkzi_nya (归梦)</a>
     • <a href="https://www.xzadudu179.top/" {}>xzadudu179</a>
-    • <a href="https://k9.lv/klm/" {}>_4everDimensions</a>
+    • <a href="https://k9.lv/klm/" {}>CalaMity-Zero</a>
     • <a href="https://github.com/jsjsjsjsjsjsjson" {}>libchara-dev</a>
     • Autumn
     • Panyi
