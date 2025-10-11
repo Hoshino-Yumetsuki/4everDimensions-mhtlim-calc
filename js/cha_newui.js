@@ -37,6 +37,7 @@ async function renderToCanvas(element) {
 
 
 console.log(Updated)
+console.log("awa")
 console.log(" ███  ███                               \n\
  ███  ███                               \n\
  ███▒▒███                               \n\
@@ -546,7 +547,7 @@ async function parsePDFFile(content) {
     const content = await page.getTextContent();
     fullText += content.items.map(item => item.str).join(" ") + "\n";
   }
-  console.log("fullText", fullText)
+  // console.log("fullText", fullText)
   const match = fullText.match(/---BEGIN_JSON---(.*?)---END_JSON---/s);
   if (match) {
     document.getElementById('inputData').value = match[1];
