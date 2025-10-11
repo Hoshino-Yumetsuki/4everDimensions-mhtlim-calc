@@ -1,4 +1,4 @@
-const Updated = "Updated at 2025.10.11 20:40 (UTC+8)"
+const Updated = "Updated at 2025.10.11 20:45 (UTC+8)"
 var cha_newui_js_ver = 7
 const BACKGROUND_COUNT = 11
 const BACKGROUND_COUNT_YRJ = 4
@@ -1663,6 +1663,7 @@ async function downloadImage() {
             #hidden-json {
               font-size: 0.1rem;
               color: #191820;
+              user-select: none;
               max-width: ${width}px;
               margin: auto;
             }
