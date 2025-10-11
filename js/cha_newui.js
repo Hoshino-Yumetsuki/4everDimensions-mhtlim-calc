@@ -4,6 +4,8 @@ var cha_newui_js_ver = 7
 const BACKGROUND_COUNT = 11
 const BACKGROUND_COUNT_YRJ = 4
 
+//QWQQWQQWQQQWQWQWQWQOWOWOWOOOWOWOWOWOXWXWXWXWXWXWXWXWXWXWUWUWUWUWUWUWUWUWU
+
 function getStrLength(str) {
   let len = 0;
   for (const ch of str) {
