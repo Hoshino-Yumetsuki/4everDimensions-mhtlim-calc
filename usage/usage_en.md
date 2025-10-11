@@ -187,13 +187,44 @@ $$
 
 Single-song Reality formula (where s = score, c = difficulty):  
 
-{{reality公式}}
+{{reality}}
+$$
+\text{Realityv2}(s, c) =
+\begin{cases} 
+\mathbf{1 + c}, & s \in [1005000, 1010000] \\
+\displaystyle \frac{1.4}{e^{3.65 \cdot \left(99.5 - \frac{s}{10000}\right)} + 1} - 0.4 + c, 
+& s \in [995000, 1005000) \\
+\displaystyle \frac{e^{3.1 \cdot \frac{s - 980000}{15000}} - 1}{e^{3.1} - 1} \cdot 0.8 - 0.5 + c, 
+& s \in [980000, 995000) \\
+\displaystyle \frac{s}{280000} - 4 + c, & s \in [700000, 980000) \\
+0, & s \in (-\infty, 700000)
+\end{cases}
+$$
 
 [Reality Reference Table](#reality-reference-table)
 
 #### Code Implementation:  
 
-{{公式js}}
+```js
+function realityv3(score, c) {
+    if (c < 1e-3) return 0;
+    if (score >= 1000000) return c + 1.5;
+    if (score >= 850000) return c + (score - 850000) / 100000.0;
+    if (score >= 700000) return Math.max(0, c * (0.5 + (score - 700000) / 300000.0) + (score - 850000) / 100000.0);
+    if (score >= 600000) return Math.max(0, (c - 3) * (score - 600000) / 200000.0);
+    return 0;
+}
+
+function realityv2(score, c) {
+  if (c < 1e-3) return 0;
+  if (score >= 1005000) return 1 + c;
+  if (score >= 995000) return 1.4 / (Math.exp(363.175 - score * 0.000365) + 1) - 0.4 + c;
+  if (score >= 980000) return ((Math.exp(3.1 * (score - 980000) / 15000) - 1) / (Math.exp(3.1) - 1)) * 0.8 - 0.5 + c;
+  if (score >= 700000) return score / 280000 - 4 + c;
+  return 0;
+}
+
+```
 
 ---
 
@@ -230,9 +261,7 @@ Five judgment types per note:
 
 Score/ACC scales linearly within ranges. Full details:  
 
-| Perfect | perfect | Great | Good | Bad | Miss |
-|-|-|-|-|-|-|
-| ±35ms | ±35-70ms | ±70-105ms | ±105-140 | ±140-155ms | >155ms |
+{{判定范围}}
 
 ---
 
@@ -541,11 +570,7 @@ Support development via:
 
 ## Contact Us
 
-- **[QQ Milthm#-1 洨巟羣](https://qm.qq.com/q/Utb6sNDvki)**：375882310
-
-- **[QQ Milthm#Φ 交流群](https://qm.qq.com/q/fIErsKKz3a)**：678471942
-
-- **Discord**: [mkzi_nya](https://discordapp.com/users/1135097559891853435)
+{{联系我们}}
 
 ---
 
@@ -620,33 +645,7 @@ Score images embed save data as text—upload to [http://k9.lv/c/prefedit.html](
 
 ### Milthm Community Group
 
-记录于25.8.20 10:30  
-  
-| 群 | 群号 | 人数 |
-|-|-|-|
-| Milthm#1 交流群 | 372255828 | 1498 |
-| Milthm#3 交流群 | 910085472 | 1994 |
-| Milthm#5 官方交流群 | 480062123 | 88 |
-| Milthm#6 公开测试 | 915230984 | 283 |
-| Milthm#7 交流群 | 774927051 | 259 |
-| Milthm#8 交流群 | 887231011 | 1957 |
-| Milthm#9 开发交流群 | 1047814125 | 23 |
-| Milthm#10 交流群 | 454822146 | 356 |
-| Milthm#11 交流群 | 1042806409 | 81 |
-| Milthm#12 交流群 | 1048470253 | 31 |
-| Milthm#14 开发测试 | 1050419460 | 9 |
-| Mhtlim#√-1 洨巟羣 | 375882310 | 157 |
-| milthm#二创群——暮雨回廊 | 771250001 | 147 |
-| 梦见霖音高级中学 高一一部114514班 | 574275806 | 13 |
-| Milthm#Φ 交流群 | 678471942 | 40 |
-| milthm#神金 交流群 | 877854042 | 67 |
-| Milthm及各种🐉🖊交流群 | 981366419 | 54 |
-
-`1`,`3`,`8`群已不对外开放  
-`5`,`6`,`9`,`14`群为开发专用  
-存在`Milthm#2 交流群da☆ze（梦见霖音高级中学 高一一部2班）`为解散后重建  
-`√-1群`,`二创群`为交流群性质  
-另有`Rain Editor 公测群`,`MCEMの小群`为玩家制作的制谱器发布群
+{{群}}
 
 ### What is a File Path
 
@@ -662,4 +661,13 @@ A string specifying a file's location in a directory tree, using separators like
 
 ### Reality Reference Table
 
-{{reality表}}
+$$
+\text{Realityv3}(s, c) =
+\begin{cases}
+c + 1.5, & s \in [1000000, \infty), \\[6pt]
+c + \dfrac{s - 850000}{100000}, & s \in [850000, 1000000), \\[10pt]
+\max\!\Biggl(0,\; c \Bigl(0.5 + \dfrac{s - 700000}{300000}\Bigr) + \dfrac{s - 850000}{100000}\Biggr), & s \in [700000, 850000), \\[12pt]
+\max\!\Biggl(0,\; (c - 3)\dfrac{s - 600000}{200000}\Biggr), & s \in [600000, 700000), \\[10pt]
+0, & s \in [0, 600000).
+\end{cases}
+$$
