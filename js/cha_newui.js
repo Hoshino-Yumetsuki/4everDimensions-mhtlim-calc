@@ -1,4 +1,4 @@
-const Updated = "Updated at 2025.10.11 20:28 (UTC+8)"
+const Updated = "Updated at 2025.10.11 20:40 (UTC+8)"
 var cha_newui_js_ver = 7
 const BACKGROUND_COUNT = 11
 const BACKGROUND_COUNT_YRJ = 4
@@ -2166,7 +2166,7 @@ async function downloadImage() {
               <button onclick="window.print()">打印页面</button>
               <button onclick="copyJson()">复制用户数据</button>
             </div>
-            <h2 style="text-align: center; margin: 15px; font-weight: normal;" id="safari-tip">检测到当前浏览器为 Safari 内核，可能会出现兼容问题，若遇到无法保存 / 图片异常等问题，请尝试点击 "打印页面" 或使用其他设备浏览。</h2>
+            <h2 style="text-align: center; margin: 15px; font-weight: normal;" id="safari-tip">检测到当前浏览器为 Safari 内核，可能会出现兼容问题，若遇到无法保存 / 图片异常等问题，请尝试点击 "打印页面" 后保存为 PDF 或使用其他设备浏览。</h2>
             <h2 style="text-align: center; margin: 15px; font-weight: normal;">如果发现图片资源未加载完全的情况，可以尝试退出重新生成几次。</h2>
             <div id="hidden-json">---BEGIN_JSON---${(window.data || input) /* 把用户json存到这里 */}---END_JSON---</div>
         <script>
