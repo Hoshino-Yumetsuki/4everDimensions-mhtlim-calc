@@ -1,5 +1,5 @@
 
-const Updated = "Updated at 2025.10.11 02:38 (UTC+8)"
+const Updated = "Updated at 2025.10.11 18:44 (UTC+8)"
 var cha_newui_js_ver = 7
 const BACKGROUND_COUNT = 11
 const BACKGROUND_COUNT_YRJ = 4
@@ -1099,7 +1099,6 @@ function urltc(userrealityHistory, scores) {
       let y = scaleY(reality);
       ctx.fillText(reality.toFixed(2), chartX - 10, y);
     }
-    console.log("数据", items);
 
     const calculateMetric = (items, key, multiplier, divisor) => {
       return multiplier * (
@@ -1415,12 +1414,21 @@ function escapeHtml(str) {
   return el.innerHTML;
 }
 
+async function imgToDataURL(url) {
+  const response = await fetch(url);
+  const blob = await response.blob();
+  return new Promise(resolve => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.readAsDataURL(blob);
+  });
+}
+
 async function downloadImage() {
   // 显示生成进度 UI（项目里已有 ol_runner/ol_updateImgGenProcess）
   // if (typeof ol_runner === 'function') {
   //   ol_runner((e) => { document.getElementById('picgen').style.display = 'block' }, [114, 514]);
   // }
-  console.log("test")
   // 读取要导出的卡片数量 & 过滤设置
   const cardCount = parseInt(document.getElementById('cardCount').value, 10);
   const maxItems = Math.max(0, cardCount);
@@ -1569,7 +1577,13 @@ async function downloadImage() {
 
   const input = document.getElementById('inputData')?.value || '';
   const data = 'userdata:' + (window.data || input);
-
+  const bg_count = yrjds != 'true' ? BACKGROUND_COUNT : BACKGROUND_COUNT_YRJ;
+  const bg_prefix = yrjds != 'true' ? '' : 'yrj-';
+  const bgs = []
+  for (let index = 1; index <= bg_count; index++) {
+    const bg = `./jpgs/background/${bg_prefix}${index}.avif`;
+    bgs.push(`'${await imgToDataURL(bg)}'`);
+  }
   const htmlHead = `<!DOCTYPE html>
 <html lang="en">
     <head>
@@ -1618,7 +1632,7 @@ async function downloadImage() {
             }
 
             .bg {
-                background-image: url(${bg_filename});
+                background-image: url(${await imgToDataURL(bg_filename)});
                 background-size: cover;
                 min-height: 1778px;
                 background-position: center;
@@ -1720,7 +1734,7 @@ async function downloadImage() {
             }
 
             .reality-v3 {
-                background: url(./jpgs/v3-bg.png);
+                background: url(${await imgToDataURL('./jpgs/v3-bg.png')});
                 background-size: cover;
                 text-shadow: 1px 1px 0 #00000081;
                 box-shadow: 0 0 14px #6945f7;
@@ -1729,7 +1743,7 @@ async function downloadImage() {
             }
 
             .reality-v50 {
-                background: url(./jpgs/v50-bg.png);
+                background: url(${await imgToDataURL('./jpgs/v50-bg.png')});
                 background-size: cover;
                 text-shadow: 1px 1px 0 #00000081;
                 box-shadow: 0 0 14px rgba(255, 70, 70, 0.77);
@@ -1828,7 +1842,7 @@ async function downloadImage() {
                 box-shadow: 0 8px 5pxrgba(222, 195, 252, 0.6);
                 /* background: linear-gradient(90deg, #DEC3FC, #A1C5FC);*/
                 background: #0B0A0F88;
-                font-weight: 200;
+                font-weight: 400;
                 border: 2px solid #56555A;
             }
 
@@ -2128,13 +2142,13 @@ async function downloadImage() {
         let isDownloading = false;
         let imgIndex = ${bg_index + 1};
         function changeBackground() {
-          const nums = [${yrjds != "true" ? buildNumArray(BACKGROUND_COUNT) : buildNumArray(BACKGROUND_COUNT_YRJ)}];
+          const bgs = [${bgs}];
           const prefix = ${yrjds != "true" ? '""' : '"yrj-"'}
           const bg_element = document.querySelector('.bg');
-          if (imgIndex >= nums.length) {
+          if (imgIndex >= bgs.length) {
             imgIndex = 0;
           }
-          bg_element.style.backgroundImage = 'url(./jpgs/background/' + prefix + nums[imgIndex] + '.avif)';
+          bg_element.style.backgroundImage = 'url(' + bgs[imgIndex] + ')';
           imgIndex++;
         }
         function waitForImages(selector = 'img') {
@@ -2210,7 +2224,7 @@ async function downloadImage() {
     </body>
 </html>`;
   // // 绘制卡片并导出
-  const cardsHtml = getCardHtml(items, actualCardCount);
+  const cardsHtml = await getCardHtml(items, actualCardCount);
   // // console.log(cardsHtml);
   const htmlContent = htmlHead + cardsHtml + htmlFoot;
   // 打开一个新窗口或新标签页
@@ -2512,14 +2526,12 @@ function getLevelIconName(it) {
 }
 
 function limitText(str, len = 16) {
-  console.log("str", str, "len", len)
   let resultstr = str;
   if (getStrLength(str) > len) {
     let l = 0;
     let cut = false;
     Array.from(str).forEach((s, i) => {
       l += getStrLength(s)
-      console.log("str", s, getStrLength(s), "totallen", l)
       if (l >= len && !cut) {
         resultstr = str.slice(0, Math.max(i - 2, 0)) + "...";
         cut = true;
@@ -2531,9 +2543,9 @@ function limitText(str, len = 16) {
 }
 
 // 得到卡片 html
-function getCardHtml(items, maxCount) {
+async function getCardHtml(items, maxCount) {
   const htmls = []
-  const getItemHtml = (it, i, ignoreMaxCount = false, numberPrefix = '#', maxTitleLen = 21) => {
+  const getItemHtml = async (it, i, ignoreMaxCount = false, numberPrefix = '#', maxTitleLen = 21) => {
     if (i + 1 > maxCount && !ignoreMaxCount) {
       return
     }
@@ -2596,7 +2608,7 @@ function getCardHtml(items, maxCount) {
   <section class="card">
       <div class="cardcover ${scoreIsV3 ? 'cardcover-v3' : ''}">
           <div class="cardimgcover"
-              style="background-image: url('./jpgs/${coverImgName}'), url('./jpgs/img-error.webp');">
+              style="background-image: url('${await imgToDataURL('./jpgs/' + coverImgName)}'), url('${await imgToDataURL('./jpgs/img-error.webp')}');">
               <div class="cardbg">
                   <img
                       src="jpgs/${coverImgName}"
@@ -2651,7 +2663,7 @@ function getCardHtml(items, maxCount) {
     // if (coverImg) ctx.drawImage(coverImg, x + 13, y + 13, imgW, imgH);
     // if (iconImg) ctx.drawImage(iconImg, x + 351, y + 26, icon, icon);
   };
-  items.forEach((it, i) => { getItemHtml(it, i, false) });
+  await Promise.all(items.map((it, i) => getItemHtml(it, i, false)));
   // 增加下划线
   if (window.norlt.length > 0) {
     htmls.push(`
@@ -2664,7 +2676,7 @@ function getCardHtml(items, maxCount) {
       <aside class="down">
     `)
   }
-  window.norlt.forEach((it, i) => { getItemHtml(it, i, true, "EX #") });
+  await Promise.all(window.norlt.map((it, i) => getItemHtml(it, i, true, "EX #")));
   const cardsHtml = `<aside class="down">
   ${htmls.join("\n")}
   </aside>`
