@@ -1,10 +1,8 @@
 
-const Updated = "Updated at 2025.10.11 18:44 (UTC+8)"
+const Updated = "Updated at 2025.10.11 19:11 (UTC+8)"
 var cha_newui_js_ver = 7
 const BACKGROUND_COUNT = 11
 const BACKGROUND_COUNT_YRJ = 4
-
-//QWQQWQQWQQQWQWQWQWQOWOWOWOOOWOWOWOWOXWXWXWXWXWXWXWXWXWXWUWUWUWUWUWUWUWUWU
 
 function getStrLength(str) {
   let len = 0;
@@ -2133,35 +2131,47 @@ async function downloadImage() {
             <h2 style="text-align: center; margin: 15px; font-weight: normal;" id="safari-tip">检测到当前浏览器为 Safari 内核，可能会出现兼容问题，若遇到无法保存 / 图片异常等问题，请尝试使用其他设备浏览。</h2>
             <h2 style="text-align: center; margin: 15px; font-weight: normal;">如果发现图片资源未加载完全的情况，可以尝试退出重新生成几次。</h2>
         <script>
-        const date = "${new Date().toISOString().replace(/[:\-T]/g, '_').split('.')[0]}"
-        const parents = document.querySelectorAll('.down');
-            parents.forEach((parent, i) => {
-                if (parent && parent.children.length === 1) {
-                    parent.style.display = 'grid';
-                    parent.style.justifyContent = 'start';
-                }
-            })
-        let isDownloading = false;
-        let imgIndex = ${bg_index + 1};
-        function changeBackground() {
-          const bgs = [${bgs}];
-          const prefix = ${yrjds != "true" ? '""' : '"yrj-"'}
-          const bg_element = document.querySelector('.bg');
-          if (imgIndex >= bgs.length) {
-            imgIndex = 0;
+          const date = "${new Date().toISOString().replace(/[:\-T]/g, '_').split('.')[0]}"
+          const parents = document.querySelectorAll('.down');
+              parents.forEach((parent, i) => {
+                  if (parent && parent.children.length === 1) {
+                      parent.style.display = 'grid';
+                      parent.style.justifyContent = 'start';
+                  }
+              })
+          let isDownloading = false;
+          let imgIndex = ${bg_index + 1};
+          function changeBackground() {
+            const bgs = [${bgs}];
+            const prefix = ${yrjds != "true" ? '""' : '"yrj-"'}
+            const bg_element = document.querySelector('.bg');
+            if (imgIndex >= bgs.length) {
+              imgIndex = 0;
+            }
+            bg_element.style.backgroundImage = 'url(' + bgs[imgIndex] + ')';
+            imgIndex++;
           }
-          bg_element.style.backgroundImage = 'url(' + bgs[imgIndex] + ')';
-          imgIndex++;
-        }
-        function waitForImages(selector = 'img') {
-                const images = Array.from(document.querySelectorAll(selector));
-                const promises = images.map(img => {
-                    if (img.complete) return Promise.resolve();
-                    return new Promise(resolve => {
-                        img.onload = img.onerror = resolve;
-                    });
-                });
-                return Promise.all(promises);
+          function waitForImages(selector = 'img') {
+              const images = Array.from(document.querySelectorAll(selector));
+
+              const promises = images.map(img => {
+                if (img.complete) {
+                  // Safari 某些情况下 img.complete 为 true 但未 decode 完
+                  return img.decode ? img.decode().catch(() => {}) : Promise.resolve();
+                } else {
+                  return new Promise(resolve => {
+                    img.onload = async () => {
+                      if (img.decode) {
+                        await img.decode().catch(() => {});
+                      }
+                      resolve();
+                    };
+                    img.onerror = resolve;
+                  });
+                }
+              });
+
+              return Promise.all(promises);
             }
 
             async function download() {
