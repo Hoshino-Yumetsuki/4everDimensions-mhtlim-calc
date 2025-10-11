@@ -229,9 +229,9 @@ function fetch_save(id) {
     }, function () {
       layer.closeAll();
       startProcess(); // TODO
-      
+
     });
-    
+
   }, (e) => { layer.msg(e.msg) }, closeSavesBrowser)
 }
 function delete_save_r(id) {
@@ -573,7 +573,7 @@ function openStat(){
   try{
     fetch("wtf/stat.php").then((res)=>{
     res.json().then((data)=>{
-      
+
       if(data.data.code!=0){
         layer.msg(data.data.msg);
         return;
@@ -587,7 +587,7 @@ function openStat(){
   }finally{
     layer.close(f);
   }
-  
+
 }
 function mount_stat(content){
   var f=document.getElementById('stat_chart')

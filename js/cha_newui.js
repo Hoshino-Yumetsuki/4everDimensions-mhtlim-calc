@@ -1,4 +1,3 @@
-
 const Updated = "Updated at 2025.10.11 19:15 (UTC+8)"
 var cha_newui_js_ver = 7
 const BACKGROUND_COUNT = 11
@@ -537,7 +536,25 @@ async function processDBFile(arrayBuffer, SQL) {
   }
 }
 
-function handleFile(content, fileName) {
+async function parsePDFFile(content) {
+  const pdf = await pdfjsLib.getDocument({ data: content }).promise;
+  let fullText = "";
+  for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+    const page = await pdf.getPage(pageNum);
+    const content = await page.getTextContent();
+    fullText += content.items.map(item => item.str).join(" ") + "\n";
+  }
+  console.log("fullText", fullText)
+  const match = fullText.match(/---BEGIN_JSON---(.*?)---END_JSON---/s);
+  if (match) {
+    document.getElementById('inputData').value = match[1];
+    processData();
+  } else {
+    alert("未找到用户数据。");
+  }
+}
+
+async function handleFile(content, fileName) {
   const inputDataElem = document.getElementById('inputData');
 
   if (fileName.endsWith('.json')) {
@@ -830,10 +847,15 @@ document.getElementById('fileupLoad').addEventListener("change", async function 
         }
       };
       reader.readAsArrayBuffer(file);
+    } else if (fileName.endsWith('.pdf')) {
+      const reader = new FileReader();
+      reader.onload = async () => await parsePDFFile(reader.result);
+      reader.onerror = () => layer.msg("读取 PDF 文件失败\nFailed to read the PDF file.");
+      reader.readAsArrayBuffer(file);
     } else {
       // 处理其他文件类型
       const reader = new FileReader();
-      reader.onload = () => handleFile(reader.result, fileName);
+      reader.onload = async () => await handleFile(reader.result, fileName);
       reader.onerror = () => layer.msg("读取文件失败\nFailed to read the file.");
       reader.readAsText(file);
     }
@@ -1616,6 +1638,13 @@ async function downloadImage() {
                 font-family: 'Chill Round', Geist Variable, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei, Heiti SC, WenQuanYi Micro Hei, sans-serif;
             }
 
+            @media print {
+                * {
+                    -webkit-print-color-adjust: exact !important; /* Safari / Chrome */
+                    print-color-adjust: exact !important;         /* Firefox */
+                    color-adjust: exact !important;               /* 旧浏览器 */
+                }
+            }
 
             body {
                 background-color: #191820;
@@ -1629,6 +1658,13 @@ async function downloadImage() {
 
             .main-container {
                 min-height: 1778px;
+            }
+
+            #hidden-json {
+              font-size: 0.1rem;
+              color: #191820;
+              max-width: ${width}px;
+              margin: auto;
             }
 
             .bg {
@@ -2127,9 +2163,12 @@ async function downloadImage() {
             <div style="display: flex; justify-content: center;">
               <button id="capture">保存图片</button>
               <button onclick="changeBackground()">换一张背景</button>
+              <button onclick="window.print()">打印页面</button>
+              <button onclick="copyJson()">复制用户数据</button>
             </div>
-            <h2 style="text-align: center; margin: 15px; font-weight: normal;" id="safari-tip">检测到当前浏览器为 Safari 内核，可能会出现兼容问题，若遇到无法保存 / 图片异常等问题，请尝试使用其他设备浏览。</h2>
+            <h2 style="text-align: center; margin: 15px; font-weight: normal;" id="safari-tip">检测到当前浏览器为 Safari 内核，可能会出现兼容问题，若遇到无法保存 / 图片异常等问题，请尝试点击 "打印页面" 或使用其他设备浏览。</h2>
             <h2 style="text-align: center; margin: 15px; font-weight: normal;">如果发现图片资源未加载完全的情况，可以尝试退出重新生成几次。</h2>
+            <div id="hidden-json">---BEGIN_JSON---${(window.data || input) /* 把用户json存到这里 */}---END_JSON---</div>
         <script>
           const date = "${new Date().toISOString().replace(/[:\-T]/g, '_').split('.')[0]}"
           const parents = document.querySelectorAll('.down');
@@ -2232,6 +2271,19 @@ async function downloadImage() {
             window.onload = async () => {
                 await download()
             };
+
+            function copyJson() {
+            const element = document.getElementById('hidden-json');
+            const text = element.innerText || element.textContent;
+            const match = text.match(/---BEGIN_JSON---(.*?)---END_JSON---/s);
+            navigator.clipboard.writeText(match)
+              .then(() => {
+                alert('玩家数据已复制！');
+              })
+              .catch(err => {
+                console.error('复制失败:', err);
+              });
+            }
         </script>
     </body>
 </html>`;

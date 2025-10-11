@@ -22,6 +22,7 @@ $version_hash = sha1_file(filename: "version.txt");
 
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="new_UI.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <script src="js/constant.js?<?php echo $version_hash; ?>"></script>
     <link href="./layui/css/layui.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
