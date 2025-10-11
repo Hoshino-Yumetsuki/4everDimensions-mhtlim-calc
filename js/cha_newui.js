@@ -1,5 +1,5 @@
 
-const Updated = "Updated at 2025.10.11 19:11 (UTC+8)"
+const Updated = "Updated at 2025.10.11 19:15 (UTC+8)"
 var cha_newui_js_ver = 7
 const BACKGROUND_COUNT = 11
 const BACKGROUND_COUNT_YRJ = 4
@@ -2675,7 +2675,10 @@ async function getCardHtml(items, maxCount) {
     // if (coverImg) ctx.drawImage(coverImg, x + 13, y + 13, imgW, imgH);
     // if (iconImg) ctx.drawImage(iconImg, x + 351, y + 26, icon, icon);
   };
-  await Promise.all(items.map((it, i) => getItemHtml(it, i, false)));
+  // await Promise.all(items.map((it, i) => getItemHtml(it, i, false)));
+  for (let i = 0; i < items.length; i++) {
+    await getItemHtml(items[i], i, false);
+  }
   // 增加下划线
   if (window.norlt.length > 0) {
     htmls.push(`
@@ -2688,7 +2691,10 @@ async function getCardHtml(items, maxCount) {
       <aside class="down">
     `)
   }
-  await Promise.all(window.norlt.map((it, i) => getItemHtml(it, i, true, "EX #")));
+  // await Promise.all(window.norlt.map((it, i) => getItemHtml(it, i, true, "EX #")));
+  for (let i = 0; i < window.norlt.length; i++) {
+    await getItemHtml(window.norlt[i], i, true, "EX #");
+  }
   const cardsHtml = `<aside class="down">
   ${htmls.join("\n")}
   </aside>`
