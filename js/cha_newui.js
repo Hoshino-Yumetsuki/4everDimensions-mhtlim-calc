@@ -1,4 +1,4 @@
-const Updated = "Updated at 2025.10.13 3:22 (UTC+8)"
+const Updated = "Updated at 2025.10.13 3:26 (UTC+8)"
 var cha_newui_js_ver = 7
 const BACKGROUND_COUNT = 11
 const BACKGROUND_COUNT_YRJ = 4
@@ -1775,7 +1775,7 @@ async function downloadImage() {
             }
 
             .reality-v3 {
-                background: url(${await imgToDataURL('./jpgs/v3-bg.png')});
+                background: url(${await imgToDataURL('./jpgs/v3-bg.webp')});
                 background-size: cover;
                 text-shadow: 1px 1px 0 #00000081;
                 box-shadow: 0 0 14px #6945f7;
@@ -1806,7 +1806,7 @@ async function downloadImage() {
             }
 
             .reality-v50 {
-                background: url(${await imgToDataURL('./jpgs/v50-bg.png')});
+                background: url(${await imgToDataURL('./jpgs/v50-bg.webp')});
                 background-size: cover;
                 text-shadow: 1px 1px 0 #00000081;
                 box-shadow: 0 0 14px rgba(255, 70, 70, 0.77);
