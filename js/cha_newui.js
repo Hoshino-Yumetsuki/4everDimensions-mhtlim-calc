@@ -1,4 +1,4 @@
-const Updated = "Updated at 2025.10.13 3:35 (UTC+8)"
+const Updated = "Updated at 2025.10.13 3:37 (UTC+8)"
 var cha_newui_js_ver = 7
 const BACKGROUND_COUNT = 11
 const BACKGROUND_COUNT_YRJ = 4
@@ -1677,9 +1677,7 @@ async function downloadImage() {
                 min-height: 1778px;
                 background-position: center;
                 width: ${width}px;
-                display: flex;
-                justify-content: center;
-                justify-self: center;
+                margin: auto;
             }
 
             .top {
@@ -2297,7 +2295,11 @@ async function downloadImage() {
               currentScale = scale;
               const scaleText = '图片缩放 (' + (scale * 100).toFixed(0) + '%)';
               document.querySelector('#scaleText').innerText = scaleText;
-              document.querySelector('.bg').style.transformOrigin = 'bottom';
+              if (!isSafari()) {
+                document.querySelector('.bg').style.transformOrigin = 'bottom';
+              } else {
+                document.querySelector('.bg').style.transformOrigin = 'bottom left';
+              }
               document.querySelector('.bg').style.transform = 'scale(' + scale + ')';
           }
 
