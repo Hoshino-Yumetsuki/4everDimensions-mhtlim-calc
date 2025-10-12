@@ -2177,7 +2177,7 @@ async function downloadImage() {
                                 <div style="height: 100%; text-align: right;">
                                     <div class="avatar-container">
                                         <div class="avatar">
-                                            <img src="./jpgs/${yrjds != 'true' ? 'avatar.png' : 'avatar-aprilfools.png'}"
+                                            <img src="./jpgs/${yrjds != 'true' ? 'avatar.webp' : 'avatar-aprilfools.webp'}"
                                                 class="avatar">
                                             ${star > 0 ? '<img class="star" src="./jpgs/' + star + '-star.png">' : ''}
                                         </div>
