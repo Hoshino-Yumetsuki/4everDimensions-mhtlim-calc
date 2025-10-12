@@ -1694,6 +1694,7 @@ async function downloadImage() {
 
             .avatar-container {
                 display: flex;
+                user-select: none;
                 flex-direction: row-reverse;
             }
 
@@ -1731,7 +1732,7 @@ async function downloadImage() {
                 padding-top: 10px;
                 padding-bottom: 10px;
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(380px, max-content));
+                grid-template-columns: repeat(auto-fit, minmax(430px, max-content));
                 gap: 30px;
                 justify-content: center;
                 align-items: start;
@@ -1782,6 +1783,28 @@ async function downloadImage() {
                 color: white;
             }
 
+            #capture {
+              transition: border 0.2s, box-shadow 0.2s, filter 0.2s;
+              background: url(${await imgToDataURL('./jpgs/main-btn-bg.webp')});
+              border: 2px solid #8378B4;
+              box-shadow: 0 5px 10px #a19bdb55;
+              position: relative;
+              width: 300px;
+              background-size: cover;
+              }
+
+            #capture:hover {
+                border-color:rgb(161, 153, 238);
+                filter: brightness(1.2);
+                box-shadow: 0 5px 10px rgba(188, 155, 219, 0.33);
+            }
+
+            #capture:active {
+                border-color:rgb(164, 142, 224);
+                filter: brightness(1.2);
+                box-shadow: 0 5px 10px rgba(188, 155, 219, 0.33);
+            }
+
             .reality-v50 {
                 background: url(${await imgToDataURL('./jpgs/v50-bg.png')});
                 background-size: cover;
@@ -1822,6 +1845,7 @@ async function downloadImage() {
                 /* max-width: 210px; */
                 /* width: 100%; */
                 height: 100%;
+                user-select: none;
                 display: flex;
                 justify-self: center;
                 /* border-radius: 15px; */
@@ -2064,7 +2088,13 @@ async function downloadImage() {
             .buttons-container {
               display: flex;
               justify-content: center;
+              align-items: center;
               flex-wrap: wrap;
+            }
+
+            button.squared {
+                width: 50px;
+                font-size: 40px;
             }
 
         </style>
@@ -2198,17 +2228,77 @@ async function downloadImage() {
             </main>
             </div>
             <div class="buttons-container">
-              <button id="capture">保存图片</button>
-              <button onclick="changeBackground()">换一张背景</button>
-              <button onclick="window.print()">打印页面</button>
-              <button onclick="copyJson()">复制用户数据</button>
-              <button id="compatible-btn" onclick="switchCompatibleMode()">兼容模式</button>
+            <button onclick="printPage()">打印页面</button>
+            <button id="capture">保存图片</button>
+            <button onclick="copyJson()">复制用户数据</button>
             </div>
+            <div class="buttons-container">
+            <button onclick="changeBackground()">换一张背景</button>
+            <button id="compatible-btn" onclick="switchCompatibleMode()">兼容模式</button>
+            </div>
+            <div class="buttons-container" style="z-index: 1000; position: relative; justify-content: space-evenly; max-width: 1000px; margin:auto;">
+              <div style="display: flex; align-items: center;">
+                <button class="squared" onclick="setPageScale(-0.05)">-</button>
+                <h2 style="text-align: center; font-weight: normal;" id="scaleText">图片缩放 (100%)</h2>
+                <button class="squared" onclick="setPageScale(0.05)">+</button>
+              </div>
+              <div style="display: flex; align-items: center;">
+                <button class="squared" onclick="setPageWidth(-100)">-</button>
+                <h2 style="text-align: center; font-weight: normal;" id="widthText">图片宽度 (${width}px)</h2>
+                <button class="squared" onclick="setPageWidth(100)">+</button>
+              </div>
+            </div>
+
             <h2 style="text-align: center; margin: 15px; font-weight: normal;" id="safari-tip">检测到当前浏览器为 Safari 内核，可能会出现兼容问题，若遇到无法保存 / 图片异常等问题，请尝试点击 "打印页面" 后保存为 PDF 或使用其他设备浏览。</h2>
             <h2 style="text-align: center; margin: 15px; font-weight: normal;">如果出现 AP / R 分数显示错误一类的问题，可以尝试打开 "兼容模式"。</h2>
-            <h3 style="text-align: center; margin: 15px; font-weight: normal;">该查分器主题为测试阶段，若出现问题可将查分结果截图发送至<a href="https://qm.qq.com/q/Utb6sNDvki">交流群</a>询问。</h3>
+            <h2 style="text-align: center; margin: 15px; font-weight: normal;">你可以试试改变图片缩放或宽度来适应自己的需求 / 方便设备截图</h2>
+            <h3 style="text-align: center; margin: 15px; font-weight: normal;">该查分器主题为测试阶段，若出现问题可将查分结果图或问题描述发送至<a href="https://qm.qq.com/q/Utb6sNDvki">交流群</a>询问。</h3>
             <div id="hidden-json">---BEGIN_JSON---${(window.data || input)}---END_JSON---</div>
         <script>
+          let currentScale = 1;
+          let currentWidth = ${width};
+          const bg = document.querySelector('.bg');
+          function printPage() {
+            window.print();
+          }
+          function setPageWidth(widthChange) {
+              const w = currentWidth + widthChange;
+              if (w <= 650) {
+                return;
+              }
+              currentWidth = w;
+              // const viewportHeight = window.innerHeight;
+              const lastDocHeight = document.documentElement.scrollHeight;
+              bg.style.minHeight = '0';
+              bg.style.width = w + 'px';
+              document.querySelector('main').style.minHeight = '0';
+
+              document.querySelector('.main-container').style.minHeight = '0';
+              const docHeight = document.documentElement.scrollHeight;
+              const widthText = '图片宽度 (' + w + 'px)';
+              if (widthChange < 0) {
+                const distanceFromBottom = window.scrollY + (docHeight - lastDocHeight)
+                window.scrollTo({
+                    top: distanceFromBottom,
+                    behavior: 'auto'
+                });
+              }
+              document.querySelector('#widthText').innerText = widthText;
+
+          }
+
+          function setPageScale(scaleChange) {
+              const scale = currentScale + scaleChange;
+              if (scale <= 0) {
+                return;
+              }
+              currentScale = scale;
+              const scaleText = '图片缩放 (' + (scale * 100).toFixed(0) + '%)';
+              document.querySelector('#scaleText').innerText = scaleText;
+              document.querySelector('.bg').style.transformOrigin = 'bottom';
+              document.querySelector('.bg').style.transform = 'scale(' + scale + ')';
+          }
+
           function switchCompatibleMode() {
                 document.querySelector('#compatible-btn').classList.toggle("active");
                 document.querySelectorAll('.AP').forEach((item, i) => {
@@ -2267,8 +2357,8 @@ async function downloadImage() {
                   // 等待所有 <img> 加载完成
                   await waitForImages();
 
-                  const element = document.querySelector('.bg');
-                  const dataURL = await htmlToImage.toPng(element, {
+                  // const element = document.querySelector('.bg');
+                  const dataURL = await htmlToImage.toPng(bg, {
                       pixelRatio: ${totalCardCount < 50 ? '2' : '1'},
                       cacheBust: true,
                       useCORS: true,
@@ -2326,7 +2416,7 @@ async function downloadImage() {
             })
 
             window.onload = async () => {
-                await download()
+                // await download()
             };
 
             function copyJson() {
@@ -2335,7 +2425,7 @@ async function downloadImage() {
             const match = text.match(/---BEGIN_JSON---(.*?)---END_JSON---/s);
             navigator.clipboard.writeText(match)
               .then(() => {
-                alert('玩家数据已复制！');
+                alert('用户数据已复制！');
               })
               .catch(err => {
                 console.error('复制失败:', err);
