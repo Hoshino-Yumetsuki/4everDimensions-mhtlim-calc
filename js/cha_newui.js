@@ -2249,7 +2249,7 @@ async function downloadImage() {
               </div>
             </div>
 
-            <h2 style="text-align: center; margin: 15px; font-weight: normal;" id="safari-tip">检测到当前浏览器为 Safari 内核，可能会出现兼容问题，若遇到无法保存 / 图片异常等问题，请尝试点击 "打印页面" 后保存为 PDF 或使用其他设备浏览。</h2>
+            <h2 style="text-align: center; margin: 15px; font-weight: normal;" id="safari-tip">检测到当前浏览器为 Safari 内核，可能会出现兼容问题，若遇到无法保存 / 图片异常等问题，请尝试打印页面保存为 PDF 或调整缩放并截图。</h2>
             <h2 style="text-align: center; margin: 15px; font-weight: normal;">如果出现 AP / R 分数显示错误一类的问题，可以尝试打开 "兼容模式"。</h2>
             <h2 style="text-align: center; margin: 15px; font-weight: normal;">你可以试试改变图片缩放或宽度来适应自己的需求 / 方便设备截图</h2>
             <h3 style="text-align: center; margin: 15px; font-weight: normal;">该查分器主题为测试阶段，若出现问题可将查分结果图或问题描述发送至<a href="https://qm.qq.com/q/Utb6sNDvki">交流群</a>询问。</h3>
