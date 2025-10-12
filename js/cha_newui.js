@@ -1677,7 +1677,8 @@ async function downloadImage() {
                 min-height: 1778px;
                 background-position: center;
                 width: ${width}px;
-                margin: auto;
+                display: flex;
+                justify-self: center;
             }
 
             .top {
