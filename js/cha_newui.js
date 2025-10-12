@@ -1645,7 +1645,6 @@ async function downloadImage() {
                 * {
                     -webkit-print-color-adjust: exact !important; /* Safari / Chrome */
                     print-color-adjust: exact !important;         /* Firefox */
-                    color-adjust: exact !important;               /* 旧浏览器 */
                 }
             }
 
@@ -1718,7 +1717,7 @@ async function downloadImage() {
                 font-size: 1.5em;
                 max-width: calc(${width}px - 550px);
                 overflow: hidden;
-                text-wrap-mode: nowrap;
+                white-space: nowrap;
             }
 
             .topmain {
@@ -1875,13 +1874,10 @@ async function downloadImage() {
                 justify-self: center;
                 align-items: center;
                 justify-content: center;
-                /* text-align: center; */
                 font-size: 1.3em;
-                transition: background-color 0.2s;
+                transition: background 0.2s, box-shadow 0.2s, color 0.2s;
                 margin: 20px;
                 color: #FFF;
-                box-shadow: 0 8px 5pxrgba(222, 195, 252, 0.6);
-                /* background: linear-gradient(90deg, #DEC3FC, #A1C5FC);*/
                 background: #0B0A0F88;
                 font-weight: 400;
                 border: 2px solid #56555A;
@@ -1925,11 +1921,11 @@ async function downloadImage() {
             }
 
             .R {
+                color: #969BFA;
                 background: linear-gradient(0deg, #9A6EFA, #92C5FA);
                 background-clip: text;
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
-                color: transparent;
             }
 
             .FC {
@@ -1937,15 +1933,30 @@ async function downloadImage() {
             }
 
             .AP {
+                color: #E4D7FE;
                 background: linear-gradient(0deg, #A174FA, #E4D7FE);
                 background-clip: text;
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
-                color: transparent;
+            }
+
+            .AP-compatible {
+                color: #E4D7FE;
+                background: transparent;
+                background-clip: unset;
+                -webkit-background-clip: unset;
+                -webkit-text-fill-color: #E4D7FE;
+            }
+
+            .R-compatible {
+                color: #969BFA;
+                background: transparent;
+                background-clip: unset;
+                -webkit-background-clip: unset;
+                -webkit-text-fill-color: #969BFA;
             }
 
             .CB {
-                /* background-color: #9368f0; */
                 background: linear-gradient(45deg, #6479f1, #9567e9);
             }
 
@@ -2040,6 +2051,19 @@ async function downloadImage() {
                 font-size: 0.6em;
                 color: #FFF6;
                 margin-top: 10px;
+            }
+
+            button.active {
+                background-color: #fff;
+                color: #000;
+                box-shadow: 0 0 10px #ffffffa8;
+                border: 0;
+            }
+
+            .buttons-container {
+              display: flex;
+              justify-content: center;
+              flex-wrap: wrap;
             }
 
         </style>
@@ -2172,16 +2196,28 @@ async function downloadImage() {
                 </footer>
             </main>
             </div>
-            <div style="display: flex; justify-content: center;">
+            <div class="buttons-container">
               <button id="capture">保存图片</button>
               <button onclick="changeBackground()">换一张背景</button>
               <button onclick="window.print()">打印页面</button>
               <button onclick="copyJson()">复制用户数据</button>
+              <button id="compatible-btn" onclick="switchCompatibleMode()">兼容模式</button>
             </div>
             <h2 style="text-align: center; margin: 15px; font-weight: normal;" id="safari-tip">检测到当前浏览器为 Safari 内核，可能会出现兼容问题，若遇到无法保存 / 图片异常等问题，请尝试点击 "打印页面" 后保存为 PDF 或使用其他设备浏览。</h2>
-            <h2 style="text-align: center; margin: 15px; font-weight: normal;">如果发现图片资源未加载完全的情况，可以尝试退出重新生成几次。</h2>
-            <div id="hidden-json">---BEGIN_JSON---${(window.data || input) /* 把用户json存到这里 */}---END_JSON---</div>
+            <h2 style="text-align: center; margin: 15px; font-weight: normal;">如果出现 AP / R 分数显示错误一类的问题，可以尝试打开 "兼容模式"。</h2>
+            <h3 style="text-align: center; margin: 15px; font-weight: normal;">该查分器主题为测试阶段，若出现问题可将查分结果截图发送至<a href="https://qm.qq.com/q/Utb6sNDvki">交流群</a>询问。</h3>
+            <div id="hidden-json">---BEGIN_JSON---${(window.data || input)}---END_JSON---</div>
         <script>
+          function switchCompatibleMode() {
+                document.querySelector('#compatible-btn').classList.toggle("active");
+                document.querySelectorAll('.AP').forEach((item, i) => {
+                    item.classList.toggle('AP-compatible')
+                })
+                document.querySelectorAll('.R').forEach((item, i) => {
+                    item.classList.toggle('R-compatible')
+                })
+            }
+
           const date = "${new Date().toISOString().replace(/[:\-T]/g, '_').split('.')[0]}"
           const parents = document.querySelectorAll('.down');
               parents.forEach((parent, i) => {
@@ -2217,7 +2253,7 @@ async function downloadImage() {
                       }
                       resolve();
                     };
-                    img.onerror = resolve;
+                    img.onerror = () => {resolve();};
                   });
                 }
               });
@@ -2226,39 +2262,47 @@ async function downloadImage() {
             }
 
             async function download() {
-                // 等待所有 <img> 加载完成
-                await waitForImages();
+              try {
+                  // 等待所有 <img> 加载完成
+                  await waitForImages();
 
-                const element = document.querySelector('.bg');
-                const dataURL = await htmlToImage.toPng(element, {
-                    pixelRatio: ${totalCardCount < 50 ? '2' : '1'},
-                    style: {
-                        margin: '0',
-                        transform: 'translate(0, 0)',
-                    },
-                });
+                  const element = document.querySelector('.bg');
+                  const dataURL = await htmlToImage.toPng(element, {
+                      pixelRatio: ${totalCardCount < 50 ? '2' : '1'},
+                      cacheBust: true,
+                      useCORS: true,
+                      style: {
+                          margin: '0',
+                          transform: 'translate(0, 0)',
+                      },
+                  });
 
-                // --- 将 dataURL 转 Uint8Array ---
-                const base64Data = dataURL.split(',')[1];
-                const pngBinary = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
+                  // --- 将 dataURL 转 Uint8Array ---
+                  const base64Data = dataURL.split(',')[1];
+                  const pngBinary = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
 
-                // --- JSON 数据 ---
-                const jsonStr = '${data}';
+                  // --- JSON 数据 ---
+                  const jsonStr = '${data}';
 
-                // 将 JSON 转成 Uint8Array
-                const txtBytes = new TextEncoder().encode(jsonStr);
+                  // 将 JSON 转成 Uint8Array
+                  const txtBytes = new TextEncoder().encode(jsonStr);
 
-                // 合并 PNG 和 JSON
-                const combined = new Uint8Array(pngBinary.length + txtBytes.length);
-                combined.set(pngBinary, 0);
-                combined.set(txtBytes, pngBinary.length);
+                  // 合并 PNG 和 JSON
+                  const combined = new Uint8Array(pngBinary.length + txtBytes.length);
+                  combined.set(pngBinary, 0);
+                  combined.set(txtBytes, pngBinary.length);
 
-                // 下载合并后的 PNG
-                const blob = new Blob([combined], { type: 'image/png' });
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = 'output_MilAerno_' + date + '.png';
-                link.click();
+                  // 下载合并后的 PNG
+                  const blob = new Blob([combined], { type: 'image/png' });
+                  const link = document.createElement('a');
+                  link.href = URL.createObjectURL(blob);
+                  link.download = 'output_MilAerno_' + date + '.png';
+                  link.click();
+              } catch(e) {
+                  console.error("保存图片失败", e);
+                  alert("保存图片失败 xwx\\n可以尝试 \\"打印页面\\" 或截图页面，或是在交流群询问详情。");
+              }
+
             }
 
             function isSafari() {
@@ -2307,6 +2351,7 @@ async function downloadImage() {
   const newWindow = window.open('', '_blank');
 
   // 往新窗口写入 HTML 内容
+  console.log(htmlContent);
   newWindow.document.open();
   newWindow.document.write(htmlContent);
   newWindow.document.close();
@@ -2679,15 +2724,15 @@ async function getCardHtml(items, maxCount) {
 
     const scoreIsV3 = it.isV3 || it.bestLevel <= 1 || it.bestScore >= 1005000 || (it.achievedStatus.includes(2) || it.achievedStatus.includes(5))
     // const scoreIsV3 = true;
-
+    const dataurl = await imgToDataURL('./jpgs/' + coverImgName)
     const cardHtmlText = `
   <section class="card">
       <div class="cardcover ${scoreIsV3 ? 'cardcover-v3' : ''}">
           <div class="cardimgcover"
-              style="background-image: url('${await imgToDataURL('./jpgs/' + coverImgName)}'), url('${await imgToDataURL('./jpgs/img-error.webp')}');">
+              style="background-image: url('${dataurl}'), url('${await imgToDataURL('./jpgs/img-error.webp')}');">
               <div class="cardbg">
                   <img
-                      src="jpgs/${coverImgName}"
+                      src="${dataurl}"
                       onerror="this.onerror=null; this.src='./jpgs/img-error.webp';"
                       alt
                       class="cardimg">
