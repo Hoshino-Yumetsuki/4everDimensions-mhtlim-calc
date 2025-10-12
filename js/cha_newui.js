@@ -1442,6 +1442,7 @@ function escapeHtml(str) {
 async function imgToDataURL(url) {
   const response = await fetch(url);
   const blob = await response.blob();
+  layer.msg(`正在生成...由于下载资源需要时间，请耐心等待...如果太久没有跳转到新窗口请刷新重试。\n<p>正在转换图片 "${url}..."</p>`)
   return new Promise(resolve => {
     const reader = new FileReader();
     reader.onloadend = () => resolve(reader.result);
