@@ -1678,6 +1678,7 @@ async function downloadImage() {
                 background-position: center;
                 width: ${width}px;
                 display: flex;
+                justify-content: center;
                 justify-self: center;
             }
 
