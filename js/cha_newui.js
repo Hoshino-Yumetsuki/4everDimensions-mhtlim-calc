@@ -1828,6 +1828,7 @@ async function downloadImage() {
             }
 
             .cardimgcover {
+                display: block;
                 width: 204.444px;
                 height: 115px;
                 margin-right: 8px;
@@ -2035,6 +2036,12 @@ async function downloadImage() {
                 display: flex;
             }
 
+            .user-agent {
+                font-size: 0.6em;
+                color: #FFF6;
+                margin-top: 10px;
+            }
+
         </style>
     </head>
     <body>
@@ -2043,7 +2050,7 @@ async function downloadImage() {
             <main>
                 <div class="main-container">
                     <aside class="top">
-                        <div class="cover">
+                    <div class="cover">
                             <div class="topmain">
                                 <div class="info">
                                     <h1>Milthm-Calculator</h1>
@@ -2161,6 +2168,7 @@ async function downloadImage() {
                     <p style="font-size: 0.9em; color: #DDD;">
                         ${Updated}
                     </p>
+                    <p class="user-agent">${navigator.userAgent}</p>
                 </footer>
             </main>
             </div>
