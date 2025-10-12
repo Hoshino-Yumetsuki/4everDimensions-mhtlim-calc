@@ -1,4 +1,4 @@
-const Updated = "Updated at 2025.10.13 1:17 (UTC+8)"
+const Updated = "Updated at 2025.10.13 3:22 (UTC+8)"
 var cha_newui_js_ver = 7
 const BACKGROUND_COUNT = 11
 const BACKGROUND_COUNT_YRJ = 4
