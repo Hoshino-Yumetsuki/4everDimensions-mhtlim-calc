@@ -1442,7 +1442,10 @@ function escapeHtml(str) {
 async function imgToDataURL(url) {
   const response = await fetch(url);
   const blob = await response.blob();
-  layer.msg(`正在读取以及生成图片资源...。\n<p>正在转换图片 "${url}..."</p>`)
+  // layer.msg(`正在读取以及生成图片资源...。\n<p>正在转换图片 "${url}..."</p>`)
+  if (typeof ol_runner === 'function') {
+    ol_runner(ol_updateImgGenProcess, [`正在转换图片 "${url}..."`]);
+  }
   return new Promise(resolve => {
     const reader = new FileReader();
     reader.onloadend = () => resolve(reader.result);
@@ -1451,6 +1454,9 @@ async function imgToDataURL(url) {
 }
 
 async function downloadImage() {
+  if (typeof ol_runner === 'function') {
+    ol_runner((e) => { document.getElementById('picgen').style.display = 'block' }, [114, 514]);
+  }
   // 显示生成进度 UI（项目里已有 ol_runner/ol_updateImgGenProcess）
   // if (typeof ol_runner === 'function') {
   //   ol_runner((e) => { document.getElementById('picgen').style.display = 'block' }, [114, 514]);
@@ -2007,7 +2013,7 @@ async function downloadImage() {
             }
 
             .SP {
-                background: linear-gradient(45deg, #FFF, #FFF);
+                background: linear-gradient(45deg,#FFF, #FFF);
             }
 
             .textp {
@@ -2464,10 +2470,12 @@ async function downloadImage() {
   const newWindow = window.open('', '_blank');
 
   // 往新窗口写入 HTML 内容
-  console.log(htmlContent);
   newWindow.document.open();
   newWindow.document.write(htmlContent);
   newWindow.document.close();
+  if (typeof ol_runner === 'function') {
+    ol_runner(ol_updateImgGenProcess, ['完成']);
+  }
 }
 
 /* ========== 下载图片 (含背景、卡片等，全部从 image.css 取图) ========== */

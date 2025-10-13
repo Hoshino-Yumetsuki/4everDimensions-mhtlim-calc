@@ -13,7 +13,7 @@ function show_author_info() {
   try {
     fetch('authors.txt').then(res => res.text()).then(data => {
       layer.close(loading);
-      document.getElementById("Authors_content").innerHTML = `<pre>${data.replaceAll("{}",'target="_blank" class="superlinkR"')}</pre><hr><button class="layui-btn layui-btn-normal" onclick="layer.close(authors_dialog)">关闭</button>`
+      document.getElementById("Authors_content").innerHTML = `<pre>${data.replaceAll("{}", 'target="_blank" class="superlinkR"')}</pre><hr><button class="layui-btn layui-btn-normal" onclick="layer.close(authors_dialog)">关闭</button>`
     })
   } catch (e) {
     layer.close(loading);
@@ -525,17 +525,17 @@ function alertSetSecret() {
 }
 // upl_pre
 function upl_pre() {
-  if(document.getElementById("inputData").value != "debug"){
+  if (document.getElementById("inputData").value != "debug") {
     upl();
-  }else{
+  } else {
     upl_debug();
   }
 }
 
 function TRY(func) {
-  try{eval(func)}catch(e){}
+  try { eval(func) } catch (e) { }
 }
-function upl_debug(){
+function upl_debug() {
   layer.open({
     type: 1,
     title: 'Debug / 调试',
@@ -549,14 +549,14 @@ function upl_debug(){
     </div>`,
     skin: 'layui-layer-win10'
   });
-    TRY("upload4index_debug()");
-    TRY("cha_newui_js_debug()");
+  TRY("upload4index_debug()");
+  TRY("cha_newui_js_debug()");
 }
 
 // for stat
 var stat_dialog;
-function openStat(){
-  stat_dialog=layer.open({
+function openStat() {
+  stat_dialog = layer.open({
     type: 1,
     title: '统计',
     content: `<div id="stat_content" style="padding:32px;text-align:center;height:100%">
@@ -569,73 +569,73 @@ function openStat(){
     shadeClose: true,
   });
   console.log(stat_dialog)
-  var f=layer.load(1);
-  try{
-    fetch("wtf/stat.php").then((res)=>{
-    res.json().then((data)=>{
+  var f = layer.load(1);
+  try {
+    fetch("wtf/stat.php").then((res) => {
+      res.json().then((data) => {
 
-      if(data.data.code!=0){
-        layer.msg(data.data.msg);
-        return;
-      }
-      console.log(data)
-      mount_stat(data);
+        if (data.data.code != 0) {
+          layer.msg(data.data.msg);
+          return;
+        }
+        console.log(data)
+        mount_stat(data);
+      })
     })
-  })
-  }catch(e){
+  } catch (e) {
     layer.msg("获取数据失败，请检查网络连接。");
-  }finally{
+  } finally {
     layer.close(f);
   }
 
 }
-function mount_stat(content){
-  var f=document.getElementById('stat_chart')
-var ccc = echarts.init(f);
-var p=content.data.data;
-var dates = p.map((item => item.date));
-var data = {
-        title: {
-            text: '访问统计',
-            textStyle: {
-                color: '#fff',
-                fontSize: 20,
-                fontWeight: 'bold'
-            }
-        },
-        tooltip: {},
-        legend: {
-            data: ["访问量"],
-            textStyle: {
-                color: '#fff'
-            }
-        },
-        xAxis: {
-            data: dates
-        },
-        yAxis: {
-            type: 'value',
-            axisLabel: {
-                formatter: '{value}',
-                color: '#fff'
-            }
-        },
-        series: [{
-            name: '访问量',
-            type: 'line',
-            data: p.map((item => item.visits))
-        }
-            ]
-    };
-ccc.setOption(data,true);
-ccc.resize({height: f.clientHeight*0.8});
-console.log(f.clientHeight*0.8)
+function mount_stat(content) {
+  var f = document.getElementById('stat_chart')
+  var ccc = echarts.init(f);
+  var p = content.data.data;
+  var dates = p.map((item => item.date));
+  var data = {
+    title: {
+      text: '访问统计',
+      textStyle: {
+        color: '#fff',
+        fontSize: 20,
+        fontWeight: 'bold'
+      }
+    },
+    tooltip: {},
+    legend: {
+      data: ["访问量"],
+      textStyle: {
+        color: '#fff'
+      }
+    },
+    xAxis: {
+      data: dates
+    },
+    yAxis: {
+      type: 'value',
+      axisLabel: {
+        formatter: '{value}',
+        color: '#fff'
+      }
+    },
+    series: [{
+      name: '访问量',
+      type: 'line',
+      data: p.map((item => item.visits))
+    }
+    ]
+  };
+  ccc.setOption(data, true);
+  ccc.resize({ height: f.clientHeight * 0.8 });
+  console.log(f.clientHeight * 0.8)
 }
 
-function ol_runner(func, args){
+function ol_runner(func, args) {
   func(...args)
 }
-function ol_updateImgGenProcess(text){
-  var f=document.getElementById('img_gen_process')
-  f.innerHTML=text
+function ol_updateImgGenProcess(text) {
+  var f = document.getElementById('img_gen_process')
+  f.innerText = text
 }
