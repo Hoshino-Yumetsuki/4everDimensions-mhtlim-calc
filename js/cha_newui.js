@@ -1,4 +1,4 @@
-const Updated = "Updated at 2025.10.14 02:58 (UTC+8)"
+const Updated = "Updated at 2025.10.14 03:22 (UTC+8)"
 var cha_newui_js_ver = 7
 const BACKGROUND_COUNT = 15
 const BACKGROUND_COUNT_YRJ = 4
@@ -2844,7 +2844,7 @@ async function getCardHtml(items, maxCount, errorImg) {
         : 114514, yrjds != "true" ? "No remaining" : "🐉👃👈😨"
     );
     // ctx.fillText(`>>${targetScore}`, x + 212, y + 86);
-    const targetScoreText = `&gt;&gt; Goal: ${String(targetScore).padStart(7, '0')}`
+    const targetScoreText = `&gt;&gt; Goal: ${!isNaN(Number(targetScore)) ? String(targetScore).padStart(7, '0') : targetScore}`
     // 封面与段位图
     // 等级/段位：映射到 .icon-N
     const iconName = getLevelIconName(it);
