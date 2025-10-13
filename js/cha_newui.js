@@ -1518,8 +1518,8 @@ async function downloadImage() {
       }
       if ((Array.isArray(item.achievedStatus) && item.achievedStatus.includes(5)) || item.bestLevel === 0) {
         progress[item.category].ap++
-      }
-      if ((Array.isArray(item.achievedStatus) && item.achievedStatus.includes(4)) || item.bestLevel === 0) {
+        progress[item.category].fc++
+      } else if ((Array.isArray(item.achievedStatus) && item.achievedStatus.includes(4)) || item.bestLevel === 0) {
         progress[item.category].fc++
       }
     }
