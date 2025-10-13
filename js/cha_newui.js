@@ -1,6 +1,6 @@
-const Updated = "Updated at 2025.10.14 02:29 (UTC+8)"
+const Updated = "Updated at 2025.10.14 02:58 (UTC+8)"
 var cha_newui_js_ver = 7
-const BACKGROUND_COUNT = 17
+const BACKGROUND_COUNT = 15
 const BACKGROUND_COUNT_YRJ = 4
 
 //
@@ -1612,10 +1612,15 @@ async function downloadImage() {
   const bg_count = yrjds != 'true' ? BACKGROUND_COUNT : BACKGROUND_COUNT_YRJ;
   const bg_prefix = yrjds != 'true' ? '' : 'yrj-';
   const bgs = []
-  for (let index = 1; index <= bg_count; index++) {
-    const bg = `./jpgs/background/${bg_prefix}${index}.avif`;
-    bgs.push(`'${await imgToDataURL(bg)}'`);
+  if (!hasFile) {
+    for (let index = 1; index <= bg_count; index++) {
+      const bg = `./jpgs/background/${bg_prefix}${index}.avif`;
+      bgs.push(`'${await imgToDataURL(bg)}'`);
+    }
+  } else {
+    bgs.push(`'${bg_filename}'`)
   }
+
   const htmlHead = `<!DOCTYPE html>
 <html lang="en">
     <head>
@@ -1710,6 +1715,20 @@ async function downloadImage() {
                 display: flex;
                 align-items: center;
                 justify-content: right;
+            }
+
+            button:disabled {
+              color: #9F9FA2;
+              border-color: #56555A;
+              cursor: not-allowed;
+              background-color: #121017;
+            }
+
+            button:disabled:hover {
+              color: #9F9FA2;
+              border-color: #56555A;
+              cursor: not-allowed;
+              background-color: #121017;
             }
 
             .name-reality {
@@ -2258,7 +2277,7 @@ async function downloadImage() {
             <button onclick="copyJson()">复制用户数据</button>
             </div>
             <div class="buttons-container">
-            <button onclick="changeBackground()">换一张背景</button>
+            <button onclick="changeBackground()" id="change-background">换一张背景</button>
             <button id="compatible-btn" onclick="switchCompatibleMode()">兼容模式</button>
             </div>
             <div class="buttons-container" style="z-index: 1000; position: relative; justify-content: space-evenly; max-width: 1000px; margin:auto;">
@@ -2452,6 +2471,7 @@ async function downloadImage() {
                 if (isHuawei()) {
                   switchCompatibleMode();
                 }
+                ${hasFile ? "document.querySelector('#change-background').disabled = true;" : ""}
             };
 
             function copyJson() {
