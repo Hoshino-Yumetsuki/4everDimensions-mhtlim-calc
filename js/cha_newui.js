@@ -1,4 +1,4 @@
-const Updated = "Updated at 2025.10.13 15:00 (UTC+8)"
+const Updated = "Updated at 2025.10.13 17:14 (UTC+8)"
 var cha_newui_js_ver = 7
 const BACKGROUND_COUNT = 11
 const BACKGROUND_COUNT_YRJ = 4
@@ -1995,7 +1995,7 @@ async function downloadImage() {
             }
 
             .DZ {
-                background: linear-gradient(45deg, #b2b5c5, #93dbdb);
+                background: linear-gradient(45deg, #93dbdb, #b2b5c5);
             }
 
             .SK {
@@ -2457,7 +2457,7 @@ async function downloadImage() {
     </body>
 </html>`;
   // // 绘制卡片并导出
-  const cardsHtml = await getCardHtml(items, actualCardCount);
+  const cardsHtml = await getCardHtml(items, actualCardCount, await imgToDataURL('./jpgs/img-error.webp'));
   // // console.log(cardsHtml);
   const htmlContent = htmlHead + cardsHtml + htmlFoot;
   // 打开一个新窗口或新标签页
@@ -2777,7 +2777,7 @@ function limitText(str, len = 16) {
 }
 
 // 得到卡片 html
-async function getCardHtml(items, maxCount) {
+async function getCardHtml(items, maxCount, errorImg) {
   const htmls = []
   const getItemHtml = async (it, i, ignoreMaxCount = false, numberPrefix = '#', maxTitleLen = 21) => {
     if (i + 1 > maxCount && !ignoreMaxCount) {
@@ -2842,11 +2842,11 @@ async function getCardHtml(items, maxCount) {
   <section class="card">
       <div class="cardcover ${scoreIsV3 ? 'cardcover-v3' : ''}">
           <div class="cardimgcover"
-              style="background-image: url('${dataurl}'), url('${await imgToDataURL('./jpgs/img-error.webp')}');">
+              style="background-image: url('${dataurl}'), url('${errorImg}');">
               <div class="cardbg">
                   <img
                       src="${dataurl}"
-                      onerror="this.onerror=null; this.src='./jpgs/img-error.webp';"
+                      onerror="this.onerror=null; this.src='${errorImg}';"
                       alt
                       class="cardimg">
               </div>
