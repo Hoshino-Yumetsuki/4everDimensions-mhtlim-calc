@@ -1,6 +1,6 @@
-const Updated = "Updated at 2025.10.13 17:14 (UTC+8)"
+const Updated = "Updated at 2025.10.14 02:29 (UTC+8)"
 var cha_newui_js_ver = 7
-const BACKGROUND_COUNT = 11
+const BACKGROUND_COUNT = 17
 const BACKGROUND_COUNT_YRJ = 4
 
 //
@@ -2274,7 +2274,7 @@ async function downloadImage() {
               </div>
             </div>
             <h2 style="text-align: center; margin: 15px; font-weight: normal; color: #FBB" id="safari-tip">检测到当前浏览器为 Safari 内核，可能会出现兼容问题，若遇到无法保存 / 图片异常等问题，请尝试打印页面保存为 PDF 或调整缩放并截图。或使用其他设备访问。</h2>
-            <h2 style="text-align: center; margin: 15px; font-weight: normal; color:rgb(241, 205, 255);">如果出现 AP / R 分数显示错误一类的问题，可以尝试打开 "兼容模式"。</h2>
+            <h2 style="text-align: center; margin: 15px; font-weight: normal; color:rgb(241, 205, 255);">如果出现 AP / R 分数显示成渐变方块一类的问题，可以尝试打开 "兼容模式"。</h2>
             <h2 style="text-align: center; margin: 15px; font-weight: normal;">你可以试试改变图片缩放或宽度来适应自己的需求 / 方便设备截图</h2>
             <h3 style="text-align: center; margin: 15px; font-weight: normal;">该查分器主题为测试阶段，若出现问题可将查分结果图或问题描述发送至<a href="https://qm.qq.com/q/Utb6sNDvki">交流群</a>询问。</h3>
             <div id="hidden-json">---BEGIN_JSON---${(window.data || input)}---END_JSON---</div>
@@ -2429,6 +2429,11 @@ async function downloadImage() {
               return /Safari/.test(ua) && !/Chrome|Chromium|Edg|OPR/.test(ua);
             }
 
+            function isHuawei() {
+              const ua = navigator.userAgent;
+              return /HuaweiBrowser/.test(ua) && !/Chromium|Edg|OPR/.test(ua);
+            }
+
             if (!isSafari()) {
               document.querySelector("#safari-tip").classList.add("hidden");
             }
@@ -2444,7 +2449,9 @@ async function downloadImage() {
             })
 
             window.onload = async () => {
-                // await download()
+                if (isHuawei()) {
+                  switchCompatibleMode();
+                }
             };
 
             function copyJson() {
