@@ -2821,8 +2821,7 @@ async function getCardHtml(items, maxCount, errorImg) {
     // 封面与段位图
     // 等级/段位：映射到 .icon-N
     const iconName = getLevelIconName(it);
-    const imgName = it.name.replaceAll("#", '').replaceAll("?", '').replaceAll(">", '').replaceAll("<", '').replaceAll("*", '').replaceAll('"', '').replaceAll("|", '').replaceAll("/", '').replaceAll("\\", '').replaceAll(":", '');
-    const coverImgName = `${imgName}.jpg`;
+    let imgName = it.name.replaceAll("#", '').replaceAll("?", '').replaceAll(">", '').replaceAll("<", '').replaceAll("*", '').replaceAll('"', '').replaceAll("|", '').replaceAll("/", '').replaceAll("\\", '').replaceAll(":", '');
     const iconImgName = iconName + '.png';
     // const coverImgName = imgPairs[i]?.[0] || '';
     // const iconImgName = imgPairs[i]?.[1] || '';
@@ -2842,6 +2841,10 @@ async function getCardHtml(items, maxCount, errorImg) {
     if (category != "CB" && category != "CL" && category != "SP" && category != "UN" && category != "SK" && category != "DZ") {
       category = 'SP';
     }
+    if (category == 'SP' && imgName == 'Welcome to Milthm') {
+      imgName = 'Welcome to Milthm SP'
+    }
+    const coverImgName = `${imgName}.jpg`;
 
     const scoreIsV3 = it.isV3 || it.bestLevel <= 1 || it.bestScore >= 1005000 || (it.achievedStatus.includes(2) || it.achievedStatus.includes(5))
     // const scoreIsV3 = true;
