@@ -282,6 +282,15 @@ for (const id in constantsData) {
 
   constants[id] = fields.reduce((obj, k, i) => {
     let v = arr[i];
+    
+    // 处理 yct 字段：如果不存在就取 ceil(constantv3 * 20)
+    if (k === "yct" && v === undefined) {
+      const constantv3 = arr[1]; // constantv3 在数组中的索引是 1
+      if (constantv3 !== undefined) {
+        v = Math.ceil(constantv3 * 20);
+      }
+    }
+    
     if (v === undefined) v = (k === "ad" ? 0 : (k === "ae" || k === "af" ? 1 : (k === "ag" ? 0 : v)));
     if (v !== undefined) obj[k] = v;
     return obj;
