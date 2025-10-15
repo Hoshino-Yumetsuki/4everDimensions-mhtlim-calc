@@ -1,4 +1,4 @@
-const Updated = "Updated at 2025.10.15 23:02 (UTC+8)"
+const Updated = "Updated at 2025.10.15 23:05 (UTC+8)"
 var cha_newui_js_ver = 7
 const BACKGROUND_COUNT = 15
 const BACKGROUND_COUNT_YRJ = 4
@@ -2164,7 +2164,7 @@ async function downloadImage() {
                 height: 20px;
                 width: 100%;
                 border-radius: 999px;
-                background: linear-gradient(to right, #f00 0%, #f00 100%);
+                background: linear-gradient(to right, #98C7FE 0%, #DFC3FD 60%, #0002 60%, #0002 100%);
                 outline: none;
             }
             input[type="range"]::-webkit-slider-thumb {
