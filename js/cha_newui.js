@@ -1,4 +1,4 @@
-const Updated = "Updated at 2025.10.15 23:05 (UTC+8)"
+const Updated = "Updated at 2025.11.09 21:30 (UTC+8)"
 var cha_newui_js_ver = 7
 const BACKGROUND_COUNT = 15
 const BACKGROUND_COUNT_YRJ = 4
@@ -2289,7 +2289,7 @@ async function downloadImage() {
                                                 <p
                                                     class="reality-content ${yrjds != 'true' ? isRealityV3 ? 'reality-v3' : '' : 'reality-v50'}">${yrjds != 'true' ? 'REALITY' : 'YTILAER'}</p>
                                                 <p
-                                                    class="reality-text">${average1 ? average1 : '0.00'}</p>
+                                                    class="reality-text">${average1 ? average1.toFixed(2) : '0.00'}</p>
                                             </div>
                                         </div>
                                     </div>
