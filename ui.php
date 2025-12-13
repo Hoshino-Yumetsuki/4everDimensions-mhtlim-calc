@@ -679,6 +679,29 @@ $version_hash = sha1_file(filename: "version.txt");
             }
         }
         autoParse();
+        function autoParse2() {
+            let url = new URL(window.location.href);
+            let data = url.searchParams.get("quickfetch");
+            if (data != null) {
+                try {
+                    var ll=layer.load(1)
+                    fetch("user/quickfetch.php?id="+data).then(res => res.json()).then((r)=>{
+                        layer.close(ll)
+                        if (r.code==0){
+                            document.getElementById('inputData').value = r.data;
+                            startProcess();
+                        }else{
+                            layer.alert("<h1>找不到指定的存档</h1>")
+                        }
+                    })
+                } catch (e) {
+                    console.log(e);
+                }
+            } else {
+                console.log("no data found");
+            }
+        }
+        autoParse2();
     </script>
 
 
