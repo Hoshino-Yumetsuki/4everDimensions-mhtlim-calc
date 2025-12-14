@@ -1,3 +1,5 @@
+[返回目录](./)
+
 # ネオン色のまち feat. Mai
 
 ## 曲目信息
@@ -9,21 +11,25 @@
 | 所属曲包 | (待补充) |
 | 更新版本 | (待补充) |
 | 时长 | (待补充) |
-| 谱面时长 | 2:53 |
 | BPM | 110 |
 
 ## 谱面信息
 | 难度 | [Drizzle](info:info("ネオン色のまち feat. Mai", "Drizzle")) | [Sprinkle](info:info("ネオン色のまち feat. Mai", "Sprinkle")) | [Cloudburst](info:info("ネオン色のまち feat. Mai", "Cloudburst")) |
 | - | - | - | - |
-| 等级 | 3.5 | 8.0 | 9.7 |
+| 等级 | 3+ (3.5) | 8 (8.0) | 9+ (9.7) |
+| 谱师 | Magazet in Bustling city | Magazet in Rhythmic music | Magazet in Romantic love |
 | Note数量 | 314 | 690 | 721 |
-| 谱师 | Magazet | Magazet | Magazet |
+
 
 ## 解锁方法
 
 (待补充)
 
 ## 曲目试听
+
+(待补充)
+
+## 曲目相关
 
 (待补充)
 

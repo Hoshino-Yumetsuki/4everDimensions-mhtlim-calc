@@ -4,7 +4,7 @@ from pathlib import Path
 
 PACKED_DOC = Path("packed_document.json")
 CHARTINFO = Path("chartinfo.json")
-OUT_JS = Path("map.js")
+OUT_JS = Path("../map.js")
 
 DIFF_ORDER = ["Drizzle", "Sprinkle", "Cloudburst", "Clear", "Special"]
 
@@ -17,26 +17,40 @@ def latin_title_to_key(latin):
         s = " ".join(map(str, latin))
     else:
         s = str(latin)
-    s = s.strip().replace(" ", "_")
+    s = s.strip()
+    s = re.sub(r"\s+", " ", s)
+    s = s.replace(" ", "_")
     s = re.sub(r"[^A-Za-z0-9_\-]", "", s)
     return s or None
+
+def is_pure_latin_words(title):
+    return bool(re.fullmatch(r"[A-Za-z ]+", title))
+
+def make_latin_abbr(title):
+    words = title.strip().split()
+    if len(words) <= 1:
+        return None
+    return "".join(w[0].upper() for w in words if w)
+
+def extract_han_only(title):
+    han = re.findall(r"[\u4e00-\u9fff]", title)
+    if len(han) >= 2:
+        return "".join(han)
+    return None
 
 # ---------- load data ----------
 
 packed_docs = json.loads(PACKED_DOC.read_text(encoding="utf-8"))
 chartinfo = json.loads(CHARTINFO.read_text(encoding="utf-8"))
 
-doc_by_id = {d["id"]: d for d in packed_docs}
+doc_by_id = {d["id"]: d for d in packed_docs if "id" in d}
 
 # ---------- build map ----------
 
 song_map = {}
+used_keys = set()
 
 for key, info in chartinfo.items():
-    chart_id = info.get("id")
-    if not isinstance(chart_id, str):
-        continue
-
     if "_" not in key:
         continue
 
@@ -44,41 +58,60 @@ for key, info in chartinfo.items():
     if diff not in DIFF_ORDER:
         continue
 
-    song_id = info.get("id")
-    doc = doc_by_id.get(song_id)
+    chart_id = info.get("id")
+    if not isinstance(chart_id, str):
+        continue
+
+    doc = doc_by_id.get(chart_id)
     if not doc:
         continue
 
+    # ---------- 主 key ----------
     latin_key = latin_title_to_key(doc.get("latinTitle")) or base
+    if not latin_key:
+        continue
 
     if latin_key not in song_map:
         song_map[latin_key] = {
             "original": doc.get("title"),
-            "diffs": {},
+            "aliases": [],
         }
+        used_keys.add(latin_key)
 
-    song_map[latin_key]["diffs"][diff] = chart_id
+    title = str(doc.get("title") or "")
+
+    # ---------- alias A：拉丁缩写 ----------
+    if is_pure_latin_words(title):
+        abbr = make_latin_abbr(title)
+        if abbr and abbr not in used_keys:
+            song_map[latin_key]["aliases"].append(abbr)
+            used_keys.add(abbr)
+
+    # ---------- alias B：纯汉字 ----------
+    han_alias = extract_han_only(title)
+    if han_alias and han_alias not in used_keys:
+        song_map[latin_key]["aliases"].append(han_alias)
+        used_keys.add(han_alias)
 
 # ---------- write map.js ----------
 
 lines = []
 lines.append("export const songMap = {")
 
-for latin, data in sorted(song_map.items()):
-    # ⚠️ 关键：key 用 json.dumps 强制加引号
-    key_js = json.dumps(latin, ensure_ascii=False)
+for key in sorted(song_map.keys()):
+    data = song_map[key]
 
-    row = [json.dumps(data["original"], ensure_ascii=False)]
-    for diff in DIFF_ORDER:
-        if diff in data["diffs"]:
-            row.append(json.dumps(data["diffs"][diff], ensure_ascii=False))
+    arr = [data["original"]]
+    arr.extend(data["aliases"])
 
-    js_array = "[" + ", ".join(row) + "]"
-    lines.append(f"  {key_js}: {js_array},")
+    js_key = json.dumps(key, ensure_ascii=False)
+    js_arr = "[" + ", ".join(json.dumps(x, ensure_ascii=False) for x in arr) + "]"
+
+    lines.append(f"  {js_key}: {js_arr},")
 
 lines.append("};")
 lines.append("")
 
 OUT_JS.write_text("\n".join(lines), encoding="utf-8")
 
-print("✓ 已生成 map.js（所有 key 均为字符串，语法安全）")
+print("✓ 已生成 map.js（自动主键 / 智能别名 / 无需填写 id）")

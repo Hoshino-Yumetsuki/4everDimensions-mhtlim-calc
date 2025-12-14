@@ -84,21 +84,21 @@ def load_constant_js(path: Path):
 def list_to_str(v):
     return ", ".join(map(str, v)) if isinstance(v, list) else "-" if not v else str(v)
 
+def md_escape_table_cell(s):
+    if s is None:
+        return "-"
+    return str(s).replace("|", r"\|")
+
 def bpm_to_str(bpm):
     if not bpm:
         return "-"
 
-    # 工具：整数就去 .0
     def fmt(x):
-        if isinstance(x, (int, float)) and x == int(x):
-            return str(int(x))
-        return str(x)
+        return str(int(x)) if isinstance(x, (int, float)) and x == int(x) else str(x)
 
-    # 只有一项：直接返回 bpm
     if len(bpm) == 1:
         return fmt(bpm[0]["bpm"])
 
-    # 多项：输出 [start,bpm],[start,bpm]
     return ",".join(
         f"[{fmt(x['start'])},{fmt(x['bpm'])}]"
         for x in bpm
@@ -115,10 +115,59 @@ def latin_title_to_filename(latin):
     s = re.sub(r"[^A-Za-z0-9_\-]", "", s)
     return s or None
 
-# ---------- 表格裁剪 ----------
+def format_ct(ct):
+    if ct is None:
+        return "-"
+
+    try:
+        ct = float(ct)
+    except Exception:
+        return str(ct)
+
+    base = int(ct)
+    frac = ct - base
+
+    return f"{base}+ ({ct})" if frac >= 0.5 else f"{base} ({ct})"
+
+# ---------- 表格裁剪（已修复） ----------
+def split_md_table_row(row: str):
+    """
+    安全地拆分 Markdown 表格行
+    - 不会把 \\| 当成分隔符
+    - 返回 cell 列表（不含首尾空列）
+    """
+    cells = []
+    buf = []
+    escape = False
+
+    for ch in row.strip():
+        if escape:
+            buf.append(ch)
+            escape = False
+        elif ch == "\\":
+            buf.append(ch)
+            escape = True
+        elif ch == "|":
+            cells.append("".join(buf).strip())
+            buf = []
+        else:
+            buf.append(ch)
+
+    cells.append("".join(buf).strip())
+
+    # 去掉首尾空列（Markdown 表格语法）
+    if cells and cells[0] == "":
+        cells = cells[1:]
+    if cells and cells[-1] == "":
+        cells = cells[:-1]
+
+    return cells
+
 def trim_chart_table_lines(lines, exist_diffs):
     out = []
     i = 0
+
+    valid_diffs = [d for d in DIFF_ORDER if d in exist_diffs]
 
     while i < len(lines):
         line = lines[i]
@@ -135,27 +184,25 @@ def trim_chart_table_lines(lines, exist_diffs):
             if not table:
                 continue
 
-            # 以表头为基准
-            header_cells = table[0].split("|")
+            header = split_md_table_row(table[0])
 
-            keep = [0, 1]
-            for idx, cell in enumerate(header_cells[2:], start=2):
-                if any(d in cell for d in exist_diffs):
-                    keep.append(idx)
+            # 第 0 列是「难度 / 等级 / Note数量 / 谱师」
+            keep_idx = [0]
 
-            keep.append(len(header_cells) - 1)
-            max_idx = max(keep)
+            for idx, cell in enumerate(header[1:], start=1):
+                if any(d in cell for d in valid_diffs):
+                    keep_idx.append(idx)
 
-            def cut(row):
-                cells = row.split("|")
+            for row in table:
+                cells = split_md_table_row(row)
 
-                # ★ 关键修复：补齐列数
-                if len(cells) <= max_idx:
-                    cells.extend([""] * (max_idx + 1 - len(cells)))
+                # 补齐列数
+                while len(cells) <= max(keep_idx):
+                    cells.append("-")
 
-                return "|".join(cells[j] for j in keep)
+                new_cells = [cells[j] for j in keep_idx]
+                out.append("| " + " | ".join(new_cells) + " |")
 
-            out.extend(cut(r) for r in table)
             continue
 
         i += 1
@@ -169,11 +216,7 @@ packed_docs = json.loads(PACKED_DOC.read_text(encoding="utf-8"))
 chartinfo = json.loads(CHARTINFO.read_text(encoding="utf-8"))
 base_tpl = BASE_MD.read_text(encoding="utf-8")
 
-# ★ 建立：chart_id -> doc 映射
-doc_by_chart_id = {}
-for d in packed_docs:
-    if "id" in d:
-        doc_by_chart_id[d["id"]] = d
+doc_by_chart_id = {d["id"]: d for d in packed_docs if "id" in d}
 
 # ---------- 主流程 ----------
 
@@ -193,16 +236,12 @@ for song_id, arr in constants.items():
     if not info_title:
         continue
 
-    latin_filename = None
-
-    # 所有谱面（按难度）
     chart_by_diff = {
         k.split("_", 1)[1]: v
         for k, v in chartinfo.items()
         if k.startswith(info_title + "_")
     }
 
-    # 任意一个 doc 用来填歌曲级信息
     first_chart = next(iter(chart_by_diff.values()), None)
     if not first_chart:
         continue
@@ -226,34 +265,23 @@ for song_id, arr in constants.items():
         md = md.replace("{doc:illustratorsList}", list_to_str(base_doc.get("illustratorsList")))
         md = md.replace("{doc:bpmInfo}", bpm_to_str(base_doc.get("bpmInfo")))
 
-        dur = "-"
-        for v in chart_by_diff.values():
-            if "谱面时长" in v:
-                dur = v["谱面时长"]
-                break
-        md = md.replace("{info:谱面时长}", dur)
+        if base_doc.get("title") == list_to_str(base_doc.get("latinTitle")):
+            md = re.sub(r"\|\s*拉丁文曲名\s*\|.*?\n", "", md)
 
-    # ---------- ct ----------
-    md = md.replace(f"{{ct,{DIFF_SHORT[diff]}}}", str(ct_value))
+    md = md.replace(f"{{ct,{DIFF_SHORT[diff]}}}", format_ct(ct_value))
 
-    # ---------- combo ----------
     for dname, info in chart_by_diff.items():
         combo = info.get("combo") or info.get("noteCount")
         if combo is not None:
             md = md.replace(f"{{info:combo,{dname}}}", str(combo))
 
-    # ---------- ★ 新增：谱师（按难度 id 精确匹配） ----------
     for dname, info in chart_by_diff.items():
         chart_id = info.get("id")
         charter_doc = doc_by_chart_id.get(chart_id)
-        if not charter_doc:
-            continue
-
-        charters = charter_doc.get("chartersList")
-        if charters:
+        if charter_doc and charter_doc.get("charter"):
             md = md.replace(
-                f"{{doc:chartersList,{dname}}}",
-                list_to_str(charters)
+                f"{{doc:charter,{dname}}}",
+                md_escape_table_cell(charter_doc["charter"])
             )
 
     lines = md.splitlines()
@@ -262,4 +290,4 @@ for song_id, arr in constants.items():
 
     md_path.write_text(md, encoding="utf-8")
 
-print("✓ 所有曲目处理完成（combo / ct / charters 已替换）")
+print("✓ 所有曲目处理完成（裁剪 / 等级 / charter / 拉丁名去重）")
