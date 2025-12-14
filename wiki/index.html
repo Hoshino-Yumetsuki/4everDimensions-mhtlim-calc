@@ -70,6 +70,7 @@
     - [露晓卉庭(花园)](#garden)
     - [隐藏曲解锁方式](#hidden-song-unlock)
 - 列表条目
+  - [曲目信息](./song/)
   - [定数表](./table.html)
   - [曲师统计](./artist-statistics.html)
   - [谱师统计](./charter-statistics.html)
@@ -574,14 +575,6 @@ Good 判定的基础扣血量为 12.0，Bad 与 Miss 的基础扣血量为 8.0�
 
   <script>
     marked.use(markedKatex());
-    marked.setOptions({
-      highlight: (code, lang) => {
-        if (lang && hljs.getLanguage(lang)) {
-          return hljs.highlight(code, { language: lang }).value;
-        }
-        return hljs.highlightAuto(code).value;
-      }
-    });
 
     function resizeKatex() {
       const w = document.querySelector('.markdown-body').clientWidth;
