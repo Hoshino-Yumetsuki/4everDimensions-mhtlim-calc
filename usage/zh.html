@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Reality对照表</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css/github-markdown-dark.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked-katex-extension/lib/index.umd.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+      background: #0d1117;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .markdown-body {
+      width: 100%;
+      overflow-wrap: break-word;
+    }
+
+    .katex-display {
+      display: block !important;
+      text-align: center;
+      margin: 10px 0;
+      font-size: 1em;
+    }
+
+    pre,
+    code {
+      user-select: text;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <article id="content" class="markdown-body"></article>
+  </div>
+
+  <script type="text/markdown" id="md">
+
+## 目录
+
+- [网站](#网站)
+- [查分器使用说明](#使用说明)
+  - [上传存档文件](#上传存档文件)
+  - [旧版存档路径](#其他存档路径)
+  - [在线客服](#在线客服)
+- [(推荐查看)Milthm Wiki](../wiki/)
+
+---
+
+## 网站
+
+- [k9.lv/c/](htt://k9.lv/c/)
+- [mhtlim.top](https://mhtlim.top/)
+- [mhtl.im](https://mhtl.im)
+> 以上网站由_4everDimensions托管
+- [mkzi-nya.github.io](https://mkzi-nya.github.io/milthm-calculator-web/)
+> 以上网站由mkzi_nya托管
+
+---
+
+## 使用说明
+
+>查分器纯属玩家自行制作，与官方并无关联
+
+### 上传存档文件
+
+点击主页中的 **「上传文件」** 选项，选择存档文件 `saves.db` 或推分记录文件 `data.db` 上传即可。
+
+> **注意：**
+> - `data.db` 只包含 `3.2` 更新后的游玩记录（如果未丢失）。
+> - 安卓端推荐使用 [MT 管理器](https://mt2.cn/) 访问 `sdcard/Android/data` 目录。
+
+#### 文件路径（详见 [Milthm Wiki](https://milthm.fandom.com/wiki/Data_File)）
+
+[什么是文件路径](#什么是文件路径)
+
+- **Android (TapTap)**
+  ```text
+  /storage/emulated/0/Android/data/game.taptap.morizero.milthm/files/data/
+  ```
+- **Android (Google Play)**
+  ```text
+  /storage/emulated/0/Android/data/com.morizero.milthm/files/data/
+  ```
+- **iOS**
+
+  使用 [文件](https://support.apple.com//102570) 应用打开 Milthm 文件夹：
+
+  ```text
+  /data/
+  ```
+
+  > 如果找不到本地文件：进入“文件”主页右上角的三点菜单，将本地文件取消隐藏（[详见](https://www.tenorshare.com/iphone-fix/on-my-iphone-missing-in-files-app.html)）。
+
+- **Windows 用户：**  
+  在资源管理器地址栏输入：  
+  ```text
+  %AppData%\..\LocalLow\Morizero\Milthm\data\
+  ```
+- **Mac OS**
+  ```text
+  /Library/Application Support/Morizero/Milthm/data/
+  ```
+- **Linux**
+  ```text
+  ~/.config/unity3d/Morizero/Milthm/data/
+  ```
+
+[安卓演示视频](https://mkzi-nya.github.io/milthm-calculator-web/files/android.mp4)  
+[IOS演示视频](https://mkzi-nya.github.io/milthm-calculator-web/files/ios.mp4)  
+安卓用户[没有访问权限](#没有访问权限)
+
+---
+
+### 旧版存档路径
+
+若上传后无法解析，可尝试手动提取 JSON 数据并上传：
+
+- **Android (TapTap)**
+  ```text
+  /data/user/0/game.taptap.morizero.milthm/shared_prefs/
+  ```
+- **Android (Google Play)**
+  ```text
+  /data/user/0/com.morizero.milthm/shared_prefs/
+  ```
+- **iOS**
+  ```text
+  milthm file/Data/Library/Preferences
+  ```
+- **Windows**
+  regedit:
+  ```text
+  HKEY_CURRENT_USER\Software\Morizero\Milthm\
+  ```
+- **Mac OS**
+  ```text
+  ~/Library/Preferences
+  ```
+- **Linux**
+  ```text
+  $HOME/.config/unity3d/Morizero/Milthm/
+  ```
+
+---
+
+### 在线客服
+
+- [客服A\(中国大陆找TA\)](https://www.deepseek.com/)
+- [客服B](https://chatgpt.com/)
+问题描述：将你看不懂的地方复制后发给TA即可  
+
+  </script>
+
+  <script>
+    marked.use(markedKatex());
+    marked.setOptions({
+      highlight: (code, lang) => {
+        if (lang && hljs.getLanguage(lang)) {
+          return hljs.highlight(code, { language: lang }).value;
+        }
+        return hljs.highlightAuto(code).value;
+      }
+    });
+
+    function resizeKatex() {
+      const w = document.querySelector('.markdown-body').clientWidth;
+      document.querySelectorAll('.katex-display').forEach(e => {
+        e.style.fontSize = '';
+        const actual = e.scrollWidth;
+        if (actual > w) {
+          const fs = parseFloat(getComputedStyle(e).fontSize);
+          e.style.fontSize = (fs * w / actual) + 'px';
+        }
+      });
+    }
+
+    const md = document.getElementById('md').textContent.replace(/^\n/, '');
+    const content = document.getElementById('content');
+    content.innerHTML = marked.parse(md, { headerIds: true, mangle: false });
+    content.querySelectorAll('h2,h3,h4').forEach(h => {
+      h.id = h.innerText.toLowerCase().replace(/\s+/g, '-');
+    });
+    hljs.highlightAll();
+    resizeKatex();
+
+    addEventListener('resize', () => resizeKatex());
+    // reality对照表函数
+    function findScore(constant, target) {
+  if (target <= 0) return 600000;
+  if (target > constant + 1.5) return "Unable to deduce points";
+  
+  if (target >= constant) {
+    if (target === constant + 1.5) return 1000000;
+    return Math.ceil(850000 + (target - constant) * 100000);
+  }
+  
+  if (target >= Math.max(0, 0.5 * constant - 1.5)) {
+    const denominator = constant / 300000 + 1 / 100000;
+    const score = (target + constant * 11/6 + 8.5) / denominator;
+    return Math.min(Math.ceil(score), 849999);
+  }
+  
+  if (Math.abs(constant - 3) < 1e-6) return 600000;
+  const score = 600000 + (target * 200000) / (constant - 3);
+  return Math.min(Math.ceil(score), 699999);
+}
+
+function updateOutput() {
+  const input = document.getElementById("constantInput").value;
+  const output = document.getElementById("output");
+  
+  if (input === "") {
+    output.textContent = "reality\tscore\n请填写 c (constant)，结果将以公式形式计算";
+    return;
+  }
+  
+  const c = parseFloat(input);
+  let result = "reality\tscore\n";
+  
+  // 先计算所有结果
+  const data = [];
+  for (let r = 0; r <= c + 1.5; r += 0.01) {
+    const score = findScore(c, parseFloat(r.toFixed(2)));
+    data.push({ r: r.toFixed(2), s: score });
+  }
+  
+  // 倒序输出
+  for (let i = data.length - 1; i >= 0; i--) {
+    result += `${data[i].r}\t${data[i].s}\n`;
+  }
+  
+  output.textContent = result;
+}
+
+  </script>
+
+</body>
+
+</html>
