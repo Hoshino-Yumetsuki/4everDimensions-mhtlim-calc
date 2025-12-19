@@ -3,7 +3,6 @@
     cursor: pointer;
     color: lightblue;
 }
-
 .container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -193,8 +192,11 @@ body {
     background-color: #595d8352 !important;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3) !important;
     border-color: #00000000 !important;
+    transition: all 0.1s ease ;
 }
-
+.layui-btn:active,.layui-layer-btn0:active,.layui-layer-btn1:active{
+    transform: scale(0.9);
+}
 .layui-btn:hover,.layui-layer-btn0:hover,.layui-layer-btn1:hover {
     border-color: #ffffff !important;
     background-color: #595d83bf !important;
@@ -273,7 +275,6 @@ body {
 .superlinkR:hover{
     color:rgb(223, 246, 255) !important;
 }
-
 .settingsModal, .overlay{
     animation: show 0.3s;
 }
