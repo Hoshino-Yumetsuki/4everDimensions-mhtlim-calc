@@ -343,7 +343,12 @@ $version_hash = sha1_file(filename: "version.txt");
             </div>
         </div>
     </div>
-
+  <div id="rain-control" style="display: none;">
+        <div onclick="setRain(1.5,50);openRainSettings()">正常</div>
+        <div onclick="setRain(3,100);openRainSettings()">慢</div>
+        <div onclick="setRain(0.6,15);openRainSettings()">快</div>
+        <div onclick="stopRain();openRainSettings()">禁用</div>
+  </div>
     <div style="position:absolute;right:20px;top:20px;z-index:114514;">
         <button id="languageButton" style="background:transparent;border:none;cursor:pointer;font-size:20px;">🌐</button>
         <button class="lb-style" id="rainSettingsButton" onclick="javascript:openRainSettings();" style="background:transparent;border:none;cursor:pointer;font-size:20px;">🌧️</button>

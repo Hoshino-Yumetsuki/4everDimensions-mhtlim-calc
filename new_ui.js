@@ -417,22 +417,8 @@ function open_changelog() {
 
 }
 function openRainSettings() {
-  layer.open({
-    type: 1,
-    title: 'Rain Settings / 雨滴设置',
-    content: `<div id="rain_settings_content" style="padding:32px;text-align:center;line-height:8vh">
-    <button class="layui-btn layui-btn-normal" onclick="setRain(1.5,50)">正常</button><br>
-    <button class="layui-btn layui-btn-normal" onclick="setRain(3,100)">慢</button><br>
-    <button class="layui-btn layui-btn-normal" onclick="setRain(0.6,15)">快</button><br>
-    <button class="layui-btn layui-btn-normal" onclick="stopRain()">禁用</button><br>
-    <button class="layui-btn layui-btn-normal" onclick="layer.closeAll()">完成</button>
-    </div>`,
-    area: ['auto', '80vh'],
-    shade: 0.6,
-    shadeClose: true,
-    skin: 'layui-layer-win10'
-  })
-
+  var _ = document.getElementById("rain-control")
+  _.style.display = _.style.display=="none" ? "block" : "none";
 }
 function reRain() {
   clearInterval(rain_interval);
