@@ -119,7 +119,7 @@ function loadImageCSS() {
   return new Promise((resolve, reject) => {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = 'images.css';
+    link.href = 'https://storage.mhtl.im/images.css';
 
     link.onload = () => {
       console.log('CSS 加载完成！');
