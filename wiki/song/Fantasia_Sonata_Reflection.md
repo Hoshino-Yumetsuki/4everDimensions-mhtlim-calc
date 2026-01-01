@@ -1,8 +1,5 @@
 [返回目录](./)
 
-> 此页面正在建设中，当前为模板自动生成，部分信息可能不完整  
-> 如果您愿意参与填写，可以[点此](https://github.dev/mkzi-nya/milthm-calculator-web)进行修改并提交，或联系@mkzi_nya(qq: 2450382239)
-
 # Fantasia Sonata Reflection
 
 ## 曲目信息
@@ -10,9 +7,9 @@
 | - | - |
 | 曲师 | PYKAMIA |
 | 曲绘 | nanakaria |
-| 所属曲包 | (待补充) |
-| 更新版本 | (待补充) |
-| 时长 | (待补充) |
+| 所属曲包 | 天气预报 |
+| 更新版本 | v4.0 |
+| 时长 | 2:08 |
 | BPM | 170 |
 
 ## 谱面信息
@@ -25,16 +22,16 @@
 
 ## 解锁方法
 
-(待补充)
+- 默认解锁
 
 ## 曲目试听
 
-(待补充)
+- [【Youtube】](https://youtu.be/K6SOkINESXU?si=kl3m5znjhyaDFNoj)
 
 ## 曲目相关
 
-(待补充)
+- 该曲目为 Milthm 独占曲。
 
 ## 游戏相关
 
-(待补充)
+- 与《[1.0](info:info("Welcome to Milthm", "Drizzle"))》相同，该曲目为 Milthm 的进阶教程曲，为学习雨丝音符的「[水面反射](https://milthm.com/wiki/hans/manual/judgment/water-reflected)」而制作。
