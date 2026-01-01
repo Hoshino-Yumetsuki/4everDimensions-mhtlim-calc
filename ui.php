@@ -123,6 +123,7 @@ $version_hash = sha1_file(filename: "version.txt");
     </script>
     <input type="file" id="fileupLoad" style="display:none;" />
     <style>
+        /* !!! TODO (karamitii) : remove block after cache updated !!! */
         #languageMenu {
             position: absolute;
             right: 0;
@@ -366,20 +367,6 @@ $version_hash = sha1_file(filename: "version.txt");
 
     <div style="padding: 30px; text-align:center;display:flex;">
         <div class="" style="text-align: left;max-width:1200px;margin:auto;">
-
-
-            <!-- <div class="layui-card rccc">
-                <div class="layui-card-header">
-                    经常无法访问本站？
-                </div>
-                <div class="layui-card-body">
-                    <pre>网站代理服务器正在被攻击，所以容易出现较大丢包
-如果的确访问不了可去Mkzi_Nya的网站。</pre>
-
-                </div>
-            </div> -->
-
-
             <div class="layui-card rccc">
                 <div class="layui-card-header">
                     温馨提示
