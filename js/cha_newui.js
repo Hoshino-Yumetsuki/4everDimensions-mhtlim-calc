@@ -2480,7 +2480,7 @@ async function downloadImage() {
                   // const element = document.querySelector('.bg');
                   const dataURL = await htmlToImage.toPng(bg, {
                       pixelRatio: ${totalCardCount < 50 ? '2' : '1'},
-                      cacheBust: true,
+                      cacheBust: false,
                       useCORS: true,
                       style: {
                           margin: '0',
