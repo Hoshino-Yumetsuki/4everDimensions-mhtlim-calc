@@ -9,25 +9,44 @@
 主要负责人：
 
     mkzi_nya
-    4everDimensions
-    libchara-dev
-    Autumn
+    不是xyn喵~
 
 脚本：
 
-    xzadudu179
     mkzi_nya
-    4everDimensions
+    不是xyn喵~
 
-UI/前端&后端&托管：
+前端&后端&托管：
 
-    4everDimensions
+    不是xyn喵~
+
+UI/查分图:
+
+    不是xyn喵~
+    xzadudu179
+
+文档:
+
+    mkzi_nya
+    xyh5033
+    不是xyn喵~
+    纸喵柚nya
+    "火猫"
+
+其他:
+    Autumn
+    libchara-dev
+    Panyi
 
 特别鸣谢：
 
     mkzi_nya(归梦)
-    4everDimensions
+    不是xyn喵~
     libchara-dev
     Autumn
     Panyi
     Eric_Lian
+    xzadudu179
+    xyh5033
+    纸喵柚nya
+    "火猫"
