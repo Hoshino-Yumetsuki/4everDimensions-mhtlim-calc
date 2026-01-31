@@ -27,7 +27,11 @@
 
 ## 曲目试听
 
-- [【Bilibili】OverRain - SharK](https://www.bilibili.com/video/BV1Hr421K7De/?spm_id_from=333.337.search-card.all.click&vd_source=5b3e79ab92787fc9811abb3777741746)
+- [【Bilibili】](https://www.bilibili.com/video/BV1Hr421K7De)
+<div style="position: relative; width: 50%; aspect-ratio: 16 / 9;">
+<iframe style="position:absolute;width:100%;height:100%;left:0;top:0;"src="//www.bilibili.com/blackboard/html5mobileplayer.html?danmaku=0&fjw=0&hideCoverInfo=0&isOutside=true&bvid=BV1Hr421K7De&p=1"rameborder="no"scrolling="no"></iframe>
+</div>
+
 - [【Youtube】](https://youtu.be/65IVBul1cxE?si=7qS3vLeIBwD6sjCE)
 
 ## 曲目相关
