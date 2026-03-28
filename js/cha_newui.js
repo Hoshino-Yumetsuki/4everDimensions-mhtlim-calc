@@ -1,4 +1,4 @@
-const Updated = "Updated at 2025.11.09 21:30 (UTC+8)"
+const Updated = "Updated at 2026.03.28 17:44 (UTC+8)"
 var cha_newui_js_ver = 7
 const BACKGROUND_COUNT = 15
 const BACKGROUND_COUNT_YRJ = 4
@@ -1967,6 +1967,14 @@ async function downloadImage() {
                 width: 205px;
             }
 
+            .cardtitle {
+                overflow-x: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                padding-right: 2em;
+                /* max-width: 70%; */
+            }
+
             .grade {
                 max-width: 50px;
                 margin: -10px;
@@ -1978,6 +1986,7 @@ async function downloadImage() {
                 font-size: 2em;
                 display: flex;
                 align-items: center;
+                margin-left: 5px;
                 margin-bottom: 5px;
             }
 
@@ -2511,7 +2520,7 @@ async function downloadImage() {
                   link.click();
               } catch(e) {
                   console.error("保存图片失败", e);
-                  alert("保存图片失败 xwx\\n可以尝试 \\"打印页面\\" 或截图页面，或是在交流群询问详情。");
+                  alert("保存图片失败 xwx\\n可以尝试 \\"打印页面\\" 或截图页面，或是在交流群询问详情。\nerror:" + e);
               }
 
             }
@@ -2889,22 +2898,22 @@ function getLevelIconName(it) {
   return `${n}`;
 }
 
-function limitText(str, len = 16) {
-  let resultstr = str;
-  if (getStrLength(str) > len) {
-    let l = 0;
-    let cut = false;
-    Array.from(str).forEach((s, i) => {
-      l += getStrLength(s)
-      if (l >= len && !cut) {
-        resultstr = str.slice(0, Math.max(i - 2, 0)) + "...";
-        cut = true;
-        return
-      }
-    })
-  }
-  return resultstr;
-}
+// function limitText(str, len = 16) {
+//   let resultstr = str;
+//   if (getStrLength(str) > len) {
+//     let l = 0;
+//     let cut = false;
+//     Array.from(str).forEach((s, i) => {
+//       l += getStrLength(s)
+//       if (l >= len && !cut) {
+//         resultstr = str.slice(0, Math.max(i - 2, 0)) + "...";
+//         cut = true;
+//         return
+//       }
+//     })
+//   }
+//   return resultstr;
+// }
 
 // 得到卡片 html
 async function getCardHtml(items, maxCount, errorImg) {
@@ -2917,7 +2926,7 @@ async function getCardHtml(items, maxCount, errorImg) {
 
     // 分数（含渐变颜色）
     const scoreStr = String(it.bestScore ?? 0).padStart(7, '0');
-    const songName = escapeHtml(limitText(it.name, maxTitleLen - numStr.length))
+    const songName = escapeHtml(it.name)
 
     // 评级/常数/准确率 行
     // ctx.font = '20px Arial';
@@ -2989,7 +2998,7 @@ async function getCardHtml(items, maxCount, errorImg) {
                   style="text-align: right; position: absolute; right: 0; top: 6px;  color:${scoreIsV3 ? '#cbbeffee' : '#dde3ffc9'}">${numStr}</p>
               <div class="cardtext">
                   <div
-                      style="display: flex; align-items: center; padding-bottom: 9px; position: relative;">
+                      style="display: flex; align-items: center; padding-bottom: 9px; position: relative; margin-left: 4px;">
                       <div
                           style="width: 6px; height: 18px; border-radius: 5px; margin-right: 5px; margin-left: 8px;"
                           class="${category}"></div>
