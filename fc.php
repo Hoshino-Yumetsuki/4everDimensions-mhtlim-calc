@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER['REMOTE_ADDR'] !== "38.147.184.146" && $_SERVER['REMOTE_ADDR'] !== "127.0.0.1"){
+if ($_SERVER['REMOTE_ADDR'] !== "127.0.0.1"){
     die("Fuck you!");
 }
 function dbc()
