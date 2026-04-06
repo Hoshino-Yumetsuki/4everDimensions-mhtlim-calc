@@ -33,7 +33,7 @@
 
 ## 曲目试听
 
-(待补充)
+<div class="wiki-audio" file="KAEDE.ogg"></div>
 
 ## 曲目相关
 
