@@ -1880,7 +1880,7 @@ async function downloadImage() {
                 border-radius: 15px;
                 overflow: hidden;
             }
-            
+
             .cardimg {
                 width: 100%;
                 height: 100%;
@@ -2900,22 +2900,22 @@ function getLevelIconName(it) {
   return `${n}`;
 }
 
-function limitText(str, len = 16) {
-  let resultstr = str;
-  if (getStrLength(str) > len) {
-    let l = 0;
-    let cut = false;
-    Array.from(str).forEach((s, i) => {
-      l += getStrLength(s)
-      if (l >= len && !cut) {
-        resultstr = str.slice(0, Math.max(i - 2, 0)) + "...";
-        cut = true;
-        return
-      }
-    })
-  }
-  return resultstr;
-}
+// function limitText(str, len = 16) {
+//   let resultstr = str;
+//   if (getStrLength(str) > len) {
+//     let l = 0;
+//     let cut = false;
+//     Array.from(str).forEach((s, i) => {
+//       l += getStrLength(s)
+//       if (l >= len && !cut) {
+//         resultstr = str.slice(0, Math.max(i - 2, 0)) + "...";
+//         cut = true;
+//         return
+//       }
+//     })
+//   }
+//   return resultstr;
+// }
 
 // 得到卡片 html
 async function getCardHtml(items, maxCount, errorImg) {
@@ -2941,7 +2941,7 @@ async function getCardHtml(items, maxCount, errorImg) {
 
     // ===== 基本信息 =====
     const scoreStr = String(it.bestScore ?? 0).padStart(7, '0');
-    const songName = escapeHtml(limitText(it.name, maxTitleLen - numStr.length));
+    const songName = escapeHtml(it.name, maxTitleLen - numStr.length);
 
     const acc = `${(((it.bestAccuracy ?? 0) * 100) || 0).toFixed(2)}%`;
 
