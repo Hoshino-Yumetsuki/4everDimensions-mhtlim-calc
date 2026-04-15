@@ -1,4 +1,4 @@
-const Updated = "Updated at 2026.03.28 17:44 (UTC+8)"
+const Updated = "Updated at 2026.04.15 22:11 (UTC+8)"
 var cha_newui_js_ver = 7
 const BACKGROUND_COUNT = 15
 const BACKGROUND_COUNT_YRJ = 4
@@ -2932,7 +2932,7 @@ async function getCardHtml(items, maxCount, errorImg) {
     return url;
   }
 
-  const getItemHtml = async (it, i, ignoreMaxCount = false, numberPrefix = '#', maxTitleLen = 21) => {
+  const getItemHtml = async (it, i, ignoreMaxCount = false, numberPrefix = '#') => {
     if (i + 1 > maxCount && !ignoreMaxCount) {
       return;
     }
@@ -2941,7 +2941,7 @@ async function getCardHtml(items, maxCount, errorImg) {
 
     // ===== 基本信息 =====
     const scoreStr = String(it.bestScore ?? 0).padStart(7, '0');
-    const songName = escapeHtml(it.name, maxTitleLen - numStr.length);
+    const songName = escapeHtml(it.name);
 
     const acc = `${(((it.bestAccuracy ?? 0) * 100) || 0).toFixed(2)}%`;
 
