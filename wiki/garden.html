@@ -139,8 +139,6 @@ const TAG_TO_KEY = { '菌菇':'fungus', '食物':'food', '观赏':'orn', '功能
 const WATER_MULT = { 0:1, 1:0.8, 2:0.6, 3:0.5 };
 const CROPS = {
   '双孢蘑菇': { tags:['菌菇','食物'], yield:8, time:60, costs:[], unlock:1 },
-  '毛头鬼伞': { tags:['菌菇','食物'], yield:5, time:60, costs:[], unlock:1, disabled:true },
-  '毛茛': { tags:['观赏','功能'], yield:1, time:60, costs:[], unlock:1, disabled:true },
   '水蕨菜': { tags:['食物'], yield:45, time:360, costs:['菌菇*5'], unlock:3, disabled:true },
   '勿忘草': { tags:['观赏'], yield:7, time:720, costs:[], unlock:4 },
   '水晶兰': { tags:['观赏'], yield:20, time:1920, costs:['观赏*5'], unlock:6, disabled:true },
@@ -152,16 +150,37 @@ const CROPS = {
   '草莓': { tags:['食物'], yield:400, time:5760, costs:['功能*3'], unlock:17, disabled:true },
   '香菇': { tags:['菌菇','食物'], yield:45, time:60, costs:['食物*30'], unlock:19 },
   '傅氏凤尾蕨': { tags:['观赏','功能'], yield:5, time:360, costs:['食物*25'], unlock:21 },
+  '毛头鬼伞': { tags:['菌菇','食物'], yield:5, time:60, costs:[], unlock:1, disabled:true },
+  '毛茛': { tags:['观赏','功能'], yield:1, time:60, costs:[], unlock:1, disabled:true },
 };
 const POT_UNLOCKS = {
-  2:{ level:2, cost:{ fungus:5 } },
-  3:{ level:10, cost:{ food:80, orn:20 } },
-  4:{ level:15, cost:{ func:40 } }
+  2: { level: 2, cost: { fungus: 5 } },
+  3: { level: 10, cost: { food: 80, orn: 20 } },
+  4: { level: 15, cost: { func: 40 } },
 };
+
 const LEVEL_COSTS = {
-   2:{ food:5 }, 3:{ food:40 }, 4:{ food:80 }, 5:{ food:100 }, 6:{ food:150 }, 7:{ orn:5 }, 8:{ orn:20 }, 9:{ food:350 }, 10:{ orn:35 },
-  11:{ food:300, orn:10 }, 12:{ food:400, orn:10 }, 13:{ food:500, orn:20 }, 14:{ food:600, orn:20 }, 15:{ orn:100 }, 16:{ food:800 },
-  17:{ food:800 }, 18:{ orn:80 }, 19:{ food:800, orn:30 }, 20:{ food:1200 }, 21:{ orn:120 }, 22:{ orn:50, func:10 }
+  2: { food: 5 },
+  3: { food: 40 },
+  4: { food: 80 },
+  5: { food: 100 },
+  6: { food: 150 },
+  7: { orn: 5 },
+  8: { orn: 20 },
+  9: { food: 350 },
+  10: { orn: 35 },
+  11: { food: 300, orn: 10 },
+  12: { food: 400, orn: 10 },
+  13: { food: 500, orn: 20 },
+  14: { food: 600, orn: 20 },
+  15: { orn: 100 },
+  16: { food: 800 },
+  17: { food: 800 },
+  18: { orn: 80 },
+  19: { food: 800, orn: 30 },
+  20: { food: 1200 },
+  21: { orn: 120 },
+  22: { orn: 50, func: 10 },
 };
 const RATE_CACHE = new Map();
 const TAG_RARITY = { food:0, fungus:1, orn:2, func:3 };
@@ -279,7 +298,11 @@ function renderCropTable(level, water){
   return `<div class="small">当前阶段类别最高净收益：菌菇 ${fmtNum(rateInfo.categoryRates['菌菇']||0)}/h，食物 ${fmtNum(rateInfo.categoryRates['食物']||0)}/h，观赏 ${fmtNum(rateInfo.categoryRates['观赏']||0)}/h，功能 ${fmtNum(rateInfo.categoryRates['功能']||0)}/h</div><table><thead><tr><th>作物</th><th>tag</th><th>单次产量</th><th>单次时长</th><th>种植消耗</th><th>净收益</th></tr></thead><tbody>${rows || '<tr><td colspan="6">当前等级无可用作物</td></tr>'}</tbody></table>`;
 }
 
-function cloneGenericState(s){ return { df:s.df||0, sd:s.sd||0, sf:s.sf||0, o:s.o||0, f:s.f||0, of:s.of||0 }; }
+function cloneGenericState(s){
+  const out={ df:s.df||0, sd:s.sd||0, sf:s.sf||0, o:s.o||0, f:s.f||0, of:s.of||0 };
+  out._labels={ ...(s&&s._labels ? s._labels : {}) };
+  return out;
+}
 function tagTotalsFromGenericState(s){
   return {
     fungus:(s.sf||0)+(s.df||0),
@@ -289,15 +312,15 @@ function tagTotalsFromGenericState(s){
   };
 }
 function genericStateFromInventory(inv){
-  const state={ df:0, sd:0, sf:0, o:0, f:0, of:0 };
+  const state={ df:0, sd:0, sf:0, o:0, f:0, of:0, _labels:{} };
   for(const [name,countRaw] of Object.entries(inv||{})){
     const count=Number(countRaw||0);
     if(!count) continue;
     const cat=cropCategory(name);
-    if(cat==='D') state.df += count;
-    else if(cat==='O') state.o += count;
-    else if(cat==='F') state.f += count;
-    else if(cat==='OF') state.of += count;
+    if(cat==='D'){ state.df += count; state._labels.df=name; }
+    else if(cat==='O'){ state.o += count; state._labels.o=name; }
+    else if(cat==='F'){ state.f += count; state._labels.f=name; }
+    else if(cat==='OF'){ state.of += count; state._labels.of=name; }
     else {
       const tags=getItemTags(name);
       if(tags.length===1){
@@ -327,6 +350,15 @@ function targetProgressFromGenericState(state, target){
   progress.food += dCount - useFungus;
   return progress;
 }
+function targetExcessFromGenericState(state, target){
+  const p=targetProgressFromGenericState(state, target||{});
+  let excess=0;
+  for(const key of TAG_KEYS){
+    const need=Number((target&&target[key])||0);
+    if(need>0) excess += Math.max(0, Number(p[key]||0)-need);
+  }
+  return excess;
+}
 function targetDeficitsFromGenericState(state, target){
   const p=targetProgressFromGenericState(state, target||{});
   return {
@@ -342,25 +374,16 @@ function sumTargetDeficits(miss){
 function solveSharedPairPayment(onlyA, onlyB, shared, needA, needB){
   const a=Math.max(0, Number(needA||0));
   const b=Math.max(0, Number(needB||0));
+  onlyA=Number(onlyA||0); onlyB=Number(onlyB||0); shared=Number(shared||0);
   if(a<=0 && b<=0) return { onlyA, onlyB, shared };
-  if(b<=0){
-    if(onlyA + shared < a) return null;
-    const useOnlyA=Math.min(onlyA, a);
-    const useShared=a-useOnlyA;
-    return { onlyA:onlyA-useOnlyA, onlyB, shared:shared-useShared };
-  }
-  if(a<=0){
-    if(onlyB + shared < b) return null;
-    const useOnlyB=Math.min(onlyB, b);
-    const useShared=b-useOnlyB;
-    return { onlyA, onlyB:onlyB-useOnlyB, shared:shared-useShared };
-  }
-  const maxShared=Math.min(shared, a, b);
+  // shared 是一份多 tag 作物库存。消耗 1 个 shared 可以同时满足 A/B 两个 tag，
+  // 也可以只用于其中一个 tag；因此上限应是 max(a,b)，不能错误地限制成 min(a,b)。
   const minShared=Math.max(0, a-onlyA, b-onlyB);
+  const maxShared=Math.min(shared, Math.max(a,b));
   if(minShared>maxShared) return null;
-  const useShared=maxShared;
-  const useA=a-useShared;
-  const useB=b-useShared;
+  const useShared=minShared;
+  const useA=Math.max(0, a-useShared);
+  const useB=Math.max(0, b-useShared);
   if(useA>onlyA || useB>onlyB) return null;
   return { onlyA:onlyA-useA, onlyB:onlyB-useB, shared:shared-useShared };
 }
@@ -382,25 +405,15 @@ function payCostOnGenericState(state, cost){
 function solveSharedPairPaymentDetailed(onlyA, onlyB, shared, needA, needB, labelA, labelB, sharedLabel){
   const a=Math.max(0, Number(needA||0));
   const b=Math.max(0, Number(needB||0));
+  onlyA=Number(onlyA||0); onlyB=Number(onlyB||0); shared=Number(shared||0);
   if(a<=0 && b<=0) return { onlyA, onlyB, shared, parts:[] };
-  let useOnlyA=0, useOnlyB=0, useShared=0;
-  if(b<=0){
-    if(onlyA + shared < a) return null;
-    useOnlyA=Math.min(onlyA, a);
-    useShared=a-useOnlyA;
-  }else if(a<=0){
-    if(onlyB + shared < b) return null;
-    useOnlyB=Math.min(onlyB, b);
-    useShared=b-useOnlyB;
-  }else{
-    const maxShared=Math.min(shared, a, b);
-    const minShared=Math.max(0, a-onlyA, b-onlyB);
-    if(minShared>maxShared) return null;
-    useShared=maxShared;
-    useOnlyA=a-useShared;
-    useOnlyB=b-useShared;
-    if(useOnlyA>onlyA || useOnlyB>onlyB) return null;
-  }
+  const minShared=Math.max(0, a-onlyA, b-onlyB);
+  const maxShared=Math.min(shared, Math.max(a,b));
+  if(minShared>maxShared) return null;
+  const useShared=minShared;
+  const useOnlyA=Math.max(0, a-useShared);
+  const useOnlyB=Math.max(0, b-useShared);
+  if(useOnlyA>onlyA || useOnlyB>onlyB) return null;
   const parts=[];
   if(useShared>0) parts.push({ label:sharedLabel, count:useShared });
   if(useOnlyA>0) parts.push({ label:labelA, count:useOnlyA });
@@ -411,12 +424,21 @@ function solveSharedPairPaymentDetailed(onlyA, onlyB, shared, needA, needB, labe
 function cropNamesByCategory(category){
   return cropNames().filter(name=>cropCategory(name)===category);
 }
-function preferredCropName(category, counts=null){
+function bucketKeyForCategory(category){
+  if(category==='D') return 'df';
+  if(category==='O') return 'o';
+  if(category==='F') return 'f';
+  if(category==='OF') return 'of';
+  return null;
+}
+function preferredCropName(category, counts=null, state=null){
   const names=cropNamesByCategory(category);
   if(counts){
     const planted=names.filter(name=>Number(counts[name]||0)>0).sort((a,b)=>Number(counts[b]||0)-Number(counts[a]||0));
     if(planted.length) return planted[0];
   }
+  const bucket=bucketKeyForCategory(category);
+  if(state && state._labels && bucket && state._labels[bucket]) return state._labels[bucket];
   if(category==='OF' && CROPS['毛茛']) return '毛茛';
   if(category==='D' && CROPS['双孢蘑菇']) return '双孢蘑菇';
   const enabled=names.filter(name=>!CROPS[name].disabled).sort((a,b)=>Number(CROPS[a].unlock||1)-Number(CROPS[b].unlock||1));
@@ -425,21 +447,21 @@ function preferredCropName(category, counts=null){
   if(disabled.length) return disabled[0];
   return category;
 }
-function labelForSingleBucket(key){
+function labelForSingleBucket(key, counts=null, state=null){
   if(key==='sd') return '食物';
   if(key==='sf') return '菌菇';
-  if(key==='o') return preferredCropName('O');
-  if(key==='f') return preferredCropName('F');
+  if(key==='o') return preferredCropName('O', counts, state);
+  if(key==='f') return preferredCropName('F', counts, state);
   return key;
 }
 function paymentSummaryOnGenericState(state, cost, counts=null){
   const st=cloneGenericState(state);
-  const dfPaid=solveSharedPairPaymentDetailed(st.sd, st.sf, st.df, Number(cost.food||0), Number(cost.fungus||0), labelForSingleBucket('sd'), labelForSingleBucket('sf'), preferredCropName('D', counts));
+  const dfPaid=solveSharedPairPaymentDetailed(st.sd, st.sf, st.df, Number(cost.food||0), Number(cost.fungus||0), labelForSingleBucket('sd', counts, st), labelForSingleBucket('sf', counts, st), preferredCropName('D', counts, st));
   if(!dfPaid) return null;
   st.sd=dfPaid.onlyA;
   st.sf=dfPaid.onlyB;
   st.df=dfPaid.shared;
-  const ofPaid=solveSharedPairPaymentDetailed(st.o, st.f, st.of, Number(cost.orn||0), Number(cost.func||0), labelForSingleBucket('o'), labelForSingleBucket('f'), preferredCropName('OF', counts));
+  const ofPaid=solveSharedPairPaymentDetailed(st.o, st.f, st.of, Number(cost.orn||0), Number(cost.func||0), labelForSingleBucket('o', counts, st), labelForSingleBucket('f', counts, st), preferredCropName('OF', counts, st));
   if(!ofPaid) return null;
   st.o=ofPaid.onlyA;
   st.f=ofPaid.onlyB;
@@ -461,10 +483,10 @@ function addCropYieldToGenericState(state, crop, count=1){
   const st=cloneGenericState(state);
   const amount=Number(CROPS[crop].yield||0)*Number(count||0);
   const cat=cropOutputBucket(crop);
-  if(cat==='D') st.df += amount;
-  else if(cat==='O') st.o += amount;
-  else if(cat==='F') st.f += amount;
-  else if(cat==='OF') st.of += amount;
+  if(cat==='D'){ st.df += amount; st._labels.df=crop; }
+  else if(cat==='O'){ st.o += amount; st._labels.o=crop; }
+  else if(cat==='F'){ st.f += amount; st._labels.f=crop; }
+  else if(cat==='OF'){ st.of += amount; st._labels.of=crop; }
   else return null;
   return st;
 }
@@ -656,10 +678,49 @@ function buildStageProducerPlan(startLevel, event, water, startState=null){
 }
 function nextStageBootstrapReserve(nextStartLevel, nextEvent, water){
   if(!nextEvent) return null;
-  const plan=buildStageProducerPlan(nextStartLevel, nextEvent, water, null);
-  const { mains } = plan;
-  for(const cat of CATEGORY_KEYS){ if(mains[cat]) return seedCostOfCrop(mains[cat]); }
-  return null;
+
+  // 预留下一阶段主力作物的启动材料。
+  // 旧版只预留第一个主力作物的种子费；当下一阶段是最终库存阶段时，
+  // 例如 Lv.22 后要种香菇 + 铃兰，Lv.21→Lv.22 的支付可能会把食物/功能启动料全部吃掉，
+  // 导致下一阶段被迫回退种草菇/其它前驱作物。这里改为预留所有下一阶段主力及其依赖主力的种子费。
+  const seedProbeState = nextEvent.kind==='finalInventory'
+    ? { df:0, sd:0, sf:0, o:0, f:0, of:0 }
+    : null;
+  const plan=buildStageProducerPlan(nextStartLevel, nextEvent, water, seedProbeState);
+  const reserve=emptyCost();
+  let has=false;
+  for(const cat of CATEGORY_KEYS){
+    const name=plan.mains && plan.mains[cat];
+    if(!name) continue;
+    addCostInto(reserve, seedCostOfCrop(name));
+    has=true;
+  }
+  if(!has) return null;
+  return reserve;
+}
+function extendProducerPlanForReserve(startLevel, event, water, startState, mains, boot, reserve){
+  if(!reserve) return;
+  const windowLevel = event.kind==='cropImprovement' ? Math.max(1, event.level-1) : event.level;
+  for(const cat of CATEGORY_KEYS){
+    if(costNeedsCategory(reserve, cat) && !mains[cat]){
+      const producer=categoryBestProducer(cat, windowLevel, water);
+      if(producer) mains[cat]=producer;
+    }
+  }
+  ensureSeedDependencyProducers(mains, windowLevel, water);
+  const prevLevel=Math.max(1, startLevel-1);
+  const state=startState || { df:0, sd:0, sf:0, o:0, f:0, of:0 };
+  for(const cat of CATEGORY_KEYS){
+    const main=mains[cat];
+    if(!main || boot[cat]) continue;
+    const seed=seedCostOfCrop(main);
+    if(seed && !canPayCostOnGenericState(state, seed)){
+      boot[cat]=bestSeedFeasibleProducer(cat, windowLevel, water, state, main);
+    }else{
+      const prev=previousCategoryBestProducer(cat, prevLevel, water);
+      if(prev && prev!==main) boot[cat]=prev;
+    }
+  }
 }
 function lowerBoundCounts(startState, actions, producers, reserve, event){
   const totals=totalCostFromActions(actions);
@@ -667,7 +728,7 @@ function lowerBoundCounts(startState, actions, producers, reserve, event){
   const lb={};
   if(producers.O){
     const y=cropNetForCategory(producers.O, 'O');
-    let needOrn=Number(totals.orn||0) + (producers.F && cropOutputBucket(producers.F)==='OF' ? 0 : Number(targetDef.orn||0));
+    let needOrn=Number(totals.orn||0) + Number(targetDef.orn||0);
     const currentOrn=(startState.o||0)+(startState.of||0);
     lb[producers.O]=Math.max(0, Math.ceil(Math.max(0, needOrn-currentOrn)/y));
   }
@@ -718,72 +779,184 @@ function evalStageCounts(startState, actions, producers, reserve, event, pots, w
   const hours=stageDurationHours(counts, producers, pots, water);
   return { counts:{...counts}, actions, producers, reserve, hours, endState:st, payText:paid.text };
 }
+function uniqueSortedNumbers(values){
+  return Array.from(new Set(values.filter(v=>Number.isFinite(v)).map(v=>Math.max(0, Math.floor(v))))).sort((a,b)=>a-b);
+}
+function candidateCountsAround(base, maxBase){
+  base=Math.max(0, Math.floor(base||0));
+  const vals=[base, base+1, base+2, base+4, base+8];
+  if(base>0) vals.push(Math.max(0, base-1));
+  return uniqueSortedNumbers(vals);
+}
+
+function exactLowerForF(startState, actions, producers, reserve, event, oCount){
+  if(!producers.F) return 0;
+  const totals=totalCostFromActions(actions);
+  const targetDef=event && event.target ? targetDeficitsFromGenericState(startState, event.target) : emptyCost();
+  let needFunc=Number(totals.func||0) + Number((reserve&&reserve.func)||0) + Number(targetDef.func||0);
+  if(producers.O){
+    const oSeed=seedCostOfCrop(producers.O);
+    needFunc += Number(oSeed.func||0) * Number(oCount||0);
+  }
+  const currentFunc=(startState.f||0)+(startState.of||0);
+  return Math.max(0, Math.ceil(Math.max(0, needFunc-currentFunc)/cropNetForCategory(producers.F, 'F')));
+}
+function exactLowerForD(startState, actions, producers, reserve, event, oCount, fCount){
+  if(!producers.D) return 0;
+  const totals=totalCostFromActions(actions);
+  const targetDef=event && event.target ? targetDeficitsFromGenericState(startState, event.target) : emptyCost();
+  let needPay=Number(totals.food||0)+Number(totals.fungus||0)+Number((reserve&&reserve.food)||0)+Number((reserve&&reserve.fungus)||0);
+  if(producers.F){
+    const fSeed=seedCostOfCrop(producers.F);
+    needPay += (Number(fSeed.food||0)+Number(fSeed.fungus||0)) * Number(fCount||0);
+  }
+  if(producers.O){
+    const oSeed=seedCostOfCrop(producers.O);
+    needPay += (Number(oSeed.food||0)+Number(oSeed.fungus||0)) * Number(oCount||0);
+  }
+  const currentPay=(startState.df||0)+(startState.sd||0)+(startState.sf||0);
+  const targetNeed=Number(targetDef.fungus||0) + Number(targetDef.food||0);
+  const net=cropNetForCategory(producers.D, 'D');
+  return Math.max(0, Math.ceil(Math.max(0, needPay-currentPay + targetNeed)/net));
+}
+function findMinimalDForFixedOF(startState, actions, producers, reserve, event, pots, water, baseCounts, dBase){
+  if(!producers.D){
+    return evalStageCounts(startState, actions, producers, reserve, event, pots, water, baseCounts);
+  }
+  let lo=Math.max(0, Math.floor(dBase||0));
+  let hi=lo;
+  let res=null;
+  for(let guard=0; guard<64; guard++){
+    const counts={...baseCounts, [producers.D]:hi};
+    res=evalStageCounts(startState, actions, producers, reserve, event, pots, water, counts);
+    if(res) break;
+    if(hi===0) hi=1;
+    else hi*=2;
+  }
+  if(!res) return null;
+  let best=res;
+  while(lo<=hi){
+    const mid=Math.floor((lo+hi)/2);
+    const counts={...baseCounts, [producers.D]:mid};
+    const r=evalStageCounts(startState, actions, producers, reserve, event, pots, water, counts);
+    if(r){ best=r; hi=mid-1; } else lo=mid+1;
+  }
+  return best;
+}
+function stageResultScore(res, event, hoursOverride=null){
+  const hours = hoursOverride==null ? Number(res.hours||0) : Number(hoursOverride||0);
+  const planted = Object.values(res.counts||{}).reduce((a,b)=>a+Number(b||0),0);
+  if(event && event.kind==='finalInventory' && event.target){
+    const excess=targetExcessFromGenericState(res.endState, event.target);
+    return [excess, hours, planted];
+  }
+  return [hours, planted, 0];
+}
+function isBetterScore(score, bestScore){
+  if(!bestScore) return true;
+  for(let i=0;i<Math.max(score.length,bestScore.length);i++){
+    const a=Number(score[i]||0), b=Number(bestScore[i]||0);
+    if(a < b - 1e-9) return true;
+    if(a > b + 1e-9) return false;
+  }
+  return false;
+}
 function solveStageWithForcedProducers(startState, actions, producers, reserve, event, pots, water){
   const crops=[producers.D, producers.F, producers.O].filter(Boolean);
   const totalActionCost=totalCostFromActions(actions);
   if(!crops.length){
-    const paid=paymentSummaryOnGenericState(cloneGenericState(startState), totalActionCost, counts);
+    const paid=paymentSummaryOnGenericState(cloneGenericState(startState), totalActionCost, null);
     if(!paid) return null;
     const st=paid.state;
     if(reserve && !canPayCostOnGenericState(st, reserve)) return null;
     if(event.target && sumTargetDeficits(targetDeficitsFromGenericState(st, event.target))>0) return null;
     return { counts:{}, actions, producers, reserve, hours:0, endState:st, payText:paid.text };
   }
+
   const lb=lowerBoundCounts(startState, actions, producers, reserve, event);
-  let best=null;
   const oBase=producers.O ? Number(lb[producers.O]||0) : 0;
   const fBase=producers.F ? Number(lb[producers.F]||0) : 0;
   const dBase=producers.D ? Number(lb[producers.D]||0) : 0;
-  const oSpan=producers.O ? Math.max(24, Math.min(160, Math.ceil(oBase*0.5)+16)) : 0;
-  const fSpan=producers.F ? Math.max(24, Math.min(160, Math.ceil(fBase*0.5)+16)) : 0;
-  const oList=producers.O ? Array.from({length:oSpan+1}, (_,i)=>oBase+i) : [0];
-  const fList=producers.F ? Array.from({length:fSpan+1}, (_,i)=>fBase+i) : [0];
-  for(const oCount of oList){
-    for(const fCount of fList){
+  let best=null;
+
+  const oCandidates=producers.O ? candidateCountsAround(oBase, oBase) : [0];
+  for(const oCount of oCandidates){
+    let fNeed=exactLowerForF(startState, actions, producers, reserve, event, oCount);
+    if(producers.F) fNeed=Math.max(fNeed, Math.max(0, fBase-16));
+    const fCandidates=producers.F ? candidateCountsAround(fNeed, fNeed<=256 ? fNeed : null) : [0];
+    for(const fCount of fCandidates){
       const baseCounts={};
       if(producers.O) baseCounts[producers.O]=oCount;
       if(producers.F) baseCounts[producers.F]=fCount;
-      if(!producers.D){
-        const res=evalStageCounts(startState, actions, producers, reserve, event, pots, water, baseCounts);
-        if(!res) continue;
-        const score=[res.hours, Object.values(res.counts).reduce((a,b)=>a+b,0)];
-        if(!best || score[0]<best.score[0]-1e-9 || (Math.abs(score[0]-best.score[0])<=1e-9 && score[1]<best.score[1])) best={...res, score};
-        continue;
-      }
-      const maxExtra=Math.max(160, Math.min(1200, Math.ceil(dBase*1.2)+160));
-      let lo=dBase, hi=dBase;
-      let found=null;
-      while(hi<=dBase+maxExtra){
-        const counts={...baseCounts, [producers.D]:hi};
-        const res=evalStageCounts(startState, actions, producers, reserve, event, pots, water, counts);
-        if(res){ found={count:hi, res}; break; }
-        hi = hi===0 ? 1 : (hi<8 ? hi+1 : hi*2);
-      }
-      if(!found) continue;
-      let left=lo, right=found.count, bestRes=found.res;
-      while(left<=right){
-        const mid=Math.floor((left+right)/2);
-        const counts={...baseCounts, [producers.D]:mid};
-        const res=evalStageCounts(startState, actions, producers, reserve, event, pots, water, counts);
-        if(res){ bestRes=res; right=mid-1; } else left=mid+1;
-      }
-      const score=[bestRes.hours, Object.values(bestRes.counts).reduce((a,b)=>a+b,0)];
-      if(!best || score[0]<best.score[0]-1e-9 || (Math.abs(score[0]-best.score[0])<=1e-9 && score[1]<best.score[1])) best={...bestRes, score};
+      const dNeed=exactLowerForD(startState, actions, producers, reserve, event, oCount, fCount);
+      const dStart=producers.D ? Math.max(0, Math.min(dNeed, dBase + 32)) : 0;
+      const res=findMinimalDForFixedOF(startState, actions, producers, reserve, event, pots, water, baseCounts, dStart);
+      if(!res) continue;
+      const score=stageResultScore(res, event);
+      if(isBetterScore(score, best&&best.score)) best={...res, score};
     }
   }
-  return best;
+
+  if(best) return best;
+
+  // 兜底：从理论下界开始逐项放大，保证大阶段不会因为枚举窗口太窄而误判无解。
+  const counts={};
+  if(producers.O) counts[producers.O]=oBase;
+  if(producers.F) counts[producers.F]=fBase;
+  if(producers.D) counts[producers.D]=dBase;
+  for(let guard=0; guard<80; guard++){
+    const res=evalStageCounts(startState, actions, producers, reserve, event, pots, water, counts);
+    if(res) return {...res, score:[res.hours, Object.values(res.counts).reduce((a,b)=>a+b,0)]};
+    if(producers.D) counts[producers.D]=Math.max(1, Math.ceil((counts[producers.D]||0)*1.25)+8);
+    if(producers.F) counts[producers.F]=Math.max(1, Math.ceil((counts[producers.F]||0)*1.15)+4);
+    if(producers.O) counts[producers.O]=Math.max(1, Math.ceil((counts[producers.O]||0)*1.10)+2);
+  }
+  return null;
+}
+
+function minimalBootCountForMainSeed(state, bootCrop, mainCrop){
+  if(!bootCrop || !mainCrop) return 0;
+  let st=cloneGenericState(state);
+  const seed=seedCostOfCrop(mainCrop);
+  if(canPayCostOnGenericState(st, seed)) return 0;
+  for(let i=1;i<=512;i++){
+    st=plantOnceOnGenericState(st, bootCrop);
+    if(!st) return 0;
+    if(canPayCostOnGenericState(st, seed)) return i;
+  }
+  return 512;
+}
+function smallBootCandidates(base){
+  base=Math.max(0, Math.floor(base||0));
+  return uniqueSortedNumbers([base, base+1, base+2]);
 }
 function solveStage(startLevel, event, nextEvent, startState, pots, water){
   const { mains, boot, actions } = buildStageProducerPlan(startLevel, event, water, startState);
   const reserve=nextStageBootstrapReserve(event.level, nextEvent, water);
-  const totalActionCost=totalCostFromActions(actions);
-  const bootRanges={};
-  for(const key of CATEGORY_KEYS){
-    const crop=boot[key];
-    if(!crop){ bootRanges[key]=[0]; continue; }
-    const span = key==='D' ? 12 : 8;
-    bootRanges[key]=Array.from({length:span+1}, (_,i)=>i);
+  extendProducerPlanForReserve(startLevel, event, water, startState, mains, boot, reserve);
+
+  const bootBase={ D:0, F:0, O:0 };
+  let probe=cloneGenericState(startState);
+  if(boot.D && mains.D){
+    bootBase.D=minimalBootCountForMainSeed(probe, boot.D, mains.D);
+    probe=applyCropBatch(probe, boot.D, bootBase.D) || probe;
   }
+  // 主线顺序是 D → F → O。若 D 主力存在，F 的食物种子会由 D 主力解决，不需要在 boot 阶段强行枚举。
+  if(boot.F && mains.F && !mains.D){
+    bootBase.F=minimalBootCountForMainSeed(probe, boot.F, mains.F);
+    probe=applyCropBatch(probe, boot.F, bootBase.F) || probe;
+  }
+  // 若 F 主力存在，铃兰等 O 作物需要的功能种子会由 F 主力解决。
+  if(boot.O && mains.O && !mains.F){
+    bootBase.O=minimalBootCountForMainSeed(probe, boot.O, mains.O);
+  }
+
+  const bootRanges={
+    D: boot.D ? smallBootCandidates(bootBase.D) : [0],
+    F: boot.F ? smallBootCandidates(bootBase.F) : [0],
+    O: boot.O ? smallBootCandidates(bootBase.O) : [0],
+  };
+
   let best=null;
   for(const bD of bootRanges.D){
     for(const bF of bootRanges.F){
@@ -800,9 +973,10 @@ function solveStage(startLevel, event, nextEvent, startState, pots, water){
         for(const [name,v] of Object.entries(mainRes.counts||{})) counts[name]=(counts[name]||0)+v;
         const bootHours=stageDurationHours(bootCounts, {D:boot.D,F:boot.F,O:boot.O}, pots, water);
         const hours=bootHours + mainRes.hours;
-        const score=[hours, Object.values(counts).reduce((a,b)=>a+b,0)];
-        if(!best || score[0]<best.score[0]-1e-9 || (Math.abs(score[0]-best.score[0])<=1e-9 && score[1]<best.score[1])){
-          best={score, counts, actions, producers:{...mains, boot}, reserve, hours, endState:mainRes.endState, payText:mainRes.payText};
+        const candidate={counts, actions, producers:{...mains, boot}, reserve, hours, endState:mainRes.endState, payText:mainRes.payText};
+        const score=stageResultScore(candidate, event, hours);
+        if(isBetterScore(score, best&&best.score)){
+          best={score, ...candidate};
         }
       }
     }
@@ -810,15 +984,63 @@ function solveStage(startLevel, event, nextEvent, startState, pots, water){
   return best;
 }
 
+
+// 稳定版阶段求解器：用理论下界起步，先找可行解，再逐项压缩，避免旧枚举窗口在部分阶段卡死。
+solveStageWithForcedProducers = function(startState, actions, producers, reserve, event, pots, water){
+  const crops=[producers.D, producers.F, producers.O].filter(Boolean);
+  const totalActionCost=totalCostFromActions(actions);
+  if(!crops.length){
+    const paid=paymentSummaryOnGenericState(cloneGenericState(startState), totalActionCost, null);
+    if(!paid) return null;
+    const st=paid.state;
+    if(reserve && !canPayCostOnGenericState(st, reserve)) return null;
+    if(event.target && sumTargetDeficits(targetDeficitsFromGenericState(st, event.target))>0) return null;
+    return { counts:{}, actions, producers, reserve, hours:0, endState:st, payText:paid.text };
+  }
+
+  const lb=lowerBoundCounts(startState, actions, producers, reserve, event);
+  const counts={};
+  for(const crop of crops) counts[crop]=Math.max(0, Math.floor(lb[crop]||0));
+
+  let feasible=null;
+  for(let guard=0; guard<256; guard++){
+    feasible=evalStageCounts(startState, actions, producers, reserve, event, pots, water, counts);
+    if(feasible) break;
+    for(const crop of crops){
+      const cur=Number(counts[crop]||0);
+      counts[crop]=cur + Math.max(1, Math.ceil(cur*0.06));
+    }
+  }
+  if(!feasible) return null;
+
+  // 在可行解附近做单调压缩。固定其它作物，二分每个作物的最小数量；重复两轮处理相互依赖。
+  for(let pass=0; pass<2; pass++){
+    for(const crop of crops){
+      let lo=0, hi=Number(counts[crop]||0), best=hi;
+      while(lo<=hi){
+        const mid=Math.floor((lo+hi)/2);
+        const trial={...counts, [crop]:mid};
+        const r=evalStageCounts(startState, actions, producers, reserve, event, pots, water, trial);
+        if(r){ best=mid; hi=mid-1; }
+        else lo=mid+1;
+      }
+      counts[crop]=best;
+    }
+  }
+
+  const finalRes=evalStageCounts(startState, actions, producers, reserve, event, pots, water, counts);
+  if(!finalRes) return feasible;
+  return finalRes;
+};
 function stateSummaryText(state, counts=null){
   const items=[];
   const add=(label, count)=>{ if(Number(count||0)>0) items.push(`${label}*${fmtNum(count)}`); };
-  add(preferredCropName('D', counts), state.df);
-  add(labelForSingleBucket('sf'), state.sf);
-  add(labelForSingleBucket('sd'), state.sd);
-  add(preferredCropName('O', counts), state.o);
-  add(labelForSingleBucket('f'), state.f);
-  add(preferredCropName('OF', counts), state.of);
+  add(preferredCropName('D', counts, state), state.df);
+  add(labelForSingleBucket('sf', counts, state), state.sf);
+  add(labelForSingleBucket('sd', counts, state), state.sd);
+  add(preferredCropName('O', counts, state), state.o);
+  add(labelForSingleBucket('f', counts, state), state.f);
+  add(preferredCropName('OF', counts, state), state.of);
   return items.join('，') || '无';
 }
 function actionCostText(actions){
@@ -832,10 +1054,19 @@ function actionCostText(actions){
 function countsText(counts){
   return Object.entries(counts).filter(([,v])=>v>0).map(([k,v])=>`${fmtNum(v)}个${k}`).join('，') || '无';
 }
-function renderStageLog(stage){
-  return `<div class="line"><span class="stamp">[${fmtDuration(stage.timeStart)}-${fmtDuration(stage.timeEnd)}]</span><br>等级：lv.${stage.levelStart}<br>阶段：${stage.phaseText || stage.title || ''}<br>种植：${countsText(stage.counts)}<br>支付：${stage.payText || actionCostText(stage.actions)}<br>结束库存：${stateSummaryText(stage.endState, stage.counts)}</div>`;
+function targetMapText(map){
+  const items=[];
+  for(const key of TAG_KEYS){
+    const v=Number((map&&map[key])||0);
+    if(v>0) items.push(`${KEY_TO_TAG[key]}*${fmtNum(v)}`);
+  }
+  return items.join('，') || '无';
 }
-function solvePathToEvent(input, events, endIndex){
+function renderStageLog(stage){
+  const finalLine = stage.finalTarget ? `<br>目标口径库存：${targetMapText(targetProgressFromGenericState(stage.endState, stage.finalTarget))}<br>目标要求：${targetMapText(stage.finalTarget)}` : '';
+  return `<div class="line"><span class="stamp">[${fmtDuration(stage.timeStart)}-${fmtDuration(stage.timeEnd)}]</span><br>等级：lv.${stage.levelStart}<br>阶段：${stage.phaseText || stage.title || ''}<br>种植：${countsText(stage.counts)}<br>支付：${stage.payText || actionCostText(stage.actions)}<br>结束库存：${stateSummaryText(stage.endState, stage.counts)}${finalLine}</div>`;
+}
+function solvePathToEvent(input, events, endIndex, finalTargetForReserve=null){
   let level=input.startLevel;
   let pots=input.startUnlockedPots.length;
   let state=genericStateFromInventory(input.startInv);
@@ -844,7 +1075,10 @@ function solvePathToEvent(input, events, endIndex){
   for(let i=0;i<=endIndex;i++){
     const event=events[i];
     if(event.level<level) continue;
-    const nextEvent=i<endIndex ? events[i+1] : null;
+    let nextEvent=i<endIndex ? events[i+1] : null;
+    if(!nextEvent && finalTargetForReserve && Object.values(finalTargetForReserve).some(v=>Number(v||0)>0)){
+      nextEvent={ kind:'finalInventory', level:event.level, target:finalTargetForReserve, text:'最终库存' };
+    }
     const stage=solveStage(level, event, nextEvent, state, pots, input.water);
     if(!stage) throw new Error(`阶段求解失败：Lv.${level} → ${event.text}`);
     stages.push({
@@ -872,7 +1106,8 @@ function solvePlan(input){
   const needFinalTarget=Object.values(finalTarget).some(v=>(v||0)>0);
   const desiredPots=allPotNumbers();
   const maxLevel=maxConfiguredLevel();
-  const events=buildPlanningEvents(input.startLevel, targetLevel, desiredPots, input.water, maxLevel);
+  const horizonLevel=needFinalTarget ? maxLevel : Math.max(targetLevel, input.startLevel);
+  const events=buildPlanningEvents(input.startLevel, targetLevel, desiredPots, input.water, horizonLevel);
   const checkpointIndex=events.findIndex(e=>e.kind==='checkpoint' && e.level===Math.max(targetLevel, input.startLevel));
   if(checkpointIndex<0) throw new Error('内部错误：未找到等级检查点。');
   const candidateIndexes=[];
@@ -885,7 +1120,7 @@ function solvePlan(input){
   let lastErr=null;
   for(const idx of candidateIndexes){
     try{
-      const pathRes=solvePathToEvent(input, events, idx);
+      const pathRes=solvePathToEvent(input, events, idx, needFinalTarget ? finalTarget : null);
       let totalHours=pathRes.totalHours;
       let stages=[...pathRes.stages];
       let endState=pathRes.endState;
@@ -902,14 +1137,17 @@ function solvePlan(input){
           actions:invStage.actions,
           payText:invStage.payText,
           endState:invStage.endState,
+          finalTarget,
         });
         totalHours += invStage.hours;
         endState=invStage.endState;
         const finalMiss=targetDeficitsFromGenericState(endState, finalTarget);
         if(sumTargetDeficits(finalMiss)>0) continue;
       }
-      const score=[totalHours, stages.reduce((s,st)=>s+Object.values(st.counts||{}).reduce((a,b)=>a+b,0),0), idx];
-      if(!best || score[0]<best.score[0]-1e-9 || (Math.abs(score[0]-best.score[0])<=1e-9 && score[1]<best.score[1])){
+      const plantedCount=stages.reduce((s,st)=>s+Object.values(st.counts||{}).reduce((a,b)=>a+Number(b||0),0),0);
+      const finalExcess=needFinalTarget ? targetExcessFromGenericState(endState, finalTarget) : 0;
+      const score=needFinalTarget ? [finalExcess, totalHours, plantedCount, idx] : [totalHours, plantedCount, idx];
+      if(isBetterScore(score, best&&best.score)){
         best={ score, totalHours, stages, endState, chosenEvent:events[idx] };
       }
     }catch(err){
