@@ -484,6 +484,11 @@ $version_hash = sha1_file(filename: "version.txt");
             <option value="false">false</option>
             <option value="true">true</option>
         </select><br>
+        <label for="apscore" data-i18n="apscore" style="font-size: 18px;">只展示ap成绩:</label>
+        <select id="apscore" style="font-size: 16px;">
+          <option value="false">false</option>
+          <option value="true">true</option>
+        </select><br>
         <hr />
         <button onclick="closeSettings()" class="cancel-btn" data-i18n="cancel">取消</button>
         <button onclick="applySettings()" class="apply-btn" data-i18n="apply">应用</button>
