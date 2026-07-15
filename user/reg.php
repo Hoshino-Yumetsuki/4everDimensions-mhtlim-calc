@@ -1,4 +1,5 @@
 <?php
+require __DIR__ . '/archived.php';
 function generateUUID() {
     $bytes = random_bytes(16);
     $uuid = bin2hex($bytes);

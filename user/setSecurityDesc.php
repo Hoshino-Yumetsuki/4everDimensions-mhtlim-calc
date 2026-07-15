@@ -1,4 +1,5 @@
 <?php
+require __DIR__ . '/archived.php';
 include "auth.php"; // 引入封装好的验证逻辑文件
 
 $loginName = $_POST["username"];

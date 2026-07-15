@@ -1,4 +1,5 @@
 <?php
+require __DIR__ . '/archived.php';
 include "auth.php";
 
 $loginName = $_POST["username"];

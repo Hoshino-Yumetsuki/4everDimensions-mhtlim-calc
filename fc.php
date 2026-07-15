@@ -1,4 +1,8 @@
 <?php
+/**
+ * Site is archived — no MySQL connection.
+ * Login, cloud saves, and visit statistics are disabled.
+ */
 if (
     ($_SERVER['REMOTE_ADDR'] ?? '') === '127.0.0.1'
     && getenv('MHTLIM_ALLOW_LOCALHOST') !== '1'
@@ -8,29 +12,22 @@ if (
 
 function dbc()
 {
-    $host = getenv('MYSQL_HOST') ?: 'klms.local';
-    $dbname = getenv('MYSQL_DATABASE') ?: 'k9lv';
-    $user = getenv('MYSQL_USER') ?: 'k9lv';
-    $pass = getenv('MYSQL_PASSWORD') ?: 'kMPnhPYT4R6bheXW';
-    $dsn = sprintf('mysql:host=%s;dbname=%s;charset=utf8mb4', $host, $dbname);
-    $pdo = new PDO($dsn, $user, $pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    return $pdo;
+    throw new RuntimeException('Database disabled: site archived.');
 }
 
 function query($pdo, $sql)
 {
-    return $pdo->query($sql);
+    throw new RuntimeException('Database disabled: site archived.');
 }
 
 function fetch($pdo, $sql)
 {
-    return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    throw new RuntimeException('Database disabled: site archived.');
 }
 
 function execute($pdo, $sql)
 {
-    return $pdo->exec($sql);
+    throw new RuntimeException('Database disabled: site archived.');
 }
 
 function redirect($url)
@@ -38,7 +35,8 @@ function redirect($url)
     header("Location: $url");
     exit();
 }
-function  uuid()
+
+function uuid()
 {
     $chars = md5(uniqid(mt_rand(), true));
     $uuid = substr($chars, 0, 8) . '-'

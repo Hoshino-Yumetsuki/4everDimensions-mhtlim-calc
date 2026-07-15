@@ -1,4 +1,5 @@
 <?php
+require __DIR__ . '/archived.php';
 
 $saveid = $_GET["id"];
 if (strlen($saveid) > 48) {

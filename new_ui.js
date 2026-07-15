@@ -310,33 +310,11 @@ function show_alertInfo() {
 
 // for API
 function apiAuth(path, username, token, customParams, afterLoginFailed, afterOpFailed, afterSuccess, afterError, final) {
-  var loading = layer.load(1);
-  try {
-    fetch(path, {
-      method: "POST",
-      body: new URLSearchParams({
-        username: username,
-        token: token,
-        ...customParams
-      })
-    }).then(res => res.json()).then(data => {
-      layer.close(loading);
-      if (data.code === 0) {
-        if (afterSuccess) afterSuccess(data);
-      } else if (data.code === -4) {
-        loginExpired(function () {
-          if (afterLoginFailed) afterLoginFailed(data);
-        })
-      } else {
-        if (afterOpFailed) afterOpFailed(data);
-      }
-      if (final) final();
-    })
-  } catch (e) {
-    layer.close(loading);
-    if (afterError) afterError(e);
-    if (final) final();
-  }
+  var msg = (typeof window.MHTLIM_ARCHIVE_MESSAGE === 'string')
+    ? window.MHTLIM_ARCHIVE_MESSAGE
+    : '本站已处于归档状态，登录及云存档功能不可用，请访问 https://renya.mhtlim.top/';
+  layer.msg(msg);
+  if (final) final();
 }
 function loginExpired(after) {
   logout();
@@ -542,38 +520,7 @@ function upl_debug() {
 // for stat
 var stat_dialog;
 function openStat() {
-  stat_dialog = layer.open({
-    type: 1,
-    title: '统计',
-    content: `<div id="stat_content" style="padding:32px;text-align:center;height:100%">
-
-            <div id="stat_chart" style="width: 100%;min-width:400px;height: 70%;"> </div>
-    </div>`,
-    skin: 'layui-layer-win10',
-    area: ['75vw', '80vh'],
-    shade: 0.6,
-    shadeClose: true,
-  });
-  console.log(stat_dialog)
-  var f = layer.load(1);
-  try {
-    fetch("wtf/stat.php").then((res) => {
-      res.json().then((data) => {
-
-        if (data.data.code != 0) {
-          layer.msg(data.data.msg);
-          return;
-        }
-        console.log(data)
-        mount_stat(data);
-      })
-    })
-  } catch (e) {
-    layer.msg("获取数据失败，请检查网络连接。");
-  } finally {
-    layer.close(f);
-  }
-
+  layer.msg('本站已归档，访问统计已关闭。');
 }
 function mount_stat(content) {
   var f = document.getElementById('stat_chart')

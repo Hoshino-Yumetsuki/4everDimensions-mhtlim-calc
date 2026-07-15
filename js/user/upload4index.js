@@ -1,19 +1,23 @@
 var upload4index_js_ver = 3
+var MHTLIM_ARCHIVE_MSG = (typeof window.MHTLIM_ARCHIVE_MESSAGE === 'string')
+    ? window.MHTLIM_ARCHIVE_MESSAGE
+    : '本站已处于归档状态，登录及云存档功能不可用，请访问 https://renya.mhtlim.top/';
+
+function mhtlimArchiveBlocked() {
+    if (typeof layer !== 'undefined') {
+        layer.alert(MHTLIM_ARCHIVE_MSG, { title: '归档提示' });
+    } else {
+        alert(MHTLIM_ARCHIVE_MSG);
+    }
+    return true;
+}
+
 function goLogin() {
-    var loginUI = document.getElementById("loginModal");
-        var o2l = document.getElementById("over2lay");
-        var x2l = document.getElementById("loginPanel-t");
-        x2l.style.display = "none";
-        loginUI.style.display = "block";
-        o2l.style.display = "block";
+    mhtlimArchiveBlocked();
 }
 function doSavesUpload() {
-    if (!isLogged()) {
-        goLogin();
-        return;
-    } else {
-        showUploadPanel();
-    }
+    mhtlimArchiveBlocked();
+    return;
 }
 function showUploadPanel() {
     var pn = document.getElementById("uploadModal");
@@ -98,52 +102,17 @@ function setStorage(name, value) {
     localStorage.setItem(name, value);
 }
 function initLogging() {
-    //init
     var userInfoDraw = document.getElementById("logInfo");
-    if (isLogged()) {
-        userInfoDraw.innerHTML = "欢迎，" + getStorage("nickname") + "！<a href='javascript:void(0);' class='superlinkR' onclick='javascript:openSavesBrowser_btn();'>查看我的存档</a> / " +
-            "<a class='nowrap superlinkR' href='javascript:void(0);' onclick='javascript:loadUserPanel();'>用户设置</a> / <a href='javascript:void(0);' class='superlinkR' onclick='javascript:logout_Btn();'>登出</a>";
-            // <a class='nowrap superlinkR' href='javascript:void(0);' onclick='javascript:logoutAll();'>在所有设备上登出</a>
-    } else {
-        userInfoDraw.innerHTML = "未登陆 / Not logged in. <a href='javascript:void(0);' class='superlinkR' onclick='javascript:logout();goLogin();'>登录</a>";
-        localStorage.removeItem("username");
-        localStorage.removeItem("token");
-        localStorage.removeItem("nickname");
+    if (userInfoDraw) {
+        userInfoDraw.innerHTML = '本站已归档，登录与云存档已关闭。<a href="https://renya.mhtlim.top/" target="_blank" rel="noopener" class="superlinkR">前往新站</a>';
     }
+    localStorage.removeItem("username");
+    localStorage.removeItem("token");
+    localStorage.removeItem("nickname");
 }
 function checkLogin(alertNoSecret) {
-    if (!alertNoSecret) alertNoSecret = false;
-    if (isLogged()) {
-        try {
-            fetch("user/check.php", {
-                method: "POST",
-                body: new URLSearchParams({
-                    username: getStorage("username"),
-                    token: getStorage("token")
-                })
-            }).then(res => res.json()).then(data => {
-                if (data.code === 0) {
-                    localStorage.setItem("nickname", data.nickname);
-                    initLogging();
-                    if(alertNoSecret && !data.hasSecret){
-                        alertSetSecret();
-                    }
-                } else {
-                    logout();
-                    initLogging();
-                    layer.msg("登录已过期，请重新登录。");
-
-                }
-            })
-        } catch (e) {
-            layer.msg("登陆校验发生错误。");
-            console.log("登陆校验发生错误。", e);
-        }
-    }else{
-        initLogging();
-    }
-
-    return isLogged();
+    initLogging();
+    return false;
 }
 
 //on page load
@@ -153,11 +122,7 @@ window.onload = function () {
 }
 
 function loadUserPanel(){
-    if (isLogged()){
-        openUserPanel();
-    }else{
-        goLogin();
-    }
+    mhtlimArchiveBlocked();
 }
 function openUserPanel(){
     document.getElementById("over5lay").style.display = "block";

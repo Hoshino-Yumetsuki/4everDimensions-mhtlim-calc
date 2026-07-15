@@ -322,6 +322,11 @@ $version_hash = sha1_file(filename: "version.txt");
 
 <body>
 
+    <div id="archive-notice" style="background:linear-gradient(90deg,#5c3d1e,#8b4513);color:#fff;padding:14px 20px;text-align:center;font-size:1.05em;border-bottom:2px solid #ffb347;z-index:200000;position:relative;">
+        本站已处于<strong>归档</strong>状态，<strong>登录及云存档功能不可用</strong>。请访问
+        <a href="https://renya.mhtlim.top/" target="_blank" rel="noopener" style="color:#7fffd4;text-decoration:underline;font-weight:bold;">https://renya.mhtlim.top/</a>
+    </div>
+
         <?//php include __DIR__ . "/floating.php"; ?>
         <!-- TAG: FloatingWindow -->
 
@@ -385,8 +390,7 @@ $version_hash = sha1_file(filename: "version.txt");
 
                     <span data-i18n="siteAuthor">网站作者：</span><a href="javascript:void(0);" onclick="show_author_info();" class="superlinkR" data-i18n="viewAuthor">查看</a>&nbsp;
                     <span data-i18n="donationText">赞助：</span><a href="javascript:void(0);" onclick="show_donation();" class="superlinkR" data-i18n="donation">捐赠</a><br>
-                    <span data-i18n="visit">本站访问数量：</span><span id="accessCount"></span>
-                    <a class="superlinkR" href="javascript:void(0);" onclick="openStat();">查看访问统计</a><br>
+                    <span data-i18n="visit">本站访问数量：</span><span id="accessCount">—</span>（归档站点，统计已关闭）<br>
                     <!-- 务必查看使用须知：<a href="javascript:void(0);" onclick="show_alertInfo();"><span class="superlinkR">查看使用须知</span></a> -->
                     <hr>
                     <div style="padding: 3px">
@@ -409,10 +413,8 @@ $version_hash = sha1_file(filename: "version.txt");
                 </div>
             </div>
             <script>
-                if (accessCount != null) {
+                if (typeof accessCount !== 'undefined' && accessCount != null) {
                     document.getElementById("accessCount").innerHTML = accessCount;
-                } else {
-                    document.getElementById("accessCount").innerHTML = "DevMode";
                 }
             </script>
 
@@ -721,59 +723,8 @@ $version_hash = sha1_file(filename: "version.txt");
         }
 
         function login() {
-            var username = login_username.value;
-            var password = login_password.value;
-            if (username == "" || password == "") {
-                // Pass
-            } else {
-                pr.style.display = "none";
-                var loading = layer.load(1)
-
-                try {
-                    pr2.style.display = "block";
-                    lplt.innerHTML = "Logging in... / 正在登入...";
-
-                    fetch("user/requestLogin.php", {
-                        method: "POST",
-                        body: new URLSearchParams({
-                            username: username,
-                            password: password
-                        })
-                    }).then(response => response.json()).then(data => {
-                        lplt.innerHTML = data.msg
-                        layer.msg(data.msg);
-                        pr.style.display = "block";
-                        layer.close(loading);
-
-                        if (data.code !== 0) {
-
-                            return;
-
-                        } else {
-
-                            setStorage("username", data.data.username);
-
-                            setStorage("nickname", data.data.nickName);
-
-                            setStorage("token", data.token);
-                            setStorage("token", data.token);
-                            closeLogin();
-                            initLogging();
-                            // checkLogin();
-                            if (!data.hasSecret) {
-                                alertSetSecret();
-                            }
-                            return;
-                        }
-                    })
-
-                } catch (e) {
-                    lplt.innerHTML = ("An error occurred / 发生错误");
-                    pr.style.display = "block";
-                    layer.close(loading);
-                }
-            }
-        }
+            layer.alert(window.MHTLIM_ARCHIVE_MESSAGE || '本站已处于归档状态，登录及云存档功能不可用，请访问 https://renya.mhtlim.top/', { title: '归档提示' });
+            return;
 
         // for upload
         function initUpload() {
@@ -785,126 +736,12 @@ $version_hash = sha1_file(filename: "version.txt");
         }
 
         document.getElementById("upload_btn").onclick = function() {
-            var dt = document.getElementById("upload_data").innerHTML;
-            var title = document.getElementById("upload_title").value;
-            var desc = document.getElementById("upload_description").value;
-            var info = document.getElementById("upload_info").innerHTML;
-            var token = getStorage("token");
-            var username = getStorage("username");
-            var loadingDiv = document.getElementById("uploadPanel-t");
-            var normalDiv = document.getElementById("uploadPanel-normal");
-            var lplt = document.getElementById("uploadPanel-t-text");
-            if (dt == "" || title == "" || desc == "" || info == "") {
-                layer.msg("Please fill in all the fields / 请填写所有字段: data(Auto/自动获取), title, description, info(Auto/自动获取)");
-                return;
-            }
-            if (title.length > 1024) {
-                layer.msg("Title is too long / 标题过长");
-                return;
-            }
-            if (desc.length > 2048) {
-                layer.msg("Description is too long / 描述过长");
-                return;
-            }
-            if (info.length > 1024) {
-                layer.msg("Info is too long / 信息过长");
-                return;
-            }
-            var loading = layer.load(1)
-            try {
-                loadingDiv.style.display = "block";
-                normalDiv.style.display = "none";
-                lplt.innerHTML = "Uploading... / 正在上传...";
-                fetch("user/postSave.php", {
-                    method: "POST",
-                    body: new URLSearchParams({
-                        data: dt,
-                        title: title,
-                        description: desc,
-                        score: info,
-                        username: username,
-                        token: token
-                    })
-                }).then(response => response.json()).then(data => {
-                    layer.msg(data.msg);
-                    if (data.code === 0) {
-                        closeUploadPanel();
-                    }
-                    loadingDiv.style.display = "none";
-                    normalDiv.style.display = "block";
-                    layer.close(loading);
-                });
-            } catch (e) {
-                layer.msg("An error occurred / 发生错误");
-                console.log(e);
-                loadingDiv.style.display = "none";
-                layer.close(loading);
-                normalDiv.style.display = "block";
-            }
-
-        }
+            layer.alert(window.MHTLIM_ARCHIVE_MESSAGE || '本站已处于归档状态，登录及云存档功能不可用，请访问 https://renya.mhtlim.top/', { title: '归档提示' });
+        };
 
         // for reg
         function reg_user() {
-            var username = document.getElementById("login_username").value;
-            var password = document.getElementById("login_password").value;
-            if (username == '' || password == '') return;
-            if (username.length > 48) {
-                layer.msg("用户名过长");
-                return;
-            }
-            if (password.length > 128) {
-                layer.msg("密码过长");
-                return;
-            }
-            if (password.length < 8) {
-                layer.msg("密码过短");
-                return;
-            }
-            if (username.length < 6) {
-                layer.msg("用户名过短");
-                return;
-            }
-            layer.prompt({
-                title: '重复密码：',
-                formType: 1,
-                shade: 0.6
-            }, function(text, index) {
-                if (text != password) {
-                    layer.msg("两次密码不一致");
-                    return;
-                }
-
-
-                var loading = layer.load(1)
-                try {
-                    fetch("user/reg.php", {
-                        method: "POST",
-                        body: new URLSearchParams({
-                            username: username,
-                            password: password
-                        })
-                    }).then(response => response.json()).then(data => {
-                        layer.msg(data.msg);
-                        if (data.code === 0) {
-                            setStorage("token", data.token);
-                            setStorage("username", data.username);
-                            setStorage("nickname", data.nickname);
-                            initLogging();
-
-                        }
-                        layer.close(loading);
-                        layer.close(index);
-                    })
-                } catch (e) {
-                    layer.msg("An error occurred / 发生未知错误");
-                    console.log(e);
-                    layer.close(loading);
-                    layer.close(index);
-                } finally {
-                    closeLogin();
-                }
-            });
+            layer.alert(window.MHTLIM_ARCHIVE_MESSAGE || '本站已处于归档状态，登录及云存档功能不可用，请访问 https://renya.mhtlim.top/', { title: '归档提示' });
         }
 
 

@@ -1,44 +1,10 @@
 services:
-  db:
-    image: mysql:8.0
-    restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_dev_only}
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-k9lv}
-      MYSQL_USER: ${MYSQL_USER:-k9lv}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-k9lv_dev_password}
-    volumes:
-      - mysql_data:/var/lib/mysql
-      - ./docker/mysql/init:/docker-entrypoint-initdb.d:ro
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-root_dev_only}"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 30s
-    ports:
-      - "${MYSQL_PUBLISH_PORT:-3306}:3306"
-
   web:
     build:
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
-    depends_on:
-      db:
-        condition: service_healthy
     ports:
       - "${HTTP_PORT:-8080}:80"
     environment:
-      MYSQL_HOST: db
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-k9lv}
-      MYSQL_USER: ${MYSQL_USER:-k9lv}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-k9lv_dev_password}
-      # fc.php blocks 127.0.0.1 unless this is set (needed for container healthcheck)
       MHTLIM_ALLOW_LOCALHOST: "1"
-    volumes:
-      # Optional: mount source for live edit without rebuild
-      # - .:/var/www/html
-
-volumes:
-  mysql_data:
