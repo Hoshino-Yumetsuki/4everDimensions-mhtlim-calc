@@ -1,10 +1,19 @@
 <?php
-if ($_SERVER['REMOTE_ADDR'] == "127.0.0.1"){
+if (
+    ($_SERVER['REMOTE_ADDR'] ?? '') === '127.0.0.1'
+    && getenv('MHTLIM_ALLOW_LOCALHOST') !== '1'
+) {
     die("Fuck you!");
 }
+
 function dbc()
 {
-    $pdo = new PDO("mysql:host=klms.local;dbname=k9lv", "k9lv", "kMPnhPYT4R6bheXW");
+    $host = getenv('MYSQL_HOST') ?: 'klms.local';
+    $dbname = getenv('MYSQL_DATABASE') ?: 'k9lv';
+    $user = getenv('MYSQL_USER') ?: 'k9lv';
+    $pass = getenv('MYSQL_PASSWORD') ?: 'kMPnhPYT4R6bheXW';
+    $dsn = sprintf('mysql:host=%s;dbname=%s;charset=utf8mb4', $host, $dbname);
+    $pdo = new PDO($dsn, $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $pdo;
 }

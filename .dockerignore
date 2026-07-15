@@ -1,0 +1,11 @@
+.git
+.gitignore
+.idea
+.vscode
+**/.omc
+**/node_modules
+files/new_picture_origin_files
+*.mp4
+*.log
+.env
+.env.*
