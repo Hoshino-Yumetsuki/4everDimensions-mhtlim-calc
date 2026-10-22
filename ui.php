@@ -725,6 +725,7 @@ $version_hash = sha1_file(filename: "version.txt");
         function login() {
             layer.alert(window.MHTLIM_ARCHIVE_MESSAGE || '本站已处于归档状态，登录及云存档功能不可用，请访问 https://renya.mhtlim.top/', { title: '归档提示' });
             return;
+        }
 
         // for upload
         function initUpload() {
