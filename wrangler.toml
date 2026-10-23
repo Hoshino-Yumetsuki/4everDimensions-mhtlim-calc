@@ -21,3 +21,7 @@ directory = "./dist/assets"
 binding = "ASSETS"
 run_worker_first = ["/", "/*.php"]
 not_found_handling = "none"
+
+[observability.logs]
+enabled = false
+invocation_logs = true
