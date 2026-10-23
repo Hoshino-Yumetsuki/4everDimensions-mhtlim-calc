@@ -3,6 +3,8 @@ main = "workers/index.js"
 compatibility_date = "2026-10-23"
 # PHP's Cloudflare build must not detect the Node.js process polyfill.
 compatibility_flags = ["no_nodejs_compat", "no_nodejs_compat_v2"]
+workers_dev = false
+preview_urls = false
 
 [build]
 command = "yarn build"
