@@ -1,4 +1,4 @@
-name = "4everDimensions-mhtlim-calc"
+name = "4everdimensions-mhtlim-calc"
 main = "workers/index.js"
 compatibility_date = "2026-10-23"
 # PHP's Cloudflare build must not detect the Node.js process polyfill.
