@@ -25,4 +25,3 @@ not_found_handling = "none"
 [observability.logs]
 enabled = true
 invocation_logs = true
-
