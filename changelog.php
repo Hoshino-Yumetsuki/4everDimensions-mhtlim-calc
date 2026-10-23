@@ -1,6 +1,6 @@
 <?php
 echo "\n最新提交：\n\n";
-exec("git log -1 --stat", $output);
+$output = file(__DIR__ . '/changelog.txt', FILE_IGNORE_NEW_LINES);
 foreach ($output as $line) {
     if (strpos($line, 'bitbucket.org') === false) {
         echo $line . "\n";

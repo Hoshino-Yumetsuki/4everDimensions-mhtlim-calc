@@ -6,6 +6,13 @@
 # Node artifact files
 node_modules/
 dist/
+.wrangler/
+.yarn/
+/changelog.txt
+.dev.vars*
+.env
+.env.*
+!.env.example
 
 # Compiled Java class files
 *.class
